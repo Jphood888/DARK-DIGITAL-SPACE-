@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DDS — Dark Digital Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Creepster&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Orbitron',monospace;background:linear-gradient(135deg,#000 0%,#001122 50%,#000 100%);color:#eaeaea;min-height:100vh;overflow-x:hidden;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,255,.07)1px,transparent 1px),linear-gradient(90deg,rgba(0,255,255,.07)1px,transparent 1px);background-size:46px 46px;animation:gm 22s linear infinite;z-index:-1;}
+@keyframes gm{0%{transform:translate(0,0)}100%{transform:translate(46px,46px)}}
+
+/* ---------- top bar ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(0,0,0,.92);border-bottom:1px solid rgba(0,255,255,.25);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;}
+.brand{display:flex;align-items:center;gap:.55rem;}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:transparent;display:flex;align-items:center;justify-content:center;border:none;color:#fff;font-size:.95rem;overflow:hidden;flex-shrink:0;position:relative;}
+.brand-mark img.dds-logo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+.brand-name{font-family:'Creepster',cursive;color:#ff0040;font-size:1.3rem;letter-spacing:1px;text-shadow:0 0 10px rgba(255,0,64,.4);}
+.brand-sub{font-size:.5rem;color:#7b2ff7;letter-spacing:2px;margin-top:-2px;}
+#launchTimer{font-family:'Orbitron',monospace;font-weight:900;color:#ff0040;font-size:.92rem;letter-spacing:1px;text-shadow:0 0 8px rgba(255,0,64,.4);white-space:nowrap;}
+#launchNameCycle{font-size:.5rem;color:#7b2ff7;letter-spacing:1.5px;margin-top:-2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px;transition:opacity .3s;}
+.signin-pill{background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.4);color:#00ffff;border-radius:16px;padding:.4rem .8rem;font-family:inherit;font-size:.62rem;font-weight:700;display:flex;align-items:center;gap:.35rem;cursor:pointer;}
+.user-pill{display:flex;align-items:center;gap:.5rem;background:rgba(123,47,247,.1);border:1px solid rgba(123,47,247,.35);border-radius:18px;padding:.28rem .7rem .28rem .35rem;cursor:pointer;}
+.user-pill .av{width:24px;height:24px;border-radius:50%;background:linear-gradient(45deg,#7b2ff7,#ff0040);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#fff;overflow:hidden;}
+.user-pill .av img{width:100%;height:100%;object-fit:cover;}
+.user-pill span{font-size:.6rem;color:#ccc;}
+
+/* ---------- account dropdown ---------- */
+.account-menu{position:fixed;top:56px;right:.9rem;background:#05050f;border:1px solid rgba(123,47,247,.4);border-radius:12px;padding:.4rem;z-index:950;display:none;min-width:160px;box-shadow:0 10px 30px rgba(0,0,0,.6);}
+.account-menu.open{display:block;}
+.account-menu button{width:100%;text-align:left;background:none;border:none;color:#ccc;padding:.55rem .65rem;font-size:.66rem;font-family:inherit;border-radius:8px;display:flex;align-items:center;gap:.5rem;cursor:pointer;}
+.account-menu button i{color:#7b2ff7;width:14px;}
+.account-menu button:active,.account-menu button:hover{background:rgba(123,47,247,.15);}
+
+/* ---------- bottom nav ---------- */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:900;background:rgba(0,0,0,.95);border-top:1px solid rgba(0,255,255,.2);backdrop-filter:blur(14px);display:flex;padding-bottom:env(safe-area-inset-bottom,0);}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:.6rem 0 .55rem;background:none;border:none;color:#4a4a6a;font-family:inherit;cursor:pointer;position:relative;}
+.nav-btn i{font-size:1.05rem;}
+.nav-btn span{font-size:.52rem;letter-spacing:.4px;}
+.nav-btn.active{color:#00ffff;}
+.nav-btn.active::before{content:'';position:absolute;top:0;left:30%;right:30%;height:2px;background:#00ffff;box-shadow:0 0 8px rgba(0,255,255,.7);}
+.nav-hint{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:rgba(0,0,0,.9);border:1px solid rgba(0,255,255,.3);color:#00ffff;font-size:.48rem;padding:.2rem .4rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+.nav-btn:active .nav-hint{opacity:1;}
+
+/* ---------- page shell ---------- */
+.page{display:none;padding:64px 0 74px;min-height:100vh;}
+.page.active{display:block;}
+.wrap{max-width:640px;margin:0 auto;padding:0 1rem;}
+
+/* ---------- home ---------- */
+.greet{padding:1.3rem 0 .3rem;}
+.greet .wave{font-size:1.3rem;}
+.greet h1{font-size:1.35rem;color:#fff;margin-top:.3rem;}
+.greet h1 b{color:#00ffff;text-shadow:0 0 10px rgba(0,255,255,.35);}
+
+.bits-card{margin:1rem 0;background:linear-gradient(120deg,rgba(255,215,0,.12),rgba(123,47,247,.12));border:1px solid rgba(255,215,0,.35);border-radius:14px;padding:1rem 1.1rem;display:flex;align-items:center;gap:.9rem;}
+.bits-coin{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe27a,#b8860b);display:flex;align-items:center;justify-content:center;color:#3a2600;font-size:1.15rem;flex-shrink:0;box-shadow:0 0 16px rgba(255,215,0,.35);}
+.bits-info{flex:1;}
+.bits-info .lbl{font-size:.55rem;color:#ffd76a;letter-spacing:1.5px;}
+.bits-info .val{font-size:1.35rem;color:#fff;font-weight:900;}
+.bits-cta{background:rgba(0,255,255,.12);border:1px solid rgba(0,255,255,.4);color:#00ffff;border-radius:16px;padding:.45rem .8rem;font-family:inherit;font-size:.6rem;font-weight:700;flex-shrink:0;}
+
+.gate-card{margin:1rem 0;background:rgba(0,0,0,.55);border:1px dashed rgba(123,47,247,.4);border-radius:14px;padding:1.4rem 1rem;text-align:center;}
+.gate-card i{font-size:1.6rem;color:#7b2ff7;margin-bottom:.5rem;display:block;}
+.gate-card p{font-size:.7rem;color:#999;margin-bottom:.8rem;line-height:1.5;}
+.gate-card button{background:linear-gradient(135deg,#7b2ff7,#00c8ff);border:none;color:#000;font-weight:900;font-family:inherit;border-radius:18px;padding:.55rem 1.2rem;font-size:.68rem;}
+
+.sec-title{display:flex;align-items:center;gap:.5rem;margin:1.5rem 0 .7rem;font-size:.85rem;color:#fff;letter-spacing:.5px;}
+.sec-title i{color:#7b2ff7;}
+
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.mod-card{background:rgba(0,0,0,.6);border:1px solid rgba(123,47,247,.35);border-radius:13px;padding:1rem .9rem;display:flex;flex-direction:column;gap:.5rem;min-height:118px;position:relative;overflow:hidden;transition:transform .2s;}
+.mod-card:active{transform:scale(.97);}
+.mod-card.core{border-color:rgba(0,255,255,.45);background:linear-gradient(160deg,rgba(0,255,255,.05),rgba(123,47,247,.08));}
+.mod-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:#fff;}
+.mod-title{font-size:.78rem;color:#fff;font-weight:700;}
+.mod-desc{font-size:.6rem;color:#888;line-height:1.35;flex-grow:1;}
+.mod-action{align-self:flex-start;font-size:.58rem;padding:.28rem .6rem;border-radius:8px;display:flex;align-items:center;gap:.3rem;font-weight:700;letter-spacing:.3px;cursor:pointer;border:none;font-family:inherit;}
+.mod-action.dl{background:rgba(0,255,0,.14);border:1px solid rgba(0,255,0,.4);color:#00ff88;}
+.mod-action.open{background:rgba(0,255,255,.12);border:1px solid rgba(0,255,255,.35);color:#00ffff;}
+
+/* ---------- downloads ---------- */
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dl-card{background:linear-gradient(160deg,rgba(0,255,255,.06),rgba(123,47,247,.1));border:1px solid rgba(0,255,255,.3);border-radius:13px;padding:1rem .9rem;display:flex;flex-direction:column;gap:.5rem;min-height:130px;}
+.dl-icon{width:38px;height:38px;border-radius:10px;background:rgba(0,255,255,.12);display:flex;align-items:center;justify-content:center;color:#00ffff;font-size:1.1rem;}
+.dl-card b{font-size:.76rem;color:#fff;}
+.dl-card span{font-size:.58rem;color:#888;line-height:1.4;flex-grow:1;}
+.dl-btn{margin-top:.2rem;background:linear-gradient(135deg,#7b2ff7,#00c8ff);border:none;color:#000;font-weight:900;font-family:inherit;border-radius:16px;padding:.5rem;font-size:.62rem;cursor:pointer;}
+.dl-btn.locked{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#777;}
+/* ---------- what is DDS ---------- */
+.dds-hero-img{width:100%;height:150px;object-fit:cover;border-radius:14px;border:1px solid rgba(123,47,247,.35);display:block;margin-bottom:.9rem;}
+.about-dds-copy{font-size:.72rem;color:#bbb;line-height:1.75;margin-bottom:1rem;}
+.about-dds-copy b{color:#00ffff;}
+.about-dds-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1.6rem;margin-top:1.8rem;}
+.about-dds-card{position:relative;overflow:visible;background:rgba(0,0,0,.55);border:1px solid rgba(0,255,255,.22);border-radius:12px;padding:2.4rem .85rem .85rem;}
+.about-dds-card img{position:absolute;top:-1.8rem;left:50%;transform:translateX(-50%);width:78%;height:76px;object-fit:contain;border-radius:10px;margin-bottom:0;filter:drop-shadow(0 8px 14px rgba(0,255,255,.35));}
+.about-dds-card i{color:#00ffff;font-size:1.05rem;margin-bottom:.4rem;display:block;}
+.about-dds-card b{font-size:.7rem;color:#fff;display:block;margin-bottom:.22rem;}
+.about-dds-card span{font-size:.58rem;color:#999;line-height:1.4;}
+.rule-item-card{background:rgba(0,0,0,.55);border-left:3px solid #7b2ff7;border-radius:8px;padding:.7rem .85rem;margin-bottom:.6rem;}
+.rule-item-card i{color:#00ffff;font-size:.95rem;margin-bottom:.3rem;display:block;}
+.rule-item-card b{font-size:.7rem;color:#fff;display:block;margin-bottom:.2rem;}
+.rule-item-card span{font-size:.62rem;color:#999;line-height:1.5;}
+/* ---------- about team cards ---------- */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.team-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;border:1px solid rgba(123,47,247,.3);background:linear-gradient(135deg,#1a0030,#000020);}
+.team-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.team-card .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 10%,rgba(0,0,0,.15) 55%,rgba(0,0,0,.35) 100%);}
+.team-role-icon{position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,.55);border:1px solid rgba(0,255,255,.4);display:flex;align-items:center;justify-content:center;color:#00ffff;font-size:.72rem;backdrop-filter:blur(4px);}
+.team-info{position:absolute;left:0;right:0;bottom:0;padding:.6rem .65rem;}
+.team-role{font-size:.5rem;letter-spacing:1px;color:#00ffff;text-transform:uppercase;margin-bottom:.15rem;}
+.team-name{font-size:.78rem;color:#fff;font-weight:700;margin-bottom:.2rem;}
+.team-desc{font-size:.56rem;color:#bbb;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* ---------- team modal ---------- */
+.tm-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:5200;display:none;align-items:flex-end;justify-content:center;}
+.tm-ov.open{display:flex;}
+.tm-box{background:#05050f;border:1px solid rgba(123,47,247,.4);border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;}
+.tm-hero{position:relative;height:210px;overflow:hidden;background:linear-gradient(135deg,#1a0030,#000020);}
+.tm-hero img{width:100%;height:100%;object-fit:cover;}
+.tm-hero .grad{position:absolute;inset:0;background:linear-gradient(to top,#05050f,transparent 60%);}
+.tm-close{position:absolute;top:.7rem;right:.7rem;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.tm-body{padding:0 1.2rem 1.5rem;margin-top:-40px;position:relative;}
+.tm-role-chip{display:inline-flex;align-items:center;gap:.35rem;background:rgba(0,255,255,.12);border:1px solid rgba(0,255,255,.4);color:#00ffff;border-radius:14px;padding:.25rem .7rem;font-size:.6rem;font-weight:700;margin-bottom:.5rem;}
+.tm-name{font-size:1.25rem;color:#fff;font-weight:900;margin-bottom:.6rem;}
+.tm-about{font-size:.72rem;color:#ccc;line-height:1.65;margin-bottom:1.1rem;}
+.tm-lbl{font-size:.58rem;color:#555;letter-spacing:1.5px;margin-bottom:.5rem;border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;}
+.tm-port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
+.tm-port-item{aspect-ratio:1;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#1a0030,#000020);border:1px solid rgba(123,47,247,.25);display:flex;align-items:center;justify-content:center;color:rgba(123,47,247,.4);font-size:1.1rem;}
+
+/* ---------- footer ---------- */
+.site-footer{margin:2.2rem 0 .5rem;padding-top:1.5rem;border-top:1px solid rgba(123,47,247,.25);text-align:center;}
+.footer-logo{width:40px;height:40px;border-radius:10px;margin:0 auto .6rem;overflow:hidden;border:none;position:relative;background:transparent;display:flex;align-items:center;justify-content:center;}
+.footer-logo img.dds-logo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+.footer-tag{font-size:.6rem;color:#666;max-width:340px;margin:0 auto .9rem;line-height:1.6;}
+.footer-social{display:flex;justify-content:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+.footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(123,47,247,.12);border:1px solid rgba(123,47,247,.35);display:flex;align-items:center;justify-content:center;color:#00ffff;font-size:.9rem;text-decoration:none;}
+.footer-links{display:flex;justify-content:center;gap:1rem;font-size:.58rem;color:#666;margin-bottom:.8rem;flex-wrap:wrap;}
+.footer-links a{color:#7b2ff7;text-decoration:none;cursor:pointer;}
+.footer-small{font-size:.52rem;color:#333;}
+
+/* ---------- explore ---------- */
+.search-wrap{position:relative;margin:1rem 0 .8rem;}
+.search-wrap input{width:100%;background:rgba(123,47,247,.08);border:1px solid rgba(123,47,247,.35);border-radius:26px;padding:.68rem 1rem .68rem 2.5rem;color:#fff;font-family:inherit;font-size:.75rem;outline:none;}
+.search-wrap input:focus{border-color:#00ffff;box-shadow:0 0 14px rgba(0,255,255,.12);}
+.search-wrap i{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:#7b2ff7;font-size:.8rem;}
+.chip-row{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;}
+.chip{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(123,47,247,.3);border-radius:16px;padding:.35rem .9rem;font-size:.65rem;color:#999;cursor:pointer;}
+.chip.on{background:#7b2ff7;color:#fff;border-color:#7b2ff7;}
+.empty-hist{text-align:center;color:#333;font-size:.68rem;padding:2.2rem 0;grid-column:1/-1;}
+.empty-hist i{font-size:1.8rem;display:block;margin-bottom:.6rem;color:#2a2a44;}
+
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.pcard{background:rgba(0,0,0,.6);border:1px solid rgba(123,47,247,.28);border-radius:12px;overflow:hidden;cursor:pointer;}
+.pcard-poster{aspect-ratio:16/10;background:linear-gradient(135deg,#1a0030,#000020);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(123,47,247,.4);font-size:1.7rem;overflow:hidden;}
+.pcard-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.pcard-tag{position:absolute;top:6px;left:6px;font-size:.44rem;font-weight:700;padding:.08rem .32rem;border-radius:3px;background:rgba(0,255,255,.18);color:#00ffff;border:1px solid rgba(0,255,255,.3);z-index:2;}
+.pcard-body{padding:.55rem .6rem .65rem;}
+.pcard-title{font-size:.66rem;color:#fff;margin-bottom:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pcard-row{display:flex;justify-content:space-between;font-size:.5rem;color:#888;}
+.pcard-row .stars{color:#ffd700;}
+
+/* ---------- project detail modal ---------- */
+.pdm-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:5200;display:none;align-items:flex-end;justify-content:center;}
+.pdm-ov.open{display:flex;}
+.pdm-box{background:#05050f;border:1px solid rgba(0,255,255,.35);border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;}
+.pdm-hero{position:relative;height:180px;background:linear-gradient(135deg,#1a0030,#000020);display:flex;align-items:center;justify-content:center;color:rgba(123,47,247,.35);font-size:2.4rem;overflow:hidden;}
+.pdm-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.pdm-close{position:absolute;top:.7rem;right:.7rem;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;}
+.pdm-body{padding:1rem 1.2rem 1.5rem;}
+.pdm-title{font-size:1.05rem;color:#fff;margin-bottom:.3rem;}
+.pdm-meta{font-size:.62rem;color:#00ffff;margin-bottom:.8rem;}
+.pdm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.9rem;}
+.pdms{background:rgba(255,255,255,.03);border:1px solid rgba(123,47,247,.2);border-radius:8px;padding:.5rem .3rem;text-align:center;}
+.pdms-v{font-size:.85rem;color:#00ffff;font-weight:700;}
+.pdms-l{font-size:.44rem;color:#555;margin-top:.15rem;}
+.pdm-desc{font-size:.68rem;color:#bbb;line-height:1.65;margin-bottom:.3rem;white-space:pre-wrap;}
+.pdm-desc.collapsed{max-height:130px;overflow:hidden;position:relative;}
+.pdm-desc.collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:36px;background:linear-gradient(transparent,#05050f);}
+.read-more-btn{background:none;border:none;color:#00ffff;font-size:.66rem;cursor:pointer;padding:.15rem 0 .9rem;font-family:inherit;letter-spacing:.4px;display:block;}
+.pdm-admin{display:flex;gap:.5rem;margin-bottom:.55rem;}
+.pdm-admin button{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(123,47,247,.3);border-radius:9px;padding:.55rem;color:#bb88ff;font-family:inherit;font-size:.64rem;cursor:pointer;}
+.pdm-admin button.boost{border-color:rgba(255,60,0,.35);color:#ff8050;}
+.pdm-actions{display:flex;gap:.6rem;}
+.pdm-actions button{flex:1;border:none;border-radius:10px;padding:.7rem;font-family:inherit;font-size:.7rem;font-weight:700;cursor:pointer;}
+.pdm-like{background:rgba(255,0,96,.12);border:1.5px solid rgba(255,0,96,.35)!important;color:#ff0060;}
+.pdm-like.liked{background:rgba(255,0,96,.25);color:#ff3378;}
+.pdm-dl{background:linear-gradient(135deg,#7b2ff7,#00c8ff);color:#000;}
+.pdm-stars-inp{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:.3rem;margin-bottom:.9rem;}
+.pdm-stars-inp input{display:none;}
+.pdm-stars-inp label{font-size:1.3rem;color:#2a2a3a;cursor:pointer;}
+.pdm-stars-inp label:hover,.pdm-stars-inp label:hover~label,.pdm-stars-inp input:checked~label{color:#ffd700;}
+
+/* ---------- learn ---------- */
+.yt-banner{margin:1rem 0;background:linear-gradient(120deg,#ff0040,#7b2ff7);border-radius:14px;padding:1.1rem;display:flex;align-items:center;gap:.9rem;}
+.yt-banner i{font-size:1.6rem;color:#fff;}
+.yt-banner b{color:#fff;font-size:.85rem;display:block;}
+.yt-banner span{color:rgba(255,255,255,.8);font-size:.65rem;}
+.yt-banner button{margin-left:auto;flex-shrink:0;background:#fff;color:#ff0040;border:none;border-radius:16px;padding:.4rem .8rem;font-family:inherit;font-weight:900;font-size:.62rem;}
+
+.tut-card{display:flex;gap:.8rem;background:rgba(0,0,0,.6);border:1px solid rgba(0,255,255,.18);border-radius:12px;padding:.7rem;margin-bottom:.75rem;cursor:pointer;}
+.tut-thumb{width:96px;height:64px;border-radius:8px;flex-shrink:0;background-size:cover;background-position:center;position:relative;}
+.tut-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.25);border-radius:8px;}
+.tut-thumb .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.tut-thumb .play i{color:#fff;font-size:1.1rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));}
+.tut-info{flex:1;min-width:0;}
+.tut-info h4{font-size:.72rem;color:#00ffff;margin-bottom:.25rem;}
+.tut-info p{font-size:.6rem;color:#888;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* ---------- codelab tab ---------- */
+.cl-hero{margin:1rem 0;border-radius:16px;overflow:hidden;background:linear-gradient(150deg,#001a2e 0%,#0a0025 55%,#1a0022 100%);position:relative;padding:1.4rem 1.2rem 1.2rem;}
+.cl-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,255,.08)1px,transparent 1px),linear-gradient(90deg,rgba(0,255,255,.08)1px,transparent 1px);background-size:20px 20px;pointer-events:none;}
+.cl-top{display:flex;align-items:flex-start;justify-content:space-between;position:relative;z-index:1;}
+.cl-hero h1{font-size:1.55rem;color:#fff;line-height:1.15;max-width:72%;}
+.new-pill{background:#00c8ff;color:#001;font-weight:900;font-size:.62rem;padding:.35rem .8rem;border-radius:16px;flex-shrink:0;}
+.cl-icon-lg{width:44px;height:44px;border-radius:12px;background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.35);display:flex;align-items:center;justify-content:center;color:#00ffff;font-size:1.15rem;margin-top:.6rem;position:relative;z-index:1;}
+.cl-copy{color:#bbb;font-size:.75rem;line-height:1.75;margin:1rem 0 1.2rem;}
+.feat-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem;}
+.feat-item{display:flex;align-items:flex-start;gap:.6rem;background:rgba(0,0,0,.4);border:1px solid rgba(123,47,247,.2);border-radius:10px;padding:.6rem .75rem;}
+.feat-item i{color:#00ffff;font-size:.85rem;margin-top:.15rem;flex-shrink:0;}
+.feat-item b{display:block;font-size:.68rem;color:#fff;}
+.feat-item span{font-size:.58rem;color:#888;}
+.cl-btn{width:100%;background:linear-gradient(135deg,#7b2ff7,#00c8ff);color:#000;border:none;border-radius:26px;padding:.85rem;font-family:inherit;font-weight:900;font-size:.85rem;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.cl-note{text-align:center;color:#444;font-size:.6rem;margin-top:.6rem;}
+
+/* ---------- fullscreen IDE ---------- */
+.ide-ov{position:fixed;inset:0;background:#03030a;z-index:6000;display:none;flex-direction:column;}
+.ide-ov.open{display:flex;}
+.ide-top{display:flex;align-items:center;justify-content:space-between;padding:.7rem .9rem;background:rgba(0,0,0,.8);border-bottom:1px solid rgba(0,255,255,.2);flex-shrink:0;}
+.ide-top .ide-title{color:#00ffff;font-size:.75rem;display:flex;align-items:center;gap:.5rem;}
+.ide-main{flex:1;display:flex;overflow:hidden;}
+.ide-files{width:120px;flex-shrink:0;background:rgba(255,255,255,.02);border-right:1px solid rgba(123,47,247,.18);padding:.7rem .5rem;overflow-y:auto;}
+.ide-file{font-size:.58rem;color:#888;padding:.4rem .4rem;border-radius:6px;margin-bottom:.15rem;display:flex;align-items:center;gap:.35rem;}
+.ide-file.on{background:rgba(0,255,255,.1);color:#00ffff;}
+.ide-editor{flex:1;background:#050510;padding:1rem;overflow-y:auto;font-family:monospace;font-size:.62rem;line-height:1.7;color:#8fe;white-space:pre-wrap;}
+.ide-editor .kw{color:#ff6ec7;}
+.ide-editor .str{color:#ffd76a;}
+.ide-editor .com{color:#556;}
+.ide-dock{display:flex;background:rgba(0,0,0,.95);border-top:1px solid rgba(0,255,255,.2);padding-bottom:env(safe-area-inset-bottom,0);flex-shrink:0;}
+.ide-dock button{flex:1;background:none;border:none;color:#4a4a6a;display:flex;flex-direction:column;align-items:center;gap:2px;padding:.55rem 0;font-family:inherit;}
+.ide-dock button i{font-size:1rem;}
+.ide-dock button span{font-size:.48rem;}
+.ide-dock button.exit{color:#00ffff;}
+
+/* ---------- toast ---------- */
+.toast-cont{position:fixed;top:60px;right:.8rem;z-index:7000;display:flex;flex-direction:column;gap:.4rem;}
+.toast{background:rgba(0,0,0,.95);border:1px solid #00ffff;border-radius:10px;padding:.55rem .8rem;font-size:.68rem;color:#fff;max-width:220px;animation:tIn .25s ease;}
+.toast.success{border-color:#00ff00;}
+.toast.error{border-color:#ff0040;}
+@keyframes tIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* ---------- video modal ---------- */
+.vm-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:5000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.vm-ov.open{display:flex;}
+.vm-box{background:#05050f;border:1px solid rgba(0,255,255,.35);border-radius:14px;width:100%;max-width:560px;overflow:hidden;}
+.vm-head{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;border-bottom:1px solid rgba(0,255,255,.12);}
+.vm-head h4{color:#00ffff;font-size:.8rem;}
+.vm-head button{background:none;border:none;color:#666;font-size:1rem;}
+.vm-frame{position:relative;padding-bottom:56.25%;height:0;background:#000;}
+.vm-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+/* ---------- floating Dev Spot button ---------- */
+.fab-dev{position:fixed;right:1rem;bottom:82px;width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:2px solid rgba(0,255,255,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;z-index:850;box-shadow:0 4px 18px rgba(0,0,0,.55);cursor:pointer;overflow:hidden;}
+.fab-dev:active{transform:scale(.94);}
+.fab-dev img.dds-logo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+
+/* ---------- Dev Spot modal ---------- */
+.dsm-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:6500;display:none;align-items:flex-end;justify-content:center;}
+.dsm-ov.open{display:flex;}
+.dsm-box{background:#050514;border:1px solid rgba(0,255,255,.3);border-radius:18px 18px 0 0;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;}
+.dsm-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.1rem .8rem;border-bottom:1px solid rgba(0,255,255,.12);position:sticky;top:0;background:#050514;z-index:2;}
+.dsm-head h3{color:#00ffff;font-size:.85rem;}
+.dsm-head button{background:none;border:none;color:#666;font-size:1.1rem;}
+.dsm-body{padding:1rem 1.1rem 2rem;}
+.ef{margin-bottom:.8rem;}
+.ef label{display:block;color:#00ffff;font-size:.6rem;margin-bottom:.26rem;letter-spacing:.8px;}
+.ef input,.ef textarea,.ef select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(123,47,247,.3);border-radius:8px;padding:.58rem .82rem;color:#fff;font-family:inherit;font-size:.7rem;outline:none;}
+.ef input:focus,.ef textarea:focus,.ef select:focus{border-color:#00ffff;}
+.ef textarea{resize:vertical;min-height:110px;}
+.ef-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.type-pills{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.tp{background:rgba(255,255,255,.04);border:1px solid rgba(123,47,247,.26);border-radius:14px;padding:.25rem .62rem;font-size:.58rem;cursor:pointer;color:#555;transition:all .18s;}
+.tp.on{background:#7b2ff7;border-color:#7b2ff7;color:#fff;}
+.img-zone{border:2px dashed rgba(123,47,247,.35);border-radius:9px;padding:1.1rem;text-align:center;cursor:pointer;transition:all .26s;position:relative;}
+.img-zone.drag{border-color:#00ffff;background:rgba(0,255,255,.03);}
+.img-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.img-zone .iz-icon{font-size:1.6rem;color:#7b2ff7;margin-bottom:.3rem;}
+.img-zone p{color:#444;font-size:.65rem;}
+.img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.6rem;}
+.it{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;border:1px solid rgba(123,47,247,.25);}
+.it img{width:100%;height:100%;object-fit:cover;}
+.it-del{position:absolute;top:2px;right:2px;background:rgba(255,0,64,.8);border:none;border-radius:3px;color:#fff;width:16px;height:16px;font-size:.55rem;cursor:pointer;}
+.up-prog{height:5px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:.45rem;overflow:hidden;display:none;}
+.up-bar{height:100%;background:linear-gradient(90deg,#7b2ff7,#00ffff);border-radius:3px;width:0;transition:width .3s;}
+.dsm-submit{width:100%;background:linear-gradient(135deg,#7b2ff7,#ff0040);border:none;border-radius:10px;padding:.78rem;color:#fff;font-family:inherit;font-size:.78rem;cursor:pointer;margin-top:.5rem;letter-spacing:.8px;}
+.dsm-submit:disabled{opacity:.5;}
+
+/* ---------- auth overlay (signup / login) ---------- */
+:root{--acy:#00c8ff;--agr:#00ff88;--ard:#ff2255;--aam:#ffaa00;--asf2:#0f1e2e;--abd:rgba(0,200,255,.15);--abdg:rgba(0,200,255,.4);--amt:#4a6a80;--atx:#c8e0f0;}
+.auth-ov{position:fixed;inset:0;background:#000;z-index:8000;display:none;overflow-y:auto;}
+.auth-ov.open{display:block;}
+.auth-topbar{position:sticky;top:0;display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;background:rgba(0,0,0,.96);border-bottom:1px solid rgba(0,255,255,.2);z-index:3;}
+.auth-back{background:rgba(123,47,247,.15);border:1px solid rgba(123,47,247,.4);color:#00ffff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;}
+.auth-title{color:#fff;font-size:.82rem;font-weight:700;}
+.auth-wrap{max-width:480px;margin:0 auto;padding:1.4rem 1.1rem 3rem;}
+.au-journey{background:rgba(11,21,32,.6);border:1px solid var(--abd);border-radius:14px;padding:1rem 1.1rem;margin-bottom:1.3rem;}
+.au-lbl{font-size:.55rem;letter-spacing:.15em;color:var(--amt);text-transform:uppercase;margin-bottom:.8rem;}
+.au-steps{display:flex;align-items:center;overflow-x:auto;}
+.au-step{display:flex;flex-direction:column;align-items:center;flex:1;min-width:80px;position:relative;cursor:pointer;}
+.au-step:not(:last-child)::after{content:'';position:absolute;top:16px;left:calc(50% + 18px);width:calc(100% - 36px);height:2px;background:var(--abd);}
+.au-step.done:not(:last-child)::after{background:var(--agr);}
+.au-step.act:not(:last-child)::after{background:var(--acy);}
+.au-dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--amt);background:var(--asf2);display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--amt);margin-bottom:.35rem;position:relative;z-index:1;}
+.au-step.act .au-dot{border-color:var(--acy);color:var(--acy);background:rgba(0,200,255,.1);}
+.au-step.done .au-dot{border-color:var(--agr);color:var(--agr);background:rgba(0,255,136,.08);}
+.au-step.done .au-num{display:none;}
+.au-step.done .au-dot::after{content:'✓';}
+.au-name{font-size:.5rem;color:var(--amt);text-align:center;}
+.au-step.act .au-name{color:var(--acy);}
+.au-step.done .au-name{color:var(--agr);}
+.au-card{background:rgba(11,21,32,.7);border:1px solid var(--abd);border-radius:16px;padding:1.4rem;}
+.au-card-title{color:#fff;font-size:.85rem;margin-bottom:.2rem;}
+.au-card-sub{font-size:.62rem;color:var(--amt);margin-bottom:1rem;line-height:1.5;}
+.au-field{margin-bottom:1rem;}
+.au-field label{display:block;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acy);margin-bottom:.3rem;}
+.au-field input,.au-field select{width:100%;background:rgba(0,0,0,.5);border:1px solid var(--abd);border-radius:7px;color:var(--atx);font-family:inherit;font-size:.78rem;padding:.65rem .8rem;outline:none;}
+.au-field input:focus,.au-field select:focus{border-color:var(--acy);}
+.au-field select option{background:#0b1520;}
+.au-field small{display:block;font-size:.56rem;color:var(--amt);margin-top:.25rem;}
+.au-btn{width:100%;padding:.75rem;border-radius:9px;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:.35rem;border:1px solid;font-family:inherit;font-weight:700;}
+.au-btn-p{background:linear-gradient(135deg,rgba(0,200,255,.25),rgba(0,200,255,.1));border-color:var(--acy);color:var(--acy);}
+.au-btn-p:disabled{opacity:.4;}
+.au-btn-s{background:transparent;border-color:var(--abd);color:var(--amt);}
+.au-msg{padding:.65rem .8rem;border-radius:7px;font-size:.65rem;line-height:1.5;margin-bottom:.8rem;display:none;}
+.au-msg.show{display:block;}
+.au-msg.suc{background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);color:var(--agr);}
+.au-msg.err{background:rgba(255,34,85,.08);border:1px solid rgba(255,34,85,.3);color:var(--ard);}
+.au-msg.inf{background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);color:var(--acy);}
+.au-msg.wrn{background:rgba(255,170,0,.08);border:1px solid rgba(255,170,0,.3);color:var(--aam);}
+.au-loading{display:none;text-align:center;padding:.7rem 0;}
+.au-loading.show{display:block;}
+.au-spinner{width:26px;height:26px;border:2px solid rgba(0,200,255,.2);border-top-color:var(--acy);border-radius:50%;animation:auspin .8s linear infinite;margin:0 auto .4rem;}
+@keyframes auspin{to{transform:rotate(360deg)}}
+.au-screen{display:none;}
+.au-screen.active{display:block;}
+.au-substep{display:none;}
+.au-substep.active{display:block;}
+.au-hint{background:rgba(0,200,255,.05);border:1px solid var(--abd);border-radius:7px;padding:.65rem .8rem;font-size:.62rem;color:var(--atx);margin-bottom:.8rem;line-height:1.6;}
+.au-divider{display:flex;align-items:center;gap:.6rem;margin:.9rem 0;font-size:.56rem;color:var(--amt);}
+.au-divider::before,.au-divider::after{content:'';flex:1;height:1px;background:var(--abd);}
+.au-swlinks{display:flex;justify-content:center;flex-wrap:wrap;gap:.35rem;margin-top:1rem;}
+.au-swl{font-size:.56rem;color:var(--amt);cursor:pointer;padding:.22rem .5rem;border-radius:5px;border:1px solid transparent;}
+.au-swl:hover,.au-swl.cur{color:var(--acy);border-color:var(--abdg);}
+.au-back-link{display:block;text-align:center;font-size:.58rem;color:var(--amt);cursor:pointer;margin-top:.8rem;}
+.au-tt-ov{display:none;position:fixed;inset:0;z-index:8600;background:rgba(0,0,0,.8);align-items:center;justify-content:center;padding:1rem;}
+.au-tt-ov.show{display:flex;}
+.au-tt-box{background:var(--asf2);border:1px solid var(--abdg);border-radius:14px;padding:1.4rem;max-width:400px;width:100%;position:relative;}
+.au-ban-ov{position:fixed;inset:0;z-index:9990;background:rgba(0,0,0,.97);display:none;align-items:center;justify-content:center;padding:1rem;}
+.au-ban-ov.show{display:flex;}
+
+/* ---------- legal modal (terms / privacy) ---------- */
+.legal-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:8300;display:none;align-items:flex-end;justify-content:center;}
+.legal-ov.open{display:flex;}
+.legal-box{background:#05050f;border:1px solid rgba(0,255,255,.3);border-radius:18px 18px 0 0;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;}
+.legal-head{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;background:#05050f;border-bottom:1px solid rgba(0,255,255,.15);z-index:2;}
+.legal-head h3{color:#00ffff;font-size:.85rem;}
+.legal-head button{background:none;border:none;color:#666;font-size:1.1rem;}
+.legal-body{padding:1rem 1.3rem 2rem;font-size:.68rem;color:#bbb;line-height:1.8;}
+.legal-body h4{color:#fff;font-size:.75rem;margin:1.1rem 0 .4rem;}
+.legal-body h4:first-child{margin-top:0;}
+.legal-body p{margin-bottom:.6rem;}
+.legal-updated{font-size:.58rem;color:#555;margin-bottom:1rem;}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="toast-cont" id="toastCont"></div>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <img class="dds-logo-img" id="logoTopbar" alt="DDS">
+      <i class="fas fa-skull" id="logoTopbarFallback"></i>
+    </div>
+    <div><div class="brand-name" id="launchTimer">--:--:--:--</div><div class="brand-sub" id="launchNameCycle">DARK DIGITAL SPACE</div></div>
+  </div>
+  <button class="signin-pill" id="signinBtn" onclick="onAuthPillClick()"><i class="fas fa-sign-in-alt"></i> SIGN IN</button>
+</div>
+
+<div class="account-menu" id="accountMenu">
+  <button onclick="closeAccountMenu();switchPageByName('Explore')"><i class="fas fa-compass"></i> Explore Projects</button>
+  <button onclick="closeAccountMenu();openDevSpot()"><i class="fas fa-code-branch"></i> Post a Project</button>
+  <button onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+</div>
+
+<!-- ================= HOME ================= -->
+<div class="page active" id="pageHome">
+  <div class="wrap">
+    <div class="greet">
+      <div class="wave">👋</div>
+      <h1>Hello, <b id="userName">Guest</b></h1>
+    </div>
+
+    <div class="bits-card" id="bitsCard" style="display:none">
+      <div class="bits-coin"><i class="fas fa-coins"></i></div>
+      <div class="bits-info"><div class="lbl">DDS BITS BALANCE</div><div class="val" id="bitsVal">0</div></div>
+      <button class="bits-cta" onclick="showToast('Earn bits by posting, liking and challenges','info')">Earn more</button>
+    </div>
+    <div class="gate-card" id="bitsGate">
+      <i class="fas fa-coins"></i>
+      <p>Sign in to see your real DDS bits balance and start earning.</p>
+      <button onclick="goToAuth()">Sign In</button>
+    </div>
+
+    <div class="sec-title"><i class="fas fa-download"></i> TO START INSTALL THESE APPS</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-icon"><i class="fas fa-skull"></i></div>
+        <b>DDS App</b>
+        <span>The full Dark Digital Space app — posts, projects, bits, challenges &amp; more.</span>
+        <button class="dl-btn locked" onclick="showLockedToast()"><i class="fas fa-lock"></i> Locked</button>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><i class="fas fa-code"></i></div>
+        <b>DDS Codelab</b>
+        <span>Standalone Code Lab IDE — build &amp; publish projects on the go.</span>
+        <button class="dl-btn locked" onclick="showLockedToast()"><i class="fas fa-lock"></i> Locked</button>
+      </div>
+    </div>
+
+<div class="sec-title"><i class="fas fa-users"></i> DDS COMMUNITY MEMBERS</div>
+<div id="membersArea">
+  <div class="team-grid" id="membersGrid"><div class="empty-hist" style="grid-column:1/-1"><i class="fas fa-spinner fa-spin"></i>Loading members…</div></div>
+</div>
+
+<div class="sec-title"><i class="fas fa-gift"></i> REFERRALS</div>
+<div class="gate-card" id="referralGate">
+  <i class="fas fa-lock"></i>
+  <p>Sign in to get your referral code, earn bits, and see how referrals work.</p>
+  <button onclick="goToAuth()">Sign In to Continue</button>
+</div>
+<div id="referralArea" style="display:none">
+  <div class="rule-item-card">
+    <i class="fas fa-ticket-alt"></i>
+    <b>1. Share your code</b>
+    <span>Every member gets a unique referral code from the Referral Center.</span>
+  </div>
+  <div class="rule-item-card">
+    <i class="fas fa-gift"></i>
+    <b>2. Rewards on both sides</b>
+    <span>New members get <b style="color:#00ff88">500 bits</b> for using a code. You get <b style="color:#00ffff">1,000 bits</b> for every person who joins with yours.</span>
+  </div>
+  <div class="rule-item-card">
+    <i class="fas fa-infinity"></i>
+    <b>3. No limit</b>
+    <span>Refer as many people as you like — each new code use is instant.</span>
+  </div>
+  <button class="mod-action dl" style="margin-top:.6rem" onclick="openReferralCenter()"><i class="fas fa-user-plus"></i> Open Referral Center</button>
+</div>
+
+      
+    <div class="sec-title"><i class="fas fa-satellite-dish"></i> WHAT IS DDS?</div>
+    <img class="dds-hero-img" src="https://i.postimg.cc/WzpRMYZK/IMG-20260814-082829.png" alt="Dark Digital Space network" onerror="this.style.display='none'">
+    <div class="about-dds-copy">
+      <b>Dark Digital Space (DDS)</b> 
+software serves as a specialized digital forum for global gatherings of individuals with interests in cybersecurity, hacking, and programming. It operates under the premise of sharing knowledge, skills, and entertainment related to these fields, while emphasizing the importance of ethical conduct and security .
+
+The platform aims to facilitate educational and recreational interactions among its members, fostering a community that values learning, innovation, and responsible engagement with technology .
+
+
+
+        
+       <B> DDS is a community platform for builders</B> — hackers, developers, designers and tinkerers who post real projects, tools, scripts and games for the world to use. Sign in to get your own <b>DDS Number</b>, build a profile, and start posting to <b>Explore</b>, our live catalog of everything the community has shipped.
+      Every action on DDS — posting a project, getting downloads, earning likes — pays out <b>DDS bits</b>, the platform's internal currency. Bits can be spent to <b>boost</b> your projects to the top of Explore, or saved up and challenged for rank against other member and even withdraw from it.
+    </div>
+    <div class="about-dds-grid">
+      <div class="about-dds-card">
+        <img src="https://i.postimg.cc/cJvJSBcj/file-00000000ec5c82438c754b4e577b0dbd.png" alt="" onerror="this.style.display='none'">
+        <i class="fas fa-code-branch"></i>
+        <b>Dev Spot</b>
+        <span>Post APKs, links, scripts, tools and games straight to Explore.</span>
+      </div>
+      <div class="about-dds-card">
+        <img src="https://i.postimg.cc/Jzzg7dCL/lv-0-20260814094326.png" alt="" onerror="this.style.display='none'">
+        <i class="fas fa-coins"></i>
+        <b>Bits Economy</b>
+        <span>Earn bits from engagement, spend them to boost your work.</span>
+      </div>
+      <div class="about-dds-card">
+        <img src="https://i.postimg.cc/qvWLfmk2/lv-0-20260814094354.png" alt="" onerror="this.style.display='none'">
+        <i class="fas fa-trophy"></i>
+        <b>Ranks &amp; Challenges</b>
+        <span>Climb the leaderboard by challenging other DDS members.</span>
+      </div>
+      <div class="about-dds-card">
+        <img src="https://i.postimg.cc/B6BcK42M/lv-0-20260814094436.png" alt="" onerror="this.style.display='none'">
+        <i class="fas fa-terminal"></i>
+        <b>Code Lab</b>
+        <span>Write, preview and publish projects without leaving the app.</span>
+      </div>
+    </div>
+
+    <div class="sec-title"><i class="fas fa-users"></i> ABOUT</div>
+    <div class="team-grid" id="teamGrid"></div>
+
+    <div class="site-footer">
+      <div class="footer-logo">
+        <img class="dds-logo-img" id="logoFooter" alt="DDS">
+        <i class="fas fa-skull" id="logoFooterFallback" style="color:#7b2ff7"></i>
+      </div>
+      <div class="footer-tag">Dark Digital Space — built by the underground, for the underground. Digital freedom, real tools, real community.</div>
+      <div class="footer-social">
+        <a href="#" title="Discord" onclick="return sfClick(event)"><i class="fab fa-discord"></i></a>
+        <a href="#" title="X / Twitter" onclick="return sfClick(event)"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" title="YouTube" onclick="return sfClick(event)"><i class="fab fa-youtube"></i></a>
+        <a href="#" title="GitHub" onclick="return sfClick(event)"><i class="fab fa-github"></i></a>
+        <a href="#" title="Telegram" onclick="return sfClick(event)"><i class="fab fa-telegram"></i></a>
+        <a href="mailto: darkdigitalspaceteam@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div class="footer-links">
+        <a onclick="return openLegalClick(event,'terms')">Terms</a>
+        <a onclick="return openLegalClick(event,'privacy')">Privacy</a>
+        <a href="#" onclick="return sfClick(event)">Support</a>
+      </div>
+      <div class="footer-small">© <span id="fYear"></span> DARK DIGITAL SPACE — DDS Command Center</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= EXPLORE ================= -->
+<div class="page" id="pageExplore">
+  <div class="wrap">
+    <div class="sec-title" style="margin-top:1rem"><i class="fas fa-compass"></i> ALL DDS PROJECTS</div>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" id="exploreSearch" placeholder="Search DDS projects, tools, scripts..." oninput="onExploreSearch(this.value)"/>
+    </div>
+    <div class="chip-row">
+      <div class="chip on" data-c="all" onclick="setChip(this,'all')">All</div>
+      <div class="chip" data-c="APK" onclick="setChip(this,'APK')">APKs</div>
+      <div class="chip" data-c="tools" onclick="setChip(this,'tools')">Tools</div>
+      <div class="chip" data-c="Script" onclick="setChip(this,'Script')">Scripts</div>
+      <div class="chip" data-c="Game" onclick="setChip(this,'Game')">Games</div>
+    </div>
+
+    <div class="sec-title"><i class="fas fa-trophy"></i> TOP RATED</div>
+    <div class="proj-grid" id="exploreGrid"><div class="empty-hist"><i class="fas fa-spinner fa-spin"></i>Loading real DDS projects…</div></div>
+  </div>
+</div>
+
+<!-- ================= LEARN ================= -->
+<div class="page" id="pageLearn">
+  <div class="wrap">
+    <div class="sec-title" style="margin-top:1rem"><i class="fas fa-graduation-cap"></i> TUTORIALS &amp; GUIDES</div>
+    <div class="yt-banner">
+      <i class="fab fa-youtube"></i>
+      <div><b>DDS on YouTube</b><span>Every tutorial, straight from the source</span></div>
+      <button onclick="showToast('Opening YouTube channel...','info')">Subscribe</button>
+    </div>
+
+    <div id="tutList"></div>
+  </div>
+</div>
+
+<!-- ================= CODELAB ================= -->
+<div class="page" id="pageCodelab">
+  <div class="wrap">
+    <div class="cl-hero">
+      <div class="cl-top">
+        <h1>Everything about<br>Code Lab</h1>
+        <span class="new-pill">IDE</span>
+      </div>
+      <div class="cl-icon-lg"><i class="fas fa-code"></i></div>
+    </div>
+
+    <p class="cl-copy">Code Lab is DDS's built-in editor — write, test and publish projects without leaving the app. Double-tap the Codelab icon in the nav bar any time to snap it open full screen and experience how the main app is.</p>
+
+    <div class="feat-list">
+      <div class="feat-item"><i class="fas fa-file-code"></i><div><b>Multi-file editor</b><span>HTML, JS, Python and shell scripts, all in one workspace</span></div></div>
+      <div class="feat-item"><i class="fas fa-play"></i><div><b>Live preview</b><span>Run and preview your project instantly, no setup required</span></div></div>
+      <div class="feat-item"><i class="fas fa-cloud-upload-alt"></i><div><b>One-tap publish</b><span>Push straight to Explore or host it as a live website in dds</span></div></div>
+    </div>
+
+    <button class="cl-btn" onclick="openIDE()"><i class="fas fa-terminal"></i> Launch Code Lab</button>
+    <div class="cl-note">Tip: double-tap the Codelab tab below for the same shortcut</div>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <button class="nav-btn active" data-p="Home" onclick="switchPage('Home',this)"><i class="fas fa-home"></i><span>Home</span></button>
+  <button class="nav-btn" data-p="Explore" onclick="switchPage('Explore',this)"><i class="fas fa-compass"></i><span>Explore</span></button>
+  <button class="nav-btn" data-p="Learn" onclick="switchPage('Learn',this)"><i class="fas fa-graduation-cap"></i><span>Learn</span></button>
+  <button class="nav-btn" data-p="Codelab" onclick="codelabTap(this)"><i class="fas fa-code"></i><span>Codelab</span><span class="nav-hint">double-tap for full IDE</span></button>
+</div>
+
+<!-- Floating Dev Spot button -->
+<div class="fab-dev" id="fabDev" onclick="openDevSpot()" title="Post a project">
+  <img class="dds-logo-img" id="logoFab" alt="">
+  <i class="fas fa-plus" id="logoFabFallback"></i>
+</div>
+
+<!-- ================= DEV SPOT MODAL ================= -->
+<div class="dsm-ov" id="dsmOv" onclick="if(event.target===this)closeDevSpot()">
+  <div class="dsm-box">
+    <div class="dsm-head"><h3><i class="fas fa-code-branch" style="color:#7b2ff7"></i> DEV SPOT — POST PROJECT</h3><button onclick="closeDevSpot()"><i class="fas fa-times"></i></button></div>
+    <div class="dsm-body">
+      <div class="ef">
+        <label>PROJECT IMAGES <span style="color:#ff0040">*</span> <span style="color:#ffaa00;font-size:.52rem">(first = thumbnail)</span></label>
+        <div class="img-zone" id="imgZone">
+          <input type="file" id="imgFile" accept="image/*" multiple onchange="handleImgs(this)"/>
+          <div class="iz-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <p>Tap to add images (max 8)</p>
+        </div>
+        <div class="up-prog" id="upProg"><div class="up-bar" id="upBar"></div></div>
+        <div class="img-grid" id="imgGrid"></div>
+      </div>
+      <div class="ef"><label>PROJECT TITLE <span style="color:#ff0040">*</span></label><input type="text" id="dsTitle" maxlength="80" placeholder="e.g. DarkScan Pro v2.0"/></div>
+      <div class="ef"><label>DESCRIPTION <span style="color:#ff0040">*</span></label><textarea id="dsDesc" placeholder="What does it do?"></textarea></div>
+      <div class="ef-row">
+        <div class="ef"><label>CATEGORY <span style="color:#ff0040">*</span></label><input type="text" id="dsCat" placeholder="e.g. Ethical Hacking"/></div>
+        <div class="ef"><label>PLATFORM</label>
+          <select id="dsPlatform"><option value="">Select</option><option>Android</option><option>iOS</option><option>Windows</option><option>Web Browser</option><option>Cross-Platform</option><option>Termux</option><option>All Platforms</option></select>
+        </div>
+      </div>
+      <div class="ef-row">
+        <div class="ef"><label>AUTHOR / TEAM</label><input type="text" id="dsAuthor" placeholder="Your name"/></div>
+        <div class="ef"><label>VERSION</label><input type="text" id="dsVersion" placeholder="e.g. v1.0"/></div>
+      </div>
+      <div class="ef"><label>TAGS <span style="color:#ffaa00;font-size:.52rem">comma separated</span></label><input type="text" id="dsTags" placeholder="hacking, scanner, python"/></div>
+      <div class="ef">
+        <label>ACTION TYPE</label>
+        <div class="type-pills" id="typePills">
+          <span class="tp on" onclick="setType('APK',this)">📦 APK</span>
+          <span class="tp" onclick="setType('Link',this)">🔗 Link</span>
+          <span class="tp" onclick="setType('Tool',this)">🔧 Tool</span>
+          <span class="tp" onclick="setType('Script',this)">💻 Script</span>
+          <span class="tp" onclick="setType('GitHub',this)">🐱 GitHub</span>
+          <span class="tp" onclick="setType('Game',this)">🎮 Game</span>
+        </div>
+        <label style="margin-top:.3rem;margin-bottom:.2rem;display:block">ACTION URL <span style="color:#ff0040">*</span></label>
+        <input type="text" id="dsActionUrl" placeholder="Download URL / GitHub link"/>
+      </div>
+      <div class="ef"><label>FILE SIZE</label><input type="text" id="dsSize" placeholder="e.g. 24 MB"/></div>
+      <button class="dsm-submit" id="dsmSubmitBtn" onclick="submitProject()"><i class="fas fa-rocket"></i> PUBLISH TO DDS</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= fullscreen IDE ================= -->
+<div class="ide-ov" id="ideOv">
+  <div class="ide-top">
+    <div class="ide-title"><i class="fas fa-code"></i> Code Lab IDE — project.html</div>
+    <button onclick="closeIDE()" style="background:none;border:none;color:#666;font-size:1rem"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="ide-main">
+    <div class="ide-files">
+      <div class="ide-file on"><i class="fas fa-file-code"></i> index.html</div>
+      <div class="ide-file"><i class="fab fa-css3"></i> style.css</div>
+      <div class="ide-file"><i class="fab fa-js"></i> app.js</div>
+      <div class="ide-file"><i class="fas fa-file-alt"></i> README.md</div>
+    </div>
+    <div class="ide-editor"><span class="com">&lt;!-- Code Lab · live editor --&gt;</span>
+<span class="kw">&lt;div</span> class=<span class="str">"dds-project"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;h1&gt;</span>My DDS Project<span class="kw">&lt;/h1&gt;</span>
+  <span class="kw">&lt;p&gt;</span>Built in Code Lab, published to Explore.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;p&gt;</span>Download me now in the home section, just click download under  "DDS Codelab" and we shall start.<span class="kw">&lt;/p&gt;</span>
+
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="com">// tap the Codelab icon below to exit</span></div>
+  </div>
+  <div class="ide-dock">
+    <button onclick="ideGo('Home')"><i class="fas fa-home"></i><span>Home</span></button>
+    <button onclick="ideGo('Explore')"><i class="fas fa-compass"></i><span>Explore</span></button>
+    <button onclick="ideGo('Learn')"><i class="fas fa-graduation-cap"></i><span>Learn</span></button>
+    <button class="exit" onclick="closeIDE()"><i class="fas fa-code"></i><span>Codelab</span></button>
+  </div>
+</div>
+
+<div class="vm-ov" id="vmOv" onclick="if(event.target===this)closeVideo()">
+  <div class="vm-box">
+    <div class="vm-head"><h4 id="vmTitle">Tutorial</h4><button onclick="closeVideo()"><i class="fas fa-times"></i></button></div>
+    <div class="vm-frame" id="vmFrame"></div>
+  </div>
+</div>
+
+<div class="tm-ov" id="tmOv" onclick="if(event.target===this)closeTeamModal()">
+  <div class="tm-box" id="tmBox"></div>
+</div>
+
+<div class="pdm-ov" id="pdmOv" onclick="if(event.target===this)closeProjectModal()">
+  <div class="pdm-box" id="pdmBox"></div>
+</div>
+
+<!-- ================= AUTH OVERLAY — real sign up / sign in ================= -->
+<div class="auth-ov" id="authOv">
+  <div class="auth-topbar">
+    <button class="auth-back" onclick="closeAuthOverlay()"><i class="fas fa-arrow-left"></i></button>
+    <div class="auth-title">DDS Access Portal</div>
+  </div>
+  <div class="auth-wrap">
+    <div class="au-journey">
+      <div class="au-lbl">Your path to DDS access</div>
+      <div class="au-steps">
+        <div class="au-step act" id="ajS1" onclick="auGoScreen('auApply')"><div class="au-dot"><span class="au-num">1</span></div><div class="au-name">Apply</div></div>
+        <div class="au-step" id="ajS2" onclick="auShowTT('step2')"><div class="au-dot"><span class="au-num">2</span></div><div class="au-name">Get DDS No.</div></div>
+        <div class="au-step" id="ajS3" onclick="auGoScreen('auRegister')"><div class="au-dot"><span class="au-num">3</span></div><div class="au-name">Register</div></div>
+        <div class="au-step" id="ajS4" onclick="auGoScreen('auLogin')"><div class="au-dot"><span class="au-num">4</span></div><div class="au-name">Login</div></div>
+      </div>
+    </div>
+
+    <div class="au-card">
+      <div class="au-screen active" id="auApply">
+        <div class="au-card-title">Apply for DDS Number</div>
+        <div class="au-card-sub">Step 1 of 4 — verify your email first.</div>
+        <div class="au-substep active" id="auApA">
+          <div class="au-msg inf show">We'll send a 6-digit code to your email to verify it before you can apply.</div>
+          <div class="au-field"><label>Your Email Address</label><input type="email" id="auEmail" placeholder="you@example.com"></div>
+          <button class="au-btn au-btn-p" onclick="auSendOTP()">Send Verification Code</button>
+        </div>
+        <div class="au-substep" id="auApB">
+          <div class="au-hint">A 6-digit code was sent to <span id="auOtpEmailShow" style="color:#00ffff">your email</span>. Enter it below — expires in 15 minutes.</div>
+          <div class="au-field"><label>Verification Code</label><input type="text" id="auOTP" placeholder="6-digit code" maxlength="6" inputmode="numeric"></div>
+          <button class="au-btn au-btn-p" onclick="auVerifyOTP()">Verify Code</button>
+          <button class="au-btn au-btn-s" onclick="auSendOTP(true)">Resend Code</button>
+          <span class="au-back-link" onclick="auShowSub('auApA')">Change email</span>
+        </div>
+        <div class="au-substep" id="auApC">
+          <div class="au-msg suc show" style="display:block">Email verified! Fill in your details below.</div>
+          <div class="au-field"><label>Verified Email</label><input type="email" id="auEmailRO" readonly></div>
+          <div class="au-field"><label>WhatsApp Number (with country code)</label><input type="tel" id="auWA" placeholder="+2349012345678"></div>
+          <div class="au-field"><label>Country</label><select id="auCountry">
+            <option value="">Select your country</option>
+            <option value="NG">Nigeria</option><option value="GH">Ghana</option><option value="KE">Kenya</option>
+            <option value="ZA">South Africa</option><option value="US">United States</option><option value="GB">United Kingdom</option>
+            <option value="CA">Canada</option><option value="AU">Australia</option><option value="DE">Germany</option>
+            <option value="FR">France</option><option value="IN">India</option><option value="PK">Pakistan</option>
+            <option value="BR">Brazil</option><option value="MX">Mexico</option><option value="EG">Egypt</option>
+          </select></div>
+          <button class="au-btn au-btn-p" id="auSubmitAppBtn" onclick="auSubmitApp()">Submit Application</button>
+        </div>
+        <div class="au-loading" id="auApLoad"><div class="au-spinner"></div><p style="font-size:.6rem;color:#556">Processing...</p></div>
+        <div class="au-msg err" id="auApErr"></div>
+        <div class="au-msg suc" id="auApOk"></div>
+        <div class="au-divider">already have a DDS number?</div>
+        <div class="au-swlinks">
+          <span class="au-swl" onclick="auGoScreen('auRegister')">Create Account</span>
+          <span class="au-swl" onclick="auGoScreen('auLogin')">Login</span>
+        </div>
+      </div>
+
+      <div class="au-screen" id="auRegister">
+        <div class="au-card-title">Create Your Account</div>
+        <div class="au-card-sub">Step 3 of 4 — use your DDS Number to register.</div>
+        <div class="au-msg inf show">You need your DDS Number — check your email after your application is approved.</div>
+        <div class="au-field"><label>DDS Number</label><input type="text" id="auDDS" placeholder="(!-XXXXXXXXXX)"><small>Sent to your email after approval</small></div>
+        <div class="au-field"><label>Choose an Alias</label><input type="text" id="auAlias" placeholder="YourUniqueAlias"><small>Your identity in the DDS network</small></div>
+        <div class="au-field"><label>Profession</label><input type="text" id="auProf" placeholder="Programmer, Ethical Hacker, Engineer..."></div>
+        <div class="au-field"><label>Password</label><input type="password" id="auPass" placeholder="Create a strong password"></div>
+        <div class="au-field"><label>Confirm Password</label><input type="password" id="auConf" placeholder="Repeat your password"></div>
+<div class="au-field" style="margin-bottom:.6rem">
+  <div style="font-size:.62rem;color:#9fb;line-height:1.6">
+    Please read the <a href="#" onclick="return openLegalClick(event,'terms')" style="color:#00ffff">Terms of Service</a> and
+    <a href="#" onclick="return openLegalClick(event,'privacy')" style="color:#00ffff">Privacy Policy</a> before creating an account.
+  </div>
+  <label style="display:flex;align-items:flex-start;gap:.5rem;margin-top:.6rem;cursor:pointer">
+    <input type="checkbox" id="auAgreeChk" disabled style="margin-top:.2rem">
+    <span style="font-size:.6rem;color:#c8e0f0">I have read and agree to the Terms of Service and Privacy Policy</span>
+  </label>
+  <div id="auAgreeHint" style="font-size:.55rem;color:#ffaa00;margin-top:.3rem">Open and scroll to the bottom of both documents to unlock this checkbox.</div>
+</div>
+<button class="au-btn au-btn-p" onclick="auSubmitRegister()">Create Account</button>
+        <div class="au-loading" id="auRegLoad"><div class="au-spinner"></div><p style="font-size:.6rem;color:#556">Creating account...</p></div>
+        <div class="au-msg err" id="auRegErr"></div>
+        <div class="au-msg suc" id="auRegOk"></div>
+        <div class="au-swlinks">
+          <span class="au-swl" onclick="auGoScreen('auApply')">Apply First</span>
+          <span class="au-swl" onclick="auGoScreen('auLogin')">Already registered? Login</span>
+        </div>
+      </div>
+
+      <div class="au-screen" id="auLogin">
+        <div class="au-card-title">Login to DDS</div>
+        <div class="au-card-sub">Step 4 of 4 — enter your alias and password.</div>
+        <div class="au-field"><label>Alias</label><input type="text" id="auLAlias" placeholder="Your alias"></div>
+        <div class="au-field"><label>Password</label><input type="password" id="auLPass" placeholder="Your password"></div>
+        <button class="au-btn au-btn-p" onclick="auSubmitLogin()">Login</button>
+        <button class="au-btn au-btn-s" onclick="auGoScreen('auForgot')">Forgot Password?</button>
+        <div class="au-loading" id="auLoginLoad"><div class="au-spinner"></div><p style="font-size:.6rem;color:#556">Logging in...</p></div>
+        <div class="au-msg err" id="auLoginErr"></div>
+        <div class="au-msg suc" id="auLoginOk"></div>
+        <div class="au-swlinks">
+          <span class="au-swl" onclick="auGoScreen('auApply')">New here? Apply</span>
+          <span class="au-swl" onclick="auGoScreen('auRegister')">Create Account</span>
+        </div>
+      </div>
+
+      <div class="au-screen" id="auForgot">
+        <div class="au-card-title">Reset Password</div>
+        <div class="au-card-sub">We'll send a security code to your email.</div>
+        <div class="au-substep active" id="auFgA">
+          <div class="au-field"><label>Email Address</label><input type="email" id="auFEmail" placeholder="your.email@domain.com"></div>
+          <div class="au-field"><label>DDS Number</label><input type="text" id="auFDDS" placeholder="(!-XXXXXXXXXX)"></div>
+          <button class="au-btn au-btn-p" onclick="auRequestReset()">Send Security Code</button>
+        </div>
+        <div class="au-substep" id="auFgB">
+          <div class="au-hint">Security code sent to your email. Enter it along with your new password.</div>
+          <div class="au-field"><label>Security Code</label><input type="text" id="auFCode" placeholder="6-digit code" maxlength="6" inputmode="numeric"></div>
+          <div class="au-field"><label>New Password</label><input type="password" id="auFNewP" placeholder="New strong password"></div>
+          <div class="au-field"><label>Confirm New Password</label><input type="password" id="auFConf" placeholder="Repeat new password"></div>
+          <button class="au-btn au-btn-p" onclick="auSubmitReset()">Reset Password</button>
+          <span class="au-back-link" onclick="auShowSubFg('auFgA')">Back</span>
+        </div>
+        <div class="au-loading" id="auForgotLoad"><div class="au-spinner"></div><p style="font-size:.6rem;color:#556">Processing...</p></div>
+        <div class="au-msg err" id="auForgotErr"></div>
+        <div class="au-msg suc" id="auForgotOk"></div>
+        <span class="au-back-link" onclick="auGoScreen('auLogin')">Back to Login</span>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem;display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center">
+      <span class="au-swl cur" id="auNavApply" onclick="auGoScreen('auApply')">Apply</span>
+      <span class="au-swl" id="auNavRegister" onclick="auGoScreen('auRegister')">Register</span>
+      <span class="au-swl" id="auNavLogin" onclick="auGoScreen('auLogin')">Login</span>
+      <span class="au-swl" id="auNavForgot" onclick="auGoScreen('auForgot')">Reset Password</span>
+    </div>
+  </div>
+</div>
+
+<div class="au-tt-ov" id="auTtOv" onclick="if(event.target===this)auCloseTT()">
+  <div class="au-tt-box">
+    <button style="position:absolute;top:.6rem;right:.6rem;background:none;border:none;color:#556;font-size:1rem" onclick="auCloseTT()"><i class="fas fa-times"></i></button>
+    <div style="font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:#00c8ff;margin-bottom:.5rem">System Info</div>
+    <div style="font-size:.8rem;color:#fff;margin-bottom:.6rem" id="auTtTitle"></div>
+    <div style="font-size:.68rem;color:#c8e0f0;line-height:1.7" id="auTtBody"></div>
+  </div>
+</div>
+
+<div class="au-ban-ov" id="auBanOv">
+  <div style="max-width:340px;width:100%;background:#0b1520;border:1px solid rgba(255,34,85,.4);border-radius:14px;padding:1.6rem;text-align:center">
+    <div style="font-size:2.2rem;margin-bottom:.6rem">⛔</div>
+    <div style="font-size:.78rem;color:#ff2255;letter-spacing:.15em;margin-bottom:.35rem">ACCESS RESTRICTED</div>
+    <div id="auBanType" style="font-size:.56rem;color:#ff6b35;letter-spacing:.08em;margin-bottom:.9rem;text-transform:uppercase"></div>
+    <div id="auBanReason" style="background:rgba(255,34,85,.05);border:1px solid rgba(255,34,85,.2);border-radius:7px;padding:.8rem;font-size:.64rem;color:#c8e0f0;line-height:1.7;margin-bottom:.7rem"></div>
+    <div id="auBanTimer" style="font-size:.58rem;color:#ff6b35"></div>
+  </div>
+</div>
+<!-- ================= EDIT PROJECT MODAL ================= -->
+<div class="dsm-ov" id="editOv" onclick="if(event.target===this)closeEditProject()">
+  <div class="dsm-box">
+    <div class="dsm-head"><h3><i class="fas fa-pencil-alt" style="color:#7b2ff7"></i> EDIT PROJECT</h3><button onclick="closeEditProject()"><i class="fas fa-times"></i></button></div>
+    <div class="dsm-body">
+      <input type="hidden" id="editId"/>
+      <div class="ef"><label>DESCRIPTION</label><textarea id="editDesc"></textarea></div>
+      <div class="ef-row">
+        <div class="ef"><label>VERSION</label><input type="text" id="editVersion"/></div>
+        <div class="ef"><label>PLATFORM</label>
+          <select id="editPlatform"><option value="">Select</option><option>Android</option><option>iOS</option><option>Windows</option><option>Web Browser</option><option>Cross-Platform</option><option>Termux</option><option>All Platforms</option></select>
+        </div>
+      </div>
+      <div class="ef"><label>ACTION URL</label><input type="text" id="editActionUrl"/></div>
+      <div class="ef"><label>TAGS</label><input type="text" id="editTags"/></div>
+      <button class="dsm-submit" id="editSubmitBtn" onclick="submitEditProject()"><i class="fas fa-save"></i> SAVE CHANGES</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BOOST MODAL ================= -->
+<div class="dsm-ov" id="boostOv" onclick="if(event.target===this)closeBoost()">
+  <div class="dsm-box" style="max-width:340px">
+    <div class="dsm-head"><h3><i class="fas fa-fire" style="color:#ff6040"></i> BOOST PROJECT</h3><button onclick="closeBoost()"><i class="fas fa-times"></i></button></div>
+    <div class="dsm-body">
+      <p style="font-size:.62rem;color:#888;line-height:1.6;margin-bottom:.9rem" id="boostName"></p>
+      <p style="font-size:.6rem;color:#666;line-height:1.6;margin-bottom:1rem">Boosting pins your project higher across Explore for the chosen number of days.</p>
+      <div style="display:flex;gap:.6rem;margin-bottom:.9rem">
+        <button class="dsm-submit" style="background:linear-gradient(135deg,#ff6040,#ff0040)" onclick="selectBoostOption(3,500)">3 DAYS<br><span style="font-size:.58rem;opacity:.85">500 bits</span></button>
+        <button class="dsm-submit" style="background:linear-gradient(135deg,#ff6040,#ff0040)" onclick="selectBoostOption(7,1000)">7 DAYS<br><span style="font-size:.58rem;opacity:.85">1000 bits</span></button>
+      </div>
+      <p style="font-size:.58rem;color:#666">Your balance: <span id="boostCurrentBits" style="color:#00ffff">--</span> bits</p>
+    </div>
+  </div>
+</div>
+<!-- ================= LEGAL MODAL (Terms / Privacy) ================= -->
+<div class="legal-ov" id="legalOv" onclick="if(event.target===this)closeLegal()">
+  <div class="legal-box">
+    <div class="legal-head"><h3 id="legalTitle"><i class="fas fa-file-contract"></i> Terms of Service</h3><button onclick="closeLegal()"><i class="fas fa-times"></i></button></div>
+    <div class="legal-body" id="legalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============ REAL DDS BACKEND — shared with the Command Center app ============ */
+var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbyn1WR1Hexks7vquZME3AG6msBSBF6jA4nTlTgF045s3hZP5yW8wb3uiQNWa3tXUFlIgA/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwu9XQ_6Z3_KutmpdC5TxI3InTYOMvfs_XkHMmBkM-Fzg2W1PElvLFvXdf48CTBdQf4kQ/exec';
+/* Path to the standalone Referral System page (the DDS - Referral System HTML). Update if you rename/host it elsewhere. */
+var REFERRAL_URL = 'referral.html';
+function openReferralCenter(){
+  if(!isSignedIn){ showToast('Please sign in first','error'); return; }
+  window.location.href = REFERRAL_URL;
+}
+async function loadMembers(){
+  var grid = document.getElementById('membersGrid');
+  try{
+    var r = await fetch(POSTS_API+'?action=getAllProfiles&limit=20');
+    var d = await r.json();
+    var list = (d.data && d.data.profiles) || [];
+    if(!list.length){ grid.innerHTML='<div class="empty-hist" style="grid-column:1/-1"><i class="fas fa-user-friends"></i>No members yet — be the first!</div>'; return; }
+    grid.innerHTML = list.map(function(m,i){
+      var av = (m.avatar && m.avatar.indexOf('http')===0) ? m.avatar : ('https://ui-avatars.com/api/?name='+encodeURIComponent(m.alias||'DDS')+'&background=7b2ff7&color=fff&size=300');
+      return '<div class="team-card"><img src="'+esc(av)+'" alt="'+esc(m.alias||'')+'" onerror="this.src=\'https://ui-avatars.com/api/?name='+encodeURIComponent(m.alias||'DDS')+'&background=7b2ff7&color=fff&size=300\'"><div class="grad"></div>' +
+        '<div class="team-info"><div class="team-role">'+esc(m.rank||'MEMBER')+'</div><div class="team-name">'+esc(m.alias||'DDS Member')+'</div>' +
+        '<div class="team-desc">'+esc(m.profession||'Digital Citizen')+' · '+fmtN(m.followers||0)+' followers</div></div></div>';
+    }).join('');
+  }catch(e){ grid.innerHTML='<div class="empty-hist" style="grid-column:1/-1"><i class="fas fa-exclamation-triangle"></i>Could not load members</div>'; }
+}
+    
+var GITHUB = {username:'Jphood888', repo:'dds-media-storage', token:'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'};
+
+/* ============================================================
+   PASTE YOUR REAL DDS LOGO HERE.
+   Set this to either:
+     - a normal public image URL, e.g. 'https://yourhost.com/dds-logo.png'
+     - OR a base64 data URI, e.g. 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA....'
+   Leave it as '' (empty) to keep the skull icon until you're ready.
+   The URL must point directly at the image file itself — a bare
+   domain like 'https://example.com/' will not work as an <img> src.
+   ============================================================ */
+var DDS_LOGO_SRC = 'https://i.postimg.cc/PqQhDZ9d/file-0000000065a061f4ab78a95584ea5b23-(1).png';
+
+    
+
+
+/* ---------- pre-launch countdown + rotating system name (shown in the topbar) ---------- */
+var LAUNCH_DATE = new Date('2026-09-05T00:00:00');
+var LAUNCH_NAMES = ['DDS launch is soon', 'DDS APP', 'DDS CODELAB V6'];
+var launchNameIdx = 0;
+function updateLaunchTimer(){
+  var el = document.getElementById('launchTimer');
+  if(!el) return;
+  var diff = LAUNCH_DATE.getTime() - Date.now();
+  if(diff <= 0){ el.textContent = 'LIVE NOW'; return; }
+  var d = Math.floor(diff/86400000);
+  var h = Math.floor((diff%86400000)/3600000);
+  var m = Math.floor((diff%3600000)/60000);
+  var s = Math.floor((diff%60000)/1000);
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  el.textContent = d+'d '+pad(h)+':'+pad(m)+':'+pad(s);
+}
+function cycleLaunchName(){
+  var el = document.getElementById('launchNameCycle');
+  if(!el) return;
+  el.style.opacity='0';
+  setTimeout(function(){
+    launchNameIdx = (launchNameIdx+1) % LAUNCH_NAMES.length;
+    el.textContent = LAUNCH_NAMES[launchNameIdx];
+    el.style.opacity='1';
+  },300);
+}
+    
+
+var currentUser = {};
+var isSignedIn = false;
+
+var TEAM = [
+  {name:'Julian Prosper Olushola Pearse', role:'Founder & Lead Developer', icon:'fa-crown',
+   img:'https://scattered-peach-kugdt4yu.edgeone.dev/',
+   fallback:'https://ui-avatars.com/api/?name=Julian+Pearse&background=7b2ff7&color=fff&size=500&bold=true',
+   about:'Started DDS as a small hacking-tools archive and grew it into the full Dark Digital Space platform — architecture, backend, and the Code Lab IDE are all his builds.',
+   portfolio:['fa-skull','fa-code','fa-shield-alt']},
+  {name:'Ada Voss', role:'UI / UX Designer', icon:'fa-palette',
+   img:'https://i.pravatar.cc/500?img=32',
+   fallback:'https://ui-avatars.com/api/?name=Ada+Voss&background=00c8ff&color=001&size=500&bold=true',
+   about:'Designs every screen in DDS, from the neon command center to the mobile app flows. Obsessed with making dark, dense interfaces feel effortless.',
+   portfolio:['fa-mobile-alt','fa-swatchbook','fa-vector-square']},
+  {name:'Kade Renn', role:'Security Engineer', icon:'fa-shield-alt',
+   img:'https://i.pravatar.cc/500?img=51',
+   fallback:'https://ui-avatars.com/api/?name=Kade+Renn&background=ff0040&color=fff&size=500&bold=true',
+   about:'Runs DDS Security Center — keeping accounts, uploads and the challenge system locked down against abuse.',
+   portfolio:['fa-lock','fa-bug','fa-key']},
+  {name:'Mira Solis', role:'Community Lead', icon:'fa-comments',
+   img:'https://i.pravatar.cc/500?img=45',
+   fallback:'https://ui-avatars.com/api/?name=Mira+Solis&background=ffaa00&color=001&size=500&bold=true',
+   about:'Runs the DDS YouTube channel and community events, and moderates Explore so top projects actually get seen.',
+   portfolio:['fa-youtube','fa-users','fa-bullhorn']}
+];
+
+/* ---------- helpers ---------- */
+function esc(s){var d=document.createElement('div');d.appendChild(document.createTextNode(String(s||'')));return d.innerHTML;}
+function fmtN(n){n=n||0;if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return String(n);}
+function starsHTML(r){var full=Math.round(r||0);return '<span class="stars">'+'★'.repeat(full)+'☆'.repeat(5-full)+'</span>';}
+function sfClick(e){e.preventDefault();showToast('Social links coming soon — follow us for launch news!','info');return false;}
+
+function showToast(msg,type){
+  type=type||'info';
+  var c=document.getElementById('toastCont');
+  var t=document.createElement('div');
+  t.className='toast '+type; t.textContent=msg; c.appendChild(t);
+  setTimeout(function(){t.remove();},3200);
+}
+function download(name){ showToast(name+' download starting...','success'); }
+function showLockedToast(){ showToast('🔒 Downloads unlock at launch — Sept 5, 2026', 'info'); }
+    
+    function hostProject(){
+  showToast('Preparing your free DDS hosting slot...','info');
+  setTimeout(function(){ showToast('Pick a project in Code Lab to publish it','success'); },900);
+}
+
+/* ---------- logo: single place to drop in the real DDS logo ---------- */
+function tryLogoSrc(img, list, idx){
+  if(idx>=list.length){
+    img.style.display='none';
+    var fb=document.getElementById(img.id+'Fallback');
+    if(fb) fb.style.display='flex';
+    return;
+  }
+  img.onerror=function(){ tryLogoSrc(img, list, idx+1); };
+  img.onload=function(){
+    img.style.display='block';
+    var fb=document.getElementById(img.id+'Fallback');
+    if(fb) fb.style.display='none';
+  };
+  img.src=list[idx];
+}
+function initLogos(){
+  var candidates=[];
+  if(DDS_LOGO_SRC) candidates.push(DDS_LOGO_SRC);
+  candidates.push('dds-logo.png'); /* also works if you keep a dds-logo.png file next to this html */
+  ['logoTopbar','logoFooter','logoFab'].forEach(function(id){
+    var img=document.getElementById(id);
+    if(img) tryLogoSrc(img, candidates.slice(), 0);
+  });
+}
+
+/* ---------- real session / auth ---------- */
+function goToAuth(){ openAuthOverlay(); }
+function onAuthPillClick(){ if(isSignedIn){ toggleAccountMenu(); } else { goToAuth(); } }
+function toggleAccountMenu(){ document.getElementById('accountMenu').classList.toggle('open'); }
+function closeAccountMenu(){ document.getElementById('accountMenu').classList.remove('open'); }
+function doLogout(){
+  closeAccountMenu();
+  try{ localStorage.removeItem('ddsUserData'); }catch(e){}
+  currentUser={}; isSignedIn=false;
+  renderAuthUI();
+  showToast('Signed out','success');
+}
+function openAuthOverlay(){
+  document.getElementById('authOv').classList.add('open');
+  document.body.style.overflow='hidden';
+  auGoScreen('auApply');
+}
+function closeAuthOverlay(){
+  document.getElementById('authOv').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function loadSession(){
+  try{
+    var raw = localStorage.getItem('ddsUserData');
+    if(raw){
+      var u = JSON.parse(raw);
+      if(u && u.ddsNumber){ currentUser=u; isSignedIn=true; }
+    }
+  }catch(e){}
+  renderAuthUI();
+  if(isSignedIn) refreshBits();
+}
+
+function renderAuthUI(){
+  var nameEl=document.getElementById('userName');
+  var btn=document.getElementById('signinBtn');
+  nameEl.textContent = isSignedIn ? (currentUser.alias||'Member') : 'Guest';
+  if(isSignedIn){
+    var initial=(currentUser.alias||'?').charAt(0).toUpperCase();
+    var avatarHTML = (currentUser.avatar && currentUser.avatar.indexOf('http')===0)
+      ? '<img src="'+esc(currentUser.avatar)+'" onerror="this.style.display=\'none\'">'
+      : initial;
+    btn.innerHTML = '<div class="user-pill"><div class="av">'+avatarHTML+'</div><span>'+esc(currentUser.alias||currentUser.ddsNumber)+'</span></div>';
+  } else {
+    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> SIGN IN';
+  }
+  document.getElementById('bitsCard').style.display = isSignedIn ? 'flex' : 'none';
+  document.getElementById('bitsGate').style.display = isSignedIn ? 'none' : 'block';
+  document.getElementById('referralGate').style.display = isSignedIn ? 'none' : 'block';
+  document.getElementById('referralArea').style.display = isSignedIn ? 'block' : 'none';
+}
+
+function refreshBits(){
+  if(!currentUser.ddsNumber) return;
+  fetch(POSTS_API+'?action=getProfile&ddsNumber='+encodeURIComponent(currentUser.ddsNumber)+'&includePrivate=true')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.success && d.data && d.data.profile){
+        var bits = d.data.profile.bits || 0;
+        document.getElementById('bitsVal').textContent = fmtN(bits);
+        currentUser.profile = currentUser.profile || {};
+        currentUser.profile.bits = bits;
+        try{ localStorage.setItem('ddsUserData', JSON.stringify(currentUser)); }catch(e){}
+      }
+    }).catch(function(){});
+}
+
+/* ---------- nav ---------- */
+function switchPage(name, el){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('page'+name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  el.classList.add('active');
+  window.scrollTo(0,0);
+  if(name==='Explore' && !exploreLoadedOnce){ exploreLoadedOnce=true; loadExplore(); }
+}
+function switchPageByName(name){
+  var btn=document.querySelector('.nav-btn[data-p="'+name+'"]');
+  if(btn) switchPage(name, btn);
+}
+
+var lastCodelabTap = 0;
+function codelabTap(el){
+  var now = Date.now();
+  if(now - lastCodelabTap < 350){ lastCodelabTap = 0; openIDE(); }
+  else { lastCodelabTap = now; switchPage('Codelab', el); }
+}
+function openIDE(){ document.getElementById('ideOv').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeIDE(){
+  document.getElementById('ideOv').classList.remove('open');
+  document.body.style.overflow='';
+  switchPageByName('Codelab');
+}
+function ideGo(name){ closeIDE(); switchPageByName(name); }
+
+/* ---------- about / team ---------- */
+function teamCardHTML(m, i){
+  return '<div class="team-card" onclick="openTeamModal('+i+')"><img src="'+m.img+'" alt="'+esc(m.name)+'" onerror="this.onerror=null;this.src=\''+m.fallback+'\';"><div class="grad"></div>' +
+    '<div class="team-role-icon"><i class="fas '+m.icon+'"></i></div>' +
+    '<div class="team-info"><div class="team-role">'+esc(m.role)+'</div><div class="team-name">'+esc(m.name)+'</div>' +
+    '<div class="team-desc">'+esc(m.about)+'</div></div></div>';
+}
+document.getElementById('teamGrid').innerHTML = TEAM.map(teamCardHTML).join('');
+
+function openTeamModal(i){
+  var m = TEAM[i];
+  document.getElementById('tmBox').innerHTML =
+    '<div class="tm-hero"><img src="'+m.img+'" onerror="this.onerror=null;this.src=\''+m.fallback+'\';"><div class="grad"></div><button class="tm-close" onclick="closeTeamModal()"><i class="fas fa-times"></i></button></div>' +
+    '<div class="tm-body"><div class="tm-role-chip"><i class="fas '+m.icon+'"></i> '+esc(m.role)+'</div>' +
+    '<div class="tm-name">'+esc(m.name)+'</div><div class="tm-about">'+esc(m.about)+'</div>' +
+    '<div class="tm-lbl">PORTFOLIO</div><div class="tm-port-grid">' +
+    m.portfolio.map(function(ic){ return '<div class="tm-port-item"><i class="fas '+ic+'"></i></div>'; }).join('') +
+    '</div></div>';
+  document.getElementById('tmOv').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeTeamModal(){ document.getElementById('tmOv').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ============ EXPLORE — real DDS projects & tools, same catalog as the Command Center ============ */
+var exploreLoadedOnce = false;
+var exploreAllProjs = [];
+var exploreChip = 'all';
+var exploreSearchTimer = null;
+
+async function apiFetch(params){
+  var url = API + '?' + new URLSearchParams(params).toString();
+  try{
+    var r = await fetch(url);
+    return await r.json();
+  }catch(e){ return {success:false}; }
+}
+function apiPost(payload){
+  return fetch(API, {method:'POST', body:new URLSearchParams({payload: JSON.stringify(payload)})})
+    .then(function(r){return r.text();})
+    .then(function(t){ try{ return JSON.parse(t); }catch(e){ return {success:true, optimistic:true}; } })
+    .catch(function(){ return {success:false}; });
+}
+
+async function loadExplore(){
+  var grid = document.getElementById('exploreGrid');
+  grid.innerHTML = '<div class="empty-hist"><i class="fas fa-spinner fa-spin"></i>Loading real DDS projects…</div>';
+  try{
+    var d = await apiFetch({action:'getProjects', limit:60, sort:'score'});
+    var list = Array.isArray(d.data) ? d.data : (d.data && Array.isArray(d.data.data) ? d.data.data : []);
+    if(!d.success || !list.length){
+      grid.innerHTML = '<div class="empty-hist"><i class="fas fa-ghost"></i>No projects live yet — be the first to post one!</div>';
+      return;
+    }
+    exploreAllProjs = list;
+    applyExploreFilter();
+  }catch(e){
+    grid.innerHTML = '<div class="empty-hist"><i class="fas fa-exclamation-triangle"></i>Could not reach DDS servers</div>';
+  }
+}
+function typeMatchesChip(p, chip){
+  if(chip==='all') return true;
+  var t = (p.actionType||'').toLowerCase();
+  if(chip==='APK') return t==='apk';
+  if(chip==='tools') return t==='tool' || t==='module';
+  if(chip==='Script') return t==='script';
+  if(chip==='Game') return t==='game';
+  return true;
+}
+function setChip(el, c){
+  exploreChip = c;
+  document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+  el.classList.add('on');
+  applyExploreFilter();
+}
+function onExploreSearch(v){
+  clearTimeout(exploreSearchTimer);
+  exploreSearchTimer = setTimeout(function(){ applyExploreFilter(v); }, 250);
+}
+function applyExploreFilter(q){
+  q = (q!==undefined ? q : (document.getElementById('exploreSearch').value||'')).toLowerCase();
+  var list = exploreAllProjs.filter(function(p){
+    var catOk = typeMatchesChip(p, exploreChip);
+    var qOk = !q || (p.title||'').toLowerCase().indexOf(q)>-1 || (p.category||'').toLowerCase().indexOf(q)>-1 || (p.tags||'').toLowerCase().indexOf(q)>-1;
+    return catOk && qOk;
+  });
+  renderExplore(list);
+}
+function projCardHTML(p, i){
+  return '<div class="pcard" onclick="openProjectModal(\''+p.id+'\')"><div class="pcard-poster">' +
+    (p.thumbnail ? '<img src="'+esc(p.thumbnail)+'" loading="lazy" onerror="this.style.display=\'none\'">' : '<i class="fas fa-cube"></i>') +
+    '<span class="pcard-tag">'+esc(p.actionType||'APP')+'</span></div>' +
+    '<div class="pcard-body"><div class="pcard-title">'+esc(p.title)+'</div>' +
+    '<div class="pcard-row">'+starsHTML(p.avgRating)+'<span><i class="fas fa-eye"></i> '+fmtN(p.views)+'</span></div>' +
+    '<div class="pcard-row" style="margin-top:.2rem"><span><i class="fas fa-heart" style="color:#ff0060"></i> '+fmtN(p.likes)+'</span><span><i class="fas fa-download"></i> '+fmtN(p.downloads)+'</span></div></div></div>';
+}
+function renderExplore(list){
+  document.getElementById('exploreGrid').innerHTML = list.length ? list.map(projCardHTML).join('') : '<div class="empty-hist"><i class="fas fa-ghost"></i>No matches</div>';
+}
+
+/* ---------- real project detail modal ---------- */
+function aLbl(t){var map={APK:'DOWNLOAD APK',Link:'VISIT LINK',Module:'GET MODULE',Script:'GET SCRIPT',GitHub:'VIEW ON GITHUB',Website:'OPEN WEBSITE',Tool:'DOWNLOAD TOOL',Game:'PLAY GAME'};return map[t]||'OPEN';}
+function aIco(t){var map={APK:'fa-download',Link:'fa-external-link-alt',Module:'fa-puzzle-piece',Script:'fa-terminal',GitHub:'fa-github',Website:'fa-globe',Tool:'fa-wrench',Game:'fa-gamepad'};return map[t]||'fa-bolt';}
+
+var currentProj = null;
+async function openProjectModal(id){
+  var ov=document.getElementById('pdmOv'), box=document.getElementById('pdmBox');
+  box.innerHTML='<div style="padding:3rem;text-align:center;color:#444"><i class="fas fa-spinner fa-spin" style="font-size:1.4rem"></i></div>';
+  ov.classList.add('open'); document.body.style.overflow='hidden';
+  fetch(API+'?action=incrementViews&id='+id).catch(function(){});
+  try{
+    var d = await apiFetch({action:'getProject', id:id});
+    if(!d.success){ box.innerHTML='<div style="padding:2rem;color:#ff0040">Not found</div>'; return; }
+    var p = d.data; currentProj = p;
+    var liked = localStorage.getItem('exp_liked_'+p.id)==='1';
+    var ur = parseInt(localStorage.getItem('exp_rated_'+p.id))||0;
+    var descRaw = p.description || '';
+    var isLong = descRaw.length > 240;
+    var descHTML = '<div class="pdm-desc'+(isLong?' collapsed':'')+'" id="pdmDescText">'+esc(descRaw)+'</div>' +
+      (isLong ? '<button class="read-more-btn" id="pdmReadMoreBtn" onclick="togglePdmDesc()">Read more</button>' : '');
+    box.innerHTML =
+      '<div class="pdm-hero">' + (p.thumbnail ? '<img src="'+esc(p.thumbnail)+'" onerror="this.style.display=\'none\'">' : '<i class="fas fa-cube"></i>') +
+      '<button class="pdm-close" onclick="closeProjectModal()"><i class="fas fa-times"></i></button></div>' +
+      '<div class="pdm-body"><div class="pdm-title">'+esc(p.title)+'</div>' +
+      '<div class="pdm-meta">'+starsHTML(p.avgRating)+' '+(p.avgRating||0).toFixed(1)+' · '+esc(p.actionType||'')+(p.category?' · '+esc(p.category):'')+(p.platform?' · '+esc(p.platform):'')+'</div>' +
+      '<div class="pdm-stats"><div class="pdms"><div class="pdms-v">'+fmtN(p.views)+'</div><div class="pdms-l">VIEWS</div></div>' +
+      '<div class="pdms"><div class="pdms-v">'+fmtN(p.downloads)+'</div><div class="pdms-l">DL</div></div>' +
+      '<div class="pdms"><div class="pdms-v" id="pdmLikeVal">'+fmtN(p.likes)+'</div><div class="pdms-l">LIKES</div></div>' +
+      '<div class="pdms"><div class="pdms-v">'+(p.avgRating||0).toFixed(1)+'</div><div class="pdms-l">RATING</div></div></div>' +
+      descHTML +
+      '<div class="pdm-stars-inp" id="pdmStarsInp">' + [5,4,3,2,1].map(function(n){
+        return '<input type="radio" id="es'+n+'" name="esr" value="'+n+'"'+(ur===n?' checked':'')+'><label for="es'+n+'" onclick="rateProject(\''+p.id+'\','+n+')">★</label>';
+      }).join('') + '</div>' +
+      ((isSignedIn && p.authorDDS && p.authorDDS===currentUser.ddsNumber) ?
+        ('<div class="pdm-admin"><button onclick="openEditProject(\''+p.id+'\')"><i class="fas fa-pencil-alt"></i> Edit</button>' +
+         '<button class="boost" onclick="openBoost(\''+p.id+'\',\''+esc(p.title).replace(/'/g,"&#39;")+'\')"><i class="fas fa-fire"></i> Boost</button></div>') : '') +
+      '<div class="pdm-actions"><button class="pdm-like'+(liked?' liked':'')+'" id="pdmLikeBtn" onclick="toggleProjectLike(\''+p.id+'\')"><i class="fas fa-heart"></i> '+(liked?'Liked':'Like')+'</button>' +
+      (p.actionUrl ? ('<button class="pdm-dl" onclick="doExploreAction(\''+esc(p.actionUrl).replace(/'/g,"&#39;")+'\',\''+p.id+'\',\''+esc(p.actionType||'APP')+'\')"><i class="fas '+aIco(p.actionType)+'"></i> '+aLbl(p.actionType)+'</button>') : '') +
+      '</div></div>';
+  }catch(e){ box.innerHTML='<div style="padding:2rem;color:#ff0040">Failed to load</div>'; }
+}
+function togglePdmDesc(){
+  var d=document.getElementById('pdmDescText'); var b=document.getElementById('pdmReadMoreBtn');
+  if(!d) return;
+  d.classList.toggle('collapsed');
+  if(b) b.textContent = d.classList.contains('collapsed') ? 'Read more' : 'Read less';
+}
+function closeProjectModal(){ document.getElementById('pdmOv').classList.remove('open'); document.body.style.overflow=''; currentProj=null; }
+function doExploreAction(url, id, type){
+  fetch(API+'?action=incrementViews&id='+id).catch(function(){});
+  apiPost({action:'incrementDownloads', id:id}).catch(function(){});
+  showToast('Opening '+type+'...'); window.open(url,'_blank');
+}
+function toggleProjectLike(id){
+  var liked = localStorage.getItem('exp_liked_'+id)==='1';
+  var newLiked = !liked;
+  var uid = localStorage.getItem('dds_uid');
+  if(!uid){ uid='u_'+Date.now()+'_'+Math.random().toString(36).substr(2,8); localStorage.setItem('dds_uid', uid); }
+  localStorage.setItem('exp_liked_'+id, newLiked?'1':'0');
+  var btn=document.getElementById('pdmLikeBtn'), val=document.getElementById('pdmLikeVal');
+  btn.classList.toggle('liked', newLiked);
+  btn.innerHTML='<i class="fas fa-heart"></i> '+(newLiked?'Liked':'Like');
+  var cur=parseInt((val.textContent||'0').replace(/[^\d]/g,''))||0;
+  val.textContent = fmtN(newLiked? cur+1 : Math.max(0,cur-1));
+  apiPost({action:newLiked?'likeProject':'unlikeProject', id:id, userId:uid}).catch(function(){});
+}
+function rateProject(id, stars){
+  localStorage.setItem('exp_rated_'+id, stars);
+  showToast('Rated '+stars+' stars — thanks!','success');
+  var uid = localStorage.getItem('dds_uid');
+  if(!uid){ uid='u_'+Date.now()+'_'+Math.random().toString(36).substr(2,8); localStorage.setItem('dds_uid', uid); }
+  apiPost({action:'rateProject', id:id, rating:stars, userId:uid}).catch(function(){});
+}
+/* ============ EDIT PROJECT — owner only ============ */
+function openEditProject(id){
+  if(!currentProj || currentProj.id!==id){ showToast('Open the project first','error'); return; }
+  document.getElementById('editId').value = currentProj.id;
+  document.getElementById('editDesc').value = currentProj.description||'';
+  document.getElementById('editVersion').value = currentProj.version||'';
+  document.getElementById('editPlatform').value = currentProj.platform||'';
+  document.getElementById('editActionUrl').value = currentProj.actionUrl||'';
+  document.getElementById('editTags').value = currentProj.tags||'';
+  document.getElementById('editOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeEditProject(){ document.getElementById('editOv').classList.remove('open'); document.body.style.overflow=''; }
+async function submitEditProject(){
+  var id = document.getElementById('editId').value;
+  if(!id || !currentUser.ddsNumber) return;
+  var btn = document.getElementById('editSubmitBtn');
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> SAVING...';
+  var project = {
+    description: document.getElementById('editDesc').value.trim(),
+    version: document.getElementById('editVersion').value.trim(),
+    platform: document.getElementById('editPlatform').value,
+    actionUrl: document.getElementById('editActionUrl').value.trim(),
+    tags: document.getElementById('editTags').value.trim()
+  };
+  try{
+    var d = await apiPost({action:'editProject', adminKey:ADMIN_KEY, ownerDDS:currentUser.ddsNumber, id:id, project:project});
+    if(d.success || d.optimistic){
+      showToast('Project updated!','success');
+      closeEditProject();
+      openProjectModal(id);
+    } else showToast('Failed: '+(d.error||'Unknown error'),'error');
+  }catch(e){ showToast('Network error: '+e.message,'error'); }
+  btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> SAVE CHANGES';
+}
+
+/* ============ BOOST PROJECT — owner only, spends bits ============ */
+var boostId = '', boostTitle = '';
+function openBoost(id, title){
+  if(!isSignedIn){ showToast('Please sign in first','error'); return; }
+  boostId = id; boostTitle = title;
+  document.getElementById('boostName').textContent = 'Boost "'+title+'" to the top of Explore.';
+  document.getElementById('boostCurrentBits').textContent = fmtN((currentUser.profile && currentUser.profile.bits)||0);
+  document.getElementById('boostOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBoost(){ document.getElementById('boostOv').classList.remove('open'); document.body.style.overflow=''; }
+function selectBoostOption(days, cost){
+  var have = (currentUser.profile && currentUser.profile.bits)||0;
+  if(have < cost){ showToast('Not enough bits — you have '+fmtN(have)+', need '+cost, 'error'); return; }
+  if(!confirm('Boost "'+boostTitle+'" for '+days+' days for '+cost+' bits? This cannot be refunded.')) return;
+  doBoost(days, cost);
+}
+async function doBoost(days, cost){
+  closeBoost();
+  showToast('Charging '+cost+' bits to boost for '+days+' days...','info');
+  try{
+    var bitsResult = await fetch(POSTS_API, {method:'POST', headers:{'Content-Type':'text/plain'},
+      body: JSON.stringify({action:'spendBitsForBoost', ddsNumber:currentUser.ddsNumber, amount:cost, projectId:boostId, days:days})
+    }).then(function(r){return r.json();});
+    if(!bitsResult.success){ showToast(bitsResult.message||'Not enough bits','error'); return; }
+    if(currentUser.profile) currentUser.profile.bits = bitsResult.data ? bitsResult.data.remaining : Math.max(0,(currentUser.profile.bits||0)-cost);
+    try{ localStorage.setItem('ddsUserData', JSON.stringify(currentUser)); }catch(e){}
+    document.getElementById('bitsVal').textContent = fmtN(currentUser.profile.bits||0);
+    var d = await apiPost({action:'boostProject', id:boostId, days:days, ownerDDS:currentUser.ddsNumber});
+    if(d.success || d.optimistic) showToast(boostTitle+' is now boosted for '+days+' days! -'+cost+' bits','success');
+    else showToast('Boost failed on project side: '+(d.error||'unknown'),'error');
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+/* ============ DEV SPOT — real upload, gated by login ============ */
+var dsType = 'APK';
+var dsImgs = [];
+
+function openDevSpot(){
+  if(!isSignedIn){
+    showToast('Please sign in first to post a project', 'error');
+    setTimeout(goToAuth, 900);
+    return;
+  }
+  document.getElementById('dsmOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDevSpot(){ document.getElementById('dsmOv').classList.remove('open'); document.body.style.overflow=''; }
+function setType(t, el){
+  dsType = t;
+  document.querySelectorAll('#typePills .tp').forEach(function(p){p.classList.remove('on');});
+  el.classList.add('on');
+}
+function handleImgs(inp){ handleImgFiles(Array.from(inp.files)); inp.value=''; }
+async function handleImgFiles(files){
+  var rem = 8 - dsImgs.length;
+  if(!rem){ showToast('Max 8 images','error'); return; }
+  var toUp = files.slice(0, rem).filter(function(f){return f.type.startsWith('image/');});
+  var prog=document.getElementById('upProg'), bar=document.getElementById('upBar');
+  prog.style.display='block';
+  for(var i=0;i<toUp.length;i++){
+    try{
+      showToast('Uploading image '+(i+1)+'/'+toUp.length+'...','info');
+      var url = await uploadGH(toUp[i]);
+      dsImgs.push(url);
+      bar.style.width = ((i+1)/toUp.length*100)+'%';
+      renderImgGrid();
+    }catch(e){ showToast('Upload failed: '+e.message,'error'); }
+  }
+  setTimeout(function(){ prog.style.display='none'; bar.style.width='0'; }, 900);
+}
+async function uploadGH(file){
+  var b64 = await new Promise(function(res, rej){
+    var r = new FileReader();
+    r.onload = function(e){ res(e.target.result.split(',')[1]); };
+    r.onerror = rej; r.readAsDataURL(file);
+  });
+  var ext = (file.name.split('.').pop()||'jpg').toLowerCase();
+  var path = 'projects/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.'+ext;
+  var resp = await fetch('https://api.github.com/repos/'+GITHUB.username+'/'+GITHUB.repo+'/contents/'+path, {
+    method:'PUT', headers:{'Authorization':'token '+GITHUB.token,'Content-Type':'application/json'},
+    body: JSON.stringify({message:'DDS project image', content:b64})
+  });
+  if(!resp.ok){ var d=await resp.json(); throw new Error(d.message||'GitHub error'); }
+  return 'https://raw.githubusercontent.com/'+GITHUB.username+'/'+GITHUB.repo+'/main/'+path;
+}
+function renderImgGrid(){
+  document.getElementById('imgGrid').innerHTML = dsImgs.map(function(u,i){
+    return '<div class="it"><img src="'+u+'" loading="lazy"/><button class="it-del" onclick="removeImg('+i+')"><i class="fas fa-times"></i></button></div>';
+  }).join('');
+}
+function removeImg(i){ dsImgs.splice(i,1); renderImgGrid(); }
+
+async function submitProject(){
+  var title=document.getElementById('dsTitle').value.trim();
+  var cat=document.getElementById('dsCat').value.trim();
+  var desc=document.getElementById('dsDesc').value.trim();
+  var actionUrl=document.getElementById('dsActionUrl').value.trim();
+  if(!dsImgs.length){ showToast('At least one image is required','error'); return; }
+  if(!title){ showToast('Project title is required','error'); return; }
+  if(!cat){ showToast('Category is required','error'); return; }
+  if(!desc){ showToast('Description is required','error'); return; }
+  if(!actionUrl){ showToast('Action URL is required','error'); return; }
+  var btn=document.getElementById('dsmSubmitBtn');
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> PUBLISHING...';
+  var project = {
+    title:title, category:cat, description:desc,
+    version: document.getElementById('dsVersion').value.trim(),
+    author: document.getElementById('dsAuthor').value.trim() || currentUser.alias || 'Anonymous',
+    authorDDS: currentUser.ddsNumber || '',
+    tags: document.getElementById('dsTags').value.trim(),
+    thumbnail: dsImgs[0], images: dsImgs.join(','),
+    actionType: dsType, actionUrl: actionUrl,
+    platform: document.getElementById('dsPlatform').value,
+    size: document.getElementById('dsSize').value.trim(),
+    status:'active', featured:false, promoted:false
+  };
+  try{
+    var d = await apiPost({action:'addProject', adminKey:ADMIN_KEY, project:project});
+    if(d.success || d.optimistic){
+      showToast('Published! Your project is now live in Explore','success');
+      resetDsForm(); closeDevSpot();
+      exploreAllProjs=[]; exploreLoadedOnce=false;
+      switchPageByName('Explore');
+    } else {
+      showToast('Failed: '+(d.error||'Unknown error'),'error');
+    }
+  }catch(e){ showToast('Network error: '+e.message,'error'); }
+  btn.disabled=false; btn.innerHTML='<i class="fas fa-rocket"></i> PUBLISH TO DDS';
+}
+function resetDsForm(){
+  ['dsTitle','dsDesc','dsVersion','dsAuthor','dsTags','dsActionUrl','dsSize','dsCat'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('dsPlatform').value='';
+  dsImgs=[]; renderImgGrid(); dsType='APK';
+  document.querySelectorAll('#typePills .tp').forEach(function(p){p.classList.remove('on');});
+  document.querySelector('#typePills .tp').classList.add('on');
+}
+
+/* ============ AUTH — real signup / login (ported from the DDS access portal, backend-compatible) ============ */
+var au_email=null, au_otp=null, au_resetData=null, au_submitting=false, au_lastSub=0;
+
+async function auApi(data){
+  var r = await fetch(SCRIPT_URL, {method:'POST', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(data), mode:'cors'});
+  if(!r.ok) throw new Error('Server error '+r.status);
+  return r.json();
+}
+function auSetLoad(id,on){ var e=document.getElementById(id); if(e) e.classList.toggle('show',on); }
+function auSetMsg(id,type,txt){ var e=document.getElementById(id); if(!e) return; e.className='au-msg '+type+' show'; e.textContent=txt; if(type!=='suc') setTimeout(function(){e.classList.remove('show');},8000); }
+function auClrMsg(){ for(var i=0;i<arguments.length;i++){ var e=document.getElementById(arguments[i]); if(e) e.classList.remove('show'); } }
+
+var AU_TT = { step2:{title:'Step 2 — Receive Your DDS Number', body:"After approval you get a DDS Number like (!-XXXXXXXXXX), emailed to you. Keep this safe — you'll need it to register."} };
+function auShowTT(k){ var t=AU_TT[k]; if(!t) return; document.getElementById('auTtTitle').textContent=t.title; document.getElementById('auTtBody').innerHTML=t.body; document.getElementById('auTtOv').classList.add('show'); }
+function auCloseTT(){ document.getElementById('auTtOv').classList.remove('show'); }
+
+var AU_SCR_STEP = {auApply:1, auRegister:3, auLogin:4, auForgot:4};
+var AU_NAV_MAP = {auApply:'auNavApply', auRegister:'auNavRegister', auLogin:'auNavLogin', auForgot:'auNavForgot'};
+function auGoScreen(id){
+  document.querySelectorAll('.au-screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.au-swl[id^="auNav"]').forEach(function(l){l.classList.remove('cur');});
+  var n=document.getElementById(AU_NAV_MAP[id]); if(n) n.classList.add('cur');
+  var active = AU_SCR_STEP[id]||1;
+  for(var i=1;i<=4;i++){
+    var el=document.getElementById('ajS'+i);
+    el.classList.remove('act','done');
+    if(i<active) el.classList.add('done'); else if(i===active) el.classList.add('act');
+  }
+  var w=document.querySelector('.auth-wrap'); if(w) w.scrollIntoView({block:'start'});
+}
+function auShowSub(id){ ['auApA','auApB','auApC'].forEach(function(s){ var e=document.getElementById(s); if(e) e.classList.remove('active'); }); var t=document.getElementById(id); if(t) t.classList.add('active'); }
+function auShowSubFg(id){ ['auFgA','auFgB'].forEach(function(s){ var e=document.getElementById(s); if(e) e.classList.remove('active'); }); var t=document.getElementById(id); if(t) t.classList.add('active'); }
+
+async function auSendOTP(resend){
+  var email=document.getElementById('auEmail').value.trim();
+  if(!email||!email.includes('@')){ auSetMsg('auApErr','err','Please enter a valid email address.'); return; }
+  auClrMsg('auApErr','auApOk'); auSetLoad('auApLoad',true);
+  try{
+    var r = await auApi({action:'requestOTP', email:email, purpose:'DDS_APPLICATION'});
+    auSetLoad('auApLoad',false);
+    if(r.success){ au_email=email; document.getElementById('auOtpEmailShow').textContent=email; if(!resend) auShowSub('auApB'); else auSetMsg('auApOk','suc','New code sent to '+email); }
+    else auSetMsg('auApErr','err',r.message);
+  }catch(e){ auSetLoad('auApLoad',false); auSetMsg('auApErr','err','Connection error. Try again.'); }
+}
+async function auVerifyOTP(){
+  var otp=document.getElementById('auOTP').value.trim();
+  if(!otp||otp.length!==6){ auSetMsg('auApErr','err','Enter the 6-digit code from your email.'); return; }
+  if(!au_email){ auShowSub('auApA'); return; }
+  auClrMsg('auApErr','auApOk'); auSetLoad('auApLoad',true);
+  try{
+    var r = await auApi({action:'verifyOTP', email:au_email, otp:otp, purpose:'DDS_APPLICATION'});
+    auSetLoad('auApLoad',false);
+    if(r.success){ au_otp=otp; document.getElementById('auEmailRO').value=au_email; auShowSub('auApC'); }
+    else auSetMsg('auApErr','err', r.message||'Invalid or expired code.');
+  }catch(e){ auSetLoad('auApLoad',false); auSetMsg('auApErr','err','Connection error. Try again.'); }
+}
+async function auSubmitApp(){
+  var now=Date.now();
+  if(au_submitting || now-au_lastSub<5000){ auSetMsg('auApErr','wrn','Please wait before submitting again.'); return; }
+  if(!au_email||!au_otp){ auSetMsg('auApErr','err','Email not verified. Start from step 1.'); auShowSub('auApA'); return; }
+  var wa=document.getElementById('auWA').value.trim();
+  var country=document.getElementById('auCountry').value;
+  if(!wa){ auSetMsg('auApErr','err','Please enter your WhatsApp number.'); return; }
+  if(!country){ auSetMsg('auApErr','err','Please select your country.'); return; }
+  au_submitting=true; au_lastSub=now;
+  var btn=document.getElementById('auSubmitAppBtn'); btn.disabled=true; btn.textContent='Submitting...';
+  auClrMsg('auApErr','auApOk'); auSetLoad('auApLoad',true);
+  try{
+    var r = await auApi({action:'submitApplication', email:au_email, whatsapp:wa, country:country, otpVerified:true, originalOTP:au_otp});
+    auSetLoad('auApLoad',false);
+    if(r.success){
+      auSetMsg('auApOk','suc','Application submitted! Check your email — your DDS Number arrives once approved (usually 24–72 hrs).');
+      btn.textContent='Application Submitted'; btn.style.borderColor='#00ff88'; btn.style.color='#00ff88';
+      showToast('Application submitted — check your email','success');
+    } else { auSetMsg('auApErr','err',r.message); btn.disabled=false; btn.textContent='Submit Application'; au_submitting=false; }
+  }catch(e){ auSetLoad('auApLoad',false); auSetMsg('auApErr','err','Network error. Try again.'); btn.disabled=false; btn.textContent='Submit Application'; au_submitting=false; }
+}
+async function auSubmitRegister(){
+  var agreeChk = document.getElementById('auAgreeChk');
+  if(!agreeChk || !agreeChk.checked){ auSetMsg('auRegErr','err','You must read and agree to the Terms of Service and Privacy Policy first.'); return; }
+  var dds=document.getElementById('auDDS').value.trim();
+  var alias=document.getElementById('auAlias').value.trim();
+  var prof=document.getElementById('auProf').value.trim();
+  var pass=document.getElementById('auPass').value;
+  var conf=document.getElementById('auConf').value;
+  if(!dds||!alias||!prof||!pass){ auSetMsg('auRegErr','err','Please fill in all fields.'); return; }
+  if(pass!==conf){ auSetMsg('auRegErr','err','Passwords do not match.'); return; }
+  auClrMsg('auRegErr','auRegOk'); auSetLoad('auRegLoad',true);
+  try{
+    var r = await auApi({action:'registerDDS', ddsNumber:dds, alias:alias, profession:prof, password:pass, confirmPassword:conf});
+    auSetLoad('auRegLoad',false);
+    if(r.success){ auSetMsg('auRegOk','suc','Account created! Redirecting to login...'); setTimeout(function(){ auGoScreen('auLogin'); },1800); }
+    else auSetMsg('auRegErr','err',r.message);
+  }catch(e){ auSetLoad('auRegLoad',false); auSetMsg('auRegErr','err','Connection error. Try again.'); }
+}
+async function auSubmitLogin(){
+  var alias=document.getElementById('auLAlias').value.trim();
+  var pass=document.getElementById('auLPass').value;
+  if(!alias||!pass){ auSetMsg('auLoginErr','err','Enter your alias and password.'); return; }
+  auClrMsg('auLoginErr','auLoginOk'); auSetLoad('auLoginLoad',true);
+  try{
+    var r = await auApi({action:'loginDDS', alias:alias, password:pass});
+    auSetLoad('auLoginLoad',false);
+    if(r.success){
+      var ban = await auCheckBan(r.data.ddsNumber, auGetDeviceFP());
+      if(ban.banned){ auShowBan(ban); return; }
+      auSaveSession(r.data);
+      auSetMsg('auLoginOk','suc','Welcome, '+r.data.alias+'! Redirecting...');
+      setTimeout(function(){
+        closeAuthOverlay(); loadSession(); switchPageByName('Home');
+        showToast('Welcome back, '+r.data.alias+'!','success');
+      }, 1000);
+    } else auSetMsg('auLoginErr','err',r.message);
+  }catch(e){ auSetLoad('auLoginLoad',false); auSetMsg('auLoginErr','err','Connection error. Try again.'); }
+}
+async function auRequestReset(){
+  var email=document.getElementById('auFEmail').value.trim();
+  var dds=document.getElementById('auFDDS').value.trim();
+  if(!email||!dds){ auSetMsg('auForgotErr','err','Enter your email and DDS number.'); return; }
+  auClrMsg('auForgotErr','auForgotOk'); auSetLoad('auForgotLoad',true);
+  try{
+    var r = await auApi({action:'forgotPassword', email:email, ddsNumber:dds});
+    auSetLoad('auForgotLoad',false);
+    if(r.success){ au_resetData={email:email, dds:dds}; auSetMsg('auForgotOk','suc',r.message); setTimeout(function(){ auShowSubFg('auFgB'); },1200); }
+    else auSetMsg('auForgotErr','err',r.message);
+  }catch(e){ auSetLoad('auForgotLoad',false); auSetMsg('auForgotErr','err','Connection error. Try again.'); }
+}
+async function auSubmitReset(){
+  if(!au_resetData){ auShowSubFg('auFgA'); return; }
+  var code=document.getElementById('auFCode').value.trim();
+  var np=document.getElementById('auFNewP').value;
+  var cp=document.getElementById('auFConf').value;
+  if(!code||!np){ auSetMsg('auForgotErr','err','Fill in all fields.'); return; }
+  if(np!==cp){ auSetMsg('auForgotErr','err','Passwords do not match.'); return; }
+  auClrMsg('auForgotErr','auForgotOk'); auSetLoad('auForgotLoad',true);
+  try{
+    var r = await auApi({action:'resetPasswordWithSecurityCode', email:au_resetData.email, ddsNumber:au_resetData.dds, securityCode:code, newPassword:np, confirmPassword:cp});
+    auSetLoad('auForgotLoad',false);
+    if(r.success){ auSetMsg('auForgotOk','suc','Password reset! You can now login.'); au_resetData=null; setTimeout(function(){ auGoScreen('auLogin'); auShowSubFg('auFgA'); },1800); }
+    else auSetMsg('auForgotErr','err',r.message);
+  }catch(e){ auSetLoad('auForgotLoad',false); auSetMsg('auForgotErr','err','Connection error. Try again.'); }
+}
+function auGetDeviceFP(){
+  var raw=[navigator.userAgent, screen.width, screen.height, navigator.language, Intl.DateTimeFormat().resolvedOptions().timeZone].join('|');
+  var h=5381; for(var i=0;i<raw.length;i++) h=((h<<5)+h)^raw.charCodeAt(i);
+  return (h>>>0).toString(16);
+}
+async function auCheckBan(ddsNumber, fingerprint){
+  try{ var r = await auApi({action:'ntCheckBan', ddsNumber:ddsNumber, fingerprint:fingerprint}); if(r && r.data && r.data.banned) return r.data; }catch(e){}
+  return {banned:false};
+}
+function auShowBan(info){
+  var isPerm = info.type==='permanent' || info.permanent;
+  document.getElementById('auBanType').textContent = isPerm ? 'Permanently Banned' : 'Temporarily Banned';
+  document.getElementById('auBanReason').textContent = info.reason || 'You did not follow DDS movement policies.';
+  var timer='';
+  if(!isPerm && info.expiresAt){
+    var ms = new Date(info.expiresAt).getTime()-Date.now();
+    if(ms>0){ var h=Math.floor(ms/3600000), d=Math.floor(h/24), m=Math.floor((ms%3600000)/60000); timer = d>0 ? d+'d '+(h%24)+'h '+m+'m remaining' : h+'h '+m+'m remaining'; }
+  }
+  document.getElementById('auBanTimer').textContent = timer;
+  document.getElementById('auBanOv').classList.add('show');
+}
+function auSaveSession(data){
+  localStorage.setItem('ddsUserData', JSON.stringify(Object.assign({}, data, {loggedIn:true, loginTime:Date.now()})));
+}
+
+/* ============ LEGAL — Terms of Service & Privacy Policy ============ */
+function legalUpdatedStr(){
+  return new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'});
+}
+function buildTermsHTML(){
+  return '<div class="legal-updated">Last updated: '+legalUpdatedStr()+'</div>' +
+  '<h4>1. Acceptance of These Terms</h4><p>By creating a DDS Number, registering an account, or otherwise using Dark Digital Space ("DDS", "we", "us"), you agree to these Terms of Service. If you do not agree, please do not use the platform.</p>' +
+  '<h4>2. What DDS Is</h4><p>DDS is a community platform where members share projects, tools, scripts and games ("Content") with other members through Explore and Dev Spot, and can earn and spend DDS bits, a virtual in-app currency.</p>' +
+  '<h4>3. Accounts &amp; DDS Numbers</h4><p>Access requires an approved DDS Number and a registered alias. You are responsible for keeping your password secure and for all activity under your account. Do not share your credentials with anyone else.</p>' +
+  '<h4>4. Your Content</h4><p>You keep ownership of anything you post through Dev Spot. By posting, you grant DDS a non-exclusive license to host, display and distribute that Content within the platform so other members can view, rate and download it. You confirm that you have the right to share what you upload.</p>' +
+  '<h4>5. DDS Bits</h4><p>Bits are a virtual, non-transferable in-platform currency. They may be adjusted, reversed or removed at our discretion in cases of abuse, fraud, or violation of these Terms. Any withdrawal or cash-out feature, where offered, is governed by its own separate rules communicated in-app.</p>' +
+  '<h4>6. Prohibited Conduct</h4><p>You may not upload malware, illegal content, or content that infringes someone else\'s rights, or content intended to harm, exploit or defraud others. Do not attempt to manipulate bits, ranks, likes or ratings, or interfere with the normal operation of the platform.</p>' +
+  '<h4>7. Moderation &amp; Termination</h4><p>We may remove Content, or suspend or ban accounts, that violate these Terms, at our discretion, with or without prior notice.</p>' +
+  '<h4>8. Disclaimer</h4><p>DDS and everything posted on it is provided "as is." Projects and tools shared by members are the responsibility of their authors — download and run anything at your own risk.</p>' +
+  '<h4>9. Limitation of Liability</h4><p>To the fullest extent permitted by law, DDS is not liable for any indirect, incidental or consequential damages arising from your use of the platform or any Content on it.</p>' +
+  '<h4>10. Changes to These Terms</h4><p>We may update these Terms from time to time. Continuing to use DDS after changes take effect means you accept the updated Terms.</p>' +
+  '<h4>11. Contact</h4><p>Questions about these Terms can be sent to <span style="color:#00ffff">darkdigitalspaceteam@gmail.com</span>.</p>';
+}
+function buildPrivacyHTML(){
+  return '<div class="legal-updated">Last updated: '+legalUpdatedStr()+'</div>' +
+  '<h4>1. Information We Collect</h4><p>When you apply, we collect your email address, WhatsApp number and country. When you register, we collect your chosen alias, profession and password (stored securely, never in plain text). We also collect basic device information, like a device fingerprint, to help prevent abuse such as ban evasion.</p>' +
+  '<h4>2. How We Use It</h4><p>We use this information to create and secure your account, send you your DDS Number and account updates, operate features like bits, likes, ratings and challenges, and to enforce these policies against abuse.</p>' +
+  '<h4>3. Local Storage</h4><p>DDS uses your browser\'s local storage to keep you signed in and to remember things like which projects you\'ve liked or rated on this device. Clearing your browser data will sign you out.</p>' +
+  '<h4>4. Third-Party Services</h4><p>DDS runs on Google Apps Script for backend logic and uses GitHub to host project images. Data you submit, such as application details or uploaded images, passes through these services as part of normal operation.</p>' +
+  '<h4>5. Data Retention</h4><p>We retain account and profile data for as long as your account is active. Application data for rejected or abandoned applications may be periodically removed.</p>' +
+  '<h4>6. Your Rights</h4><p>You can request an update or deletion of your account data by contacting us at the email below.</p>' +
+  '<h4>7. Children\'s Privacy</h4><p>DDS is not directed at children under 13, and we do not knowingly collect information from them.</p>' +
+  '<h4>8. Changes to This Policy</h4><p>We may update this Privacy Policy from time to time; continued use of DDS after changes take effect means you accept the updated policy.</p>' +
+  '<h4>9. Contact</h4><p>Privacy questions can be sent to <span style="color:#00ffff">darkdigitalspaceteam@gmail.com</span>.</p>';
+}
+var auTermsRead = false, auPrivacyRead = false, currentLegalType = 'terms';
+function openLegalClick(e, type){ if(e) e.preventDefault(); openLegal(type); return false; }
+function openLegal(type){
+  var isPriv = type==='privacy';
+  currentLegalType = type;
+  document.getElementById('legalTitle').innerHTML = '<i class="fas fa-file-contract"></i> ' + (isPriv?'Privacy Policy':'Terms of Service');
+  var body = document.getElementById('legalBody');
+  body.innerHTML = isPriv ? buildPrivacyHTML() : buildTermsHTML();
+  document.getElementById('legalOv').classList.add('open');
+  document.body.style.overflow='hidden';
+  body.scrollTop = 0;
+  body.onscroll = function(){
+    if(body.scrollTop + body.clientHeight >= body.scrollHeight - 30){
+      if(currentLegalType==='privacy') auPrivacyRead = true; else auTermsRead = true;
+      updateAgreeChk();
+    }
+  };
+}
+function closeLegal(){ document.getElementById('legalOv').classList.remove('open'); document.body.style.overflow=''; }
+function updateAgreeChk(){
+  var chk = document.getElementById('auAgreeChk');
+  var hint = document.getElementById('auAgreeHint');
+  if(!chk) return;
+  if(auTermsRead && auPrivacyRead){
+    chk.disabled = false;
+    if(hint) hint.textContent = 'Both documents read — you can now check the box above.';
+  } else {
+    var missing = [];
+    if(!auTermsRead) missing.push('Terms of Service');
+    if(!auPrivacyRead) missing.push('Privacy Policy');
+    if(hint) hint.textContent = 'Still need to scroll through: '+missing.join(' and ');
+  }
+}
+
+/* ---------- learn ---------- */
+var TUTORIALS = [
+  {title:'Getting Started with DDS', desc:'Set up your profile, understand ranks and bits, and take your first steps in the Dark Digital Space.', vid:'nqMdNC83oF0', thumb:'https://img.youtube.com/vi/nqMdNC83oF0/hqdefault.jpg'},
+  {title:'Posting Your First Project', desc:'Use Dev Spot to upload images, set a category and publish a project that ranks well.', vid:'dQw4w9WgXcQ', thumb:'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'},
+  {title:'The Challenge System', desc:'Understand rank vs friendly challenges, bits costs and how to climb the leaderboard.', vid:'xmmuZrOZjao', thumb:'https://img.youtube.com/vi/xmmuZrOZjao/hqdefault.jpg'},
+  {title:'Code Lab Basics', desc:'Write, preview and publish a project straight from the Code Lab IDE.', vid:'dQw4w9WgXcQ', thumb:'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'}
+];
+function tutHTML(t, i){
+  return '<div class="tut-card" onclick="openVideo('+i+')"><div class="tut-thumb" style="background-image:url('+t.thumb+')"><div class="play"><i class="fas fa-play-circle"></i></div></div>' +
+    '<div class="tut-info"><h4>'+t.title+'</h4><p>'+t.desc+'</p></div></div>';
+}
+document.getElementById('tutList').innerHTML = TUTORIALS.map(tutHTML).join('');
+function openVideo(i){
+  var t = TUTORIALS[i];
+  document.getElementById('vmTitle').textContent = t.title;
+  document.getElementById('vmFrame').innerHTML = '<iframe src="https://www.youtube.com/embed/'+t.vid+'?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  document.getElementById('vmOv').classList.add('open');
+}
+function closeVideo(){
+  document.getElementById('vmOv').classList.remove('open');
+  document.getElementById('vmFrame').innerHTML = '';
+}
+
+/* ---------- boot ---------- */
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('fYear').textContent = new Date().getFullYear();
+  initLogos();
+  loadSession();
+  updateLaunchTimer();
+  setInterval(updateLaunchTimer, 1000);
+  setInterval(cycleLaunchName, 2600);
+  loadMembers();
+  document.addEventListener('click', function(e){
+    var menu=document.getElementById('accountMenu');
+    if(menu.classList.contains('open') && !menu.contains(e.target) && e.target.id!=='signinBtn' && !e.target.closest('#signinBtn')){
+      closeAccountMenu();
+    }
+  });
+});
+</script>
+</body>
+</html>
