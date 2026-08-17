@@ -7,6 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Creepster&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
+
+    * {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Orbitron',monospace;background:linear-gradient(135deg,#000 0%,#001122 50%,#000 100%);color:#eaeaea;min-height:100vh;overflow-x:hidden;}
 .grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(47,143,255,.07)1px,transparent 1px),linear-gradient(90deg,rgba(47,143,255,.07)1px,transparent 1px);background-size:46px 46px;animation:gm 22s linear infinite;z-index:-1;}
@@ -1304,7 +1314,8 @@ function renderAchievements(projs){
       <span class="au-swl" id="auNavForgot" onclick="auGoScreen('auForgot')">Reset Password</span>
     </div>
   </div><!-- /au-gated -->
-</div>
+  </div><!-- /auth-wrap -->
+</div><!-- /authOv -->
 
 <div class="au-tt-ov" id="auTtOv" onclick="if(event.target===this)auCloseTT()">
   <div class="au-tt-box">
@@ -1596,7 +1607,7 @@ var DDS_LOGO_SRC = 'https://i.postimg.cc/PqQhDZ9d/file-0000000065a061f4ab78a9558
 
 /* ---------- pre-launch countdown + rotating system name (shown in the topbar) ---------- */
 var LAUNCH_DATE = new Date('2026-09-05T00:00:00');
-var LAUNCH_NAMES = ['DDS launch is soon', 'DDS APP', 'DDS CODELAB V6'];
+var LAUNCH_NAMES = ['Launch coming soon', 'DDS APP', 'DDS CODELAB APP'];
 var launchNameIdx = 0;
 function updateLaunchTimer(){
   var el = document.getElementById('launchTimer');
@@ -1648,7 +1659,7 @@ var TEAM = [
    portfolio:['fa-lock','fa-bug','fa-key']},
 
     {name:'-- --', role:'Community Lead', icon:'fa-comments',
-   img:'https://i.pravatar.cc/500?img=45',
+   img:'https://image should be here',
    fallback:'https://ui-avatars.com/api/?name=Mira+Solis&background=gray&color=fff&size=500&bold=true',
    about:'Runs the DDS YouTube channel and community events, and moderates Explore so top projects actually get seen.',
    portfolio:['fa-youtube','fa-users','fa-bullhorn']}
