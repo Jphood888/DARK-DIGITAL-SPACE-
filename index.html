@@ -12,21 +12,14 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
 h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.01em;}
-.mono{font-family:'JetBrains Mono',monospace;}
 ::-webkit-scrollbar{width:6px;height:6px;}
 ::-webkit-scrollbar-thumb{background:rgba(47,143,255,.3);border-radius:4px;}
-
-/* ---- topbar ---- */
 .topbar{position:sticky;top:0;z-index:200;background:rgba(5,7,10,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.1rem;}
-.brand{display:flex;align-items:center;gap:.6rem;}
-.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px 2px rgba(47,143,255,.7);}
 .brand b{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:#fff;}
 .pill{background:rgba(47,143,255,.1);border:1px solid rgba(47,143,255,.35);color:var(--ice);border-radius:20px;padding:.45rem .95rem;font-size:.72rem;font-weight:600;display:flex;align-items:center;gap:.4rem;cursor:pointer;font-family:'Inter',sans-serif;}
 .user-pill{display:flex;align-items:center;gap:.5rem;background:rgba(47,143,255,.08);border:1px solid var(--line);border-radius:20px;padding:.3rem .8rem .3rem .3rem;cursor:pointer;}
 .user-pill .av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#1a3a66);display:flex;align-items:center;justify-content:center;font-size:.68rem;color:#fff;overflow:hidden;}
 .user-pill .av img{width:100%;height:100%;object-fit:cover;}
-
-/* ---- menu ---- */
 .menu{position:fixed;top:58px;right:1rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.4rem;z-index:260;display:none;min-width:180px;box-shadow:0 12px 30px rgba(0,0,0,.5);}
 .menu.open{display:block;}
 .menu button{width:100%;text-align:left;background:none;border:none;color:#cdd6de;padding:.6rem .7rem;font-size:.78rem;font-family:'Inter',sans-serif;border-radius:8px;display:flex;align-items:center;gap:.6rem;cursor:pointer;}
@@ -34,11 +27,7 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .menu button:hover{background:rgba(47,143,255,.1);}
 .menu .bits-row{padding:.6rem .7rem;font-size:.68rem;color:var(--mute);border-bottom:1px solid var(--line);margin-bottom:.3rem;}
 .menu .bits-row b{color:var(--ice);}
-
-/* ---- wrap ---- */
 .wrap{max-width:700px;margin:0 auto;padding:1.6rem 1.1rem 5rem;}
-
-/* ---- hero ---- */
 .hero{padding:1.2rem 0 1.8rem;}
 .hero .tag{font-size:.62rem;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;display:block;margin-bottom:.7rem;}
 .hero h1{font-size:1.65rem;color:#fff;line-height:1.25;margin-bottom:.6rem;}
@@ -48,8 +37,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;padding:.7rem 1.2rem;border-radius:9px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:.4rem;}
 .btn-primary{background:var(--blue);color:#03060a;}
 .btn-ghost{background:transparent;border:1px solid rgba(47,143,255,.35)!important;color:var(--ice);}
-
-/* ---- search / chips ---- */
 .search-wrap{position:relative;margin:1.4rem 0 .8rem;}
 .search-wrap input{width:100%;background:rgba(47,143,255,.06);border:1px solid var(--line);border-radius:24px;padding:.7rem 1rem .7rem 2.4rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;}
 .search-wrap input:focus{border-color:var(--blue);}
@@ -57,8 +44,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .chip-row{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.4rem;}
 .chip{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.32rem .85rem;font-size:.66rem;color:#93a2b0;cursor:pointer;white-space:nowrap;}
 .chip.on{background:var(--blue);color:#03060a;border-color:var(--blue);font-weight:600;}
-
-/* ---- project grid ---- */
 .sec-label{display:flex;align-items:center;justify-content:space-between;margin:1.3rem 0 .7rem;}
 .sec-label b{font-size:.78rem;color:#fff;font-family:'Space Grotesk',sans-serif;}
 .sec-label a{font-size:.65rem;color:var(--blue);cursor:pointer;}
@@ -73,13 +58,9 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .card-row .stars{color:var(--gold);}
 .empty{text-align:center;color:#3c4a58;font-size:.72rem;padding:2.4rem 0;grid-column:1/-1;}
 .empty i{font-size:1.7rem;display:block;margin-bottom:.6rem;}
-
-/* ---- horizontal explore row ---- */
 .hrow{display:flex;gap:.7rem;overflow-x:auto;padding-bottom:.5rem;scroll-snap-type:x proximity;}
 .hrow::-webkit-scrollbar{height:4px;}
 .hrow .card{flex:0 0 150px;width:150px;scroll-snap-align:start;}
-
-/* ---- hero banner (promoted/boosted projects) ---- */
 .hero-carousel{position:relative;margin:0 0 1rem;border-radius:16px;overflow:hidden;height:190px;background:linear-gradient(135deg,#111b2c,#060a12);border:1px solid var(--line);}
 .hero-slides{display:flex;height:100%;transition:transform .45s ease;}
 .hero-slide{flex:0 0 100%;height:100%;position:relative;cursor:pointer;}
@@ -92,20 +73,15 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .hero-dots{position:absolute;bottom:.6rem;right:.9rem;display:flex;gap:.3rem;z-index:3;}
 .hero-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);}
 .hero-dots span.on{background:var(--blue);width:16px;border-radius:3px;}
-
-/* ---- FAB ---- */
 .fab{position:fixed;right:1.1rem;bottom:1.4rem;width:54px;height:54px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#03060a;font-size:1.25rem;box-shadow:0 8px 22px rgba(47,143,255,.4);cursor:pointer;z-index:150;border:none;}
 .fab:active{transform:scale(.94);}
 .fab-boost{right:1.1rem;bottom:7.4rem;background:#ffaa00;color:#1a1300;animation:boostPulse 2.2s ease-in-out infinite;}
-.fab-contact{right:1.1rem;bottom:1.4rem;background:#111b2c;border:2px solid var(--blue);overflow:hidden;padding:0;}
-.fab-contact img{width:100%;height:100%;object-fit:cover;}
+.fab-contact{right:1.1rem;bottom:1.4rem;background:#111b2c;border:2px solid var(--blue);}
 @keyframes boostPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,170,0,.55);}50%{box-shadow:0 0 0 10px rgba(255,170,0,0);}}
 .boost-pick-item{display:flex;gap:.7rem;align-items:center;padding:.7rem;border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;cursor:pointer;}
 .boost-pick-item .thumb{width:52px;height:52px;border-radius:8px;background-size:cover;background-position:center;flex-shrink:0;background-color:var(--panel);}
 .boost-pick-item b{font-size:.72rem;color:#fff;display:block;}
 .boost-pick-item span{font-size:.6rem;color:var(--mute);}
-
-/* ---- contact / feedback ---- */
 .ct-faq{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:.6rem;cursor:pointer;}
 .ct-faq b{font-size:.72rem;color:var(--ice);display:flex;align-items:center;gap:.5rem;}
 .ct-faq p{font-size:.65rem;color:var(--mute);line-height:1.6;margin-top:.5rem;display:none;}
@@ -116,8 +92,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .ct-from-row span{font-size:.58rem;color:var(--mute);}
 .ct-cooldown{font-size:.62rem;color:#ffaa00;margin-top:.5rem;text-align:center;display:none;}
 .ct-cooldown.show{display:block;}
-
-/* ---- dead drop media ---- */
 .dd-media-zone{border:2px dashed var(--line);border-radius:10px;padding:.9rem;text-align:center;cursor:pointer;position:relative;margin-top:.6rem;}
 .dd-media-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
 .dd-media-zone i{font-size:1.2rem;color:var(--blue);margin-bottom:.25rem;display:block;}
@@ -127,15 +101,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .dd-media-preview button{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);border:none;color:#fff;width:24px;height:24px;border-radius:50%;font-size:.65rem;cursor:pointer;}
 .dd-card-media{margin:.5rem 0;border-radius:8px;overflow:hidden;}
 .dd-card-media img,.dd-card-media video{width:100%;max-height:160px;object-fit:cover;display:block;}
-
-/* ---- referral history ---- */
 .ref-history{margin-top:1rem;}
 .ref-history-title{font-size:.6rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;}
 .ref-history-item{display:flex;justify-content:space-between;font-size:.6rem;color:#93a2b0;padding:.35rem 0;border-bottom:1px solid rgba(47,143,255,.08);}
 .ref-history-item b{color:var(--ice);font-weight:600;}
 .ref-history-item span{color:var(--mute);}
-
-/* ---- modals (shared) ---- */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:none;align-items:flex-end;justify-content:center;}
 .ov.open{display:flex;}
 .sheet{background:var(--panel2);border:1px solid var(--line);border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;}
@@ -143,8 +113,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .sheet-head h3{font-size:.85rem;color:#fff;display:flex;align-items:center;gap:.5rem;}
 .sheet-head button{background:none;border:none;color:#5c6c7c;font-size:1rem;cursor:pointer;}
 .sheet-body{padding:1.1rem;}
-
-/* ---- auth tabs ---- */
 .tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:.25rem;margin-bottom:1.1rem;}
 .tabs button{flex:1;background:none;border:none;padding:.55rem 0;font-size:.68rem;font-weight:600;color:#7b8a99;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;}
 .tabs button.on{background:var(--blue);color:#03060a;}
@@ -154,7 +122,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .field label{display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.32rem;}
 .field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);}
-.field small{display:block;font-size:.58rem;color:var(--mute);margin-top:.25rem;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .substep{display:none;}
 .substep.on{display:block;}
@@ -166,34 +133,26 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .link-line{text-align:center;font-size:.65rem;color:var(--blue);cursor:pointer;margin-top:.6rem;}
 .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(47,143,255,.25);border-top-color:var(--blue);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;}
 @keyframes sp{to{transform:rotate(360deg);}}
-
-/* ---- dev spot ---- */
 .type-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem;}
 .type-row span{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:.28rem .7rem;font-size:.62rem;color:#7b8a99;cursor:pointer;}
 .type-row span.on{background:var(--blue);color:#03060a;border-color:var(--blue);font-weight:600;}
 .img-zone{border:2px dashed var(--line);border-radius:10px;padding:1.1rem;text-align:center;cursor:pointer;position:relative;}
-.img-zone.drag{border-color:var(--blue);background:rgba(47,143,255,.04);}
 .img-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
 .img-zone i{font-size:1.4rem;color:var(--blue);margin-bottom:.3rem;display:block;}
 .img-zone p{color:var(--mute);font-size:.62rem;}
 .img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.6rem;}
 .thumb-it{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;border:1px solid var(--line);}
-.thumb-it img{width:100%;height:100%;object-fit:cover;}
+.thumb-it img,.thumb-it video{width:100%;height:100%;object-fit:cover;}
 .thumb-it button{position:absolute;top:2px;right:2px;background:rgba(47,143,255,.8);border:none;border-radius:3px;color:#fff;width:16px;height:16px;font-size:.55rem;cursor:pointer;}
+.thumb-it .vid-badge{position:absolute;bottom:2px;left:2px;background:rgba(0,0,0,.65);color:#fff;font-size:.42rem;padding:.05rem .3rem;border-radius:4px;}
 .up-prog{height:5px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:.5rem;overflow:hidden;display:none;}
 .up-bar{height:100%;background:var(--blue);border-radius:3px;width:0;transition:width .3s;}
-
-/* ---- category dropdown ---- */
 .cat-wrap{position:relative;}
 .cat-drop{position:absolute;top:100%;left:0;right:0;z-index:50;background:var(--panel2);border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;max-height:180px;overflow-y:auto;display:none;}
 .cat-drop.open{display:block;}
 .cat-opt{padding:.5rem .8rem;font-size:.7rem;color:#93a2b0;cursor:pointer;}
 .cat-opt:hover,.cat-opt.sel{background:rgba(47,143,255,.14);color:var(--ice);}
-
-/* ---- preview card ---- */
 .preview-notice{background:rgba(47,143,255,.06);border:1px solid var(--line);border-radius:8px;padding:.55rem .75rem;font-size:.62rem;color:var(--ice);margin-bottom:.8rem;display:flex;gap:.4rem;align-items:flex-start;}
-.missing-list{background:rgba(255,34,85,.06);border:1px solid rgba(255,34,85,.25);border-radius:8px;padding:.5rem .75rem;font-size:.62rem;color:#ff7b90;margin-bottom:.8rem;}
-.missing-list b{display:block;margin-bottom:.2rem;}
 .preview-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
 .preview-hero{height:140px;background:linear-gradient(135deg,#111b2c,#060a12);position:relative;}
 .preview-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -205,8 +164,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .preview-stat b{display:block;font-size:.74rem;color:var(--blue);}
 .preview-stat span{font-size:.42rem;color:var(--mute);}
 .preview-desc{font-size:.65rem;color:#93a2b0;line-height:1.6;}
-
-/* ---- learn ---- */
 .tut{display:flex;gap:.75rem;align-items:center;padding:.7rem;border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;cursor:pointer;text-decoration:none;color:inherit;}
 .tut .thumb{width:70px;height:48px;border-radius:6px;background-size:cover;background-position:center;flex-shrink:0;position:relative;}
 .tut .thumb i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;text-shadow:0 2px 5px rgba(0,0,0,.6);}
@@ -217,14 +174,10 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .yt-cta b{font-size:.72rem;color:#fff;display:block;}
 .yt-cta span{font-size:.6rem;color:var(--mute);}
 .yt-cta .yt-btn{margin-left:auto;background:#fff;color:#ff3355;border:none;border-radius:14px;padding:.4rem .8rem;font-size:.6rem;font-weight:700;font-family:'Inter',sans-serif;}
-
-/* ---- social row ---- */
 .social-row{display:flex;gap:.6rem;margin:1.2rem 0;}
 .social-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem;border-radius:10px;font-size:.72rem;font-weight:600;text-decoration:none;font-family:'Space Grotesk',sans-serif;}
 .social-btn.wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.4);color:#25d366;}
 .social-btn.fb{background:rgba(24,119,242,.12);border:1px solid rgba(24,119,242,.4);color:#1877f2;}
-
-/* ---- referral teaser + center ---- */
 .referral-teaser{display:flex;align-items:center;gap:.8rem;background:linear-gradient(120deg,rgba(47,143,255,.1),rgba(0,255,136,.06));border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin:1.2rem 0;cursor:pointer;}
 .referral-teaser .rt-icon{width:40px;height:40px;border-radius:10px;background:rgba(47,143,255,.15);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.1rem;flex-shrink:0;}
 .referral-teaser b{font-size:.76rem;color:#fff;display:block;margin-bottom:.15rem;}
@@ -241,14 +194,10 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .ref-apply-row input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;text-transform:uppercase;outline:none;}
 .ref-rules{font-size:.62rem;color:#93a2b0;line-height:1.7;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;}
 .ref-rules li{margin-left:1rem;margin-bottom:.2rem;}
-
-/* ---- fullscreen image viewer ---- */
 .img-view-ov{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:900;display:none;align-items:center;justify-content:center;}
 .img-view-ov.open{display:flex;}
 .img-view-ov img{max-width:94%;max-height:88%;object-fit:contain;border-radius:6px;}
 .img-view-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:.9rem;cursor:pointer;}
-
-/* ---- project detail ---- */
 .pd-hero{height:170px;background:linear-gradient(135deg,#111b2c,#060a12);position:relative;overflow:hidden;cursor:pointer;}
 .pd-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .pd-gal{display:flex;gap:.4rem;overflow-x:auto;margin:.7rem 0;}
@@ -279,8 +228,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .pd-admin button.boost{border-color:rgba(255,170,0,.35);color:#ffaa00;}
 @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-70px) scale(1.3)}}
 .float-heart{position:absolute;pointer-events:none;animation:floatUp .8s ease forwards;z-index:9;font-size:1rem;}
-
-/* ---- rating ---- */
 .rate-sec{margin:.9rem 0;border-top:1px solid var(--line);padding-top:.8rem;}
 .rate-toggle-row{display:flex;align-items:center;gap:.5rem;cursor:pointer;padding:.2rem 0;}
 .rate-toggle-avg{font-size:1.1rem;color:var(--gold);font-weight:700;}
@@ -305,15 +252,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .star-inp label{font-size:1.3rem;color:#2a3646;cursor:pointer;transition:color .12s;}
 .star-inp label:hover,.star-inp label:hover~label,.star-inp input:checked~label{color:var(--gold);}
 .rate-txt{font-size:.6rem;color:var(--mute);margin-top:.3rem;}
-
-/* ---- boost / edit modals ---- */
 .boost-opts{display:flex;gap:.6rem;margin:1rem 0;}
 .boost-opt{flex:1;background:rgba(255,170,0,.06);border:1px solid rgba(255,170,0,.3);border-radius:10px;padding:.8rem .4rem;text-align:center;cursor:pointer;}
 .boost-opt b{font-size:1.3rem;color:#ffaa00;display:block;}
 .boost-opt span{font-size:.55rem;color:var(--mute);}
 .boost-opt .cost{color:var(--gold);font-size:.65rem;margin-top:.3rem;display:block;}
-
-/* ---- analytics ---- */
 .an-tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:.25rem;margin-bottom:1rem;}
 .an-tabs button{flex:1;background:none;border:none;padding:.5rem 0;font-size:.68rem;font-weight:600;color:#7b8a99;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;}
 .an-tabs button.on{background:var(--blue);color:#03060a;}
@@ -354,22 +297,16 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .ach-earned-chip{flex-shrink:0;width:58px;text-align:center;}
 .ach-earned-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;margin:0 auto .25rem;font-size:1.05rem;}
 .ach-earned-label{font-size:.44rem;color:var(--mute);}
-
-/* ---- countdown ---- */
 .countdown-bar{display:flex;align-items:center;gap:.7rem;background:rgba(47,143,255,.06);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;margin:1.2rem 0;}
 .countdown-bar i{color:var(--blue);font-size:1.1rem;}
 .countdown-bar .cd-num{font-family:'Share Tech Mono',monospace;font-weight:700;color:var(--blue);font-size:1.05rem;letter-spacing:1.5px;text-shadow:0 0 8px rgba(47,143,255,.5);}
 .countdown-bar .cd-lbl{font-size:.6rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-top:.1rem;}
-
-/* ---- apps section ---- */
 .apps-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .app-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem .9rem;display:flex;flex-direction:column;gap:.5rem;}
 .app-card .app-icon{width:36px;height:36px;border-radius:9px;background:rgba(47,143,255,.12);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1rem;}
 .app-card b{font-size:.76rem;color:#fff;}
 .app-card span{font-size:.6rem;color:var(--mute);line-height:1.4;flex-grow:1;}
 .app-card button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:#7b8a99;border-radius:14px;padding:.4rem;font-size:.6rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
-
-/* ---- DDS Codelab background card ---- */
 .codelab-card{position:relative;overflow:hidden;padding:0!important;}
 .codelab-card .cc-overlay{position:absolute;inset:0;background-size:cover;background-position:center;}
 .codelab-card .cc-overlay::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,10,.35) 0%,rgba(5,7,10,.88) 75%);}
@@ -377,14 +314,10 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .codelab-card .cc-content .app-icon{background:rgba(255,255,255,.12);}
 .codelab-card .cc-content b{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);}
 .codelab-card .cc-content span{color:#d4dde5;}
-
-/* ---- testers ---- */
 .testers-row{display:flex;align-items:baseline;gap:.5rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:1.2rem 0;}
 .testers-row .t-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--blue);}
 .testers-row .t-lbl{font-size:.62rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;}
 .testers-row i{color:var(--blue);margin-right:.3rem;}
-
-/* ---- about / team ---- */
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .team-card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4;border:1px solid var(--line);background:linear-gradient(135deg,#111b2c,#060a12);cursor:pointer;}
 .team-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -392,15 +325,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .team-card .t-info{position:absolute;left:0;right:0;bottom:0;padding:.6rem .65rem;}
 .team-card .t-role{font-size:.48rem;letter-spacing:.08em;color:var(--blue);text-transform:uppercase;margin-bottom:.15rem;}
 .team-card .t-name{font-size:.74rem;color:#fff;font-weight:700;}
-
-/* ---- toast ---- */
 .toast-cont{position:fixed;top:66px;right:.8rem;z-index:700;display:flex;flex-direction:column;gap:.4rem;}
 .toast{background:var(--panel);border:1px solid var(--blue);border-radius:10px;padding:.55rem .8rem;font-size:.68rem;color:#fff;max-width:220px;animation:tin .25s ease;}
 .toast.success{border-color:#00ff88;}
 .toast.error{border-color:#ff3355;}
 @keyframes tin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* ---- whispers ---- */
 .wh-compose{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.8rem;margin-bottom:1rem;}
 .wh-compose textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;resize:none;min-height:64px;}
 .wh-compose textarea:focus{border-color:var(--blue);}
@@ -414,6 +343,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .wh-anon-lbl{font-size:.66rem;color:var(--ice);font-weight:600;}
 .wh-time{font-size:.55rem;color:var(--mute);margin-left:auto;}
 .wh-text{font-size:.75rem;color:#d5dde4;line-height:1.6;margin-bottom:.6rem;white-space:pre-wrap;}
+.wh-media-strip{display:flex;gap:.4rem;overflow-x:auto;margin-bottom:.6rem;border-radius:8px;}
+.wh-media-thumb{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:8px;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
+.wh-media-thumb img,.wh-media-thumb video{width:100%;height:100%;object-fit:cover;}
+.wh-media-thumb .vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.25);font-size:.9rem;}
+.wh-media-more{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:8px;background:rgba(47,143,255,.15);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:.7rem;font-weight:700;cursor:pointer;}
 .wh-react-row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
 .wh-react-btn{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:.28rem .6rem;font-size:.68rem;color:#93a2b0;cursor:pointer;display:flex;align-items:center;gap:.3rem;}
 .wh-react-btn.active{background:rgba(47,143,255,.18);border-color:var(--blue);color:var(--ice);}
@@ -428,8 +362,28 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .wh-reply-input-row{display:flex;gap:.4rem;margin-top:.4rem;}
 .wh-reply-input-row input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.45rem .8rem;color:#fff;font-size:.68rem;outline:none;}
 .wh-reply-input-row button{background:var(--blue);border:none;color:#03060a;border-radius:16px;padding:.45rem .8rem;font-size:.62rem;font-weight:700;cursor:pointer;}
-
-/* ---- dead drop ---- */
+.wh-media-zone{border:2px dashed var(--line);border-radius:10px;padding:.8rem;text-align:center;cursor:pointer;position:relative;margin-top:.6rem;}
+.wh-media-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.wh-media-zone i{font-size:1.1rem;color:var(--blue);margin-bottom:.2rem;display:block;}
+.wh-media-zone p{color:var(--mute);font-size:.58rem;}
+.wh-media-limits{font-size:.55rem;color:var(--mute);margin-top:.3rem;display:flex;justify-content:space-between;}
+.story-ov{position:fixed;inset:0;background:#000;z-index:950;display:none;flex-direction:column;}
+.story-ov.open{display:flex;}
+.story-bars{display:flex;gap:.3rem;padding:.6rem .6rem 0;}
+.story-bar{flex:1;height:2.5px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;}
+.story-bar-fill{height:100%;width:0;background:#fff;}
+.story-bar-fill.done{width:100%!important;}
+.story-head{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;}
+.story-head .wh-ghost-av{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);}
+.story-head b{color:#fff;font-size:.72rem;}
+.story-head span{color:rgba(255,255,255,.6);font-size:.58rem;}
+.story-close{margin-left:auto;background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer;padding:.4rem;}
+.story-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.story-stage img,.story-stage video{max-width:100%;max-height:100%;object-fit:contain;}
+.story-tap-zone{position:absolute;top:0;bottom:0;width:35%;z-index:2;}
+.story-tap-zone.left{left:0;}
+.story-tap-zone.right{right:0;}
+.story-caption{padding:.9rem 1rem 1.4rem;color:#fff;font-size:.78rem;line-height:1.6;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);white-space:pre-wrap;}
 .dd-tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:.25rem;margin-bottom:1rem;}
 .dd-tabs button{flex:1;background:none;border:none;padding:.5rem 0;font-size:.66rem;font-weight:600;color:#7b8a99;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;}
 .dd-tabs button.on{background:var(--blue);color:#03060a;}
@@ -470,7 +424,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .dd-link-box{display:flex;gap:.4rem;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.5rem .6rem;margin-top:.6rem;align-items:center;}
 .dd-link-box input{flex:1;background:none;border:none;color:var(--ice);font-size:.62rem;outline:none;}
 .dd-link-box button{background:var(--blue);border:none;color:#03060a;border-radius:6px;padding:.35rem .6rem;font-size:.6rem;font-weight:700;cursor:pointer;flex-shrink:0;}
-
 @media (min-width:820px){ .wrap{max-width:900px;} .apps-grid,.team-grid{grid-template-columns:repeat(4,1fr);} }
 </style>
 </head>
@@ -481,6 +434,20 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 <div class="img-view-ov" id="imgViewOv" onclick="closeImgView()">
   <button class="img-view-close" onclick="closeImgView()"><i class="fas fa-times"></i></button>
   <img id="imgViewImg" src="" alt="">
+</div>
+
+<div class="story-ov" id="storyOv">
+  <div class="story-bars" id="storyBars"></div>
+  <div class="story-head">
+    <div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>
+    <div><b id="storyAnonLbl">Anon-000</b><br><span id="storyTimeLbl"></span></div>
+    <button class="story-close" onclick="closeStory()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="story-stage" id="storyStage">
+    <div class="story-tap-zone left" onclick="storyPrev()"></div>
+    <div class="story-tap-zone right" onclick="storyNext()"></div>
+  </div>
+  <div class="story-caption" id="storyCaption" style="display:none"></div>
 </div>
 
 <div class="topbar">
@@ -505,10 +472,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   <div class="hero">
     <span class="tag">// what is dds</span>
     <h1>A place for <br><span> digital innovators & builders</span>.</h1>
-    <p>DDS — Dark Digital Space — is a specialized digital forum for global gatherings of individuals with interests in cybersecurity, hacking, and programming 🌐. It operates under the premise of sharing knowledge, skills, and entertainment related to these fields, while emphasizing ethical conduct and security 🔒.</p>
-    <p style="margin-top:.7rem">The platform facilitates educational and recreational interactions among its members, fostering a community that values learning, innovation, and responsible engagement with technology 💡.
-       To start to be part of this great system, get a dds number. See it as a phone number but in dds system. This maintains the whole concept of identification of a user in dds. What to do is to apply for one using your email and phone number e.g, +234, +1 etc... after you send you application, your dds number application gets verified by admins and approved in between 24-48hour. After they get your application approved you get your dds number sent to the email you used to apply, no stress. After you get your DDS number you get to register with your dds number. Remember to add the brackets to your dds number because it's also part of your dds number! After doing that fill out the spaces in the sign-up section and sign up then login to get your self in the system. Get a DDS Number, signup and stay patient till when the time for launch is completed so you can start using the tools and apps dds team provides on the site, e.g, dds codelab, dds app, dds watch crime, dds lock d box etc...</p>
-    <div class="hero-actions">
+    <p>DDS — Dark Digital Space — is a specialized digital forum for global gatherings of individuals with interests in cybersecurity, hacking, and programming 🌐.</p>
+   <div class="sec-label"><b>About</b></div>
+  <div class="team-grid" id="teamGrid"></div>
+      <div class="hero-actions">
+        
       <button class="btn btn-primary" id="heroSignBtn" onclick="onAuthClick()"><i class="fas fa-bolt"></i> Get your DDS Number</button>
       <button class="btn btn-ghost" onclick="openLearn()"><i class="fas fa-graduation-cap"></i> Learn how it works</button>
     </div>
@@ -568,7 +536,7 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
     <div class="app-card">
       <div class="app-icon"><i class="fas fa-ghost"></i></div>
       <b>Whispers</b>
-      <span>Say it anonymously. No alias, no DDS# — just the message.</span>
+      <span>Say it anonymously — text, photos or short videos. No alias, no DDS#.</span>
       <button onclick="openWhispers()" style="background:rgba(47,143,255,.14);border-color:var(--blue);color:var(--ice)"><i class="fas fa-arrow-right"></i> Open</button>
     </div>
     <div class="app-card">
@@ -591,11 +559,10 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
     <a class="social-btn fb" href="https://facebook.com/groups/2205452993640363/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Facebook Group</a>
   </div>
 
-  <div class="sec-label"><b>About</b></div>
-  <div class="team-grid" id="teamGrid"></div>
+  
 </div>
-
-<button class="fab fab-contact" onclick="openContact()" title="Contact / feedback"><img src="data:image/png;base64,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" alt=""></button>
+    
+<button class="fab fab-contact" onclick="openContact()" title="Contact / feedback"><i class="fas fa-headset" style="color:var(--blue)"></i></button>
 <button class="fab fab-boost" onclick="openBoostPicker()" title="Boost a project"><i class="fas fa-fire"></i></button>
 
 <!-- AUTH SHEET -->
@@ -608,8 +575,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <button id="tabRegisterBtn" onclick="authTab('register')">Register</button>
         <button id="tabLoginBtn" onclick="authTab('login')">Login</button>
       </div>
-
-      <!-- APPLY -->
       <div class="tabpane on" id="paneApply">
         <div class="substep on" id="apA">
           <div class="msg inf show">We'll email you a 6-digit code to verify before you apply.</div>
@@ -636,8 +601,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <div class="msg err" id="apErr"></div>
         <div class="msg suc" id="apOk"></div>
       </div>
-
-      <!-- REGISTER -->
       <div class="tabpane" id="paneRegister">
         <div class="msg inf show">Already have a DDS Number from your approved application? Register it here.</div>
         <div class="field"><label>DDS Number</label><input type="text" id="rgDDS" placeholder="(!-XXXXXXXXXX)"></div>
@@ -654,8 +617,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <div class="msg err" id="rgErr"></div>
         <div class="msg suc" id="rgOk"></div>
       </div>
-
-      <!-- LOGIN -->
       <div class="tabpane" id="paneLogin">
         <div class="field"><label>Alias</label><input type="text" id="lgAlias" placeholder="Your alias"></div>
         <div class="field"><label>Password</label><input type="password" id="lgPass" placeholder="Your password"></div>
@@ -665,8 +626,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <div class="msg err" id="lgErr"></div>
         <div class="msg suc" id="lgOk"></div>
       </div>
-
-      <!-- FORGOT PASSWORD (its own standalone screen) -->
       <div class="tabpane" id="paneForgot">
         <div class="substep on" id="fgA">
           <div class="msg inf show">We'll send a security code to the email on your DDS account.</div>
@@ -842,7 +801,7 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   </div>
 </div>
 
-<!-- BOOST PICKER (choose which project to boost) -->
+<!-- BOOST PICKER -->
 <div class="ov" id="boostPickOv" onclick="if(event.target===this)closeBoostPicker()">
   <div class="sheet">
     <div class="sheet-head"><h3><i class="fas fa-fire" style="color:#ffaa00"></i> Choose a project to boost</h3><button onclick="closeBoostPicker()"><i class="fas fa-times"></i></button></div>
@@ -933,77 +892,88 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   </div>
 </div>
 
-<!-- WHISPERS -->
-<div class="ov" id="whispersOv" onclick="if(event.target===this)closeWhispers()">
+<!-- ANONYMOUS (Whispers + Dead Drop merged) -->
+<div class="ov" id="anonOv" onclick="if(event.target===this)closeAnonymous()">
   <div class="sheet">
-    <div class="sheet-head"><h3><i class="fas fa-ghost" style="color:var(--blue)"></i> Whispers</h3><button onclick="closeWhispers()"><i class="fas fa-times"></i></button></div>
-    <div class="sheet-body">
-      <div class="wh-compose">
-        <textarea id="whText" maxlength="500" placeholder="Say something... nobody will know it's you." oninput="whUpdateCount()"></textarea>
-        <div class="wh-compose-foot">
-          <span class="wh-compose-note"><i class="fas fa-user-secret"></i> Posted anonymously</span>
-          <span class="wh-charcount" id="whCharCount">0/500</span>
-        </div>
-        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.6rem" onclick="postWhisper()"><i class="fas fa-paper-plane"></i> Whisper it</button>
-      </div>
-      <div id="whFeed"><div class="empty"><div class="spin"></div>Loading whispers…</div></div>
+    <div class="sheet-head"><h3><i class="fas fa-user-secret" style="color:var(--blue)"></i> Anonymous</h3><button onclick="closeAnonymous()"><i class="fas fa-times"></i></button></div>
+    <div class="dd-tabs" style="margin:1rem 1.1rem 0">
+      <button class="on" id="anonTabWhispersBtn" onclick="anonTab('whispers')">Whispers</button>
+      <button id="anonTabDropsBtn" onclick="anonTab('drops')">Dead Drops</button>
     </div>
-  </div>
-</div>
 
-<!-- DEAD DROP -->
-<div class="ov" id="deaddropOv" onclick="if(event.target===this)closeDeadDrop()">
-  <div class="sheet">
-    <div class="sheet-head"><h3><i class="fas fa-skull-crossbones" style="color:var(--blue)"></i> Dead Drop</h3><button onclick="closeDeadDrop()"><i class="fas fa-times"></i></button></div>
-    <div class="sheet-body">
-      <div class="dd-tabs">
-        <button class="on" id="ddTabNewBtn" onclick="ddTab('new')">New drop</button>
-        <button id="ddTabMineBtn" onclick="ddTab('mine')">My drops</button>
-      </div>
-
-      <div class="dd-pane on" id="ddPaneNew">
-        <div class="msg inf show">Anonymous, disappears automatically. Nobody — including admins in the UI — sees your name on it.</div>
-        <div class="field"><label>Message / link</label><textarea id="ddContent" rows="3" maxlength="2000" placeholder="What are you dropping?"></textarea></div>
-        <div class="field">
-          <label>Attach a photo or video <span style="color:var(--ice);font-size:.55rem">(optional)</span></label>
-          <div class="dd-media-zone" id="ddMediaZone">
-            <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="handleDdMedia(this)"/>
-            <i class="fas fa-paperclip"></i>
-            <p>Tap to attach an image or video</p>
+    <div class="dd-pane on" id="anonPaneWhispers">
+      <div class="sheet-body">
+        <div class="wh-compose">
+          <textarea id="whText" maxlength="500" placeholder="Say something... nobody will know it's you." oninput="whUpdateCount()"></textarea>
+          <div class="wh-compose-foot">
+            <span class="wh-compose-note"><i class="fas fa-user-secret"></i> Posted anonymously</span>
+            <span class="wh-charcount" id="whCharCount">0/500</span>
           </div>
-          <div id="ddMediaPreviewWrap"></div>
-        </div>
-
-        <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Who can view it</label>
-        <div class="dd-mode-row">
-          <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
-          <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
-        </div>
-
-        <div id="ddUsersBlock">
-          <div class="dd-user-search">
-            <input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off">
-            <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
+          <div class="wh-media-zone" id="whMediaZone">
+            <input type="file" id="whMediaFile" accept="image/*,video/*" multiple onchange="handleWhMedia(this)"/>
+            <i class="fas fa-images"></i>
+            <p>Tap to add photos or short videos</p>
           </div>
-          <div class="dd-picked-row" id="ddPickedRow"></div>
+          <div class="wh-media-limits"><span id="whImgCount">0/8 photos</span><span id="whVidCount">0/3 videos</span></div>
+          <div class="up-prog" id="whUpProg"><div class="up-bar" id="whUpBar"></div></div>
+          <div class="img-grid" id="whMediaGrid"></div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.6rem" onclick="postWhisper(this)"><i class="fas fa-paper-plane"></i> Whisper it</button>
+        </div>
+        <div id="whFeed"><div class="empty"><div class="spin"></div>Loading whispers…</div></div>
+      </div>
+    </div>
+
+    <div class="dd-pane" id="anonPaneDrops">
+      <div class="sheet-body">
+        <div class="dd-tabs">
+          <button class="on" id="ddTabNewBtn" onclick="ddTab('new')">New drop</button>
+          <button id="ddTabMineBtn" onclick="ddTab('mine')">My drops</button>
         </div>
 
-        <div class="dd-range-row" style="margin-top:.9rem">
-          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
-          <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
-          <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
+        <div class="dd-pane on" id="ddPaneNew">
+          <div class="msg inf show">Anonymous, disappears automatically. Nobody sees your name on it.</div>
+          <div class="field"><label>Message / link</label><textarea id="ddContent" rows="3" maxlength="2000" placeholder="What are you dropping?"></textarea></div>
+          <div class="field">
+            <label>Attach a photo or video <span style="color:var(--ice);font-size:.55rem">(optional)</span></label>
+            <div class="dd-media-zone" id="ddMediaZone">
+              <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="handleDdMedia(this)"/>
+              <i class="fas fa-paperclip"></i>
+              <p>Tap to attach an image or video</p>
+            </div>
+            <div id="ddMediaPreviewWrap"></div>
+          </div>
+
+          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Who can view it</label>
+          <div class="dd-mode-row">
+            <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
+            <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
+          </div>
+
+          <div id="ddUsersBlock">
+            <div class="dd-user-search">
+              <input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off">
+              <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
+            </div>
+            <div class="dd-picked-row" id="ddPickedRow"></div>
+          </div>
+
+          <div class="dd-range-row" style="margin-top:.9rem">
+            <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
+            <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
+            <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
+          </div>
+          <div class="msg inf show" style="margin-top:.2rem">Whichever comes first: your view target, or 24 hours from posting. You can cancel it any time before then.</div>
+
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" id="ddSubmitBtn" onclick="createDeadDrop()"><i class="fas fa-radiation"></i> Drop it</button>
         </div>
-        <div class="msg inf show" style="margin-top:.2rem">Whichever comes first: your view target, or 24 hours from posting. You can cancel it any time before then.</div>
 
-        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" id="ddSubmitBtn" onclick="createDeadDrop()"><i class="fas fa-radiation"></i> Drop it</button>
-      </div>
+        <div class="dd-pane" id="ddPaneMine">
+          <div id="ddMineList"><div class="empty"><div class="spin"></div>Loading…</div></div>
+        </div>
 
-      <div class="dd-pane" id="ddPaneMine">
-        <div id="ddMineList"><div class="empty"><div class="spin"></div>Loading…</div></div>
-      </div>
-
-      <div class="dd-pane" id="ddPaneViewer">
-        <div class="dd-viewer" id="ddViewerBody"></div>
+        <div class="dd-pane" id="ddPaneViewer">
+          <div class="dd-viewer" id="ddViewerBody"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1018,14 +988,17 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 </div>
 
 <script>
-/* ============ real DDS backend — same as the main app ============ */
+/* ============ backend endpoints ============ */
 var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
-var POSTS_API = 'https://script.google.com/macros/s/AKfycbyn1WR1Hexks7vquZME3AG6msBSBF6jA4nTlTgF045s3hZP5yW8wb3uiQNWa3tXUFlIgA/exec';
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwu9XQ_6Z3_KutmpdC5TxI3InTYOMvfs_XkHMmBkM-Fzg2W1PElvLFvXdf48CTBdQf4kQ/exec';
-var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbyHHoCkL9pDYj7XFojbbmetPvEFOF7hl62KkCROlR8sMk6Cn-_fJY_PN99cjRZh87A/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
+var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
 var SUPPORT_EMAIL = 'darkdigitalspaceteam@gmail.com';
-var ADMIN_KEY = 'DDS_ADMIN_2024';
-var GITHUB = {username:'Jphood888', repo:'dds-media-storage', token:'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'};
+/* SECURITY: intentionally no admin key and no GitHub token here.
+   Ownership is enforced server-side by matching the signed-in user's
+   ddsNumber against the record's owner field. Media uploads go through
+   the backend's uploadMedia action, which holds the GitHub token in
+   Script Properties on the server — never in this file. */
 
 var currentUser = {}, isSignedIn = false;
 var allProjs = [], chip='all', cachedProjs=[];
@@ -1035,6 +1008,7 @@ var CATS = ['Android Apps','iOS Apps','Flutter Apps','React Native Apps','Mobile
 function esc(s){var d=document.createElement('div');d.appendChild(document.createTextNode(String(s||'')));return d.innerHTML;}
 function fmtN(n){n=n||0;if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'K';return String(n);}
 function stars(r){var f=Math.round(r||0);return '<span class="stars">'+'★'.repeat(f)+'☆'.repeat(5-f)+'</span>';}
+function isVideoUrl(u){ return !!u && /\.(mp4|webm|mov|m4v)(\?|$)/i.test(u); }
 function showToast(msg,type){
   type=type||'info';
   var c=document.getElementById('toastCont'), t=document.createElement('div');
@@ -1042,8 +1016,56 @@ function showToast(msg,type){
   setTimeout(function(){t.remove();},3200);
 }
 
-/* ---- support / feedback (compose modal, cooldown-limited, signed-in users only) ---- */
-var CT_COOLDOWN_MS = 24*60*60*1000; // 24h between messages
+
+    /* Prevents double-taps on any async action. Disables the button and
+   shows a spinner until the task settles, then restores it. Keyed so
+   the SAME action twice is blocked, but different actions aren't. */
+var _busyKeys = Object.create(null);
+function guardTap(key, btn, task){
+  if(_busyKeys[key]) return;
+  _busyKeys[key] = true;
+  var prevHTML = null;
+  if(btn){ prevHTML = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>'; }
+  function done(){
+    _busyKeys[key] = false;
+    if(btn){ btn.disabled = false; btn.innerHTML = prevHTML; }
+  }
+  try{
+    var r = task();
+    if(r && typeof r.then === 'function') r.then(done, done); else done();
+  }catch(e){ done(); throw e; }
+}
+    
+/* ============================================================
+   SECURE MEDIA UPLOAD — the ONLY place file bytes leave the browser.
+   Sends base64 to the backend; the backend (with a server-side-only
+   GitHub token in Script Properties) pushes the file to GitHub and
+   returns the public raw URL. No token or repo credential lives here.
+   ============================================================ */
+async function uploadMedia(file){
+  var b64 = await new Promise(function(res,rej){
+    var r=new FileReader();
+    r.onload=function(e){ res(e.target.result.split(',')[1]); };
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+  var r = await fetch(POSTS_API, {
+    method:'POST', headers:{'Content-Type':'text/plain'},
+    body: JSON.stringify({
+      action:'uploadMedia',
+      ddsNumber: currentUser.ddsNumber || '',
+      filename: file.name,
+      mimeType: file.type,
+      dataBase64: b64
+    })
+  });
+  var d = await r.json();
+  if(!d.success) throw new Error(d.message || 'Upload failed');
+  return d.data.url;
+}
+
+/* ---- support / feedback ---- */
+var CT_COOLDOWN_MS = 24*60*60*1000;
 function openContact(){
   if(!isSignedIn){ showToast('Sign in first to contact support','error'); setTimeout(openAuth,700); return; }
   document.getElementById('ctAvatarLetter').textContent = (currentUser.alias||'?').charAt(0).toUpperCase();
@@ -1064,34 +1086,35 @@ function ctUpdateCooldown(){
   if(diff < CT_COOLDOWN_MS){
     var remain = CT_COOLDOWN_MS - diff;
     var h = Math.floor(remain/3600000), m = Math.floor((remain%3600000)/60000);
-    btn.disabled = true;
-    cd.classList.add('show');
-    cd.textContent = 'You can send another message in '+h+'h '+m+'m';
-  } else {
-    btn.disabled = false;
-    cd.classList.remove('show');
-  }
+    btn.disabled = true; cd.classList.add('show'); cd.textContent = 'You can send another message in '+h+'h '+m+'m';
+  } else { btn.disabled = false; cd.classList.remove('show'); }
 }
-function ctSendFeedback(){
+async function ctSendFeedback(){
   if(!isSignedIn){ showToast('Sign in first','error'); return; }
   var last = parseInt(localStorage.getItem(ctCooldownKey()))||0;
   if(Date.now()-last < CT_COOLDOWN_MS){ ctUpdateCooldown(); showToast('Please wait before sending another message','error'); return; }
   var msg = document.getElementById('ctMessage').value.trim();
   if(!msg){ showToast('Write a message first','error'); return; }
-  var subject = encodeURIComponent('DDS feedback from '+(currentUser.alias||'')+' ('+(currentUser.ddsNumber||'')+')');
-  var body = encodeURIComponent(msg);
-  window.location.href = 'mailto:'+SUPPORT_EMAIL+'?subject='+subject+'&body='+body;
-  localStorage.setItem(ctCooldownKey(), String(Date.now()));
-  showToast('Message ready to send from your email app','success');
-  ctUpdateCooldown();
+  var btn = document.getElementById('ctSendBtn');
+  guardTap('sendFeedback', btn, function(){ return (async function(){
+    try{
+      var r = await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+        body: JSON.stringify({action:'sendFeedback', ddsNumber:currentUser.ddsNumber, alias:currentUser.alias, message:msg})});
+      var d = await r.json();
+      if(d.success){
+        localStorage.setItem(ctCooldownKey(), String(Date.now()));
+        document.getElementById('ctMessage').value='';
+        showToast('Message sent — the DDS team will get back to you','success');
+        ctUpdateCooldown();
+      } else {
+        showToast(d.message || 'Could not send message','error');
+      }
+    }catch(e){ showToast('Network error — try again','error'); }
+  })(); });
 }
 
 /* ---- fullscreen image viewer ---- */
-function openImgView(url){
-  if(!url) return;
-  document.getElementById('imgViewImg').src=url;
-  document.getElementById('imgViewOv').classList.add('open');
-}
+function openImgView(url){ if(!url) return; document.getElementById('imgViewImg').src=url; document.getElementById('imgViewOv').classList.add('open'); }
 function closeImgView(){ document.getElementById('imgViewOv').classList.remove('open'); }
 
 /* ---- menu / session ---- */
@@ -1189,7 +1212,7 @@ function cardHTML(p){
     '<div class="card-row" style="margin-top:.2rem"><span><i class="fas fa-heart" style="color:var(--red)"></i> '+fmtN(p.likes)+'</span><span><i class="fas fa-download"></i> '+fmtN(p.downloads)+'</span></div></div></div>';
 }
 
-/* ---- hero banner (promoted / boosted / featured projects) ---- */
+/* ---- hero banner ---- */
 var heroSlidesData=[], heroIdx=0, heroTimer=null;
 async function loadHeroBanner(){
   var promoted=[];
@@ -1207,7 +1230,7 @@ function buildHeroCarousel(list){
   document.getElementById('heroCarousel').style.display='block';
   document.getElementById('heroSlides').innerHTML = list.map(function(p){
     return '<div class="hero-slide" onclick="openPd(\''+p.id+'\')">'+(p.thumbnail?('<img src="'+esc(p.thumbnail)+'">'):'')+
-      '<div class="hs-grad"></div><span class="hs-badge"><i class="fas fa-fire"></i> BOOSTED</span>'+
+      '<div class="hs-grad"></div><span class="hs-badge"><i class="fas fa-fire"></i>HOTEST</span>'+
       '<div class="hs-info"><div class="hs-title">'+esc(p.title)+'</div><span class="hs-btn"><i class="fas fa-download"></i> Get it</span></div></div>';
   }).join('');
   document.getElementById('heroDots').innerHTML = list.map(function(_,i){ return '<span'+(i===0?' class="on"':'')+'></span>'; }).join('');
@@ -1221,7 +1244,7 @@ function updateHeroTransform(){
 }
 function heroNav(dir){ if(!heroSlidesData.length) return; heroIdx=(heroIdx+dir+heroSlidesData.length)%heroSlidesData.length; updateHeroTransform(); }
 
-/* ---- category dropdown (Dev Spot / Edit) ---- */
+/* ---- category dropdown ---- */
 function buildCatDrop(filter){
   filter=filter||'';
   var dd=document.getElementById('catDrop'); var q=filter.toLowerCase();
@@ -1252,13 +1275,10 @@ async function openPd(id){
     var liked=localStorage.getItem('exp_liked_'+p.id)==='1';
     var ur=parseInt(localStorage.getItem('exp_rated_'+p.id))||0;
     var localLikes = parseInt(localStorage.getItem('likes_count_'+p.id)) || (p.likes||0);
-
     var descRaw=p.description||''; var isLong=descRaw.length>240;
     var descHTML='<div class="pd-desc'+(isLong?' collapsed':'')+'" id="pdDescText">'+esc(descRaw)+'</div>'+
       (isLong?'<button class="pd-readmore" id="pdReadMoreBtn" onclick="togglePdDesc()">Read more</button>':'');
-
     var galHTML = galImgs.length ? ('<div class="pd-gal">'+galImgs.map(function(u){return '<img src="'+esc(u)+'" onclick="openImgView(\''+esc(u)+'\')">';}).join('')+'</div>') : '';
-
     var rc = p.ratingCount || 0; var avg = p.avgRating || 0;
     var dist = p.ratingDist || null;
     if(!dist && rc>0){
@@ -1271,7 +1291,6 @@ async function openPd(id){
       var cnt=dist[n]||0; var pct=rc>0?Math.round(cnt/rc*100):0; var cls=n>=4?'good':n===3?'ok':'poor';
       return '<div class="rate-bar-row"><span class="rate-bar-star">'+n+'</span><div class="rate-bar-track"><div class="rate-bar-fill '+cls+'" data-w="'+pct+'" style="width:0%"></div></div><span class="rate-bar-count">'+cnt+'</span></div>';
     }).join('');
-
     var detailRows=[];
     if(p.author) detailRows.push(['Author', esc(p.author), '']);
     if(p.authorDDS) detailRows.push(['DDS#', esc(p.authorDDS), 'cy']);
@@ -1283,9 +1302,7 @@ async function openPd(id){
     var detailsHTML = detailRows.length ? ('<div class="pd-details">'+detailRows.map(function(r){
       return '<div class="dc-row"><span class="dc-label">'+r[0]+'</span><span class="dc-val'+(r[2]?' '+r[2]:'')+'">'+r[1]+'</span></div>';
     }).join('')+(p.tags?('<div style="padding-top:.35rem;border-top:1px solid rgba(47,143,255,.08);margin-top:.3rem"><div class="dc-label" style="margin-bottom:.3rem">Tags</div><div class="pd-tags">'+p.tags.split(',').map(function(t){return '<span class="pd-tag">'+esc(t.trim())+'</span>';}).join('')+'</div></div>'):'')+'</div>') : '';
-
     var isOwner = isSignedIn && p.authorDDS && p.authorDDS===currentUser.ddsNumber;
-
     sheet.innerHTML=
       '<div class="pd-hero" onclick="openImgView(\''+esc(heroUrl)+'\')">'+(heroUrl?('<img src="'+esc(heroUrl)+'">'):'')+'</div>'+
       '<div class="sheet-body">'+
@@ -1296,7 +1313,7 @@ async function openPd(id){
       galHTML + descHTML + detailsHTML +
       (isOwner ? ('<div class="pd-admin"><button onclick="openEdit(\''+p.id+'\')"><i class="fas fa-pencil"></i> Edit</button><button class="boost" onclick="openBoost(\''+p.id+'\',\''+esc(p.title).replace(/'/g,"&#39;")+'\')"><i class="fas fa-fire"></i> Boost</button></div>') : '') +
       '<div class="pd-actions"><button class="pd-like'+(liked?' liked':'')+'" id="pdLikeBtn" onclick="toggleLike(\''+p.id+'\',event)"><i class="fas fa-heart"></i> '+(liked?'Liked':'Like')+'</button>'+
-      (p.actionUrl?('<button class="pd-dl" onclick="doAction(\''+esc(p.actionUrl).replace(/'/g,"&#39;")+'\',\''+p.id+'\',\''+esc(p.actionType||'APP')+'\')"><i class="fas '+aIco(p.actionType)+'"></i> '+aLbl(p.actionType)+'</button>'):'')+
+      (p.actionUrl?('<button class="pd-dl" onclick="doAction(\''+esc(p.actionUrl).replace(/'/g,"&#39;")+'\',\''+p.id+'\',\''+esc(p.actionType||'APP')+'\',this)"><i class="fas '+aIco(p.actionType)+'"></i> '+aLbl(p.actionType)+'</button>'):'')+
       '</div>'+
       '<div class="rate-sec">'+
       '<div class="rate-toggle-row" onclick="toggleRateBars()"><span class="rate-toggle-avg">'+avg.toFixed(1)+'</span><span class="rate-toggle-stars">'+stars(avg)+'</span><span class="rate-toggle-count">('+rc+' ratings)</span><i class="fas fa-chevron-down rate-toggle-arr" id="rateArr"></i></div>'+
@@ -1317,10 +1334,13 @@ function toggleRateBars(){
   if(!wrap) return; var open=wrap.classList.toggle('open'); if(arr) arr.classList.toggle('open',open);
 }
 function closePd(){ document.getElementById('pdOv').classList.remove('open'); curProj=null; }
-function doAction(url,id,type){
-  fetch(API+'?action=incrementViews&id='+id).catch(function(){});
-  apiPost({action:'incrementDownloads', id:id}).catch(function(){});
-  showToast('Opening '+type+'...'); window.open(url,'_blank');
+function doAction(url,id,type,btn){
+  guardTap('act_'+id, btn, function(){
+    fetch(API+'?action=incrementViews&id='+id).catch(function(){});
+    return apiPost({action:'incrementDownloads', id:id}).then(function(){
+      showToast('Opening '+type+'...'); window.open(url,'_blank');
+    });
+  });
 }
 function toggleLike(id,ev){
   var liked=localStorage.getItem('exp_liked_'+id)==='1', nl=!liked;
@@ -1385,7 +1405,7 @@ async function handleEditImgFiles(files){
   var toUp=files.slice(0,rem).filter(function(f){return f.type.startsWith('image/');});
   var prog=document.getElementById('editUpProg'), bar=document.getElementById('editUpBar'); prog.style.display='block';
   for(var i=0;i<toUp.length;i++){
-    try{ showToast('Uploading image '+(i+1)+'/'+toUp.length+'...','info'); var url=await uploadGH(toUp[i]); editImgs.push(url); bar.style.width=((i+1)/toUp.length*100)+'%'; renderEditImgGrid(); }
+    try{ showToast('Uploading image '+(i+1)+'/'+toUp.length+'...','info'); var url=await uploadMedia(toUp[i]); editImgs.push(url); bar.style.width=((i+1)/toUp.length*100)+'%'; renderEditImgGrid(); }
     catch(e){ showToast('Upload failed: '+e.message,'error'); }
   }
   setTimeout(function(){ prog.style.display='none'; bar.style.width='0'; },800);
@@ -1407,7 +1427,9 @@ async function submitEdit(){
   if(!titleInput.disabled) project.title = titleInput.value.trim();
   showToast('Saving changes...','info');
   try{
-    var d = await apiPost({action:'editProject', adminKey:ADMIN_KEY, ownerDDS:currentUser.ddsNumber, id:id, project:project});
+    /* No admin key: the backend verifies ownerDDS matches the project's
+       authorDDS on file before allowing the edit. */
+    var d = await apiPost({action:'editProject', ownerDDS:currentUser.ddsNumber, id:id, project:project});
     if(d.success||d.optimistic){ showToast('Project updated!','success'); closeEdit(); loadExplore(); }
     else showToast('Error: '+(d.error||'Unknown'),'error');
   }catch(e){ showToast('Error: '+e.message,'error'); }
@@ -1449,7 +1471,7 @@ async function doBoost(days,cost){
   }catch(e){ showToast('Error: '+e.message,'error'); }
 }
 
-/* ---- boost picker FAB — pick which of your projects to boost, no backend call until confirmed ---- */
+/* ---- boost picker FAB ---- */
 function openBoostPicker(){
   if(!isSignedIn){ showToast('Sign in first','error'); return; }
   document.getElementById('boostPickOv').classList.add('open');
@@ -1723,7 +1745,7 @@ function renderAchievements(projs){
 var TUTORIALS=[
   {title:'Getting Started with DDS', desc:'Set up your profile and take your first steps.', vid:'nqMdNC83oF0', thumb:'https://img.youtube.com/vi/nqMdNC83oF0/hqdefault.jpg'},
   {title:'Posting Your First Project', desc:'Use Dev Spot to publish a project that ranks well.', vid:'dQw4w9WgXcQ', thumb:'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'},
-  {title:'Understanding Bits', desc:'How the DDS bits economy works.', vid:'xmmuZrOZjao', thumb:'https://img.youtube.com/vi/xmmuZrOZjao/hqdefault.jpg'}
+  {title:'How to Challenge', desc:'How to challenge (pending the system is stagnant).', vid:'xmmuZrOZjao', thumb:'https://img.youtube.com/vi/xmmuZrOZjao/hqdefault.jpg'}
 ];
 function openLearn(){
   document.getElementById('tutList').innerHTML = TUTORIALS.map(function(t){
@@ -1756,21 +1778,10 @@ async function handleImgFiles(files){
   var toUp=files.slice(0,rem).filter(function(f){return f.type.startsWith('image/');});
   var prog=document.getElementById('upProg'), bar=document.getElementById('upBar'); prog.style.display='block';
   for(var i=0;i<toUp.length;i++){
-    try{ showToast('Uploading image '+(i+1)+'/'+toUp.length+'...','info'); var url=await uploadGH(toUp[i]); dsImgs.push(url); bar.style.width=((i+1)/toUp.length*100)+'%'; renderImgGrid(); }
+    try{ showToast('Uploading image '+(i+1)+'/'+toUp.length+'...','info'); var url=await uploadMedia(toUp[i]); dsImgs.push(url); bar.style.width=((i+1)/toUp.length*100)+'%'; renderImgGrid(); }
     catch(e){ showToast('Upload failed: '+e.message,'error'); }
   }
   setTimeout(function(){ prog.style.display='none'; bar.style.width='0'; },800);
-}
-async function uploadGH(file){
-  var b64=await new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(e){res(e.target.result.split(',')[1]);}; r.onerror=rej; r.readAsDataURL(file); });
-  var ext=(file.name.split('.').pop()||'jpg').toLowerCase();
-  var path='projects/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.'+ext;
-  var resp=await fetch('https://api.github.com/repos/'+GITHUB.username+'/'+GITHUB.repo+'/contents/'+path,{
-    method:'PUT', headers:{'Authorization':'token '+GITHUB.token,'Content-Type':'application/json'},
-    body:JSON.stringify({message:'DDS project image', content:b64})
-  });
-  if(!resp.ok){ var d=await resp.json(); throw new Error(d.message||'GitHub error'); }
-  return 'https://raw.githubusercontent.com/'+GITHUB.username+'/'+GITHUB.repo+'/main/'+path;
 }
 function renderImgGrid(){
   document.getElementById('imgGrid').innerHTML = dsImgs.map(function(u,i){
@@ -1845,7 +1856,9 @@ async function confirmPublish(){
     status: document.getElementById('dsStatus').value, featured:false, promoted:false
   };
   try{
-    var d = await apiPost({action:'addProject', adminKey:ADMIN_KEY, project:project});
+    /* No admin key: the backend trusts ownership because authorDDS must
+       match a real, registered DDS number tied to currentUser's session. */
+    var d = await apiPost({action:'addProject', ownerDDS:currentUser.ddsNumber, project:project});
     if(d.success||d.optimistic){
       showToast('Published! Now live in Explore','success');
       resetDsForm(); closeDevSpot(); loadExplore();
@@ -1990,7 +2003,7 @@ function openLegal(type){
 function closeLegal(){ document.getElementById('legalOv').classList.remove('open'); }
 
 /* ---- countdown ---- */
-var LAUNCH_DATE = new Date('2026-09-05T00:00:00');
+var LAUNCH_DATE = new Date('2026-11-05T00:00:00');
 function updateLaunchTimer(){
   var el=document.getElementById('launchTimer'); if(!el) return;
   var diff=LAUNCH_DATE.getTime()-Date.now();
@@ -2000,7 +2013,7 @@ function updateLaunchTimer(){
   el.textContent=d+'d '+pad(h)+':'+pad(m)+':'+pad(s);
 }
 
-/* ---- testers (count only, no images) ---- */
+/* ---- testers ---- */
 async function loadTesterCount(){
   var el=document.getElementById('testerCount');
   try{
@@ -2047,56 +2060,108 @@ function openTeamModal(i){
 function closeTeamModal(){ document.getElementById('teamOv').classList.remove('open'); }
 
 /* ============================================================
-   WHISPERS — anonymous public wall (reactions + anonymous replies)
-   Backend: reuses POSTS_API with new actions (see accompanying .gs spec):
-   getWhispers, postWhisper, reactWhisper, getWhisperReplies, replyWhisper
-   The real author DDS# is sent to the server for moderation ONLY —
-   it is never returned to the client in whisper list responses.
+   WHISPERS — anonymous public wall.
+   Supports up to 8 photos + 3 short videos per whisper.
+   Backend actions (POSTS_API): getWhispers, postWhisper, reactWhisper,
+   unreactWhisper, getWhisperReplies, replyWhisper.
+   The real author DDS# is sent for moderation only and is never
+   returned in the public feed response.
    ============================================================ */
 function getDeviceUid(){
   var uid=localStorage.getItem('dds_uid');
   if(!uid){ uid='u_'+Date.now()+'_'+Math.random().toString(36).substr(2,8); localStorage.setItem('dds_uid',uid); }
   return uid;
 }
-function whAnonTag(id){ // cosmetic per-whisper tag, derived from id — never tied to a real identity
+function whAnonTag(id){
   var h=0; var s=String(id||'');
   for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
   return 'Anon-'+(h % 9999).toString(16).toUpperCase().padStart(3,'0');
 }
 var WH_EMOJIS=['❤️','🔥','💀','😂','😮'];
 var whCache={};
+var WH_MAX_IMGS=8, WH_MAX_VIDS=3;
+var whImages=[], whVideos=[];
 function whUpdateCount(){ var t=document.getElementById('whText'); document.getElementById('whCharCount').textContent=t.value.length+'/500'; }
-function openWhispers(){
-  if(!isSignedIn){ showToast('Sign in first to use Whispers','error'); setTimeout(openAuth,700); return; }
-  document.getElementById('whispersOv').classList.add('open');
-  loadWhispers();
+function whUpdateMediaCounts(){
+  document.getElementById('whImgCount').textContent = whImages.length+'/'+WH_MAX_IMGS+' photos';
+  document.getElementById('whVidCount').textContent = whVideos.length+'/'+WH_MAX_VIDS+' videos';
 }
-function closeWhispers(){ document.getElementById('whispersOv').classList.remove('open'); }
+function openAnonymous(tab){
+  if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
+  document.getElementById('anonOv').classList.add('open');
+  anonTab(tab || 'whispers');
+}
+function closeAnonymous(){ document.getElementById('anonOv').classList.remove('open'); }
+function anonTab(t){
+  document.getElementById('anonTabWhispersBtn').classList.toggle('on', t==='whispers');
+  document.getElementById('anonTabDropsBtn').classList.toggle('on', t==='drops');
+  document.getElementById('anonPaneWhispers').classList.toggle('on', t==='whispers');
+  document.getElementById('anonPaneDrops').classList.toggle('on', t==='drops');
+  if(t==='whispers') loadWhispers();
+  if(t==='drops'){ ddTab('new'); ddInitRangeSteps(); }
+}
+function openWhispers(){ openAnonymous('whispers'); }
+function closeWhispers(){ closeAnonymous(); }
+function ddPublicCardHTML(dr){
+  return '<div class="wh-card" onclick="ddOpenViewer(\''+dr.id+'\',null,this)" style="cursor:pointer">'+
+    '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-skull-crossbones"></i></div>'+
+    '<span class="wh-anon-lbl">Dead Drop</span><span class="wh-time">'+timeAgo(dr.createdAt)+'</span></div>'+
+    '<div class="wh-text">'+esc(dr.preview||'(attachment only)')+'</div>'+
+    (dr.hasMedia?'<div style="font-size:.6rem;color:var(--ice);margin-bottom:.4rem"><i class="fas fa-paperclip"></i> Has attachment — tap to view</div>':'')+
+    '<div style="font-size:.58rem;color:var(--mute)">'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views · '+ddExpiryLabel(dr.expiresAt)+'</div>'+
+    '</div>';
+}
 async function loadWhispers(){
   var feed=document.getElementById('whFeed');
-  feed.innerHTML='<div class="empty"><div class="spin"></div>Loading whispers…</div>';
+  feed.innerHTML='<div class="empty"><div class="spin"></div>Loading…</div>';
   try{
-    var r=await fetch(POSTS_API+'?action=getWhispers&limit=50');
-    var d=await r.json();
-    var list=(d.data&&d.data.whispers)||d.data||[];
-    if(!d.success||!Array.isArray(list)||!list.length){ feed.innerHTML='<div class="empty"><i class="fas fa-ghost"></i>No whispers yet — be the first</div>'; return; }
-    list.forEach(function(w){ whCache[w.id]=w; });
-    feed.innerHTML=list.map(whCardHTML).join('');
-  }catch(e){ feed.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>Could not load whispers</div>'; }
+    var results = await Promise.all([
+      fetch(POSTS_API+'?action=getWhispers&limit=50').then(function(r){return r.json();}).catch(function(){return {success:false};}),
+      fetch(POSTS_API+'?action=getPublicDeadDrops').then(function(r){return r.json();}).catch(function(){return {success:false};})
+    ]);
+    var wr=results[0], dr=results[1];
+    var whispers=(wr.data&&wr.data.whispers)||wr.data||[];
+    var drops=(dr.data&&dr.data.drops)||dr.data||[];
+    whispers.forEach(function(w){ whCache[w.id]=w; w._kind='whisper'; w._t=w.timestamp; });
+    drops.forEach(function(d){ d._kind='drop'; d._t=d.createdAt; });
+    var combined = whispers.concat(drops).sort(function(a,b){ return new Date(b._t)-new Date(a._t); });
+    if(!combined.length){ feed.innerHTML='<div class="empty"><i class="fas fa-ghost"></i>Nothing here yet — be the first</div>'; return; }
+    feed.innerHTML = combined.map(function(item){
+      return item._kind==='drop' ? ddPublicCardHTML(item) : whCardHTML(item);
+    }).join('');
+  }catch(e){ feed.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>Could not load</div>'; }
+}
+function whMediaArray(w){
+  var imgs=(w.images?String(w.images).split(',').filter(Boolean):[]);
+  var vids=(w.videos?String(w.videos).split(',').filter(Boolean):[]);
+  return imgs.map(function(u){return {url:u,type:'image'};}).concat(vids.map(function(u){return {url:u,type:'video'};}));
 }
 function whCardHTML(w){
   var reactions=w.reactions||{};
-  var uid=getDeviceUid();
   var reactBtns=WH_EMOJIS.map(function(em){
     var count=reactions[em]||0;
     var mine=localStorage.getItem('wh_react_'+w.id+'_'+em)==='1';
     return '<div class="wh-react-btn'+(mine?' active':'')+'" onclick="whReact(\''+w.id+'\',\''+em+'\')">'+em+'<span class="n">'+(count||'')+'</span></div>';
   }).join('');
   var replyCount = w.replyCount||0;
+  var media = whMediaArray(w);
+  var mediaHTML = '';
+  if(media.length){
+    var shown = media.slice(0,4);
+    mediaHTML = '<div class="wh-media-strip">'+shown.map(function(m,i){
+      if(i===3 && media.length>4){
+        return '<div class="wh-media-more" onclick="openWhisperStory(\''+w.id+'\')">+'+(media.length-3)+'</div>';
+      }
+      return '<div class="wh-media-thumb" onclick="openWhisperStory(\''+w.id+'\')">'+
+        (m.type==='video' ? ('<video src="'+esc(m.url)+'" muted></video><span class="vplay"><i class="fas fa-play"></i></span>') : ('<img src="'+esc(m.url)+'">')) +
+        '</div>';
+    }).join('')+'</div>';
+  }
   return '<div class="wh-card" id="whcard_'+w.id+'">'+
     '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
     '<span class="wh-anon-lbl">'+whAnonTag(w.id)+'</span><span class="wh-time">'+timeAgo(w.timestamp)+'</span></div>'+
-    '<div class="wh-text">'+esc(w.text)+'</div>'+
+    (w.text?('<div class="wh-text">'+esc(w.text)+'</div>'):'') +
+    mediaHTML +
     '<div class="wh-react-row">'+reactBtns+
     '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+w.id+'\')"><i class="fas fa-comment"></i> '+replyCount+'</span></div>'+
     '<div class="wh-replies" id="whreplies_'+w.id+'">'+
@@ -2112,18 +2177,61 @@ function timeAgo(ts){
   if(diff<86400000) return Math.floor(diff/3600000)+'h';
   return Math.floor(diff/86400000)+'d';
 }
-async function postWhisper(){
+async function handleWhMedia(inp){
+  var files = Array.from(inp.files); inp.value='';
+  var prog=document.getElementById('whUpProg'), bar=document.getElementById('whUpBar');
+  var toProcess = [];
+  var pendingImgs=0, pendingVids=0;
+  for(var i=0;i<files.length;i++){
+    var f=files[i];
+    if(f.type.startsWith('image/')){
+      if(whImages.length+pendingImgs>=WH_MAX_IMGS){ showToast('Max '+WH_MAX_IMGS+' photos per whisper','error'); continue; }
+      toProcess.push({file:f,kind:'image'}); pendingImgs++;
+    } else if(f.type.startsWith('video/')){
+      if(whVideos.length+pendingVids>=WH_MAX_VIDS){ showToast('Max '+WH_MAX_VIDS+' videos per whisper','error'); continue; }
+      toProcess.push({file:f,kind:'video'}); pendingVids++;
+    }
+  }
+  if(!toProcess.length) return;
+  prog.style.display='block';
+  for(var j=0;j<toProcess.length;j++){
+    try{
+      showToast('Uploading '+toProcess[j].kind+' '+(j+1)+'/'+toProcess.length+'...','info');
+      var url = await uploadMedia(toProcess[j].file);
+      if(toProcess[j].kind==='image') whImages.push(url); else whVideos.push(url);
+      bar.style.width=((j+1)/toProcess.length*100)+'%';
+      renderWhMediaGrid();
+    }catch(e){ showToast('Upload failed: '+e.message,'error'); }
+  }
+  setTimeout(function(){ prog.style.display='none'; bar.style.width='0'; },800);
+}
+function renderWhMediaGrid(){
+  whUpdateMediaCounts();
+  var items = whImages.map(function(u){return {url:u,kind:'image'};}).concat(whVideos.map(function(u){return {url:u,kind:'video'};}));
+  document.getElementById('whMediaGrid').innerHTML = items.map(function(it){
+    var removeFn = it.kind==='image' ? ("whImages.splice("+whImages.indexOf(it.url)+",1);renderWhMediaGrid()") : ("whVideos.splice("+whVideos.indexOf(it.url)+",1);renderWhMediaGrid()");
+    return '<div class="thumb-it">'+(it.kind==='video'?('<video src="'+it.url+'" muted></video><span class="vid-badge">VIDEO</span>'):('<img src="'+it.url+'">'))+
+      '<button onclick="'+removeFn+'"><i class="fas fa-times"></i></button></div>';
+  }).join('');
+}
+function resetWhisperCompose(){
+  document.getElementById('whText').value=''; whUpdateCount();
+  whImages=[]; whVideos=[]; renderWhMediaGrid();
+}
+function postWhisper(btn){
   if(!isSignedIn){ showToast('Sign in first','error'); return; }
   var text=document.getElementById('whText').value.trim();
-  if(!text){ showToast('Write something first','error'); return; }
-  showToast('Whispering...','info');
-  try{
-    var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'postWhisper', ddsNumber:currentUser.ddsNumber, text:text})});
-    var d=await r.json();
-    if(d.success){ document.getElementById('whText').value=''; whUpdateCount(); showToast('Whispered anonymously','success'); loadWhispers(); }
-    else showToast(d.message||'Could not post','error');
-  }catch(e){ showToast('Network error','error'); }
+  if(!text && !whImages.length && !whVideos.length){ showToast('Write something or attach media first','error'); return; }
+  guardTap('postWhisper', btn, function(){ return (async function(){
+    showToast('Whispering...','info');
+    try{
+      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({action:'postWhisper', ddsNumber:currentUser.ddsNumber, text:text, images:whImages.join(','), videos:whVideos.join(',')})});
+      var d=await r.json();
+      if(d.success){ resetWhisperCompose(); showToast('Whispered anonymously','success'); loadWhispers(); }
+      else showToast(d.message||'Could not post','error');
+    }catch(e){ showToast('Network error','error'); }
+  })(); });
 }
 function whReact(id,em){
   var key='wh_react_'+id+'_'+em;
@@ -2131,7 +2239,7 @@ function whReact(id,em){
   localStorage.setItem(key, mine?'0':'1');
   var w=whCache[id]; if(w){ w.reactions=w.reactions||{}; w.reactions[em]=(w.reactions[em]||0)+(mine?-1:1); }
   var card=document.getElementById('whcard_'+id);
-  if(card && w){ var head=card.querySelector('.wh-card-head'); card.querySelector('.wh-react-row').outerHTML =
+  if(card && w){ card.querySelector('.wh-react-row').outerHTML =
     WH_EMOJIS.map(function(e2){ var c=(w.reactions&&w.reactions[e2])||0; var m2=localStorage.getItem('wh_react_'+id+'_'+e2)==='1';
       return '<div class="wh-react-btn'+(m2?' active':'')+'" onclick="whReact(\''+id+'\',\''+e2+'\')">'+e2+'<span class="n">'+(c||'')+'</span></div>'; }).join('') +
     '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+id+'\')"><i class="fas fa-comment"></i> '+(w.replyCount||0)+'</span>'; }
@@ -2172,20 +2280,87 @@ async function postWhisperReply(id){
 }
 
 /* ============================================================
+   WHATSAPP-STYLE STORY VIEWER for Whisper media
+   Tap right = next, left = previous. Images auto-advance after
+   STORY_IMG_MS. Videos advance on 'ended'. Progress bar segments
+   fill in real time, matching WhatsApp Status behavior.
+   ============================================================ */
+var STORY_IMG_MS = 5000;
+var storyItems=[], storyIdx=0, storyWhisperId=null, storyTimer=null, storyRAF=null, storyStart=0;
+function openWhisperStory(id){
+  var w=whCache[id]; if(!w) return;
+  storyItems = whMediaArray(w);
+  if(!storyItems.length) return;
+  storyWhisperId=id; storyIdx=0;
+  document.getElementById('storyAnonLbl').textContent = whAnonTag(id);
+  document.getElementById('storyTimeLbl').textContent = timeAgo(w.timestamp);
+  var caption = document.getElementById('storyCaption');
+  if(w.text){ caption.style.display='block'; caption.textContent=w.text; } else { caption.style.display='none'; }
+  document.getElementById('storyBars').innerHTML = storyItems.map(function(){ return '<div class="story-bar"><div class="story-bar-fill"></div></div>'; }).join('');
+  document.getElementById('storyOv').classList.add('open');
+  storyShow(0);
+}
+function closeStory(){
+  document.getElementById('storyOv').classList.remove('open');
+  clearTimeout(storyTimer); cancelAnimationFrame(storyRAF);
+  document.getElementById('storyStage').querySelectorAll('img,video').forEach(function(el){ el.remove(); });
+  storyItems=[]; storyWhisperId=null;
+}
+function storyMarkBarsDone(uptoIdx){
+  document.querySelectorAll('#storyBars .story-bar-fill').forEach(function(el,i){
+    if(i<uptoIdx) el.classList.add('done');
+    else if(i>uptoIdx){ el.classList.remove('done'); el.style.width='0%'; }
+  });
+}
+function storyShow(idx){
+  clearTimeout(storyTimer); cancelAnimationFrame(storyRAF);
+  if(idx<0) idx=0;
+  if(idx>=storyItems.length){ closeStory(); return; }
+  storyIdx=idx;
+  storyMarkBarsDone(idx);
+  var stage=document.getElementById('storyStage');
+  stage.querySelectorAll('img,video').forEach(function(el){ el.remove(); });
+  var item=storyItems[idx];
+  var el;
+  if(item.type==='video'){
+    el=document.createElement('video');
+    el.src=item.url; el.autoplay=true; el.playsInline=true; el.controls=false;
+    el.addEventListener('ended', function(){ storyNext(); });
+    stage.insertBefore(el, stage.firstChild);
+    storyRunProgress(idx, function(){ return el.duration ? (el.currentTime/el.duration) : 0; }, function(){});
+  } else {
+    el=document.createElement('img');
+    el.src=item.url;
+    stage.insertBefore(el, stage.firstChild);
+    storyRunProgress(idx, null, function(){ storyNext(); }, STORY_IMG_MS);
+  }
+}
+function storyRunProgress(idx, getFractionFn, onDone, durationMs){
+  var fill = document.querySelectorAll('#storyBars .story-bar-fill')[idx];
+  if(!fill) return;
+  storyStart = Date.now();
+  function tick(){
+    if(storyIdx!==idx) return;
+    var frac;
+    if(getFractionFn){ frac = Math.min(1, getFractionFn()||0); }
+    else { frac = Math.min(1, (Date.now()-storyStart)/durationMs); }
+    fill.style.width=(frac*100)+'%';
+    if(frac>=1){ onDone(); return; }
+    storyRAF = requestAnimationFrame(tick);
+  }
+  tick();
+}
+function storyNext(){ storyShow(storyIdx+1); }
+function storyPrev(){ storyShow(storyIdx-1); }
+
+/* ============================================================
    DEAD DROP — permissioned or link-based, self-destructing content
    Backend actions: createDeadDrop, getMyDeadDrops, viewDeadDrop,
-   cancelDeadDrop, searchProfiles (see accompanying .gs spec).
-   Deletion is enforced server-side (view target reached OR 24h
-   elapsed OR owner cancels) — the client never controls this.
+   cancelDeadDrop, searchProfiles. Deletion enforced server-side.
    ============================================================ */
 var ddMode='users', ddPicked=[], ddSearchTimer=null, ddMediaUrl='';
-function openDeadDrop(){
-  if(!isSignedIn){ showToast('Sign in first to use Dead Drop','error'); setTimeout(openAuth,700); return; }
-  document.getElementById('deaddropOv').classList.add('open');
-  ddTab('new');
-  ddInitRangeSteps();
-}
-function closeDeadDrop(){ document.getElementById('deaddropOv').classList.remove('open'); }
+function openDeadDrop(){ openAnonymous('drops'); }
+function closeDeadDrop(){ closeAnonymous(); }
 function ddTab(t){
   ['New','Mine','Viewer'].forEach(function(k){ var id='ddPane'+k; var el=document.getElementById(id); if(el) el.classList.toggle('on', k.toLowerCase()===t); });
   var nb=document.getElementById('ddTabNewBtn'), mb=document.getElementById('ddTabMineBtn');
@@ -2198,7 +2373,6 @@ function ddSetMode(m){
   document.getElementById('ddModeLinkOpt').classList.toggle('on', m==='link');
   document.getElementById('ddUsersBlock').style.display = m==='users' ? 'block' : 'none';
 }
-/* stepped scale so small counts (2,3,4,5...) are individually selectable, not skipped over */
 var DD_VIEW_STEPS = (function(){
   var steps = [];
   for (var i = 2; i <= 20; i++) steps.push(i);
@@ -2223,7 +2397,7 @@ async function ddSearchUsers(q){
   if(!q||q.trim().length<2){ box.style.display='none'; box.innerHTML=''; return; }
   ddSearchTimer=setTimeout(async function(){
     try{
-      var r=await fetch(POSTS_API+'?action=searchProfiles&q='+encodeURIComponent(q.trim())+'&limit=8');
+      var r=await fetch(POSTS_API+'?action=searchProfilesForDrop&q='+encodeURIComponent(q.trim())+'&limit=8');
       var d=await r.json();
       var list=(d.data&&d.data.profiles)||d.data||[];
       if(!d.success||!list.length){ box.innerHTML='<div class="dd-user-result">No matches</div>'; box.style.display='block'; return; }
@@ -2253,7 +2427,7 @@ async function handleDdMedia(inp){
   if(!f.type.startsWith('image/') && !isVideo){ showToast('Only images or videos can be attached','error'); inp.value=''; return; }
   showToast('Uploading attachment...','info');
   try{
-    var url = await uploadGH(f);
+    var url = await uploadMedia(f);
     ddMediaUrl = url;
     document.getElementById('ddMediaPreviewWrap').innerHTML = '<div class="dd-media-preview">'+
       (isVideo ? ('<video src="'+esc(url)+'" controls></video>') : ('<img src="'+esc(url)+'">')) +
@@ -2281,7 +2455,6 @@ async function createDeadDrop(){
     ddRemoveMedia();
     ddPicked=[]; ddRenderPicked();
     if(ddMode==='link' && d.data && d.data.id){
-      var link=location.origin+location.pathname+'?drop='+encodeURIComponent(d.data.id)+(d.data.token?('&t='+encodeURIComponent(d.data.token)):'');
       showToast('Link ready — check My drops to copy it','info');
     }
     ddTab('mine');
@@ -2302,7 +2475,7 @@ function ddCardHTML(dr){
   var pct=Math.min(100, Math.round((dr.viewCount||0)/(dr.viewTarget||2)*100));
   var isLink = dr.mode==='link';
   var link = isLink ? (location.origin+location.pathname+'?drop='+encodeURIComponent(dr.id)+(dr.token?('&t='+encodeURIComponent(dr.token)):'')) : '';
-  var isVid = dr.mediaUrl && /\.(mp4|webm|mov)$/i.test(dr.mediaUrl);
+  var isVid = isVideoUrl(dr.mediaUrl);
   var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+(isVid?('<video src="'+esc(dr.mediaUrl)+'" controls></video>'):('<img src="'+esc(dr.mediaUrl)+'">'))+'</div>') : '';
   return '<div class="dd-card">'+
     '<div class="dd-card-head"><div class="dd-icon"><i class="fas '+(isLink?'fa-link':'fa-users')+'"></i></div>'+
@@ -2337,31 +2510,36 @@ async function ddCancel(id){
     else showToast(d.message||'Could not cancel','error');
   }catch(e){ showToast('Network error','error'); }
 }
-async function ddOpenViewer(id,token){
-  document.getElementById('deaddropOv').classList.add('open');
-  ['New','Mine','Viewer'].forEach(function(k){ document.getElementById('ddPane'+k).classList.toggle('on', k==='Viewer'); });
-  document.getElementById('ddTabNewBtn').classList.remove('on'); document.getElementById('ddTabMineBtn').classList.remove('on');
-  var body=document.getElementById('ddViewerBody');
-  body.innerHTML='<div class="spin"></div>';
-  try{
-    var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+(isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'');
-    var r=await fetch(POSTS_API+'?'+qs);
-    var d=await r.json();
-    if(!d.success){
-      body.innerHTML='<div class="dd-vicon"><i class="fas fa-ghost"></i></div><h3 style="color:#fff;font-size:.9rem">This drop is gone</h3><p style="font-size:.68rem;color:var(--mute);margin-top:.4rem">'+esc(d.message||'It reached its view limit, expired, or was cancelled.')+'</p>';
-      return;
-    }
-    var dr=d.data;
-    var isVid = dr.mediaUrl && /\.(mp4|webm|mov)$/i.test(dr.mediaUrl);
-    var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+(isVid?('<video src="'+esc(dr.mediaUrl)+'" controls></video>'):('<img src="'+esc(dr.mediaUrl)+'">'))+'</div>') : '';
-    body.innerHTML='<div class="dd-vicon"><i class="fas fa-skull-crossbones"></i></div>'+
-      '<h3 style="color:#fff;font-size:.9rem">Anonymous drop</h3>'+
-      mediaHTML +
-      '<div class="dd-viewer-content">'+esc(dr.content||'')+'</div>'+
-      '<p style="font-size:.6rem;color:var(--mute);margin-top:.6rem">This counted as view '+fmtN(dr.viewCount||0)+' of '+fmtN(dr.viewTarget||0)+'. It may already be gone if you check again.</p>';
-  }catch(e){ body.innerHTML='<div class="dd-vicon"><i class="fas fa-triangle-exclamation"></i></div><p style="font-size:.7rem;color:var(--mute)">Could not reach DDS servers</p>'; }
-}
 
+
+    
+function ddOpenViewer(id,token,btn){
+  guardTap('ddview_'+id, btn, function(){ return (async function(){
+    document.getElementById('anonOv').classList.add('open');
+    anonTab('drops');
+    ['New','Mine','Viewer'].forEach(function(k){ var el=document.getElementById('ddPane'+k); if(el) el.classList.toggle('on', k==='Viewer'); });
+    document.getElementById('ddTabNewBtn').classList.remove('on'); document.getElementById('ddTabMineBtn').classList.remove('on');
+    var body=document.getElementById('ddViewerBody');
+    body.innerHTML='<div class="spin"></div>';
+    try{
+      var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+(isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'');
+      var r=await fetch(POSTS_API+'?'+qs);
+      var d=await r.json();
+      if(!d.success){
+        body.innerHTML='<div class="dd-vicon"><i class="fas fa-ghost"></i></div><h3 style="color:#fff;font-size:.9rem">This drop is gone</h3><p style="font-size:.68rem;color:var(--mute);margin-top:.4rem">'+esc(d.message||'It reached its view limit, expired, or was cancelled.')+'</p>';
+        return;
+      }
+      var dr=d.data;
+      var isVid = isVideoUrl(dr.mediaUrl);
+      var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+(isVid?('<video src="'+esc(dr.mediaUrl)+'" controls></video>'):('<img src="'+esc(dr.mediaUrl)+'">'))+'</div>') : '';
+      body.innerHTML='<div class="dd-vicon"><i class="fas fa-skull-crossbones"></i></div>'+
+        '<h3 style="color:#fff;font-size:.9rem">Anonymous drop</h3>'+
+        mediaHTML +
+        '<div class="dd-viewer-content">'+esc(dr.content||'')+'</div>'+
+        '<p style="font-size:.6rem;color:var(--mute);margin-top:.6rem">This counted as view '+fmtN(dr.viewCount||0)+' of '+fmtN(dr.viewTarget||0)+'. It may already be gone if you check again.</p>';
+    }catch(e){ body.innerHTML='<div class="dd-vicon"><i class="fas fa-triangle-exclamation"></i></div><p style="font-size:.7rem;color:var(--mute)">Could not reach DDS servers</p>'; }
+  })(); });
+}
 /* ---- boot ---- */
 document.addEventListener('DOMContentLoaded', function(){
   loadSession();
@@ -2375,7 +2553,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var m=document.getElementById('menu');
     if(m.classList.contains('open') && !m.contains(e.target) && !e.target.closest('#signinBtn') && !e.target.closest('#heroSignBtn')){ closeMenu(); }
   });
-  // Direct Dead Drop link support: yoursite.com/?drop=ID&t=TOKEN
   var params=new URLSearchParams(location.search);
   if(params.get('drop')){ setTimeout(function(){ ddOpenViewer(params.get('drop'), params.get('t')); },300); }
 });
