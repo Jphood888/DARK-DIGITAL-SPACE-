@@ -425,6 +425,32 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .dd-link-box input{flex:1;background:none;border:none;color:var(--ice);font-size:.62rem;outline:none;}
 .dd-link-box button{background:var(--blue);border:none;color:#03060a;border-radius:6px;padding:.35rem .6rem;font-size:.6rem;font-weight:700;cursor:pointer;flex-shrink:0;}
 @media (min-width:820px){ .wrap{max-width:900px;} .apps-grid,.team-grid{grid-template-columns:repeat(4,1fr);} }
+
+.anon-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}
+.anon-add-btn{background:var(--blue);color:#03060a;border:none;border-radius:16px;padding:.5rem 1rem;font-size:.68rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;font-family:'Space Grotesk',sans-serif}
+.anon-chip-row{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem}
+.anon-chip{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.32rem .85rem;font-size:.66rem;color:#93a2b0;cursor:pointer;white-space:nowrap}
+.anon-chip.on{background:var(--blue);color:#03060a;border-color:var(--blue);font-weight:600}
+.anon-type-badge{font-size:.5rem;font-weight:700;padding:.12rem .42rem;border-radius:5px;letter-spacing:.05em;text-transform:uppercase}
+.anon-type-badge.whisper{background:rgba(47,143,255,.15);color:var(--ice)}
+.anon-type-badge.drop{background:rgba(255,51,85,.15);color:#ff8fa3}
+.anon-chooser{display:none;gap:.6rem;margin-bottom:1rem}
+.anon-chooser.open{display:grid;grid-template-columns:1fr 1fr}
+.anon-chooser-opt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.8rem .6rem;text-align:center;cursor:pointer}
+.anon-chooser-opt i{color:var(--blue);font-size:1.1rem;display:block;margin-bottom:.4rem}
+.anon-chooser-opt span{font-size:.66rem;color:#cdd6de;font-weight:600}
+.up-item{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:.5rem;margin-bottom:.4rem}
+.up-item .up-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;position:relative;background:#000}
+.up-item .up-thumb img,.up-item .up-thumb video{width:100%;height:100%;object-fit:cover}
+.up-item .up-ring{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.55rem;font-weight:700}
+.up-item .up-info{flex:1;min-width:0}
+.up-item .up-name{font-size:.62rem;color:#cdd6de;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.up-item .up-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-top:.3rem}
+.up-item .up-bar-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .15s linear}
+.up-item.err .up-bar-fill{background:var(--red)}
+.up-item .up-retry{background:none;border:none;color:var(--red);font-size:.75rem;cursor:pointer;padding:.3rem}
+.dd-up-ring{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;font-weight:700}
+
 </style>
 </head>
 <body>
@@ -892,93 +918,103 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   </div>
 </div>
 
-<!-- ANONYMOUS (Whispers + Dead Drop merged) -->
+
+<!-- ANONYMOUS — Explore-style feed for Whispers + public Dead Drops -->
 <div class="ov" id="anonOv" onclick="if(event.target===this)closeAnonymous()">
   <div class="sheet">
     <div class="sheet-head"><h3><i class="fas fa-user-secret" style="color:var(--blue)"></i> Anonymous</h3><button onclick="closeAnonymous()"><i class="fas fa-times"></i></button></div>
-    <div class="dd-tabs" style="margin:1rem 1.1rem 0">
-      <button class="on" id="anonTabWhispersBtn" onclick="anonTab('whispers')">Whispers</button>
-      <button id="anonTabDropsBtn" onclick="anonTab('drops')">Dead Drops</button>
-    </div>
+    <div class="sheet-body">
 
-    <div class="dd-pane on" id="anonPaneWhispers">
-      <div class="sheet-body">
-        <div class="wh-compose">
-          <textarea id="whText" maxlength="500" placeholder="Say something... nobody will know it's you." oninput="whUpdateCount()"></textarea>
-          <div class="wh-compose-foot">
-            <span class="wh-compose-note"><i class="fas fa-user-secret"></i> Posted anonymously</span>
-            <span class="wh-charcount" id="whCharCount">0/500</span>
-          </div>
-          <div class="wh-media-zone" id="whMediaZone">
-            <input type="file" id="whMediaFile" accept="image/*,video/*" multiple onchange="handleWhMedia(this)"/>
-            <i class="fas fa-images"></i>
-            <p>Tap to add photos or short videos</p>
-          </div>
-          <div class="wh-media-limits"><span id="whImgCount">0/8 photos</span><span id="whVidCount">0/3 videos</span></div>
-          <div class="up-prog" id="whUpProg"><div class="up-bar" id="whUpBar"></div></div>
-          <div class="img-grid" id="whMediaGrid"></div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.6rem" onclick="postWhisper(this)"><i class="fas fa-paper-plane"></i> Whisper it</button>
-        </div>
-        <div id="whFeed"><div class="empty"><div class="spin"></div>Loading whispers…</div></div>
+      <div class="anon-toolbar">
+        <div style="font-size:.78rem;color:#fff;font-family:'Space Grotesk',sans-serif">Explore</div>
+        <button class="anon-add-btn" onclick="anonToggleChooser()"><i class="fas fa-plus"></i> Add</button>
       </div>
-    </div>
 
-    <div class="dd-pane" id="anonPaneDrops">
-      <div class="sheet-body">
-        <div class="dd-tabs">
-          <button class="on" id="ddTabNewBtn" onclick="ddTab('new')">New drop</button>
-          <button id="ddTabMineBtn" onclick="ddTab('mine')">My drops</button>
+      <div class="anon-chooser" id="anonChooser">
+        <div class="anon-chooser-opt" onclick="anonPickCompose('whisper')"><i class="fas fa-ghost"></i><span>Whisper</span></div>
+        <div class="anon-chooser-opt" onclick="anonPickCompose('drop')"><i class="fas fa-skull-crossbones"></i><span>Dead Drop</span></div>
+      </div>
+
+      <!-- WHISPER COMPOSE — hidden until "Add > Whisper" is tapped -->
+      <div class="wh-compose" id="whComposeBox" style="display:none">
+        <textarea id="whText" maxlength="500" placeholder="Say something... nobody will know it's you." oninput="whUpdateCount()"></textarea>
+        <div class="wh-compose-foot">
+          <span class="wh-compose-note"><i class="fas fa-user-secret"></i> Posted anonymously</span>
+          <span class="wh-charcount" id="whCharCount">0/500</span>
         </div>
-
-        <div class="dd-pane on" id="ddPaneNew">
-          <div class="msg inf show">Anonymous, disappears automatically. Nobody sees your name on it.</div>
-          <div class="field"><label>Message / link</label><textarea id="ddContent" rows="3" maxlength="2000" placeholder="What are you dropping?"></textarea></div>
-          <div class="field">
-            <label>Attach a photo or video <span style="color:var(--ice);font-size:.55rem">(optional)</span></label>
-            <div class="dd-media-zone" id="ddMediaZone">
-              <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="handleDdMedia(this)"/>
-              <i class="fas fa-paperclip"></i>
-              <p>Tap to attach an image or video</p>
-            </div>
-            <div id="ddMediaPreviewWrap"></div>
-          </div>
-
-          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Who can view it</label>
-          <div class="dd-mode-row">
-            <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
-            <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
-          </div>
-
-          <div id="ddUsersBlock">
-            <div class="dd-user-search">
-              <input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off">
-              <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
-            </div>
-            <div class="dd-picked-row" id="ddPickedRow"></div>
-          </div>
-
-          <div class="dd-range-row" style="margin-top:.9rem">
-            <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
-            <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
-            <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
-          </div>
-          <div class="msg inf show" style="margin-top:.2rem">Whichever comes first: your view target, or 24 hours from posting. You can cancel it any time before then.</div>
-
-          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" id="ddSubmitBtn" onclick="createDeadDrop()"><i class="fas fa-radiation"></i> Drop it</button>
+        <div class="wh-media-zone" id="whMediaZone">
+          <input type="file" id="whMediaFile" accept="image/*,video/*" multiple onchange="handleWhMedia(this)"/>
+          <i class="fas fa-images"></i>
+          <p>Tap to add photos or short videos</p>
         </div>
-
-        <div class="dd-pane" id="ddPaneMine">
-          <div id="ddMineList"><div class="empty"><div class="spin"></div>Loading…</div></div>
-        </div>
-
-        <div class="dd-pane" id="ddPaneViewer">
-          <div class="dd-viewer" id="ddViewerBody"></div>
+        <div class="wh-media-limits"><span id="whImgCount">0/8 photos</span><span id="whVidCount">0/3 videos</span></div>
+        <div id="whUploadQueueList"></div>
+        <div class="img-grid" id="whMediaGrid"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.6rem">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="anonCollapseCompose()">Cancel</button>
+          <button class="btn btn-primary" style="flex:2;justify-content:center" onclick="postWhisper(this)"><i class="fas fa-paper-plane"></i> Whisper it</button>
         </div>
       </div>
+
+      <!-- DEAD DROP COMPOSE — hidden until "Add > Dead Drop" is tapped -->
+      <div id="ddComposeBox" style="display:none">
+        <div class="msg inf show">Anonymous, disappears automatically. Nobody sees your name on it.</div>
+        <div class="field"><label>Message / link</label><textarea id="ddContent" rows="3" maxlength="2000" placeholder="What are you dropping?"></textarea></div>
+        <div class="field">
+          <label>Attach a photo or video <span style="color:var(--ice);font-size:.55rem">(optional)</span></label>
+          <div class="dd-media-zone" id="ddMediaZone">
+            <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="handleDdMedia(this)"/>
+            <i class="fas fa-paperclip"></i>
+            <p>Tap to attach an image or video</p>
+          </div>
+          <div id="ddMediaPreviewWrap"></div>
+        </div>
+
+        <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Who can view it</label>
+        <div class="dd-mode-row">
+          <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
+          <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
+        </div>
+
+        <div id="ddUsersBlock">
+          <div class="dd-user-search">
+            <input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off">
+            <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
+          </div>
+          <div class="dd-picked-row" id="ddPickedRow"></div>
+        </div>
+
+        <div class="dd-range-row" style="margin-top:.9rem">
+          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
+          <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
+          <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
+        </div>
+        <div class="msg inf show" style="margin-top:.2rem">Whichever comes first: your view target, or 24 hours from posting. You can cancel it any time before then.</div>
+
+        <div style="display:flex;gap:.5rem;margin-top:.6rem">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="anonCollapseCompose()">Cancel</button>
+          <button class="btn btn-primary" style="flex:2;justify-content:center" id="ddSubmitBtn" onclick="createDeadDrop()"><i class="fas fa-radiation"></i> Drop it</button>
+        </div>
+      </div>
+
+      <div class="anon-chip-row">
+        <div class="anon-chip on" data-f="all" onclick="anonSetFilter(this,'all')">All</div>
+        <div class="anon-chip" data-f="whisper" onclick="anonSetFilter(this,'whisper')">Whispers</div>
+        <div class="anon-chip" data-f="drop" onclick="anonSetFilter(this,'drop')">Dead Drops</div>
+        <div class="anon-chip" data-f="mine" onclick="anonSetFilter(this,'mine')">My drops</div>
+        <div class="anon-chip" data-f="shared" onclick="anonSetFilter(this,'shared')">Shared with me</div>
+      </div>
+
+      <div id="anonFeed"><div class="empty"><div class="spin"></div>Loading…</div></div>
+
+      <div id="ddViewerWrap" style="display:none">
+        <button class="btn btn-ghost" style="margin-bottom:.8rem" onclick="anonBackToFeed()"><i class="fas fa-arrow-left"></i> Back</button>
+        <div class="dd-viewer" id="ddViewerBody"></div>
+      </div>
+
     </div>
   </div>
 </div>
-
 <!-- LEGAL -->
 <div class="ov" id="legalOv" onclick="if(event.target===this)closeLegal()">
   <div class="sheet">
@@ -990,9 +1026,9 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 <script>
 /* ============ backend endpoints ============ */
 var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
-var POSTS_API = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
-var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbwDABpW2VNaQokDqCpiTbMPfUP0f6MOPRh_-nPl5a73ZISk8WPsksUBwHfFSprCz_c6JQ/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
+var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
 var SUPPORT_EMAIL = 'darkdigitalspaceteam@gmail.com';
 /* SECURITY: intentionally no admin key and no GitHub token here.
    Ownership is enforced server-side by matching the signed-in user's
@@ -1042,26 +1078,34 @@ function guardTap(key, btn, task){
    GitHub token in Script Properties) pushes the file to GitHub and
    returns the public raw URL. No token or repo credential lives here.
    ============================================================ */
-async function uploadMedia(file){
-  var b64 = await new Promise(function(res,rej){
-    var r=new FileReader();
-    r.onload=function(e){ res(e.target.result.split(',')[1]); };
-    r.onerror=rej;
-    r.readAsDataURL(file);
+function uploadMedia(file, onProgress){
+  var fakeTimer = null;
+  if(onProgress){
+    var pct = 0;
+    fakeTimer = setInterval(function(){
+      pct = Math.min(92, pct + 4 + Math.random()*10);
+      onProgress(Math.round(pct));
+    }, 220);
+  }
+  function stopFake(finalPct){
+    if(fakeTimer){ clearInterval(fakeTimer); fakeTimer=null; }
+    if(onProgress) onProgress(finalPct);
+  }
+  return new Promise(function(resolve, reject){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var b64 = e.target.result.split(',')[1];
+      fetch(POSTS_API, {
+        method:'POST', headers:{'Content-Type':'text/plain'},
+        body: JSON.stringify({ action:'uploadMedia', ddsNumber: currentUser.ddsNumber||'', filename:file.name, mimeType:file.type, dataBase64:b64 })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if(d.success){ stopFake(100); resolve(d.data.url); }
+        else { stopFake(100); reject(new Error(d.message||'Upload failed')); }
+      }).catch(function(err){ stopFake(100); reject(new Error(err && err.message ? err.message : 'Network error')); });
+    };
+    reader.onerror = function(){ stopFake(100); reject(new Error('Could not read file')); };
+    reader.readAsDataURL(file);
   });
-  var r = await fetch(POSTS_API, {
-    method:'POST', headers:{'Content-Type':'text/plain'},
-    body: JSON.stringify({
-      action:'uploadMedia',
-      ddsNumber: currentUser.ddsNumber || '',
-      filename: file.name,
-      mimeType: file.type,
-      dataBase64: b64
-    })
-  });
-  var d = await r.json();
-  if(!d.success) throw new Error(d.message || 'Upload failed');
-  return d.data.url;
 }
 
 /* ---- support / feedback ---- */
@@ -2081,56 +2125,103 @@ var WH_EMOJIS=['❤️','🔥','💀','😂','😮'];
 var whCache={};
 var WH_MAX_IMGS=8, WH_MAX_VIDS=3;
 var whImages=[], whVideos=[];
+var whUploadQueue=[]; // {tempId,kind,file,progress,status,previewUrl,error}
 function whUpdateCount(){ var t=document.getElementById('whText'); document.getElementById('whCharCount').textContent=t.value.length+'/500'; }
 function whUpdateMediaCounts(){
   document.getElementById('whImgCount').textContent = whImages.length+'/'+WH_MAX_IMGS+' photos';
   document.getElementById('whVidCount').textContent = whVideos.length+'/'+WH_MAX_VIDS+' videos';
-}
-function openAnonymous(tab){
+}function openAnonymous(tab){
   if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
   document.getElementById('anonOv').classList.add('open');
-  anonTab(tab || 'whispers');
+  document.getElementById('ddViewerWrap').style.display='none';
+  document.getElementById('anonFeed').style.display='';
+  document.querySelector('.anon-chip-row').style.display='';
+  var wantFilter = tab==='drops' ? 'drop' : 'all';
+  var chip = document.querySelector('.anon-chip[data-f="'+wantFilter+'"]');
+  if(chip) anonSetFilter(chip, wantFilter); else anonLoadFeed();
 }
-function closeAnonymous(){ document.getElementById('anonOv').classList.remove('open'); }
-function anonTab(t){
-  document.getElementById('anonTabWhispersBtn').classList.toggle('on', t==='whispers');
-  document.getElementById('anonTabDropsBtn').classList.toggle('on', t==='drops');
-  document.getElementById('anonPaneWhispers').classList.toggle('on', t==='whispers');
-  document.getElementById('anonPaneDrops').classList.toggle('on', t==='drops');
-  if(t==='whispers') loadWhispers();
-  if(t==='drops'){ ddTab('new'); ddInitRangeSteps(); }
+function closeAnonymous(){
+  document.getElementById('anonOv').classList.remove('open');
+  anonCollapseCompose();
+  document.getElementById('anonChooser').classList.remove('open');
 }
 function openWhispers(){ openAnonymous('whispers'); }
 function closeWhispers(){ closeAnonymous(); }
-function ddPublicCardHTML(dr){
-  return '<div class="wh-card" onclick="ddOpenViewer(\''+dr.id+'\',null,this)" style="cursor:pointer">'+
-    '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-skull-crossbones"></i></div>'+
-    '<span class="wh-anon-lbl">Dead Drop</span><span class="wh-time">'+timeAgo(dr.createdAt)+'</span></div>'+
-    '<div class="wh-text">'+esc(dr.preview||'(attachment only)')+'</div>'+
-    (dr.hasMedia?'<div style="font-size:.6rem;color:var(--ice);margin-bottom:.4rem"><i class="fas fa-paperclip"></i> Has attachment — tap to view</div>':'')+
-    '<div style="font-size:.58rem;color:var(--mute)">'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views · '+ddExpiryLabel(dr.expiresAt)+'</div>'+
-    '</div>';
+
+function anonToggleChooser(){ document.getElementById('anonChooser').classList.toggle('open'); }
+function anonPickCompose(type){
+  document.getElementById('anonChooser').classList.remove('open');
+  if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
+  if(type==='whisper'){
+    document.getElementById('ddComposeBox').style.display='none';
+    document.getElementById('whComposeBox').style.display='block';
+  } else {
+    document.getElementById('whComposeBox').style.display='none';
+    document.getElementById('ddComposeBox').style.display='block';
+    ddInitRangeSteps();
+  }
 }
-async function loadWhispers(){
-  var feed=document.getElementById('whFeed');
+function anonCollapseCompose(){
+  document.getElementById('whComposeBox').style.display='none';
+  document.getElementById('ddComposeBox').style.display='none';
+}
+
+var anonFilter='all';
+function anonSetFilter(el, f){
+  anonFilter=f;
+  document.querySelectorAll('.anon-chip').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');
+  anonLoadFeed();
+}
+async function anonLoadFeed(){
+  var feed=document.getElementById('anonFeed');
   feed.innerHTML='<div class="empty"><div class="spin"></div>Loading…</div>';
   try{
+    if(anonFilter==='mine'){
+      if(!isSignedIn){ feed.innerHTML='<div class="empty"><i class="fas fa-lock"></i>Sign in to see your drops</div>'; return; }
+      var r=await fetch(POSTS_API+'?action=getMyDeadDrops&ddsNumber='+encodeURIComponent(currentUser.ddsNumber));
+      var d=await r.json();
+      var list=(d.data&&d.data.drops)||d.data||[];
+      feed.innerHTML = list.length ? list.map(function(dr){return ddCardHTML(dr,true);}).join('') : '<div class="empty"><i class="fas fa-skull-crossbones"></i>No active drops — tap + Add to create one</div>';
+      return;
+    }
+    if(anonFilter==='shared'){
+      if(!isSignedIn){ feed.innerHTML='<div class="empty"><i class="fas fa-lock"></i>Sign in to see drops shared with you</div>'; return; }
+      var r2=await fetch(POSTS_API+'?action=getSharedDeadDrops&viewerDDS='+encodeURIComponent(currentUser.ddsNumber));
+      var d2=await r2.json();
+      var list2=(d2.data&&d2.data.drops)||d2.data||[];
+      feed.innerHTML = list2.length ? list2.map(function(dr){return ddCardHTML(dr,false);}).join('') : '<div class="empty"><i class="fas fa-inbox"></i>Nothing shared with you yet</div>';
+      return;
+    }
     var results = await Promise.all([
-      fetch(POSTS_API+'?action=getWhispers&limit=50').then(function(r){return r.json();}).catch(function(){return {success:false};}),
-      fetch(POSTS_API+'?action=getPublicDeadDrops').then(function(r){return r.json();}).catch(function(){return {success:false};})
+      (anonFilter!=='drop') ? fetch(POSTS_API+'?action=getWhispers&limit=50').then(function(r){return r.json();}).catch(function(){return {success:false};}) : Promise.resolve({success:true,data:{whispers:[]}}),
+      (anonFilter!=='whisper') ? fetch(POSTS_API+'?action=getPublicDeadDrops').then(function(r){return r.json();}).catch(function(){return {success:false};}) : Promise.resolve({success:true,data:{drops:[]}})
     ]);
     var wr=results[0], dr=results[1];
     var whispers=(wr.data&&wr.data.whispers)||wr.data||[];
     var drops=(dr.data&&dr.data.drops)||dr.data||[];
     whispers.forEach(function(w){ whCache[w.id]=w; w._kind='whisper'; w._t=w.timestamp; });
-    drops.forEach(function(d){ d._kind='drop'; d._t=d.createdAt; });
+    drops.forEach(function(d3){ d3._kind='drop'; d3._t=d3.createdAt; });
     var combined = whispers.concat(drops).sort(function(a,b){ return new Date(b._t)-new Date(a._t); });
-    if(!combined.length){ feed.innerHTML='<div class="empty"><i class="fas fa-ghost"></i>Nothing here yet — be the first</div>'; return; }
-    feed.innerHTML = combined.map(function(item){
-      return item._kind==='drop' ? ddPublicCardHTML(item) : whCardHTML(item);
-    }).join('');
+    if(!combined.length){ feed.innerHTML='<div class="empty"><i class="fas fa-ghost"></i>Nothing here yet — tap + Add to be the first</div>'; return; }
+    feed.innerHTML = combined.map(function(item){ return item._kind==='drop' ? ddPublicCardHTML(item) : whCardHTML(item); }).join('');
   }catch(e){ feed.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>Could not load</div>'; }
 }
+function anonBackToFeed(){
+  document.getElementById('ddViewerWrap').style.display='none';
+  document.getElementById('anonFeed').style.display='';
+  document.querySelector('.anon-chip-row').style.display='';
+  anonLoadFeed();
+}
+function ddPublicCardHTML(dr){
+  return '<div class="wh-card" onclick="ddOpenViewer(\''+dr.id+'\',\''+(dr.token||'')+'\',this)" style="cursor:pointer">'+
+    '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-skull-crossbones"></i></div>'+
+    '<span class="wh-anon-lbl">Dead Drop</span><span class="anon-type-badge drop" style="margin-left:.4rem">Link</span><span class="wh-time">'+timeAgo(dr.createdAt)+'</span></div>'+    '<div class="wh-text">'+esc(dr.preview||'(attachment only)')+'</div>'+
+    (dr.hasMedia?'<div style="font-size:.6rem;color:var(--ice);margin-bottom:.4rem"><i class="fas fa-paperclip"></i> Has attachment — tap to view</div>':'')+
+    '<div style="font-size:.58rem;color:var(--mute)">'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views · '+ddExpiryLabel(dr.expiresAt)+'</div>'+
+    '</div>';
+}
+
 function whMediaArray(w){
   var imgs=(w.images?String(w.images).split(',').filter(Boolean):[]);
   var vids=(w.videos?String(w.videos).split(',').filter(Boolean):[]);
@@ -2159,14 +2250,15 @@ function whCardHTML(w){
   }
   return '<div class="wh-card" id="whcard_'+w.id+'">'+
     '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
-    '<span class="wh-anon-lbl">'+whAnonTag(w.id)+'</span><span class="wh-time">'+timeAgo(w.timestamp)+'</span></div>'+
+    '<span class="wh-anon-lbl">'+whAnonTag(w.id)+'</span><span class="anon-type-badge whisper" style="margin-left:.4rem">Whisper</span><span class="wh-time">'+timeAgo(w.timestamp)+'</span></div>'+
+
     (w.text?('<div class="wh-text">'+esc(w.text)+'</div>'):'') +
     mediaHTML +
     '<div class="wh-react-row">'+reactBtns+
     '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+w.id+'\')"><i class="fas fa-comment"></i> '+replyCount+'</span></div>'+
     '<div class="wh-replies" id="whreplies_'+w.id+'">'+
     '<div id="whreplylist_'+w.id+'"><div class="an-empty" style="padding:.4rem;font-size:.6rem">Tap to load replies…</div></div>'+
-    '<div class="wh-reply-input-row"><input type="text" id="whreplyinput_'+w.id+'" maxlength="240" placeholder="Reply anonymously..."><button onclick="postWhisperReply(\''+w.id+'\')">Send</button></div>'+
+    '<div class="wh-reply-input-row"><input type="text" id="whreplyinput_'+w.id+'" maxlength="240" placeholder="Reply anonymously..."><button onclick="postWhisperReply(\''+w.id+'\',this)">Send</button></div>'+
     '</div></div>';
 }
 function timeAgo(ts){
@@ -2177,49 +2269,77 @@ function timeAgo(ts){
   if(diff<86400000) return Math.floor(diff/3600000)+'h';
   return Math.floor(diff/86400000)+'d';
 }
-async function handleWhMedia(inp){
+function handleWhMedia(inp){
   var files = Array.from(inp.files); inp.value='';
-  var prog=document.getElementById('whUpProg'), bar=document.getElementById('whUpBar');
-  var toProcess = [];
-  var pendingImgs=0, pendingVids=0;
+  var pendingImgs=0, pendingVids=0, toProcess=[];
   for(var i=0;i<files.length;i++){
     var f=files[i];
+    var curImgs = whImages.length + whUploadQueue.filter(function(q){return q.kind==='image';}).length;
+    var curVids = whVideos.length + whUploadQueue.filter(function(q){return q.kind==='video';}).length;
     if(f.type.startsWith('image/')){
-      if(whImages.length+pendingImgs>=WH_MAX_IMGS){ showToast('Max '+WH_MAX_IMGS+' photos per whisper','error'); continue; }
+      if(curImgs+pendingImgs>=WH_MAX_IMGS){ showToast('Max '+WH_MAX_IMGS+' photos per whisper','error'); continue; }
       toProcess.push({file:f,kind:'image'}); pendingImgs++;
     } else if(f.type.startsWith('video/')){
-      if(whVideos.length+pendingVids>=WH_MAX_VIDS){ showToast('Max '+WH_MAX_VIDS+' videos per whisper','error'); continue; }
+      if(curVids+pendingVids>=WH_MAX_VIDS){ showToast('Max '+WH_MAX_VIDS+' videos per whisper','error'); continue; }
       toProcess.push({file:f,kind:'video'}); pendingVids++;
     }
   }
   if(!toProcess.length) return;
-  prog.style.display='block';
-  for(var j=0;j<toProcess.length;j++){
-    try{
-      showToast('Uploading '+toProcess[j].kind+' '+(j+1)+'/'+toProcess.length+'...','info');
-      var url = await uploadMedia(toProcess[j].file);
-      if(toProcess[j].kind==='image') whImages.push(url); else whVideos.push(url);
-      bar.style.width=((j+1)/toProcess.length*100)+'%';
+  toProcess.forEach(function(item){
+    var tempId='u'+Date.now()+Math.random().toString(36).substr(2,6);
+    var q={tempId:tempId, kind:item.kind, file:item.file, progress:0, status:'uploading', previewUrl:URL.createObjectURL(item.file)};
+    whUploadQueue.push(q);
+    renderWhMediaGrid();
+    uploadMedia(item.file, function(pct){ q.progress=pct; renderWhMediaGrid(); })
+      .then(function(url){
+        if(item.kind==='image') whImages.push(url); else whVideos.push(url);
+        whUploadQueue = whUploadQueue.filter(function(x){return x.tempId!==tempId;});
+        URL.revokeObjectURL(q.previewUrl);
+        renderWhMediaGrid();
+      })
+      .catch(function(e){ q.status='error'; q.error=e.message||'Upload failed'; renderWhMediaGrid(); });
+  });
+}
+function whRetryUpload(tempId){
+  var q = whUploadQueue.find(function(x){return x.tempId===tempId;});
+  if(!q || !q.file) return;
+  q.status='uploading'; q.progress=0; renderWhMediaGrid();
+  uploadMedia(q.file, function(pct){ q.progress=pct; renderWhMediaGrid(); })
+    .then(function(url){
+      if(q.kind==='image') whImages.push(url); else whVideos.push(url);
+      whUploadQueue = whUploadQueue.filter(function(x){return x.tempId!==q.tempId;});
+      URL.revokeObjectURL(q.previewUrl);
       renderWhMediaGrid();
-    }catch(e){ showToast('Upload failed: '+e.message,'error'); }
-  }
-  setTimeout(function(){ prog.style.display='none'; bar.style.width='0'; },800);
+    })
+    .catch(function(e){ q.status='error'; q.error=e.message||'Upload failed'; renderWhMediaGrid(); });
 }
 function renderWhMediaGrid(){
   whUpdateMediaCounts();
+  document.getElementById('whUploadQueueList').innerHTML = whUploadQueue.map(function(q){
+    var pct = q.status==='error' ? 100 : q.progress;
+    return '<div class="up-item'+(q.status==='error'?' err':'')+'">'+
+      '<div class="up-thumb">'+(q.kind==='video'?('<video src="'+q.previewUrl+'" muted></video>'):('<img src="'+q.previewUrl+'">'))+
+      (q.status!=='error'?('<div class="up-ring">'+pct+'%</div>'):'')+'</div>'+
+      '<div class="up-info"><div class="up-name">'+(q.status==='error'?('Failed — '+esc(q.error||'')):('Uploading '+q.kind+'…'))+'</div>'+
+      '<div class="up-bar-track"><div class="up-bar-fill" style="width:'+pct+'%"></div></div></div>'+
+      (q.status==='error'
+        ? ('<button class="up-retry" onclick="whRetryUpload(\''+q.tempId+'\')"><i class="fas fa-rotate-right"></i></button>')
+        : ('<button onclick="whUploadQueue=whUploadQueue.filter(function(x){return x.tempId!==\''+q.tempId+'\'});renderWhMediaGrid()"><i class="fas fa-times"></i></button>'))+
+      '</div>';
+  }).join('');
   var items = whImages.map(function(u){return {url:u,kind:'image'};}).concat(whVideos.map(function(u){return {url:u,kind:'video'};}));
   document.getElementById('whMediaGrid').innerHTML = items.map(function(it){
     var removeFn = it.kind==='image' ? ("whImages.splice("+whImages.indexOf(it.url)+",1);renderWhMediaGrid()") : ("whVideos.splice("+whVideos.indexOf(it.url)+",1);renderWhMediaGrid()");
     return '<div class="thumb-it">'+(it.kind==='video'?('<video src="'+it.url+'" muted></video><span class="vid-badge">VIDEO</span>'):('<img src="'+it.url+'">'))+
       '<button onclick="'+removeFn+'"><i class="fas fa-times"></i></button></div>';
   }).join('');
-}
-function resetWhisperCompose(){
+}function resetWhisperCompose(){
   document.getElementById('whText').value=''; whUpdateCount();
   whImages=[]; whVideos=[]; renderWhMediaGrid();
 }
 function postWhisper(btn){
   if(!isSignedIn){ showToast('Sign in first','error'); return; }
+  if(whUploadQueue.length){ showToast('Please wait for uploads to finish','error'); return; }
   var text=document.getElementById('whText').value.trim();
   if(!text && !whImages.length && !whVideos.length){ showToast('Write something or attach media first','error'); return; }
   guardTap('postWhisper', btn, function(){ return (async function(){
@@ -2228,18 +2348,19 @@ function postWhisper(btn){
       var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
         body:JSON.stringify({action:'postWhisper', ddsNumber:currentUser.ddsNumber, text:text, images:whImages.join(','), videos:whVideos.join(',')})});
       var d=await r.json();
-      if(d.success){ resetWhisperCompose(); showToast('Whispered anonymously','success'); loadWhispers(); }
+      if(d.success){ resetWhisperCompose(); anonCollapseCompose(); showToast('Whispered anonymously','success'); anonLoadFeed(); }
       else showToast(d.message||'Could not post','error');
     }catch(e){ showToast('Network error','error'); }
   })(); });
 }
+
 function whReact(id,em){
   var key='wh_react_'+id+'_'+em;
   var mine=localStorage.getItem(key)==='1';
   localStorage.setItem(key, mine?'0':'1');
   var w=whCache[id]; if(w){ w.reactions=w.reactions||{}; w.reactions[em]=(w.reactions[em]||0)+(mine?-1:1); }
   var card=document.getElementById('whcard_'+id);
-  if(card && w){ card.querySelector('.wh-react-row').outerHTML =
+  if(card && w){ card.querySelector('.wh-react-row').innerHTML =
     WH_EMOJIS.map(function(e2){ var c=(w.reactions&&w.reactions[e2])||0; var m2=localStorage.getItem('wh_react_'+id+'_'+e2)==='1';
       return '<div class="wh-react-btn'+(m2?' active':'')+'" onclick="whReact(\''+id+'\',\''+e2+'\')">'+e2+'<span class="n">'+(c||'')+'</span></div>'; }).join('') +
     '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+id+'\')"><i class="fas fa-comment"></i> '+(w.replyCount||0)+'</span>'; }
@@ -2251,6 +2372,9 @@ function whToggleReplies(id){
   var open=wrap.classList.toggle('open');
   if(open) loadWhisperReplies(id);
 }
+function whMyReplyIds(){ try{ return JSON.parse(localStorage.getItem('wh_myreplies')||'[]'); }catch(e){ return []; } }
+function whRememberReply(id){ var list=whMyReplyIds(); list.push(id); localStorage.setItem('wh_myreplies', JSON.stringify(list.slice(-200))); }
+
 async function loadWhisperReplies(id){
   var el=document.getElementById('whreplylist_'+id);
   el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem"><div class="spin"></div></div>';
@@ -2259,24 +2383,72 @@ async function loadWhisperReplies(id){
     var d=await r.json();
     var list=(d.data&&d.data.replies)||d.data||[];
     if(!d.success||!list.length){ el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem">No replies yet</div>'; return; }
+    var mine = whMyReplyIds();
     el.innerHTML=list.map(function(rp){
-      return '<div class="wh-reply-item"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div><div class="wh-reply-text">'+esc(rp.text)+'</div></div>';
+      var isMine = mine.indexOf(rp.id)>-1;
+      var withinWindow = (Date.now()-new Date(rp.timestamp).getTime()) < 30*60*1000;
+      var actionsHTML = '';
+      if(isMine){
+        actionsHTML = '<div style="display:flex;gap:.5rem;margin-top:.25rem;align-items:center">'+
+          (withinWindow ? ('<button style="background:none;border:none;color:var(--blue);font-size:.55rem;cursor:pointer" onclick="whStartEditReply(\''+rp.id+'\',\''+id+'\')">Edit</button>')
+                        : ('<span style="font-size:.5rem;color:var(--mute)"><i class="fas fa-lock"></i> Edit locked</span>')) +
+          '<button style="background:none;border:none;color:var(--red);font-size:.55rem;cursor:pointer" onclick="whDeleteReply(\''+rp.id+'\',\''+id+'\',this)">Delete</button></div>';
+      }
+      return '<div class="wh-reply-item" id="whreply_'+rp.id+'"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
+        '<div style="flex:1"><div class="wh-reply-text">'+esc(rp.text)+(rp.editedAt?' <span style="color:var(--mute);font-size:.52rem">(edited)</span>':'')+'</div>'+actionsHTML+'</div></div>';
     }).join('');
   }catch(e){ el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem">Could not load replies</div>'; }
 }
-async function postWhisperReply(id){
+function whStartEditReply(replyId, whisperId){
+  var el = document.getElementById('whreply_'+replyId);
+  var textEl = el.querySelector('.wh-reply-text');
+  var current = textEl.firstChild ? textEl.firstChild.textContent : textEl.textContent;
+  el.innerHTML = '<div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
+    '<div style="flex:1"><input type="text" id="whedit_'+replyId+'" value="'+esc(current).replace(/"/g,'&quot;')+'" maxlength="240" style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;color:#fff;font-size:.66rem;outline:none">'+
+    '<div style="display:flex;gap:.5rem;margin-top:.3rem"><button style="background:var(--blue);border:none;color:#03060a;border-radius:6px;padding:.25rem .6rem;font-size:.55rem;font-weight:700;cursor:pointer" onclick="whSaveEditReply(\''+replyId+'\',\''+whisperId+'\',this)">Save</button>'+
+    '<button style="background:none;border:none;color:var(--mute);font-size:.55rem;cursor:pointer" onclick="loadWhisperReplies(\''+whisperId+'\')">Cancel</button></div></div>';
+}
+function whSaveEditReply(replyId, whisperId, btn){
+  var inp = document.getElementById('whedit_'+replyId);
+  var text = inp.value.trim(); if(!text) return;
+  guardTap('editreply_'+replyId, btn, function(){ return (async function(){
+    try{
+      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({action:'editWhisperReply', id:replyId, ddsNumber:currentUser.ddsNumber, text:text})});
+      var d=await r.json();
+      if(d.success){ showToast('Reply updated','success'); loadWhisperReplies(whisperId); }
+      else showToast(d.message||'Could not update','error');
+    }catch(e){ showToast('Network error','error'); }
+  })(); });
+}
+function whDeleteReply(replyId, whisperId, btn){
+  if(!confirm('Delete this reply?')) return;
+  guardTap('delreply_'+replyId, btn, function(){ return (async function(){
+    try{
+      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({action:'deleteWhisperReply', id:replyId, ddsNumber:currentUser.ddsNumber})});
+      var d=await r.json();
+      if(d.success){ showToast('Reply deleted','success'); loadWhisperReplies(whisperId); var w=whCache[whisperId]; if(w) w.replyCount=Math.max(0,(w.replyCount||0)-1); }
+      else showToast(d.message||'Could not delete','error');
+    }catch(e){ showToast('Network error','error'); }
+  })(); });
+}
+
+function postWhisperReply(id, btn){
   if(!isSignedIn){ showToast('Sign in first','error'); return; }
   var inp=document.getElementById('whreplyinput_'+id);
   var text=inp.value.trim(); if(!text) return;
-  inp.disabled=true;
-  try{
-    var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'replyWhisper', id:id, ddsNumber:currentUser.ddsNumber, text:text})});
-    var d=await r.json();
-    inp.disabled=false;
-    if(d.success){ inp.value=''; loadWhisperReplies(id); var w=whCache[id]; if(w) w.replyCount=(w.replyCount||0)+1; }
-    else showToast(d.message||'Could not reply','error');
-  }catch(e){ inp.disabled=false; showToast('Network error','error'); }
+  guardTap('reply_'+id, btn, function(){ return (async function(){
+    inp.disabled=true;
+    try{
+      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({action:'replyWhisper', id:id, ddsNumber:currentUser.ddsNumber, text:text})});
+      var d=await r.json();
+      inp.disabled=false;
+      if(d.success){ inp.value=''; loadWhisperReplies(id); var w=whCache[id]; if(w) w.replyCount=(w.replyCount||0)+1; if(d.data && d.data.id) whRememberReply(d.data.id); }
+      else showToast(d.message||'Could not reply','error');
+    }catch(e){ inp.disabled=false; showToast('Network error','error'); }
+  })(); });
 }
 
 /* ============================================================
@@ -2361,12 +2533,7 @@ function storyPrev(){ storyShow(storyIdx-1); }
 var ddMode='users', ddPicked=[], ddSearchTimer=null, ddMediaUrl='';
 function openDeadDrop(){ openAnonymous('drops'); }
 function closeDeadDrop(){ closeAnonymous(); }
-function ddTab(t){
-  ['New','Mine','Viewer'].forEach(function(k){ var id='ddPane'+k; var el=document.getElementById(id); if(el) el.classList.toggle('on', k.toLowerCase()===t); });
-  var nb=document.getElementById('ddTabNewBtn'), mb=document.getElementById('ddTabMineBtn');
-  if(nb) nb.classList.toggle('on', t==='new'); if(mb) mb.classList.toggle('on', t==='mine');
-  if(t==='mine') ddLoadMine();
-}
+
 function ddSetMode(m){
   ddMode=m;
   document.getElementById('ddModeUsersOpt').classList.toggle('on', m==='users');
@@ -2421,24 +2588,36 @@ function ddRenderPicked(){
     return '<div class="dd-picked-chip">'+esc(u.alias)+'<button onclick="ddRemovePicked('+i+')"><i class="fas fa-times"></i></button></div>';
   }).join('');
 }
-async function handleDdMedia(inp){
+function handleDdMedia(inp){
   var f = inp.files[0]; if(!f) return;
   var isVideo = f.type.startsWith('video/');
   if(!f.type.startsWith('image/') && !isVideo){ showToast('Only images or videos can be attached','error'); inp.value=''; return; }
-  showToast('Uploading attachment...','info');
-  try{
-    var url = await uploadMedia(f);
-    ddMediaUrl = url;
-    document.getElementById('ddMediaPreviewWrap').innerHTML = '<div class="dd-media-preview">'+
-      (isVideo ? ('<video src="'+esc(url)+'" controls></video>') : ('<img src="'+esc(url)+'">')) +
-      '<button onclick="ddRemoveMedia()"><i class="fas fa-times"></i></button></div>';
-    showToast('Attachment ready','success');
-  }catch(e){ showToast('Upload failed: '+e.message,'error'); }
+  var previewUrl = URL.createObjectURL(f);
+  ddMediaUrl = ''; // not ready until upload finishes
+  document.getElementById('ddMediaPreviewWrap').innerHTML =
+    '<div class="dd-media-preview" id="ddUpPreview">'+
+    (isVideo?('<video src="'+previewUrl+'" muted></video>'):('<img src="'+previewUrl+'">'))+
+    '<div class="dd-up-ring" id="ddUpRing">0%</div></div>';
+  uploadMedia(f, function(pct){ var ring=document.getElementById('ddUpRing'); if(ring) ring.textContent=pct+'%'; })
+    .then(function(url){
+      ddMediaUrl = url;
+      URL.revokeObjectURL(previewUrl);
+      document.getElementById('ddMediaPreviewWrap').innerHTML = '<div class="dd-media-preview">'+
+        (isVideo ? ('<video src="'+esc(url)+'" controls></video>') : ('<img src="'+esc(url)+'">')) +
+        '<button onclick="ddRemoveMedia()"><i class="fas fa-times"></i></button></div>';
+      showToast('Attachment ready','success');
+    })
+    .catch(function(e){
+      showToast('Upload failed: '+e.message,'error');
+      document.getElementById('ddMediaPreviewWrap').innerHTML='';
+    });
   inp.value='';
 }
 function ddRemoveMedia(){ ddMediaUrl=''; document.getElementById('ddMediaPreviewWrap').innerHTML=''; }
 async function createDeadDrop(){
-  var content=document.getElementById('ddContent').value.trim();
+  if(document.getElementById('ddUpRing')){ showToast('Please wait for the attachment to finish uploading','error'); return; }
+
+    var content=document.getElementById('ddContent').value.trim();
   if(!content && !ddMediaUrl){ showToast('Add a message, link, or attachment first','error'); return; }
   if(ddMode==='users' && !ddPicked.length){ showToast('Pick at least one user, or switch to link mode','error'); return; }
   var viewTarget=ddCurrentViewTarget();
@@ -2457,21 +2636,13 @@ async function createDeadDrop(){
     if(ddMode==='link' && d.data && d.data.id){
       showToast('Link ready — check My drops to copy it','info');
     }
-    ddTab('mine');
+    anonCollapseCompose();
+    var mineChip = document.querySelector('.anon-chip[data-f="mine"]');
+    if(mineChip) anonSetFilter(mineChip,'mine'); else anonLoadFeed();
   }catch(e){ btn.disabled=false; btn.innerHTML='<i class="fas fa-radiation"></i> Drop it'; showToast('Network error','error'); }
 }
-async function ddLoadMine(){
-  var el=document.getElementById('ddMineList');
-  el.innerHTML='<div class="empty"><div class="spin"></div>Loading…</div>';
-  try{
-    var r=await fetch(POSTS_API+'?action=getMyDeadDrops&ddsNumber='+encodeURIComponent(currentUser.ddsNumber));
-    var d=await r.json();
-    var list=(d.data&&d.data.drops)||d.data||[];
-    if(!d.success||!list.length){ el.innerHTML='<div class="empty"><i class="fas fa-skull-crossbones"></i>No active drops</div>'; return; }
-    el.innerHTML=list.map(ddCardHTML).join('');
-  }catch(e){ el.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>Could not load drops</div>'; }
-}
-function ddCardHTML(dr){
+
+function ddCardHTML(dr, isOwner){
   var pct=Math.min(100, Math.round((dr.viewCount||0)/(dr.viewTarget||2)*100));
   var isLink = dr.mode==='link';
   var link = isLink ? (location.origin+location.pathname+'?drop='+encodeURIComponent(dr.id)+(dr.token?('&t='+encodeURIComponent(dr.token)):'')) : '';
@@ -2485,9 +2656,10 @@ function ddCardHTML(dr){
     '<div class="dd-progress-track"><div class="dd-progress-fill" style="width:'+pct+'%"></div></div>'+
     '<div class="dd-meta-row"><span>'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views</span><span>'+ddExpiryLabel(dr.expiresAt)+'</span></div>'+
     (isLink?('<div class="dd-link-box"><input readonly value="'+esc(link)+'"><button onclick="ddCopyLink(this)">Copy</button></div>'):'')+
-    (dr.status==='active'?('<div class="dd-card-actions"><button class="cancel" onclick="ddCancel(\''+dr.id+'\')"><i class="fas fa-ban"></i> Cancel drop</button></div>'):'')+
+    (dr.status==='active' && isOwner ?('<div class="dd-card-actions"><button class="cancel" onclick="ddCancel(\''+dr.id+'\')"><i class="fas fa-ban"></i> Cancel drop</button></div>'):'')+
     '</div>';
 }
+
 function ddExpiryLabel(exp){
   if(!exp) return '';
   var diff=new Date(exp).getTime()-Date.now();
@@ -2506,7 +2678,7 @@ async function ddCancel(id){
     var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
       body:JSON.stringify({action:'cancelDeadDrop', id:id, ownerDDS:currentUser.ddsNumber})});
     var d=await r.json();
-    if(d.success){ showToast('Drop cancelled and deleted','success'); ddLoadMine(); }
+    if(d.success){ showToast('Drop cancelled and deleted','success'); anonLoadFeed(); }
     else showToast(d.message||'Could not cancel','error');
   }catch(e){ showToast('Network error','error'); }
 }
@@ -2516,9 +2688,9 @@ async function ddCancel(id){
 function ddOpenViewer(id,token,btn){
   guardTap('ddview_'+id, btn, function(){ return (async function(){
     document.getElementById('anonOv').classList.add('open');
-    anonTab('drops');
-    ['New','Mine','Viewer'].forEach(function(k){ var el=document.getElementById('ddPane'+k); if(el) el.classList.toggle('on', k==='Viewer'); });
-    document.getElementById('ddTabNewBtn').classList.remove('on'); document.getElementById('ddTabMineBtn').classList.remove('on');
+    document.getElementById('anonFeed').style.display='none';
+    document.querySelector('.anon-chip-row').style.display='none';
+    document.getElementById('ddViewerWrap').style.display='block';
     var body=document.getElementById('ddViewerBody');
     body.innerHTML='<div class="spin"></div>';
     try{
