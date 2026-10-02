@@ -4,8 +4,27 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>DDS — Dark Digital Space</title>
+<!--OG_START-->
+<meta name="description" content="Dark Digital Space — anonymous drops that self-destruct after enough eyes or 24 hours.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dark Digital Space">
+<meta property="og:title" content="Dark Digital Space">
+<meta property="og:description" content="Anonymous drops that self-destruct after enough eyes or 24 hours. Nobody can download what's inside.">
+<meta property="og:url" content="https://darkdigitalspace.com.ng/">
+<meta property="og:image" content="https://darkdigitalspace.com.ng/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dark Digital Space">
+<meta name="twitter:description" content="Anonymous drops that self-destruct after enough eyes or 24 hours.">
+<meta name="twitter:image" content="https://darkdigitalspace.com.ng/og-image.jpg">
+<meta name="theme-color" content="#05070a">
+<!--OG_END-->
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Share+Tech+Mono&family=Playfair+Display:wght@600&family=Pacifico&family=Oswald:wght@500&family=Caveat:wght@600&family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
 :root{--bg:#05070a;--panel:#0d1420;--panel2:#0a0f18;--blue:#2f8fff;--ice:#8fc4ff;--text:#e9edf2;--mute:#647485;--line:rgba(47,143,255,.18);--gold:#ffd700;--red:#ff3355;}
@@ -100,7 +119,8 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .dd-media-preview img,.dd-media-preview video{width:100%;max-height:180px;object-fit:cover;display:block;}
 .dd-media-preview button{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);border:none;color:#fff;width:24px;height:24px;border-radius:50%;font-size:.65rem;cursor:pointer;}
 .dd-card-media{margin:.5rem 0;border-radius:8px;overflow:hidden;}
-.dd-card-media img,.dd-card-media video{width:100%;max-height:160px;object-fit:cover;display:block;}
+.dd-card-media{background:#000;display:flex;align-items:center;justify-content:center;max-height:340px;}
+.dd-card-media img,.dd-card-media video{width:100%;max-height:340px;object-fit:contain;display:block;}
 .ref-history{margin-top:1rem;}
 .ref-history-title{font-size:.6rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;}
 .ref-history-item{display:flex;justify-content:space-between;font-size:.6rem;color:#93a2b0;padding:.35rem 0;border-bottom:1px solid rgba(47,143,255,.08);}
@@ -123,6 +143,10 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.pw-wrap{position:relative;}
+.pw-wrap input{padding-right:2.4rem!important;}
+.pw-toggle{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--mute);cursor:pointer;font-size:.85rem;padding:.3rem;}
+.pw-toggle:hover{color:var(--ice);}
 .substep{display:none;}
 .substep.on{display:block;}
 .msg{padding:.6rem .8rem;border-radius:7px;font-size:.68rem;line-height:1.5;margin-bottom:.8rem;display:none;}
@@ -330,60 +354,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .toast.success{border-color:#00ff88;}
 .toast.error{border-color:#ff3355;}
 @keyframes tin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-.wh-compose{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.8rem;margin-bottom:1rem;}
-.wh-compose textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;resize:none;min-height:64px;}
-.wh-compose textarea:focus{border-color:var(--blue);}
-.wh-compose-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;}
-.wh-compose-note{font-size:.56rem;color:var(--mute);display:flex;align-items:center;gap:.3rem;}
-.wh-compose-note i{color:var(--ice);}
-.wh-charcount{font-size:.55rem;color:var(--mute);}
-.wh-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem;margin-bottom:.7rem;}
-.wh-card-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;}
-.wh-ghost-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2a3646,#111b2c);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:.75rem;}
-.wh-anon-lbl{font-size:.66rem;color:var(--ice);font-weight:600;}
-.wh-time{font-size:.55rem;color:var(--mute);margin-left:auto;}
-.wh-text{font-size:.75rem;color:#d5dde4;line-height:1.6;margin-bottom:.6rem;white-space:pre-wrap;}
-.wh-media-strip{display:flex;gap:.4rem;overflow-x:auto;margin-bottom:.6rem;border-radius:8px;}
-.wh-media-thumb{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:8px;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
-.wh-media-thumb img,.wh-media-thumb video{width:100%;height:100%;object-fit:cover;}
-.wh-media-thumb .vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.25);font-size:.9rem;}
-.wh-media-more{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:8px;background:rgba(47,143,255,.15);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:.7rem;font-weight:700;cursor:pointer;}
-.wh-react-row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
-.wh-react-btn{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:.28rem .6rem;font-size:.68rem;color:#93a2b0;cursor:pointer;display:flex;align-items:center;gap:.3rem;}
-.wh-react-btn.active{background:rgba(47,143,255,.18);border-color:var(--blue);color:var(--ice);}
-.wh-react-btn .n{font-size:.58rem;color:var(--mute);}
-.wh-react-btn.active .n{color:var(--ice);}
-.wh-reply-toggle{margin-left:auto;font-size:.6rem;color:var(--blue);cursor:pointer;display:flex;align-items:center;gap:.25rem;}
-.wh-replies{margin-top:.65rem;border-top:1px solid rgba(47,143,255,.1);padding-top:.6rem;display:none;}
-.wh-replies.open{display:block;}
-.wh-reply-item{display:flex;gap:.5rem;margin-bottom:.5rem;}
-.wh-reply-item .wh-ghost-av{width:20px;height:20px;font-size:.55rem;flex-shrink:0;}
-.wh-reply-text{font-size:.66rem;color:#b9c4cf;line-height:1.5;background:rgba(255,255,255,.02);border-radius:8px;padding:.4rem .6rem;flex:1;}
-.wh-reply-input-row{display:flex;gap:.4rem;margin-top:.4rem;}
-.wh-reply-input-row input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.45rem .8rem;color:#fff;font-size:.68rem;outline:none;}
-.wh-reply-input-row button{background:var(--blue);border:none;color:#03060a;border-radius:16px;padding:.45rem .8rem;font-size:.62rem;font-weight:700;cursor:pointer;}
-.wh-media-zone{border:2px dashed var(--line);border-radius:10px;padding:.8rem;text-align:center;cursor:pointer;position:relative;margin-top:.6rem;}
-.wh-media-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
-.wh-media-zone i{font-size:1.1rem;color:var(--blue);margin-bottom:.2rem;display:block;}
-.wh-media-zone p{color:var(--mute);font-size:.58rem;}
-.wh-media-limits{font-size:.55rem;color:var(--mute);margin-top:.3rem;display:flex;justify-content:space-between;}
-.story-ov{position:fixed;inset:0;background:#000;z-index:950;display:none;flex-direction:column;}
-.story-ov.open{display:flex;}
-.story-bars{display:flex;gap:.3rem;padding:.6rem .6rem 0;}
-.story-bar{flex:1;height:2.5px;background:rgba(255,255,255,.3);border-radius:2px;overflow:hidden;}
-.story-bar-fill{height:100%;width:0;background:#fff;}
-.story-bar-fill.done{width:100%!important;}
-.story-head{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;}
-.story-head .wh-ghost-av{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);}
-.story-head b{color:#fff;font-size:.72rem;}
-.story-head span{color:rgba(255,255,255,.6);font-size:.58rem;}
-.story-close{margin-left:auto;background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer;padding:.4rem;}
-.story-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.story-stage img,.story-stage video{max-width:100%;max-height:100%;object-fit:contain;}
-.story-tap-zone{position:absolute;top:0;bottom:0;width:35%;z-index:2;}
-.story-tap-zone.left{left:0;}
-.story-tap-zone.right{right:0;}
-.story-caption{padding:.9rem 1rem 1.4rem;color:#fff;font-size:.78rem;line-height:1.6;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);white-space:pre-wrap;}
 .dd-tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:.25rem;margin-bottom:1rem;}
 .dd-tabs button{flex:1;background:none;border:none;padding:.5rem 0;font-size:.66rem;font-weight:600;color:#7b8a99;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;}
 .dd-tabs button.on{background:var(--blue);color:#03060a;}
@@ -424,56 +394,271 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 .dd-link-box{display:flex;gap:.4rem;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.5rem .6rem;margin-top:.6rem;align-items:center;}
 .dd-link-box input{flex:1;background:none;border:none;color:var(--ice);font-size:.62rem;outline:none;}
 .dd-link-box button{background:var(--blue);border:none;color:#03060a;border-radius:6px;padding:.35rem .6rem;font-size:.6rem;font-weight:700;cursor:pointer;flex-shrink:0;}
-@media (min-width:820px){ .wrap{max-width:900px;} .apps-grid,.team-grid{grid-template-columns:repeat(4,1fr);} }
+.dd-percent-ring{position:relative;width:34px;height:34px;flex-shrink:0;}
+.dd-percent-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.dd-percent-ring circle{fill:none;stroke-width:3;}
+.dd-percent-ring .bg{stroke:rgba(255,255,255,.08);}
+.dd-percent-ring .fg{stroke:var(--blue);stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
+.dd-percent-ring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.44rem;font-weight:700;color:var(--ice);}
+.dd-status-row{display:flex;gap:.6rem;overflow-x:auto;padding:.4rem .1rem 1rem;}
+.dd-bubble-media{background:#000;}
+.dd-bubble-media img,.dd-bubble-media video{max-height:360px;object-fit:contain;background:#000;}
+.confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:800;display:none;align-items:center;justify-content:center;padding:1.2rem;}
+.confirm-ov.open{display:flex;}
+.confirm-box{background:var(--panel2);border:1px solid var(--line);border-radius:14px;max-width:340px;width:100%;padding:1.2rem 1.1rem;text-align:center;}
+.confirm-box .c-icon{width:46px;height:46px;border-radius:50%;background:rgba(255,34,85,.12);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .8rem;}
+.confirm-box .c-icon.info{background:rgba(47,143,255,.12);color:var(--blue);}
+.confirm-box p{font-size:.78rem;color:#d5dde4;line-height:1.6;margin-bottom:1rem;}
+.confirm-box .c-row{display:flex;gap:.6rem;}
+.confirm-box .c-row button{flex:1;border:none;border-radius:9px;padding:.65rem;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.74rem;cursor:pointer;}
+.confirm-box .c-cancel{background:rgba(255,255,255,.06);color:#cdd6de;}
+.confirm-box .c-ok{background:var(--red);color:#fff;}
+.confirm-box .c-ok.info{background:var(--blue);color:#03060a;}
+.dd-wiz-dots{display:flex;justify-content:center;gap:.35rem;margin-bottom:1.1rem;}
+.dd-wiz-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);}
+.dd-wiz-dots span.on{background:var(--blue);}
+.dd-wiz-step{display:none;}
+.dd-wiz-step.on{display:block;}
+.dd-wiz-q{font-size:.85rem;color:#fff;font-family:'Space Grotesk',sans-serif;margin-bottom:1rem;text-align:center;}
+.dd-wiz-choice-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.dd-wiz-choice{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.6rem 1rem;text-align:center;cursor:pointer;}
+.dd-wiz-choice:hover{border-color:var(--blue);background:rgba(47,143,255,.08);}
+.dd-wiz-choice i{font-size:1.6rem;color:var(--blue);display:block;margin-bottom:.7rem;}
+.dd-wiz-choice span{font-size:.78rem;color:#cdd6de;font-weight:600;}
+.dd-wiz-foot{display:flex;gap:.6rem;padding:0 1.1rem 1.1rem;}
+.dd-wiz-foot button{flex:1;justify-content:center;}
+.dd-wiz-foot #ddWizBackBtn{flex:0 0 auto;padding-left:1rem;padding-right:1rem;}
+#ddContent{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.65rem .8rem;color:#fff;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;resize:none;}
+.dd-view-toggle{display:flex;gap:.35rem;}
+.dd-view-toggle button{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mute);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.7rem;}
+.dd-view-toggle button.on{background:var(--blue);color:#03060a;border-color:var(--blue);}
+.dd-grid-view{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;}
+.anon-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.9rem;}
+.anon-add-btn{background:var(--blue);color:#03060a;border:none;border-radius:16px;padding:.5rem 1rem;font-size:.68rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;font-family:'Space Grotesk',sans-serif;}
+.anon-chip-row{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem;padding-bottom:.2rem;}
+.anon-chip{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.34rem .9rem;font-size:.66rem;color:#93a2b0;cursor:pointer;white-space:nowrap;}
+.anon-chip.on{background:var(--blue);color:#03060a;border-color:var(--blue);font-weight:600;}
+.dd-media-preview{background:#000;}
+.dd-media-preview img,.dd-media-preview video{max-height:260px;object-fit:contain;background:#000;}
+.dd-media-info{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;font-size:.7rem;color:#cdd6de;flex-wrap:wrap;}
+.dd-badge{background:rgba(47,143,255,.14);border:1px solid var(--line);color:var(--ice);border-radius:10px;padding:.1rem .5rem;font-size:.56rem;font-weight:600;}
+.dd-up-circle{position:relative;width:104px;height:104px;margin:.4rem auto .9rem;}
+.dd-up-circle svg{width:100%;height:100%;transform:rotate(-90deg);}
+.dd-up-circle circle{fill:none;stroke-width:5;}
+.dd-up-circle .bg{stroke:rgba(255,255,255,.08);}
+.dd-up-circle .fg{stroke:var(--blue);stroke-linecap:round;transition:stroke-dashoffset .25s linear;}
+.dd-up-circle.indet svg{animation:sp 1s linear infinite;}
+.dd-up-thumb{position:absolute;inset:12px;border-radius:50%;background:#111b2c center/cover no-repeat;opacity:.5;display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:1.4rem;}
+.dd-up-circle span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.9);}
+.dd-up-title{font-family:'Space Grotesk',sans-serif;font-size:.88rem;color:#fff;text-align:center;}
+.dd-up-mb{font-size:.72rem;color:var(--mute);text-align:center;margin-top:.25rem;min-height:1em;}
+.dd-q-row{display:flex;gap:.7rem;align-items:center;}
+.dd-q-thumb{width:54px;height:54px;border-radius:10px;overflow:hidden;background:#000;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--ice);}
+.dd-q-thumb img,.dd-q-thumb video{width:100%;height:100%;object-fit:cover;}
+.dd-q-title{font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dd-q-sub{font-size:.6rem;color:var(--mute);margin-top:.15rem;}
+.dd-q-sub.err{color:#ff8fa3;}
+.dd-media-wrap{position:relative;}
+.dd-media-wrap img,.dd-media-wrap video{width:100%;height:100%;display:block;background:#000;}
+.dd-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-14deg);pointer-events:none;background:rgba(0,0,0,.3);color:rgba(255,255,255,.55);font-size:.62rem;font-weight:700;letter-spacing:.02em;padding:.3rem .65rem;border-radius:8px;display:flex;align-items:center;gap:.35rem;text-shadow:0 1px 3px rgba(0,0,0,.6);z-index:2;white-space:nowrap;}
+.dd-watermark.sm{font-size:.44rem;padding:.15rem .4rem;border-radius:6px;}
+.dd-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;background:rgba(0,0,0,.15);z-index:1;}
+.dd-vid-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;border:none;display:flex;align-items:center;justify-content:center;font-size:1.05rem;cursor:pointer;z-index:3;}
+.dd-vid-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:.45rem;padding:.4rem .55rem;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);z-index:3;}
+.dd-vid-cur,.dd-vid-dur{font-size:.55rem;color:#fff;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.dd-vid-track{flex:1;height:4px;background:rgba(255,255,255,.28);border-radius:3px;position:relative;cursor:pointer;}
+.dd-vid-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:var(--blue);border-radius:3px;}
+.dd-vid-mute,.dd-vid-fs{background:none;border:none;color:#fff;font-size:.68rem;cursor:pointer;padding:.15rem .2rem;flex-shrink:0;}
 
-.anon-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}
-.anon-add-btn{background:var(--blue);color:#03060a;border:none;border-radius:16px;padding:.5rem 1rem;font-size:.68rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;font-family:'Space Grotesk',sans-serif}
-.anon-chip-row{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem}
-.anon-chip{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:.32rem .85rem;font-size:.66rem;color:#93a2b0;cursor:pointer;white-space:nowrap}
-.anon-chip.on{background:var(--blue);color:#03060a;border-color:var(--blue);font-weight:600}
-.anon-type-badge{font-size:.5rem;font-weight:700;padding:.12rem .42rem;border-radius:5px;letter-spacing:.05em;text-transform:uppercase}
-.anon-type-badge.whisper{background:rgba(47,143,255,.15);color:var(--ice)}
-.anon-type-badge.drop{background:rgba(255,51,85,.15);color:#ff8fa3}
-.anon-chooser{display:none;gap:.6rem;margin-bottom:1rem}
-.anon-chooser.open{display:grid;grid-template-columns:1fr 1fr}
-.anon-chooser-opt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.8rem .6rem;text-align:center;cursor:pointer}
-.anon-chooser-opt i{color:var(--blue);font-size:1.1rem;display:block;margin-bottom:.4rem}
-.anon-chooser-opt span{font-size:.66rem;color:#cdd6de;font-weight:600}
-.up-item{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:.5rem;margin-bottom:.4rem}
-.up-item .up-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;position:relative;background:#000}
-.up-item .up-thumb img,.up-item .up-thumb video{width:100%;height:100%;object-fit:cover}
-.up-item .up-ring{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.55rem;font-weight:700}
-.up-item .up-info{flex:1;min-width:0}
-.up-item .up-name{font-size:.62rem;color:#cdd6de;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.up-item .up-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-top:.3rem}
-.up-item .up-bar-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .15s linear}
-.up-item.err .up-bar-fill{background:var(--red)}
-.up-item .up-retry{background:none;border:none;color:var(--red);font-size:.75rem;cursor:pointer;padding:.3rem}
-.dd-up-ring{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;font-weight:700}
-
+/* ---- vertical status cards (WhatsApp-style rectangles) ---- */
+.dd-scard{flex-shrink:0;width:98px;height:168px;border-radius:14px;position:relative;overflow:hidden;cursor:pointer;background:#0a0f18;border:2px solid var(--blue);}
+.dd-scard.add{border:2px dashed var(--line);background:linear-gradient(160deg,#1a2436,#0a0f18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#93a2b0;font-size:.6rem;}
+.dd-scard.add .plus{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#03060a;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.sc-bg{position:absolute;inset:0;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:var(--ice);}
+.sc-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;}
+.sc-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;background:rgba(0,0,0,.18);}
+.sc-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:.55rem;text-align:center;color:#fff;font-size:.62rem;line-height:1.3;overflow:hidden;word-break:break-word;}
+.sc-shade{position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);}
+.sc-type{position:absolute;top:.4rem;left:.4rem;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:.55rem;display:flex;align-items:center;justify-content:center;}
+.sc-pct{position:absolute;left:.5rem;bottom:.6rem;font-size:.58rem;font-weight:700;color:#fff;}
+.sc-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.25);}
+.sc-bar i{display:block;height:100%;background:var(--blue);}
+.dd-txt-mini{border-radius:10px;padding:1rem;min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;margin:.3rem 0 .5rem;white-space:pre-wrap;word-break:break-word;font-size:.85rem;line-height:1.35;}
+.dd-bubble-row{display:flex;gap:.55rem;align-items:flex-end;margin-bottom:.8rem;}
+.dd-bubble-avatar{width:30px;height:30px;border-radius:50%;background:rgba(47,143,255,.12);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.dd-bubble-col{max-width:82%;background:var(--panel);border:1px solid var(--line);border-radius:14px 14px 14px 4px;overflow:hidden;}
+.dd-bubble{padding:.55rem .75rem;font-size:.75rem;color:#d5dde4;line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+.dd-bubble-time{padding:0 .75rem .4rem;font-size:.5rem;color:var(--mute);text-align:right;}
+/* ---- text-only composer ---- */
+.dd-tool-lbl{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin:.2rem 0 .4rem;}
+.dd-bg-row{display:flex;gap:.45rem;overflow-x:auto;padding:.2rem .15rem .6rem;}
+.dd-bg-sw{flex-shrink:0;width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.18);cursor:pointer;}
+.dd-bg-sw.on{border-color:#fff;box-shadow:0 0 0 2px var(--blue);}
+.dd-font-row{display:flex;gap:.4rem;overflow-x:auto;padding:.5rem .1rem;}
+.dd-font-chip{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#cdd6de;border-radius:14px;padding:.35rem .8rem;font-size:.82rem;cursor:pointer;}
+.dd-font-chip.on{background:var(--blue);color:#03060a;border-color:var(--blue);}
+.dd-wc{text-align:right;font-size:.6rem;color:var(--mute);}
+.dd-wc.max{color:#ffaa00;}
+.dd-txt-card:not(.plain){width:min(100%,300px);min-height:340px;margin:.2rem auto;border-radius:18px;padding:1.2rem;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.dd-txt-card:not(.plain) #ddContent{background:transparent;border:none;color:#fff;text-align:center;line-height:1.35;padding:0;overflow:hidden;text-shadow:0 1px 6px rgba(0,0,0,.25);}
+.dd-txt-card:not(.plain) #ddContent::placeholder{color:rgba(255,255,255,.6);}
+.dd-txt-preview{width:min(100%,230px);min-height:300px;margin:0 auto;border-radius:16px;padding:1.1rem;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;white-space:pre-wrap;word-break:break-word;line-height:1.35;}
+/* ---- full-screen viewer ---- */
+.ddv{position:fixed;inset:0;z-index:950;background:#000;display:none;flex-direction:column;}
+.ddv.open{display:flex;}
+.ddv-head{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;gap:.55rem;padding:calc(env(safe-area-inset-top,0px) + .6rem) .8rem .8rem;background:linear-gradient(rgba(0,0,0,.55),transparent);}
+.ddv-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+.ddv-title b{display:block;color:#fff;font-size:.74rem;}
+.ddv-title span{color:rgba(255,255,255,.65);font-size:.58rem;}
+.ddv-x{margin-left:auto;background:rgba(0,0,0,.35);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:.95rem;cursor:pointer;}
+.ddv-stage{flex:1;min-height:0;position:relative;overflow:hidden;}
+.ddv-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.ddv-mediahold{position:absolute;inset:0;visibility:hidden;}
+.ddv-mediahold.show{visibility:visible;}
+.ddv-mediahold .dd-media-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.ddv-mediahold .dd-media-wrap img,.ddv-mediahold .dd-media-wrap video{width:100%;height:100%;max-height:none;object-fit:contain;}
+.ddv-stage.txt .ddv-content{overflow-y:auto;align-items:flex-start;}
+.ddv-text{margin:auto;width:100%;padding:5rem 1.6rem 2rem;text-align:center;color:#fff;line-height:1.35;white-space:pre-wrap;word-break:break-word;text-shadow:0 1px 8px rgba(0,0,0,.25);}
+.ddv-load{position:absolute;inset:0;z-index:4;display:none;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;color:#cdd6de;font-size:.72rem;text-align:center;padding:2rem;}
+.ddv-load i.big{font-size:1.8rem;color:var(--blue);}
+.ddv-load button{background:var(--blue);color:#03060a;border:none;border-radius:10px;padding:.6rem 1.2rem;font-weight:700;font-size:.72rem;cursor:pointer;}
+.ddv-cap{display:none;padding:.8rem 1rem;color:#fff;font-size:.8rem;line-height:1.5;background:rgba(0,0,0,.7);white-space:pre-wrap;word-break:break-word;max-height:28vh;overflow-y:auto;}
+.ddv-foot{padding:.45rem 1rem calc(.7rem + env(safe-area-inset-bottom,0px));color:rgba(255,255,255,.6);font-size:.58rem;text-align:center;background:rgba(0,0,0,.7);}
+.sc-you{position:absolute;top:.4rem;right:.4rem;background:var(--blue);color:#03060a;font-size:.5rem;font-weight:700;padding:.1rem .38rem;border-radius:8px;}
+.dd-sec-lbl{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin:.4rem 0 .6rem;}
+.sc-face{position:absolute;inset:0;}
+.sc-wait{background:linear-gradient(110deg,#0f1623 30%,#1c2840 50%,#0f1623 70%);background-size:200% 100%;animation:scShim 1.4s linear infinite;}
+@keyframes scShim{to{background-position:-200% 0;}}
+.sc-bg.col{flex-direction:column;gap:.35rem;}
+.sc-bg .lbl{font-size:.52rem;color:#93a2b0;letter-spacing:.04em;}
+.sc-wait .spin{width:22px;height:22px;}
+/* animated watermark — videos only (images keep the still stamp) */
+.dd-wm-anim{position:absolute;z-index:3;pointer-events:none;left:7%;top:16%;animation:ddwmPath 12s ease-in-out infinite;will-change:left,top,transform;}
+.dd-wm-pop{position:relative;display:flex;align-items:center;gap:.4rem;padding:.28rem .65rem .28rem .35rem;border-radius:11px;background:rgba(10,14,22,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,.2);box-shadow:0 0 14px rgba(47,143,255,.6);overflow:hidden;animation:ddwmPop 12s linear infinite;}
+.dd-wm-ic{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#2f8fff,#25f4ee);color:#03060a;display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;}
+.dd-wm-tx{display:flex;flex-direction:column;line-height:1.1;}
+.dd-wm-tx b{display:inline-block;font-size:.64rem;color:#fff;letter-spacing:.02em;text-shadow:-1.5px 0 #25f4ee,1.5px 0 #fe2c55;animation:ddwmGlitch 3s steps(1) infinite;}
+.dd-wm-tx i{font-style:normal;font-size:.44rem;color:rgba(255,255,255,.65);letter-spacing:.2em;}
+.dd-wm-pop::after{content:'';position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:ddwmShine 3s ease-in-out infinite;}
+.dd-vid:not(.is-playing) .dd-wm-anim,.dd-vid:not(.is-playing) .dd-wm-pop,.dd-vid:not(.is-playing) .dd-wm-tx b,.dd-vid:not(.is-playing) .dd-wm-pop::after{animation-play-state:paused;}
+@keyframes ddwmPath{
+ 0%,18%{left:7%;top:16%;transform:translate(0,0);}
+ 25%,43%{left:93%;top:16%;transform:translate(-100%,0);}
+ 50%,68%{left:93%;top:76%;transform:translate(-100%,-100%);}
+ 75%,93%{left:7%;top:76%;transform:translate(0,-100%);}
+ 100%{left:7%;top:16%;transform:translate(0,0);}
+}
+@keyframes ddwmPop{
+ 0%{transform:scale(1.3);filter:brightness(1.7);} 4%,24.9%{transform:scale(1);filter:brightness(1);}
+ 25%{transform:scale(1.3);filter:brightness(1.7);} 29%,49.9%{transform:scale(1);filter:brightness(1);}
+ 50%{transform:scale(1.3);filter:brightness(1.7);} 54%,74.9%{transform:scale(1);filter:brightness(1);}
+ 75%{transform:scale(1.3);filter:brightness(1.7);} 79%,99.9%{transform:scale(1);filter:brightness(1);}
+ 100%{transform:scale(1.3);filter:brightness(1.7);}
+}
+@keyframes ddwmGlitch{
+ 0%,88%,100%{text-shadow:-1.5px 0 #25f4ee,1.5px 0 #fe2c55;transform:none;}
+ 90%{text-shadow:3px 0 #25f4ee,-3px 0 #fe2c55;transform:translateX(1.5px);}
+ 93%{text-shadow:-3px 0 #25f4ee,3px 0 #fe2c55;transform:translateX(-1.5px);}
+ 96%{text-shadow:2px 1px #25f4ee,-2px -1px #fe2c55;transform:none;}
+}
+@keyframes ddwmShine{0%,60%{left:-60%;}100%{left:130%;}}
+@media (prefers-reduced-motion:reduce){.dd-wm-anim,.dd-wm-pop,.dd-wm-tx b,.dd-wm-pop::after{animation:none;}}
+.dd-wm-anim{opacity:.6;}
+.dd-scard.skel{border-color:var(--line);cursor:default;}
+.sc-skel{background:linear-gradient(110deg,#0f1623 30%,#1c2840 50%,#0f1623 70%);background-size:200% 100%;animation:scShim 1.3s linear infinite;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:.4rem;padding:.6rem .55rem 1.5rem;}
+.sk-bar{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.1);}
+.sc-thumb{background-size:cover;background-position:center;}
+.sc-loading::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);background-size:200% 100%;animation:scShim 1.3s linear infinite;}
+.dd-vid-track{touch-action:none;margin:0 .45rem;}
+.dd-vid-track::before{content:'';position:absolute;left:-6px;right:-6px;top:-12px;bottom:-12px;}
+.dd-vid-knob{position:absolute;top:50%;left:0%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:linear-gradient(135deg,#2f8fff,#25f4ee);color:#03060a;display:flex;align-items:center;justify-content:center;font-size:.55rem;box-shadow:0 0 10px rgba(47,143,255,.8);pointer-events:none;}
+.dd-skip{position:absolute;top:50%;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:.2rem;color:#fff;font-size:.7rem;font-weight:700;padding:1.1rem;border-radius:50%;background:rgba(255,255,255,.18);animation:ddSkip .65s ease-out forwards;}
+.dd-skip.l{left:8%;}
+.dd-skip.r{right:8%;}
+@keyframes ddSkip{0%{opacity:0;transform:translateY(-50%) scale(.6);}25%{opacity:1;transform:translateY(-50%) scale(1.05);}100%{opacity:0;transform:translateY(-50%) scale(1);}}
+.sc-blurwrap{overflow:hidden;background:#0a0f18;}
+.sc-blur{position:absolute;inset:-14%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,1fr);filter:blur(14px);}
+.sc-blur i{display:block;}
+.dd-chip-n{margin-left:.45rem;background:#ff3b5c;color:#fff;font-size:.55rem;font-weight:700;min-width:17px;height:17px;padding:0 .3rem;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;}
+.dd-search-wrap{position:relative;}
+#ddUserSearch{width:100%;box-sizing:border-box;background:#000;border:1px solid var(--line);border-radius:10px;padding:.7rem 2.5rem .7rem .85rem;color:#fff;font-size:.78rem;outline:none;font-family:inherit;}
+#ddUserSearch::placeholder{color:#5d6b79;}
+#ddUserSearch:focus{border-color:var(--blue);}
+.dd-search-spin{display:none;position:absolute;right:.85rem;top:50%;margin-top:-8px;}
+.dd-user-results{background:#000;}
+.dd-vid-buf{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:4;pointer-events:none;}
+.dd-vid-buf .spin{width:28px;height:28px;border-width:3px;}
+.dd-vid.is-buffering .dd-vid-buf{display:flex;}
+.ddl-bar,.ddl-land{display:none;}
+body.dd-link-mode > *:not(#ddViewOv):not(#ddLinkBar):not(#ddLinkLanding):not(#toastCont):not(script):not(style){display:none !important;}
+body.dd-link-mode .ddl-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:960;align-items:center;justify-content:space-between;gap:.6rem;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom,0px));background:rgba(5,7,10,.94);border-top:1px solid var(--line);color:#cdd6de;font-size:.7rem;}
+.ddl-bar button{background:var(--blue);color:#03060a;border:none;border-radius:10px;padding:.55rem .9rem;font-weight:700;font-size:.7rem;cursor:pointer;white-space:nowrap;}
+body.dd-link-mode .ddv-foot{padding-bottom:calc(4.6rem + env(safe-area-inset-bottom,0px));}
+body.dd-link-mode .ddl-land.open{display:flex;position:fixed;inset:0;z-index:970;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:.8rem;padding:2rem;text-align:center;}
+body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open) .ddl-bar{display:none;}
+.ddl-ic{width:64px;height:64px;border-radius:50%;background:rgba(47,143,255,.12);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 0 30px rgba(47,143,255,.3);}
+.ddl-land h2{color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.2rem;}
+.ddl-land p{color:var(--mute);font-size:.74rem;line-height:1.6;max-width:320px;}
+.ddl-main{width:100%;max-width:320px;background:var(--blue);color:#03060a;border:none;border-radius:12px;padding:.9rem;font-weight:700;font-size:.8rem;cursor:pointer;}
+.ddl-alt{width:100%;max-width:320px;background:transparent;color:#cdd6de;border:1px solid var(--line);border-radius:12px;padding:.75rem;font-size:.74rem;cursor:pointer;}
+.no-select{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+@media (min-width:700px){
+  /* real centered dialogs on tablet/desktop instead of bottom-anchored sheets */
+  .ov{align-items:center;padding:1rem;}
+  .sheet{border-radius:18px;max-height:90vh;max-height:90dvh;}
+}
+@media (min-width:820px){
+  .wrap{max-width:900px;}
+  .apps-grid,.team-grid{grid-template-columns:repeat(4,1fr);}
+  .dd-grid-view{grid-template-columns:repeat(3,1fr);}
+}
+@media (min-width:1180px){
+  body{font-size:15px;}
+  .wrap{max-width:1180px;padding:2rem 2rem 5rem;}
+  .hero{display:grid;grid-template-columns:1.3fr .9fr;gap:2rem;align-items:start;}
+  .hero .team-grid{grid-column:1/-1;grid-template-columns:repeat(4,1fr);margin-top:.4rem;}
+  .hero-actions{grid-column:1/-1;}
+  .hero h1{font-size:2.1rem;}
+  .dd-grid-view{grid-template-columns:repeat(4,1fr);}
+  .apps-grid{grid-template-columns:repeat(4,1fr);}
+  .hrow .card{flex:0 0 190px;width:190px;}
+}
+@media (min-width:1180px) and (orientation:landscape){
+  .dd-status-row{padding-bottom:.6rem;}
+}
 </style>
 </head>
 <body>
+<script>if(/^\/[^\/]+\/postID\//i.test(location.pathname)||/[?&]drop=/.test(location.search))document.body.classList.add('dd-link-mode');</script>
 
 <div class="toast-cont" id="toastCont"></div>
+<div class="ddl-bar" id="ddLinkBar"><span>Want to drop something too?</span><button onclick="ddGoPost()">Post your own <i class="fas fa-arrow-right"></i></button></div>
+<div class="ddl-land" id="ddLinkLanding">
+  <div class="ddl-ic"><i class="fas fa-skull-crossbones"></i></div>
+  <h2>Dark Digital Space</h2>
+  <p>You opened an anonymous drop. Drops self-destruct after enough views or 24 hours, and nobody can download what's inside.</p>
+  <button class="ddl-main" onclick="ddGoPost()"><i class="fas fa-radiation"></i> Post your own drop</button>
+  <button class="ddl-alt" onclick="ddLinkReopen()">View it again</button>
+  <button class="ddl-alt" onclick="ddGoHome()">Visit Dark Digital Space</button>
+</div>
 
 <div class="img-view-ov" id="imgViewOv" onclick="closeImgView()">
   <button class="img-view-close" onclick="closeImgView()"><i class="fas fa-times"></i></button>
-  <img id="imgViewImg" src="" alt="">
+  <img id="imgViewImg" src="" alt="" class="no-select" oncontextmenu="return false" draggable="false">
 </div>
 
-<div class="story-ov" id="storyOv">
-  <div class="story-bars" id="storyBars"></div>
-  <div class="story-head">
-    <div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>
-    <div><b id="storyAnonLbl">Anon-000</b><br><span id="storyTimeLbl"></span></div>
-    <button class="story-close" onclick="closeStory()"><i class="fas fa-times"></i></button>
+<div class="ddv" id="ddViewOv">
+  <div class="ddv-head">
+    <div class="ddv-av"><i class="fas fa-skull-crossbones"></i></div>
+    <div class="ddv-title"><b>Anonymous drop</b><span id="ddvSub"></span></div>
+    <button class="ddv-x" onclick="ddCloseViewer()"><i class="fas fa-times"></i></button>
   </div>
-  <div class="story-stage" id="storyStage">
-    <div class="story-tap-zone left" onclick="storyPrev()"></div>
-    <div class="story-tap-zone right" onclick="storyNext()"></div>
+  <div class="ddv-stage" id="ddvStage">
+    <div class="ddv-content" id="ddvContent"></div>
+    <div class="ddv-load" id="ddvLoad"></div>
   </div>
-  <div class="story-caption" id="storyCaption" style="display:none"></div>
+  <div class="ddv-cap" id="ddvCap"></div>
+  <div class="ddv-foot" id="ddvFoot"></div>
 </div>
 
 <div class="topbar">
@@ -485,7 +670,6 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   <div class="bits-row" id="menuBitsRow" style="display:none">Bits balance: <b id="menuBits">--</b></div>
   <button onclick="closeMenu();openDevSpot()"><i class="fas fa-code-branch"></i> Post a project</button>
   <button onclick="closeMenu();openReferralCenter()"><i class="fas fa-gift"></i> Referral Center</button>
-  <button onclick="closeMenu();openWhispers()"><i class="fas fa-ghost"></i> Whispers</button>
   <button onclick="closeMenu();openDeadDrop()"><i class="fas fa-skull-crossbones"></i> Dead Drop</button>
   <button onclick="closeMenu();openLearn()"><i class="fas fa-graduation-cap"></i> Learn</button>
   <button onclick="closeMenu();openMyProjects()"><i class="fas fa-folder-open"></i> My projects</button>
@@ -496,9 +680,11 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 
 <div class="wrap">
   <div class="hero">
+    <div>
     <span class="tag">// what is dds</span>
     <h1>A place for <br><span> digital innovators & builders</span>.</h1>
     <p>DDS — Dark Digital Space — is a specialized digital forum for global gatherings of individuals with interests in cybersecurity, hacking, and programming 🌐.</p>
+    </div>
    <div class="sec-label"><b>About</b></div>
   <div class="team-grid" id="teamGrid"></div>
       <div class="hero-actions">
@@ -557,21 +743,27 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
     </div>
   </div>
 
-  <div class="sec-label"><b>Anonymous</b></div>
-  <div class="apps-grid">
-    <div class="app-card">
-      <div class="app-icon"><i class="fas fa-ghost"></i></div>
-      <b>Whispers</b>
-      <span>Say it anonymously — text, photos or short videos. No alias, no DDS#.</span>
-      <button onclick="openWhispers()" style="background:rgba(47,143,255,.14);border-color:var(--blue);color:var(--ice)"><i class="fas fa-arrow-right"></i> Open</button>
+  <div class="sec-label"><b>Dead Drop</b><span class="dd-view-toggle" id="ddViewToggle"><button class="on" id="ddViewRowBtn" onclick="ddSwitchView('row')" title="Status row"><i class="fas fa-grip-vertical"></i></button><button id="ddViewGridBtn" onclick="ddSwitchView('grid')" title="Grid view"><i class="fas fa-table-cells"></i></button></span></div>
+  <p style="font-size:.65rem;color:var(--mute);margin:-.4rem 0 .8rem;line-height:1.6">Anonymous drops that self-destruct after enough eyes or 24h. Nobody can download what's inside — it can only be viewed here.</p>
+
+  <div id="anonSection" style="margin-top:.2rem">
+    <div class="anon-toolbar">
+      <div id="ddTitleTap" style="font-size:.78rem;color:#fff;font-family:'Space Grotesk',sans-serif">Active drops</div>
+      <span style="font-size:.58rem;color:var(--mute)">Tap New drop to start one</span>
     </div>
-    <div class="app-card">
-      <div class="app-icon"><i class="fas fa-skull-crossbones"></i></div>
-      <b>Dead Drop</b>
-      <span>Anonymous drops that self-destruct after enough eyes or 24h.</span>
-      <button onclick="openDeadDrop()" style="background:rgba(47,143,255,.14);border-color:var(--blue);color:var(--ice)"><i class="fas fa-arrow-right"></i> Open</button>
+
+    <div class="anon-chip-row">
+      <div class="anon-chip on" data-f="all" onclick="anonSetFilter(this,'all')">All</div>
+      <div class="anon-chip" data-f="mine" onclick="anonSetFilter(this,'mine')">My drops</div>
+      <div class="anon-chip" data-f="shared" onclick="anonSetFilter(this,'shared')">Shared with me</div>
+      <div class="anon-chip" id="ddQueueChip" data-f="queue" style="display:none" onclick="anonSetFilter(this,'queue')">Awaiting upload</div>
     </div>
+
+    <div id="anonFeed"><div class="empty"><div class="spin"></div>Loading…</div></div>
+
+
   </div>
+
 
   <div class="sec-label"><b>Community</b></div>
   <div class="testers-row">
@@ -632,8 +824,12 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <div class="field"><label>DDS Number</label><input type="text" id="rgDDS" placeholder="(!-XXXXXXXXXX)"></div>
         <div class="field"><label>Alias</label><input type="text" id="rgAlias" placeholder="YourUniqueAlias"></div>
         <div class="field"><label>Profession</label><input type="text" id="rgProf" placeholder="Hacker, Developer, Designer..."></div>
-        <div class="field"><label>Password</label><input type="password" id="rgPass" placeholder="Create a password"></div>
-        <div class="field"><label>Confirm password</label><input type="password" id="rgConf" placeholder="Repeat password"></div>
+        <div class="field"><label>Password</label>
+          <div class="pw-wrap"><input type="password" id="rgPass" placeholder="Create a password"><button type="button" class="pw-toggle" onclick="togglePw('rgPass',this)"><i class="fas fa-eye"></i></button></div>
+        </div>
+        <div class="field"><label>Confirm password</label>
+          <div class="pw-wrap"><input type="password" id="rgConf" placeholder="Repeat password"><button type="button" class="pw-toggle" onclick="togglePw('rgConf',this)"><i class="fas fa-eye"></i></button></div>
+        </div>
         <label style="display:flex;gap:.5rem;align-items:flex-start;font-size:.62rem;color:var(--ice);margin-bottom:.9rem;cursor:pointer">
           <input type="checkbox" id="rgAgree" style="margin-top:.2rem">
           I agree to the <a href="#" onclick="event.preventDefault();openLegal('terms')" style="color:var(--blue)">Terms</a> &amp; <a href="#" onclick="event.preventDefault();openLegal('privacy')" style="color:var(--blue)">Privacy Policy</a>
@@ -645,7 +841,9 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
       </div>
       <div class="tabpane" id="paneLogin">
         <div class="field"><label>Alias</label><input type="text" id="lgAlias" placeholder="Your alias"></div>
-        <div class="field"><label>Password</label><input type="password" id="lgPass" placeholder="Your password"></div>
+        <div class="field"><label>Password</label>
+          <div class="pw-wrap"><input type="password" id="lgPass" placeholder="Your password"><button type="button" class="pw-toggle" onclick="togglePw('lgPass',this)"><i class="fas fa-eye"></i></button></div>
+        </div>
         <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="lgSubmit()">Login</button>
         <div class="link-line" onclick="showForgot()">Forgot password?</div>
         <div style="text-align:center;margin-top:.7rem"><span class="spin" id="lgLoad" style="display:none"></span></div>
@@ -662,8 +860,12 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
         <div class="substep" id="fgB">
           <div class="msg inf show">Security code sent — enter it along with your new password.</div>
           <div class="field"><label>Security code</label><input type="text" id="fgCode" maxlength="6" inputmode="numeric" placeholder="000000"></div>
-          <div class="field"><label>New password</label><input type="password" id="fgNewP" placeholder="New password"></div>
-          <div class="field"><label>Confirm new password</label><input type="password" id="fgConf" placeholder="Repeat new password"></div>
+          <div class="field"><label>New password</label>
+            <div class="pw-wrap"><input type="password" id="fgNewP" placeholder="New password"><button type="button" class="pw-toggle" onclick="togglePw('fgNewP',this)"><i class="fas fa-eye"></i></button></div>
+          </div>
+          <div class="field"><label>Confirm new password</label>
+            <div class="pw-wrap"><input type="password" id="fgConf" placeholder="Repeat new password"><button type="button" class="pw-toggle" onclick="togglePw('fgConf',this)"><i class="fas fa-eye"></i></button></div>
+          </div>
           <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="fgReset()">Reset password</button>
           <div class="link-line" onclick="fgShowSub('fgA')">Back</div>
         </div>
@@ -724,7 +926,8 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
           <span onclick="setDsType('Tool',this)">🔧 Tool</span>
         </div>
         <label>Action URL <span style="color:var(--red)">*</span></label>
-        <input type="text" id="dsUrl" placeholder="Download URL / GitHub link / Website">
+        <input type="text" id="dsUrl" placeholder="Real hosted download URL (GitHub release, direct APK link, website...)">
+        <p style="font-size:.55rem;color:var(--mute);margin-top:.35rem">This must be a real, working link. Tapping the download button on the finished project takes people straight to this URL — there is no simulated download.</p>
       </div>
       <div class="field-row">
         <div class="field"><label>File size <span id="sizeReq" style="color:var(--red);display:none">*</span></label><input type="text" id="dsSize" placeholder="e.g. 24 MB"></div>
@@ -855,6 +1058,90 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
   <div class="sheet" id="teamSheet"></div>
 </div>
 
+<!-- DEAD DROP WIZARD -->
+<div class="ov" id="ddWizardOv" onclick="if(event.target===this)closeDdWizard()">
+  <div class="sheet" style="max-width:460px">
+    <div class="sheet-head"><h3><i class="fas fa-skull-crossbones" style="color:var(--blue)"></i> New Dead Drop</h3><button onclick="closeDdWizard()"><i class="fas fa-times"></i></button></div>
+    <div class="sheet-body">
+      <div class="dd-wiz-dots" id="ddWizDots"></div>
+
+      <div class="dd-wiz-step on" data-step="0">
+        <p class="dd-wiz-q">What are you dropping?</p>
+        <div class="dd-wiz-choice-row">
+          <div class="dd-wiz-choice" onclick="ddWizChooseType('text')"><i class="fas fa-font"></i><span>Text only</span></div>
+          <div class="dd-wiz-choice" onclick="ddWizChooseType('media')"><i class="fas fa-photo-film"></i><span>Photo / video</span></div>
+        </div>
+      </div>
+
+      <div class="dd-wiz-step" data-step="1">
+        <p class="dd-wiz-q">Your photo or video</p>
+        <div class="dd-media-zone" id="ddMediaZone">
+          <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="ddPickMedia(this)"/>
+          <i class="fas fa-paperclip"></i>
+          <p>Tap to attach an image or video</p>
+        </div>
+        <div id="ddMediaPreviewWrap"></div>
+      </div>
+
+      <div class="dd-wiz-step" data-step="2">
+        <p class="dd-wiz-q" id="ddWizTextLabel">Your message</p>
+        <div id="ddTextTools">
+          <div class="dd-tool-lbl">Background</div>
+          <div class="dd-bg-row" id="ddBgRow"></div>
+        </div>
+        <div class="dd-txt-card plain" id="ddTxtCard">
+          <textarea id="ddContent" rows="5" maxlength="2000" placeholder="What are you dropping?" oninput="ddOnTextInput()"></textarea>
+        </div>
+        <div id="ddTextTools2">
+          <div class="dd-tool-lbl">Font</div>
+          <div class="dd-font-row" id="ddFontRow"></div>
+          <div class="dd-wc" id="ddWordCount">0 / 100 words</div>
+        </div>
+      </div>
+
+      <div class="dd-wiz-step" data-step="3">
+        <p class="dd-wiz-q">Who can view it</p>
+        <div class="dd-mode-row">
+          <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
+          <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
+        </div>
+        <div id="ddUsersBlock">
+          <div class="dd-user-search">
+            <div class="dd-search-wrap"><input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off"><span class="spin dd-search-spin" id="ddSearchSpin"></span></div>
+            <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
+          </div>
+          <div class="dd-picked-row" id="ddPickedRow"></div>
+        </div>
+        <div class="dd-range-row" style="margin-top:.9rem">
+          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
+          <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
+          <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
+        </div>
+      </div>
+
+      <div class="dd-wiz-step" data-step="4">
+        <p class="dd-wiz-q">Ready to drop</p>
+        <div id="ddWizReview"></div>
+        <div id="ddUploadBox" style="display:none">
+          <div class="dd-up-circle">
+            <svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="44"></circle><circle class="fg" id="ddUpFg" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"></circle></svg>
+            <div class="dd-up-thumb" id="ddUpThumb"></div>
+            <span id="ddUpPct">0%</span>
+          </div>
+          <div class="dd-up-title" id="ddUpTitle">Uploading…</div>
+          <div class="dd-up-mb" id="ddUpMb"></div>
+          <button class="btn btn-ghost" id="ddUpCancelBtn" style="margin:.9rem auto 0;justify-content:center" onclick="ddUploadCancel()"><i class="fas fa-xmark"></i> Cancel</button>
+        </div>
+        <div class="msg inf show" id="ddWizNote" style="margin-top:.8rem">Anonymous, disappears automatically. Nobody sees your name on it. Only you will ever see the real view count — everyone else sees a % toward self-destruct.</div>
+      </div>
+    </div>
+    <div class="dd-wiz-foot" id="ddWizFoot">
+      <button class="btn btn-ghost" id="ddWizBackBtn" onclick="ddWizBack()">Back</button>
+      <button class="btn btn-primary" id="ddWizNextBtn" onclick="ddWizNext()">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
 <!-- REFERRAL CENTER -->
 <div class="ov" id="referralOv" onclick="if(event.target===this)closeReferralCenter()">
   <div class="sheet">
@@ -919,102 +1206,18 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
 </div>
 
 
-<!-- ANONYMOUS — Explore-style feed for Whispers + public Dead Drops -->
-<div class="ov" id="anonOv" onclick="if(event.target===this)closeAnonymous()">
-  <div class="sheet">
-    <div class="sheet-head"><h3><i class="fas fa-user-secret" style="color:var(--blue)"></i> Anonymous</h3><button onclick="closeAnonymous()"><i class="fas fa-times"></i></button></div>
-    <div class="sheet-body">
-
-      <div class="anon-toolbar">
-        <div style="font-size:.78rem;color:#fff;font-family:'Space Grotesk',sans-serif">Explore</div>
-        <button class="anon-add-btn" onclick="anonToggleChooser()"><i class="fas fa-plus"></i> Add</button>
-      </div>
-
-      <div class="anon-chooser" id="anonChooser">
-        <div class="anon-chooser-opt" onclick="anonPickCompose('whisper')"><i class="fas fa-ghost"></i><span>Whisper</span></div>
-        <div class="anon-chooser-opt" onclick="anonPickCompose('drop')"><i class="fas fa-skull-crossbones"></i><span>Dead Drop</span></div>
-      </div>
-
-      <!-- WHISPER COMPOSE — hidden until "Add > Whisper" is tapped -->
-      <div class="wh-compose" id="whComposeBox" style="display:none">
-        <textarea id="whText" maxlength="500" placeholder="Say something... nobody will know it's you." oninput="whUpdateCount()"></textarea>
-        <div class="wh-compose-foot">
-          <span class="wh-compose-note"><i class="fas fa-user-secret"></i> Posted anonymously</span>
-          <span class="wh-charcount" id="whCharCount">0/500</span>
-        </div>
-        <div class="wh-media-zone" id="whMediaZone">
-          <input type="file" id="whMediaFile" accept="image/*,video/*" multiple onchange="handleWhMedia(this)"/>
-          <i class="fas fa-images"></i>
-          <p>Tap to add photos or short videos</p>
-        </div>
-        <div class="wh-media-limits"><span id="whImgCount">0/8 photos</span><span id="whVidCount">0/3 videos</span></div>
-        <div id="whUploadQueueList"></div>
-        <div class="img-grid" id="whMediaGrid"></div>
-        <div style="display:flex;gap:.5rem;margin-top:.6rem">
-          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="anonCollapseCompose()">Cancel</button>
-          <button class="btn btn-primary" style="flex:2;justify-content:center" onclick="postWhisper(this)"><i class="fas fa-paper-plane"></i> Whisper it</button>
-        </div>
-      </div>
-
-      <!-- DEAD DROP COMPOSE — hidden until "Add > Dead Drop" is tapped -->
-      <div id="ddComposeBox" style="display:none">
-        <div class="msg inf show">Anonymous, disappears automatically. Nobody sees your name on it.</div>
-        <div class="field"><label>Message / link</label><textarea id="ddContent" rows="3" maxlength="2000" placeholder="What are you dropping?"></textarea></div>
-        <div class="field">
-          <label>Attach a photo or video <span style="color:var(--ice);font-size:.55rem">(optional)</span></label>
-          <div class="dd-media-zone" id="ddMediaZone">
-            <input type="file" id="ddMediaFile" accept="image/*,video/*" onchange="handleDdMedia(this)"/>
-            <i class="fas fa-paperclip"></i>
-            <p>Tap to attach an image or video</p>
-          </div>
-          <div id="ddMediaPreviewWrap"></div>
-        </div>
-
-        <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Who can view it</label>
-        <div class="dd-mode-row">
-          <div class="dd-mode-opt on" id="ddModeUsersOpt" onclick="ddSetMode('users')"><i class="fas fa-users"></i><span>Pick users</span></div>
-          <div class="dd-mode-opt" id="ddModeLinkOpt" onclick="ddSetMode('link')"><i class="fas fa-link"></i><span>Anyone with link</span></div>
-        </div>
-
-        <div id="ddUsersBlock">
-          <div class="dd-user-search">
-            <input type="text" id="ddUserSearch" placeholder="Search alias or DDS#..." oninput="ddSearchUsers(this.value)" autocomplete="off">
-            <div class="dd-user-results" id="ddUserResults" style="display:none"></div>
-          </div>
-          <div class="dd-picked-row" id="ddPickedRow"></div>
-        </div>
-
-        <div class="dd-range-row" style="margin-top:.9rem">
-          <label style="display:block;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ice);margin-bottom:.4rem">Self-destruct after this many views</label>
-          <input type="range" id="ddViewTarget" min="0" max="0" value="0" oninput="ddUpdateRangeLabel()">
-          <div class="dd-range-val"><span>min 2</span><b id="ddViewTargetVal">2 views</b><span>max 20,000</span></div>
-        </div>
-        <div class="msg inf show" style="margin-top:.2rem">Whichever comes first: your view target, or 24 hours from posting. You can cancel it any time before then.</div>
-
-        <div style="display:flex;gap:.5rem;margin-top:.6rem">
-          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="anonCollapseCompose()">Cancel</button>
-          <button class="btn btn-primary" style="flex:2;justify-content:center" id="ddSubmitBtn" onclick="createDeadDrop()"><i class="fas fa-radiation"></i> Drop it</button>
-        </div>
-      </div>
-
-      <div class="anon-chip-row">
-        <div class="anon-chip on" data-f="all" onclick="anonSetFilter(this,'all')">All</div>
-        <div class="anon-chip" data-f="whisper" onclick="anonSetFilter(this,'whisper')">Whispers</div>
-        <div class="anon-chip" data-f="drop" onclick="anonSetFilter(this,'drop')">Dead Drops</div>
-        <div class="anon-chip" data-f="mine" onclick="anonSetFilter(this,'mine')">My drops</div>
-        <div class="anon-chip" data-f="shared" onclick="anonSetFilter(this,'shared')">Shared with me</div>
-      </div>
-
-      <div id="anonFeed"><div class="empty"><div class="spin"></div>Loading…</div></div>
-
-      <div id="ddViewerWrap" style="display:none">
-        <button class="btn btn-ghost" style="margin-bottom:.8rem" onclick="anonBackToFeed()"><i class="fas fa-arrow-left"></i> Back</button>
-        <div class="dd-viewer" id="ddViewerBody"></div>
-      </div>
-
+<!-- CONFIRM -->
+<div class="confirm-ov" id="confirmOv">
+  <div class="confirm-box">
+    <div class="c-icon" id="confirmIcon"><i class="fas fa-triangle-exclamation"></i></div>
+    <p id="confirmMsg"></p>
+    <div class="c-row">
+      <button class="c-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="c-ok" id="confirmOkBtn">Yes</button>
     </div>
   </div>
 </div>
+
 <!-- LEGAL -->
 <div class="ov" id="legalOv" onclick="if(event.target===this)closeLegal()">
   <div class="sheet">
@@ -1022,19 +1225,13 @@ h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-
     <div class="sheet-body" id="legalBody" style="font-size:.72rem;color:#a9b7c4;line-height:1.75"></div>
   </div>
 </div>
-
 <script>
 /* ============ backend endpoints ============ */
 var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
-var POSTS_API = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
-var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbw-D3oFxCztLbTGyDdlVvXTmAmUoM00IitKxXeim3K_Ug_cSFvJhr58Y12k0eaB0j6RzA/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
+var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
 var SUPPORT_EMAIL = 'darkdigitalspaceteam@gmail.com';
-/* SECURITY: intentionally no admin key and no GitHub token here.
-   Ownership is enforced server-side by matching the signed-in user's
-   ddsNumber against the record's owner field. Media uploads go through
-   the backend's uploadMedia action, which holds the GitHub token in
-   Script Properties on the server — never in this file. */
 
 var currentUser = {}, isSignedIn = false;
 var allProjs = [], chip='all', cachedProjs=[];
@@ -1052,10 +1249,15 @@ function showToast(msg,type){
   setTimeout(function(){t.remove();},3200);
 }
 
+/* ---- password show/hide ---- */
+function togglePw(id, btn){
+  var inp=document.getElementById(id); if(!inp) return;
+  var show = inp.type==='password';
+  inp.type = show ? 'text' : 'password';
+  btn.innerHTML = show ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+}
 
-    /* Prevents double-taps on any async action. Disables the button and
-   shows a spinner until the task settles, then restores it. Keyed so
-   the SAME action twice is blocked, but different actions aren't. */
+/* Prevents double-taps on any async action. */
 var _busyKeys = Object.create(null);
 function guardTap(key, btn, task){
   if(_busyKeys[key]) return;
@@ -1071,41 +1273,153 @@ function guardTap(key, btn, task){
     if(r && typeof r.then === 'function') r.then(done, done); else done();
   }catch(e){ done(); throw e; }
 }
-    
+
 /* ============================================================
-   SECURE MEDIA UPLOAD — the ONLY place file bytes leave the browser.
-   Sends base64 to the backend; the backend (with a server-side-only
-   GitHub token in Script Properties) pushes the file to GitHub and
-   returns the public raw URL. No token or repo credential lives here.
+   SECURE MEDIA UPLOAD — base64 to the backend; backend pushes the
+   file to GitHub (real, permanent storage) and returns the public
+   raw URL. That URL is what actually gets opened/downloaded later —
+   nothing here is a simulated or fake link.
    ============================================================ */
-function uploadMedia(file, onProgress){
-  var fakeTimer = null;
+function netErr(msg){ var e=new Error(msg||'Network error'); e.net=true; return e; }
+/* Back to the exact plain fetch() this originally used — no client-side
+   timeout or "idle stall" watchdog of any kind. Those were cutting real,
+   still-in-progress uploads off early on a slow connection and reporting
+   that as "Network error" even though the transfer would have finished on
+   its own. fetch() just waits for the browser/OS to finish or fail the
+   request, same as it always did. The only way this ever stops early now
+   is the person tapping Cancel (ctl.abort()). Progress is simulated (the
+   Fetch API has no reliable cross-browser upload-progress event), same as
+   the original version — it just estimates from average slow-connection
+   speed towards a ceiling of 99% and jumps to 100% once the response
+   actually arrives. */
+/* Every failure is turned into a short, human message. Raw browser/parser
+   text such as "Unexpected token '<' ... is not valid JSON" is never shown:
+   an HTML reply from the server just means it was busy, so it is retried
+   silently a couple of times first. */
+function ddErr(kind, msg){
+  var M={ offline:"You're offline — check your connection and try again.",
+          network:"Network problem — check your connection and try again.",
+          server:"The server is busy right now — please try again in a moment.",
+          file:"Couldn't read that file — please pick it again." };
+  var e=new Error(msg || M[kind] || 'Something went wrong — please try again.');
+  e.kind=kind; if(kind==='offline'||kind==='network') e.net=true; return e;
+}
+function ddClassify(err){
+  if(err && (err.cancelled || err.server || err.kind)) return err;
+  if(typeof navigator!=='undefined' && navigator.onLine===false) return ddErr('offline');
+  if(err && err.name==='SyntaxError') return ddErr('server');
+  return ddErr('network');
+}
+async function ddRetry(fn, tries){
+  var last;
+  for(var i=0;i<tries;i++){
+    try{ return await fn(); }
+    catch(e){
+      if(e && e.name==='AbortError') throw e;
+      e=ddClassify(e); last=e;
+      if(e.cancelled || e.server || e.kind==='offline' || i===tries-1) throw e;
+      await new Promise(function(r){ setTimeout(r, 1200*(i+1)); });
+    }
+  }
+  throw last;
+}
+function uploadMedia(file, onProgress, ctl){
+  var fakeTimer=null, pct=0;
   if(onProgress){
-    var pct = 0;
-    fakeTimer = setInterval(function(){
-      pct = Math.min(92, pct + 4 + Math.random()*10);
-      onProgress(Math.round(pct));
-    }, 220);
+    fakeTimer=setInterval(function(){
+      pct=Math.min(92, pct+3+Math.random()*6);
+      onProgress(Math.round(pct), Math.round(pct/100*file.size), file.size);
+    },400);
   }
-  function stopFake(finalPct){
-    if(fakeTimer){ clearInterval(fakeTimer); fakeTimer=null; }
-    if(onProgress) onProgress(finalPct);
-  }
+  function stopFake(finalPct){ if(fakeTimer){ clearInterval(fakeTimer); fakeTimer=null; } if(onProgress) onProgress(finalPct, file.size, file.size); }
+  var ctrl = ('AbortController' in window) ? new AbortController() : null;
+  if(ctl) ctl.abort = function(){ if(ctrl) ctrl.abort(); };
   return new Promise(function(resolve, reject){
     var reader = new FileReader();
     reader.onload = function(e){
-      var b64 = e.target.result.split(',')[1];
-      fetch(POSTS_API, {
-        method:'POST', headers:{'Content-Type':'text/plain'},
-        body: JSON.stringify({ action:'uploadMedia', ddsNumber: currentUser.ddsNumber||'', filename:file.name, mimeType:file.type, dataBase64:b64 })
-      }).then(function(r){ return r.json(); }).then(function(d){
-        if(d.success){ stopFake(100); resolve(d.data.url); }
-        else { stopFake(100); reject(new Error(d.message||'Upload failed')); }
-      }).catch(function(err){ stopFake(100); reject(new Error(err && err.message ? err.message : 'Network error')); });
+      var body = JSON.stringify({ action:'uploadMedia', ddsNumber: currentUser.ddsNumber||'', filename:file.name, mimeType:file.type, dataBase64:e.target.result.split(',')[1] });
+      ddRetry(function(){
+        return fetch(POSTS_API, { method:'POST', headers:{'Content-Type':'text/plain'}, signal: ctrl?ctrl.signal:undefined, body: body })
+          .then(function(r){ return r.text(); })
+          .then(function(t){
+            var d; try{ d=JSON.parse(t); }catch(x){ throw ddErr('server'); }
+            if(d && d.success && d.data && d.data.url) return d.data.url;
+            var er=new Error((d&&d.message)||'Upload failed — please try again.'); er.server=true; throw er;
+          });
+      }, 3).then(function(url){ stopFake(100); resolve(url); })
+      .catch(function(err){
+        stopFake(100);
+        if(err && err.name==='AbortError'){ var ce=new Error('Cancelled'); ce.cancelled=true; return reject(ce); }
+        reject(ddClassify(err));
+      });
     };
-    reader.onerror = function(){ stopFake(100); reject(new Error('Could not read file')); };
+    reader.onerror = function(){ stopFake(100); reject(ddErr('file')); };
     reader.readAsDataURL(file);
   });
+}
+
+/* ---- WhatsApp-style size labels + image compression ---- */
+function fmtMB(bytes){
+  bytes = bytes||0;
+  if(bytes < 1024*1024) return Math.max(1,Math.round(bytes/1024))+' KB';
+  return (bytes/(1024*1024)).toFixed(1)+' MB';
+}
+var DD_MAX_BYTES = 25*1024*1024;
+/* Photos are downscaled to max 1600px and re-encoded at JPEG 80% — visually the
+   same on a phone screen, typically 60-90% smaller. Videos and GIFs are sent
+   untouched (re-encoding video in a browser would take as long as the clip
+   plays and can visibly hurt quality). If compression wouldn't make the file
+   smaller, the original is kept. */
+function ddCompressImage(file){
+  return new Promise(function(resolve){
+    if(!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size < 200*1024){ return resolve(file); }
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function(){
+      URL.revokeObjectURL(url);
+      var w=img.naturalWidth, h=img.naturalHeight, sc=Math.min(1, 1600/Math.max(w,h));
+      var cw=Math.round(w*sc), ch=Math.round(h*sc);
+      var c=document.createElement('canvas'); c.width=cw; c.height=ch;
+      var ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cw,ch); ctx.drawImage(img,0,0,cw,ch);
+      c.toBlob(function(b){
+        if(!b || b.size >= file.size) return resolve(file);
+        resolve(new File([b], file.name.replace(/\.[^.]+$/,'')+'.jpg', {type:'image/jpeg'}));
+      }, 'image/jpeg', 0.8);
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+/* ---- "Awaiting upload" queue (IndexedDB so real files survive a closed tab) ---- */
+var _qMem = [];   // fallback if IndexedDB is unavailable in this browser/context
+function qdb(){
+  return new Promise(function(res,rej){
+    try{
+      var r = indexedDB.open('dds_queue',1);
+      r.onupgradeneeded = function(){ r.result.createObjectStore('pending',{keyPath:'id'}); };
+      r.onsuccess = function(){ res(r.result); };
+      r.onerror = function(){ rej(r.error); };
+    }catch(e){ rej(e); }
+  });
+}
+function qPut(item){
+  return qdb().then(function(db){ return new Promise(function(res,rej){
+    var tx=db.transaction('pending','readwrite'); tx.objectStore('pending').put(item);
+    tx.oncomplete=function(){ res(); }; tx.onerror=function(){ rej(tx.error); };
+  }); }).catch(function(){ _qMem = _qMem.filter(function(x){return x.id!==item.id;}); _qMem.push(item); });
+}
+function qAll(){
+  return qdb().then(function(db){ return new Promise(function(res,rej){
+    var rq=db.transaction('pending','readonly').objectStore('pending').getAll();
+    rq.onsuccess=function(){ res(rq.result.concat(_qMem)); }; rq.onerror=function(){ rej(rq.error); };
+  }); }).catch(function(){ return _qMem.slice(); });
+}
+function qDel(id){
+  _qMem = _qMem.filter(function(x){return x.id!==id;});
+  return qdb().then(function(db){ return new Promise(function(res){
+    var tx=db.transaction('pending','readwrite'); tx.objectStore('pending').delete(id);
+    tx.oncomplete=function(){ res(); }; tx.onerror=function(){ res(); };
+  }); }).catch(function(){});
 }
 
 /* ---- support / feedback ---- */
@@ -1157,7 +1471,7 @@ async function ctSendFeedback(){
   })(); });
 }
 
-/* ---- fullscreen image viewer ---- */
+/* ---- fullscreen image viewer (Explore images only — those ARE meant to be seen full-size) ---- */
 function openImgView(url){ if(!url) return; document.getElementById('imgViewImg').src=url; document.getElementById('imgViewOv').classList.add('open'); }
 function closeImgView(){ document.getElementById('imgViewOv').classList.remove('open'); }
 
@@ -1168,9 +1482,10 @@ function onAuthClick(){ if(isSignedIn){ toggleMenu(); } else { openAuth(); } }
 function loadSession(){
   try{ var raw=localStorage.getItem('ddsUserData'); if(raw){ var u=JSON.parse(raw); if(u&&u.ddsNumber){ currentUser=u; isSignedIn=true; } } }catch(e){}
   renderAuthUI();
-  if(isSignedIn) refreshBits();
+  if(isSignedIn){ refreshBits(); if(typeof ddQueueProcess==='function') ddQueueProcess(); }
 }
 function renderAuthUI(){
+  if(typeof ddRefreshQueueChip==='function') ddRefreshQueueChip();
   var btn=document.getElementById('signinBtn');
   var heroBtn=document.getElementById('heroSignBtn');
   if(isSignedIn){
@@ -1200,12 +1515,28 @@ function refreshBits(){
       }
     }).catch(function(){});
 }
+function showConfirm(msg, onOk, opts){
+  opts=opts||{};
+  document.getElementById('confirmMsg').textContent = msg;
+  var icon=document.getElementById('confirmIcon');
+  icon.className = 'c-icon'+(opts.info?' info':'');
+  icon.innerHTML = '<i class="fas '+(opts.info?'fa-circle-info':'fa-triangle-exclamation')+'"></i>';
+  var okBtn=document.getElementById('confirmOkBtn');
+  okBtn.className = 'c-ok'+(opts.info?' info':'');
+  okBtn.textContent = opts.okLabel || 'Yes';
+  okBtn.onclick = function(){ closeConfirm(); onOk(); };
+  document.getElementById('confirmOv').classList.add('open');
+}
+function closeConfirm(){ document.getElementById('confirmOv').classList.remove('open'); }
+
 function doLogout(){
   closeMenu();
-  try{ localStorage.removeItem('ddsUserData'); }catch(e){}
-  currentUser={}; isSignedIn=false;
-  renderAuthUI();
-  showToast('Signed out','success');
+  showConfirm('Sign out of DDS on this device?', function(){
+    try{ localStorage.removeItem('ddsUserData'); }catch(e){}
+    currentUser={}; isSignedIn=false;
+    renderAuthUI();
+    showToast('Signed out','success');
+  }, {info:true, okLabel:'Sign out'});
 }
 
 /* ---- explore / project grid ---- */
@@ -1379,6 +1710,8 @@ function toggleRateBars(){
 }
 function closePd(){ document.getElementById('pdOv').classList.remove('open'); curProj=null; }
 function doAction(url,id,type,btn){
+  /* REAL redirect — no simulated download. This opens the exact URL the
+     poster gave (a real hosted APK / release / site) in a new tab. */
   guardTap('act_'+id, btn, function(){
     fetch(API+'?action=incrementViews&id='+id).catch(function(){});
     return apiPost({action:'incrementDownloads', id:id}).then(function(){
@@ -1471,8 +1804,6 @@ async function submitEdit(){
   if(!titleInput.disabled) project.title = titleInput.value.trim();
   showToast('Saving changes...','info');
   try{
-    /* No admin key: the backend verifies ownerDDS matches the project's
-       authorDDS on file before allowing the edit. */
     var d = await apiPost({action:'editProject', ownerDDS:currentUser.ddsNumber, id:id, project:project});
     if(d.success||d.optimistic){ showToast('Project updated!','success'); closeEdit(); loadExplore(); }
     else showToast('Error: '+(d.error||'Unknown'),'error');
@@ -1495,8 +1826,7 @@ function closeBoost(){ document.getElementById('boostOv').classList.remove('open
 function selectBoostOption(days,cost){
   var have=(currentUser.profile&&currentUser.profile.bits)||0;
   if(have<cost){ showToast('Not enough bits — you have '+fmtN(have)+', need '+cost,'error'); return; }
-  if(!confirm('Boost "'+boostTitle+'" for '+days+' days for '+cost+' bits? This cannot be refunded.')) return;
-  doBoost(days,cost);
+  showConfirm('Boost "'+boostTitle+'" for '+days+' days for '+cost+' bits? This cannot be refunded.', function(){ doBoost(days,cost); }, {info:true, okLabel:'Boost'});
 }
 async function doBoost(days,cost){
   closeBoost();
@@ -1692,7 +2022,7 @@ function renderAnalytics(projs){
       else{svg+='<path d="M'+cx+','+cy+' L'+x1.toFixed(1)+','+y1.toFixed(1)+' A'+r+','+r+' 0 '+lg+',1 '+x2.toFixed(1)+','+y2.toFixed(1)+' Z" fill="'+cols[i%cols.length]+'" opacity=".9" stroke="#0a0f18" stroke-width="1.5"></path>';}
       offset+=angle;
     });
-    svg+='<circle cx="'+cx+'" cy="'+cy+'" r="26" fill="#0a0f18"></circle>'; return svg;
+    svg+='<circle cx="60" cy="60" r="26" fill="#0a0f18"></circle>'; return svg;
   }
   var cats=Object.keys(catMap).sort(function(a,b){return catMap[b]-catMap[a];}).slice(0,6);
   var catPie=cats.map(function(c){return{n:c,v:catMap[c]};}); var catTotal=cats.reduce(function(s,c){return s+catMap[c];},0);
@@ -1900,8 +2230,6 @@ async function confirmPublish(){
     status: document.getElementById('dsStatus').value, featured:false, promoted:false
   };
   try{
-    /* No admin key: the backend trusts ownership because authorDDS must
-       match a real, registered DDS number tied to currentUser's session. */
     var d = await apiPost({action:'addProject', ownerDDS:currentUser.ddsNumber, project:project});
     if(d.success||d.optimistic){
       showToast('Published! Now live in Explore','success');
@@ -2103,163 +2431,10 @@ function openTeamModal(i){
 }
 function closeTeamModal(){ document.getElementById('teamOv').classList.remove('open'); }
 
-/* ============================================================
-   WHISPERS — anonymous public wall.
-   Supports up to 8 photos + 3 short videos per whisper.
-   Backend actions (POSTS_API): getWhispers, postWhisper, reactWhisper,
-   unreactWhisper, getWhisperReplies, replyWhisper.
-   The real author DDS# is sent for moderation only and is never
-   returned in the public feed response.
-   ============================================================ */
 function getDeviceUid(){
   var uid=localStorage.getItem('dds_uid');
   if(!uid){ uid='u_'+Date.now()+'_'+Math.random().toString(36).substr(2,8); localStorage.setItem('dds_uid',uid); }
   return uid;
-}
-function whAnonTag(id){
-  var h=0; var s=String(id||'');
-  for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
-  return 'Anon-'+(h % 9999).toString(16).toUpperCase().padStart(3,'0');
-}
-var WH_EMOJIS=['❤️','🔥','💀','😂','😮'];
-var whCache={};
-var WH_MAX_IMGS=8, WH_MAX_VIDS=3;
-var whImages=[], whVideos=[];
-var whUploadQueue=[]; // {tempId,kind,file,progress,status,previewUrl,error}
-function whUpdateCount(){ var t=document.getElementById('whText'); document.getElementById('whCharCount').textContent=t.value.length+'/500'; }
-function whUpdateMediaCounts(){
-  document.getElementById('whImgCount').textContent = whImages.length+'/'+WH_MAX_IMGS+' photos';
-  document.getElementById('whVidCount').textContent = whVideos.length+'/'+WH_MAX_VIDS+' videos';
-}function openAnonymous(tab){
-  if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
-  document.getElementById('anonOv').classList.add('open');
-  document.getElementById('ddViewerWrap').style.display='none';
-  document.getElementById('anonFeed').style.display='';
-  document.querySelector('.anon-chip-row').style.display='';
-  var wantFilter = tab==='drops' ? 'drop' : 'all';
-  var chip = document.querySelector('.anon-chip[data-f="'+wantFilter+'"]');
-  if(chip) anonSetFilter(chip, wantFilter); else anonLoadFeed();
-}
-function closeAnonymous(){
-  document.getElementById('anonOv').classList.remove('open');
-  anonCollapseCompose();
-  document.getElementById('anonChooser').classList.remove('open');
-}
-function openWhispers(){ openAnonymous('whispers'); }
-function closeWhispers(){ closeAnonymous(); }
-
-function anonToggleChooser(){ document.getElementById('anonChooser').classList.toggle('open'); }
-function anonPickCompose(type){
-  document.getElementById('anonChooser').classList.remove('open');
-  if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
-  if(type==='whisper'){
-    document.getElementById('ddComposeBox').style.display='none';
-    document.getElementById('whComposeBox').style.display='block';
-  } else {
-    document.getElementById('whComposeBox').style.display='none';
-    document.getElementById('ddComposeBox').style.display='block';
-    ddInitRangeSteps();
-  }
-}
-function anonCollapseCompose(){
-  document.getElementById('whComposeBox').style.display='none';
-  document.getElementById('ddComposeBox').style.display='none';
-}
-
-var anonFilter='all';
-function anonSetFilter(el, f){
-  anonFilter=f;
-  document.querySelectorAll('.anon-chip').forEach(function(c){c.classList.remove('on');});
-  el.classList.add('on');
-  anonLoadFeed();
-}
-async function anonLoadFeed(){
-  var feed=document.getElementById('anonFeed');
-  feed.innerHTML='<div class="empty"><div class="spin"></div>Loading…</div>';
-  try{
-    if(anonFilter==='mine'){
-      if(!isSignedIn){ feed.innerHTML='<div class="empty"><i class="fas fa-lock"></i>Sign in to see your drops</div>'; return; }
-      var r=await fetch(POSTS_API+'?action=getMyDeadDrops&ddsNumber='+encodeURIComponent(currentUser.ddsNumber));
-      var d=await r.json();
-      var list=(d.data&&d.data.drops)||d.data||[];
-      feed.innerHTML = list.length ? list.map(function(dr){return ddCardHTML(dr,true);}).join('') : '<div class="empty"><i class="fas fa-skull-crossbones"></i>No active drops — tap + Add to create one</div>';
-      return;
-    }
-    if(anonFilter==='shared'){
-      if(!isSignedIn){ feed.innerHTML='<div class="empty"><i class="fas fa-lock"></i>Sign in to see drops shared with you</div>'; return; }
-      var r2=await fetch(POSTS_API+'?action=getSharedDeadDrops&viewerDDS='+encodeURIComponent(currentUser.ddsNumber));
-      var d2=await r2.json();
-      var list2=(d2.data&&d2.data.drops)||d2.data||[];
-      feed.innerHTML = list2.length ? list2.map(function(dr){return ddCardHTML(dr,false);}).join('') : '<div class="empty"><i class="fas fa-inbox"></i>Nothing shared with you yet</div>';
-      return;
-    }
-    var results = await Promise.all([
-      (anonFilter!=='drop') ? fetch(POSTS_API+'?action=getWhispers&limit=50').then(function(r){return r.json();}).catch(function(){return {success:false};}) : Promise.resolve({success:true,data:{whispers:[]}}),
-      (anonFilter!=='whisper') ? fetch(POSTS_API+'?action=getPublicDeadDrops').then(function(r){return r.json();}).catch(function(){return {success:false};}) : Promise.resolve({success:true,data:{drops:[]}})
-    ]);
-    var wr=results[0], dr=results[1];
-    var whispers=(wr.data&&wr.data.whispers)||wr.data||[];
-    var drops=(dr.data&&dr.data.drops)||dr.data||[];
-    whispers.forEach(function(w){ whCache[w.id]=w; w._kind='whisper'; w._t=w.timestamp; });
-    drops.forEach(function(d3){ d3._kind='drop'; d3._t=d3.createdAt; });
-    var combined = whispers.concat(drops).sort(function(a,b){ return new Date(b._t)-new Date(a._t); });
-    if(!combined.length){ feed.innerHTML='<div class="empty"><i class="fas fa-ghost"></i>Nothing here yet — tap + Add to be the first</div>'; return; }
-    feed.innerHTML = combined.map(function(item){ return item._kind==='drop' ? ddPublicCardHTML(item) : whCardHTML(item); }).join('');
-  }catch(e){ feed.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>Could not load</div>'; }
-}
-function anonBackToFeed(){
-  document.getElementById('ddViewerWrap').style.display='none';
-  document.getElementById('anonFeed').style.display='';
-  document.querySelector('.anon-chip-row').style.display='';
-  anonLoadFeed();
-}
-function ddPublicCardHTML(dr){
-  return '<div class="wh-card" onclick="ddOpenViewer(\''+dr.id+'\',\''+(dr.token||'')+'\',this)" style="cursor:pointer">'+
-    '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-skull-crossbones"></i></div>'+
-    '<span class="wh-anon-lbl">Dead Drop</span><span class="anon-type-badge drop" style="margin-left:.4rem">Link</span><span class="wh-time">'+timeAgo(dr.createdAt)+'</span></div>'+    '<div class="wh-text">'+esc(dr.preview||'(attachment only)')+'</div>'+
-    (dr.hasMedia?'<div style="font-size:.6rem;color:var(--ice);margin-bottom:.4rem"><i class="fas fa-paperclip"></i> Has attachment — tap to view</div>':'')+
-    '<div style="font-size:.58rem;color:var(--mute)">'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views · '+ddExpiryLabel(dr.expiresAt)+'</div>'+
-    '</div>';
-}
-
-function whMediaArray(w){
-  var imgs=(w.images?String(w.images).split(',').filter(Boolean):[]);
-  var vids=(w.videos?String(w.videos).split(',').filter(Boolean):[]);
-  return imgs.map(function(u){return {url:u,type:'image'};}).concat(vids.map(function(u){return {url:u,type:'video'};}));
-}
-function whCardHTML(w){
-  var reactions=w.reactions||{};
-  var reactBtns=WH_EMOJIS.map(function(em){
-    var count=reactions[em]||0;
-    var mine=localStorage.getItem('wh_react_'+w.id+'_'+em)==='1';
-    return '<div class="wh-react-btn'+(mine?' active':'')+'" onclick="whReact(\''+w.id+'\',\''+em+'\')">'+em+'<span class="n">'+(count||'')+'</span></div>';
-  }).join('');
-  var replyCount = w.replyCount||0;
-  var media = whMediaArray(w);
-  var mediaHTML = '';
-  if(media.length){
-    var shown = media.slice(0,4);
-    mediaHTML = '<div class="wh-media-strip">'+shown.map(function(m,i){
-      if(i===3 && media.length>4){
-        return '<div class="wh-media-more" onclick="openWhisperStory(\''+w.id+'\')">+'+(media.length-3)+'</div>';
-      }
-      return '<div class="wh-media-thumb" onclick="openWhisperStory(\''+w.id+'\')">'+
-        (m.type==='video' ? ('<video src="'+esc(m.url)+'" muted></video><span class="vplay"><i class="fas fa-play"></i></span>') : ('<img src="'+esc(m.url)+'">')) +
-        '</div>';
-    }).join('')+'</div>';
-  }
-  return '<div class="wh-card" id="whcard_'+w.id+'">'+
-    '<div class="wh-card-head"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
-    '<span class="wh-anon-lbl">'+whAnonTag(w.id)+'</span><span class="anon-type-badge whisper" style="margin-left:.4rem">Whisper</span><span class="wh-time">'+timeAgo(w.timestamp)+'</span></div>'+
-
-    (w.text?('<div class="wh-text">'+esc(w.text)+'</div>'):'') +
-    mediaHTML +
-    '<div class="wh-react-row">'+reactBtns+
-    '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+w.id+'\')"><i class="fas fa-comment"></i> '+replyCount+'</span></div>'+
-    '<div class="wh-replies" id="whreplies_'+w.id+'">'+
-    '<div id="whreplylist_'+w.id+'"><div class="an-empty" style="padding:.4rem;font-size:.6rem">Tap to load replies…</div></div>'+
-    '<div class="wh-reply-input-row"><input type="text" id="whreplyinput_'+w.id+'" maxlength="240" placeholder="Reply anonymously..."><button onclick="postWhisperReply(\''+w.id+'\',this)">Send</button></div>'+
-    '</div></div>';
 }
 function timeAgo(ts){
   if(!ts) return '';
@@ -2269,270 +2444,984 @@ function timeAgo(ts){
   if(diff<86400000) return Math.floor(diff/3600000)+'h';
   return Math.floor(diff/86400000)+'d';
 }
-function handleWhMedia(inp){
-  var files = Array.from(inp.files); inp.value='';
-  var pendingImgs=0, pendingVids=0, toProcess=[];
-  for(var i=0;i<files.length;i++){
-    var f=files[i];
-    var curImgs = whImages.length + whUploadQueue.filter(function(q){return q.kind==='image';}).length;
-    var curVids = whVideos.length + whUploadQueue.filter(function(q){return q.kind==='video';}).length;
-    if(f.type.startsWith('image/')){
-      if(curImgs+pendingImgs>=WH_MAX_IMGS){ showToast('Max '+WH_MAX_IMGS+' photos per whisper','error'); continue; }
-      toProcess.push({file:f,kind:'image'}); pendingImgs++;
-    } else if(f.type.startsWith('video/')){
-      if(curVids+pendingVids>=WH_MAX_VIDS){ showToast('Max '+WH_MAX_VIDS+' videos per whisper','error'); continue; }
-      toProcess.push({file:f,kind:'video'}); pendingVids++;
+
+/* ============================================================
+   DEAD DROP — the only anonymous feature left in DDS.
+   Two layouts, switchable manually and blended automatically by
+   screen size/orientation (see CSS @media rules):
+     - "row"  : WhatsApp-status-style circles, horizontally scrolling,
+                each ring showing % progress toward self-destruct.
+     - "grid" : Explore-style grid of cards, better for wide/desktop
+                screens or landscape.
+   Nobody but the owner ever sees the raw view numbers — everyone
+   else only sees the percentage. Media inside a drop is shown
+   inline only: right-click, drag and video "download" controls are
+   disabled everywhere a drop's own content is rendered.
+   ============================================================ */
+var ddViewMode = (window.matchMedia && window.matchMedia('(min-width:820px)').matches) ? 'grid' : 'row';
+var ddCache = {}, ddOrder = [];
+
+function ddSwitchView(mode){
+  ddViewMode = mode;
+  document.getElementById('ddViewRowBtn').classList.toggle('on', mode==='row');
+  document.getElementById('ddViewGridBtn').classList.toggle('on', mode==='grid');
+  var c=ddFeedCache[anonFilter];
+  if(c) ddPaintFeed(anonFilter, c.list); else anonLoadFeed();
+}
+
+function noDlAttrs(){ return ' oncontextmenu="return false" draggable="false" controlsList="nodownload noremoteplayback" disablePictureInPicture'; }
+
+/* ============================================================
+   Shared media renderer for every place a drop's image/video shows:
+   a TikTok-style semi-transparent "Anonymous Drop" watermark stamped
+   over the middle of the media, plus (for video) a fully custom,
+   app-themed control bar instead of the browser's native controls.
+   forcedIsVideo lets the compose/preview steps pass this before the
+   file has a real .mp4-looking URL (it's still a local blob: URL).
+   ============================================================ */
+var _ddVidSeq=0;
+function ddWatermarkHTML(small, anim){
+  if(anim) return '<div class="dd-wm-anim"><div class="dd-wm-pop"><span class="dd-wm-ic"><i class="fas fa-skull-crossbones"></i></span><span class="dd-wm-tx"><b>Anonymous Drop</b><i>DDS</i></span></div></div>';
+  return '<div class="dd-watermark'+(small?' sm':'')+'"><i class="fas fa-skull-crossbones"></i> Anonymous Drop</div>'; }
+function ddMediaBox(url, forcedIsVideo){
+  if(!url) return '';
+  var isVid = (forcedIsVideo!==undefined) ? forcedIsVideo : isVideoUrl(url);
+  if(!isVid){
+    return '<div class="dd-media-wrap"><img src="'+esc(url)+'"'+noDlAttrs()+'>'+ddWatermarkHTML()+'</div>';
+  }
+  var id='dv'+(++_ddVidSeq);
+  return '<div class="dd-media-wrap dd-vid" data-vid="'+id+'">'+
+    '<video data-vid="'+id+'" src="'+esc(url)+'" preload="metadata" playsinline'+noDlAttrs()+'></video>'+
+    ddWatermarkHTML(false,true)+
+    '<button class="dd-vid-play" data-vid="'+id+'"><i class="fas fa-play"></i></button>'+
+    '<div class="dd-vid-buf"><span class="spin"></span></div>'+
+    '<div class="dd-vid-bar">'+
+      '<span class="dd-vid-cur" data-vid="'+id+'">0:00</span>'+
+      '<div class="dd-vid-track" data-vid="'+id+'"><div class="dd-vid-fill" data-vid="'+id+'"></div><span class="dd-vid-knob" data-vid="'+id+'"><i class="fas fa-skull-crossbones"></i></span></div>'+
+      '<span class="dd-vid-dur" data-vid="'+id+'">0:00</span>'+
+      '<button class="dd-vid-mute" data-vid="'+id+'"><i class="fas fa-volume-high"></i></button>'+
+    '</div></div>';
+}
+/* small preview-only version for the row/grid thumbnails — just a play
+   glyph + watermark, no scrub bar (tapping opens the full viewer anyway) */
+function ddMediaThumbHTML(url){
+  if(!url) return '';
+  var isVid=isVideoUrl(url);
+  return '<div class="dd-media-wrap">'+
+    (isVid ? ('<video src="'+esc(url)+'" muted style="object-fit:contain"'+noDlAttrs()+'></video><span class="dd-thumb-play"><i class="fas fa-play"></i></span>')
+           : ('<img src="'+esc(url)+'" style="object-fit:contain"'+noDlAttrs()+'>'))+
+    ddWatermarkHTML(true)+'</div>';
+}
+var _ddTap={id:null,t:0,timer:null,chain:0};
+function ddVidSkip(v,wrap,side){
+  v.currentTime=Math.max(0,Math.min(v.duration||1e9, v.currentTime+side*10));
+  if(!wrap) return;
+  var el=document.createElement('div'); el.className='dd-skip '+(side<0?'l':'r');
+  el.innerHTML='<i class="fas fa-'+(side<0?'backward':'forward')+'"></i><span>10s</span>';
+  wrap.appendChild(el); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },650);
+}
+function ddVidTap(v,e){
+  var wrap=v.closest('.dd-vid'), id=v.dataset.vid, now=Date.now();
+  var r=v.getBoundingClientRect(), x=(e.clientX-r.left)/(r.width||1);
+  var side = x<0.38 ? -1 : (x>0.62 ? 1 : 0);
+  if(_ddTap.id===id && side!==0 && (now-_ddTap.t<320 || now<_ddTap.chain)){
+    clearTimeout(_ddTap.timer); _ddTap.t=now; _ddTap.chain=now+600; ddVidSkip(v,wrap,side); return;
+  }
+  clearTimeout(_ddTap.timer);
+  _ddTap.id=id; _ddTap.t=now; _ddTap.chain=0;
+  _ddTap.timer=setTimeout(function(){ if(v.paused) v.play().catch(function(){}); else v.pause(); },300);
+}
+/* drag the icon along the progress line to scrub */
+(function(){
+  var drag=null;
+  function seekTo(tr,e){
+    var v=document.querySelector('video[data-vid="'+tr.dataset.vid+'"]'); if(!v||!v.duration) return;
+    var r=tr.getBoundingClientRect(); v.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*v.duration;
+  }
+  document.addEventListener('pointerdown',function(e){ var tr=e.target.closest && e.target.closest('.dd-vid-track'); if(tr){ drag=tr; seekTo(tr,e); } });
+  document.addEventListener('pointermove',function(e){ if(drag) seekTo(drag,e); });
+  ['pointerup','pointercancel'].forEach(function(ev){ document.addEventListener(ev,function(){ drag=null; }); });
+})();
+/* a video starts only when opened/tapped; starting one stops every other; leaving the page pauses all */
+document.addEventListener('play',function(e){
+  var v=e.target; if(!v || v.tagName!=='VIDEO') return;
+  document.querySelectorAll('video').forEach(function(o){ if(o!==v && !o.paused) o.pause(); });
+},true);
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden) document.querySelectorAll('video').forEach(function(v){ if(!v.paused) v.pause(); });
+});
+function ddFmtTime(s){ s=Math.max(0,Math.floor(s||0)); var m=Math.floor(s/60), sc=s%60; return m+':'+(sc<10?'0':'')+sc; }
+(function(){
+  document.addEventListener('click', function(e){
+    var t=e.target;
+    var play=t.closest && t.closest('.dd-vid-play');
+    if(play){
+      var pv=document.querySelector('video[data-vid="'+play.dataset.vid+'"]');
+      if(pv){ if(pv.paused) pv.play().catch(function(){}); else pv.pause(); }
+      return;
+    }
+    if(t.tagName==='VIDEO' && t.dataset && t.dataset.vid){ ddVidTap(t,e); return; }   // single tap = play/pause, double tap left/right = -10s / +10s
+    var mute=t.closest && t.closest('.dd-vid-mute');
+    if(mute){
+      var v2=document.querySelector('video[data-vid="'+mute.dataset.vid+'"]');
+      if(v2){ v2.muted=!v2.muted; mute.innerHTML='<i class="fas fa-volume-'+(v2.muted?'xmark':'high')+'"></i>'; }
+      return;
+    }
+    var track=t.closest && t.closest('.dd-vid-track');
+    if(track){
+      var v4=document.querySelector('video[data-vid="'+track.dataset.vid+'"]');
+      if(v4 && v4.duration){
+        var r=track.getBoundingClientRect();
+        var frac=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+        v4.currentTime=frac*v4.duration;
+      }
+      return;
+    }
+  });
+  ['timeupdate','loadedmetadata','play','playing','pause','ended','seeked','seeking','waiting','stalled','canplay','progress','volumechange'].forEach(function(evt){
+    document.addEventListener(evt, function(e){
+      var v=e.target; if(!v || v.tagName!=='VIDEO' || !v.dataset || !v.dataset.vid) return;
+      var wrap=document.querySelector('.dd-vid[data-vid="'+v.dataset.vid+'"]'); if(!wrap) return;
+      var playBtn=wrap.querySelector('.dd-vid-play'), fill=wrap.querySelector('.dd-vid-fill'),
+          cur=wrap.querySelector('.dd-vid-cur'), dur=wrap.querySelector('.dd-vid-dur');
+      /* play button only shows when the video is NOT playing (old code re-showed it on every timeupdate) */
+      if(playBtn) playBtn.style.display = (v.paused || v.ended) ? 'flex' : 'none';
+      wrap.classList.toggle('is-playing', !(v.paused || v.ended));
+      /* playing but without enough data (or jumping) -> show the loader so it's clear it's loading the rest */
+      wrap.classList.toggle('is-buffering', !v.paused && !v.ended && (v.readyState<3 || v.seeking));   /* watermark effects run only while the video plays */
+      var mb=wrap.querySelector('.dd-vid-mute'); if(mb){ var want=v.muted?'xmark':'high'; if(mb.dataset.st!==want){ mb.dataset.st=want; mb.innerHTML='<i class="fas fa-volume-'+want+'"></i>'; } }
+      if(dur && v.duration) dur.textContent=ddFmtTime(v.duration);
+      if(cur) cur.textContent=ddFmtTime(v.currentTime);
+      if(v.duration){ var pc=(v.currentTime/v.duration*100); if(fill) fill.style.width=pc+'%'; var kn=wrap.querySelector('.dd-vid-knob'); if(kn) kn.style.left=pc+'%'; }
+    }, true);
+  });
+})();
+
+
+function anonPickCompose(){
+  if(!isSignedIn){ showToast('Sign in first','error'); setTimeout(openAuth,700); return; }
+  ddResetWizard();
+  document.getElementById('ddWizardOv').classList.add('open');
+}
+function closeDdWizard(){
+  if(ddUploading){ ddUploadCancel(); return; }
+  if(ddMedia && ddMedia.busy && ddMedia.ctl && ddMedia.ctl.abort){ try{ ddMedia.ctl.abort(); }catch(e){} }
+  document.querySelectorAll('#ddWizardOv video').forEach(function(v){ try{ v.pause(); }catch(e){} });
+  document.getElementById('ddWizardOv').classList.remove('open');
+}
+function openDeadDrop(){
+  var sec=document.getElementById('anonSection'); if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ============================================================
+   Step-by-step drop wizard — WhatsApp-status-style flow:
+   choose text-only vs media -> (media only) attach -> caption/text
+   -> pick audience & self-destruct target -> review -> publish.
+   Reuses the same field ids the compose logic already works with
+   (ddContent, ddMediaFile, ddMode*, ddViewTarget, etc.) so nothing
+   else about upload/audience/create-drop had to change.
+   ============================================================ */
+var ddWizType=null, ddWizFlow=[0], ddWizPos=0;
+
+/* ---- text-only look: 11 backgrounds (first = default black gradient) + 7 fonts ---- */
+var DD_BGS=[
+  'linear-gradient(160deg,#000000,#3b3b3b)',
+  'linear-gradient(160deg,#1e3c72,#2a5298)',
+  'linear-gradient(160deg,#6a11cb,#b06ab3)',
+  'linear-gradient(160deg,#ff512f,#dd2476)',
+  'linear-gradient(160deg,#11998e,#38ef7d)',
+  'linear-gradient(160deg,#00c6ff,#0072ff)',
+  'linear-gradient(160deg,#f12711,#f5af19)',
+  'linear-gradient(160deg,#cb2d3e,#ef473a)',
+  'linear-gradient(160deg,#41295a,#2f0743)',
+  'linear-gradient(160deg,#c79100,#ffd200)',
+  'linear-gradient(160deg,#ff758c,#ff7eb3)'
+];
+var DD_BG_NAMES=['Black','Blue','Purple','Sunset','Green','Ocean','Orange','Red','Indigo','Gold','Rose'];
+var DD_FONTS=[
+  {n:'Sans',   f:"'Inter',sans-serif",              s:1},
+  {n:'Serif',  f:"'Playfair Display',serif",        s:1},
+  {n:'Script', f:"'Pacifico',cursive",              s:.9},
+  {n:'Bold',   f:"'Oswald',sans-serif",             s:1.1},
+  {n:'Hand',   f:"'Caveat',cursive",                s:1.3},
+  {n:'Marker', f:"'Permanent Marker',cursive",      s:.9},
+  {n:'Mono',   f:"'JetBrains Mono',monospace",      s:.85}
+];
+var DD_MAX_WORDS=100, ddBg=0, ddFont=0;
+
+/* background + font travel with the text inside the content string as a tiny
+   prefix ([t<bg>f<font>]) so no backend change is needed. Old text-only drops
+   with no prefix simply fall back to the default black gradient. */
+function ddEncodeText(text,bg,font){ return '[t'+bg+'f'+font+']'+text; }
+function ddEncodeThumb(b64,isVideo){ return '['+(isVideo?'v':'i')+b64+']'; }
+function ddEncodeBlur(b64,isVideo){ return '[b'+(isVideo?'v':'i')+b64+']'; }
+function ddEncodeTiny(b64,isVideo){ return '[c'+(isVideo?'v':'i')+b64+']'; }
+function ddParseText(raw){
+  raw=String(raw||''); var bg=0, font=0, thumb='', blur='', tiny='', tv=false, m=raw.match(/^\[t(\d+)f(\d+)\]/);
+  if(m){ bg=+m[1]; font=+m[2]; raw=raw.slice(m[0].length); }
+  else {
+    var cm=raw.match(/^\[c([iv])([A-Za-z0-9+\/=]{12})\]/);
+    if(cm){ tiny=cm[2]; tv=cm[1]==='v'; raw=raw.slice(cm[0].length); }
+    var bm=raw.match(/^\[b([iv])([A-Za-z0-9+\/=]{20,})\]/);
+    if(bm){ blur=bm[2]; tv=bm[1]==='v'; raw=raw.slice(bm[0].length); }
+    var mm=raw.match(/^\[([iv])([A-Za-z0-9+\/=]{20,})(\])?/);
+    if(mm){ if(mm[3]){ thumb=mm[2]; tv=mm[1]==='v'; } raw=raw.slice(mm[0].length); }
+    if((tiny||blur||thumb) && /^\[(b[iv]|[iv])[A-Za-z0-9+\/=]*$/.test(raw)) raw='';   // list cut a longer preview short — hide the stub
+  }
+  if(bg<0||bg>=DD_BGS.length) bg=0;
+  if(font<0||font>=DD_FONTS.length) font=0;
+  return {bg:bg, font:font, text:raw, thumb:thumb, blur:blur, tiny:tiny, thumbVideo:tv};
+}
+function ddHasThumb(c){ return /^\[(c[iv]|b[iv]|[iv])[A-Za-z0-9+\/=]{12,}\]/.test(c||''); }
+function ddStripThumb(c,keepBlur){
+  c=String(c||''); var keep='';
+  var cm=c.match(/^\[c[iv][A-Za-z0-9+\/=]{12}\]/); if(cm){ keep+=cm[0]; c=c.slice(cm[0].length); }
+  var bm=c.match(/^\[b[iv][A-Za-z0-9+\/=]{20,}\]/); if(bm){ keep+=bm[0]; c=c.slice(bm[0].length); }
+  c=c.replace(/^\[[iv][A-Za-z0-9+\/=]{20,}\]/,'');
+  return (keepBlur?keep:'')+c;
+}
+function ddIsTextDrop(dr){ return !dr.mediaUrl && !dr.hasMedia && !/^\[(c[iv]|b[iv]|[iv])[A-Za-z0-9+\/=]{12,}/.test(dr.content||dr.preview||''); }
+/* tiny grids of average colours (4 bits per channel): 3x5 = 32 chars, 2x3 = 12 chars. Short enough
+   to survive even when the public list cuts the text short, so a card can show a blurred preview. */
+function ddBlurEncode(src,cols,rows){
+  try{
+    var c1=document.createElement('canvas'); c1.width=cols*4; c1.height=rows*4;
+    var x1=c1.getContext('2d'); x1.imageSmoothingQuality='high'; x1.drawImage(src,0,0,c1.width,c1.height);
+    var c2=document.createElement('canvas'); c2.width=cols; c2.height=rows;
+    var x2=c2.getContext('2d'); x2.imageSmoothingQuality='high'; x2.drawImage(c1,0,0,cols,rows);
+    var d=x2.getImageData(0,0,cols,rows).data, bits=0, nb=0, out=[];
+    for(var i=0;i<cols*rows;i++){ for(var k=0;k<3;k++){
+      bits=(bits<<4)|(d[i*4+k]>>4); nb+=4;
+      if(nb>=8){ out.push((bits>>(nb-8))&255); nb-=8; bits&=(1<<nb)-1; }
+    } }
+    if(nb>0) out.push((bits<<(8-nb))&255);
+    return btoa(String.fromCharCode.apply(null,out));
+  }catch(e){ return ''; }
+}
+function ddBlurDecode(b64,n){
+  try{
+    var bin=atob(b64), nib=[], i;
+    for(i=0;i<bin.length;i++){ var b=bin.charCodeAt(i); nib.push(b>>4, b&15); }
+    var cells=[];
+    for(i=0;i<n;i++) cells.push('rgb('+(nib[i*3]*17)+','+(nib[i*3+1]*17)+','+(nib[i*3+2]*17)+')');
+    return cells;
+  }catch(e){ return null; }
+}
+function ddBlurHTML(b64, loading, cols, rows){
+  var cells=ddBlurDecode(b64, cols*rows); if(!cells) return '';
+  return '<div class="sc-bg sc-blurwrap'+(loading?' sc-loading':'')+'"><div class="sc-blur" style="grid-template-columns:repeat('+cols+',1fr);grid-template-rows:repeat('+rows+',1fr)">'+
+    cells.map(function(c){ return '<i style="background:'+c+'"></i>'; }).join('')+'</div></div>';
+}
+/* previews made on the phone before posting: sharper small picture + tiny blur code */
+function ddMakeThumb(file,isVideo){
+  return new Promise(function(resolve){
+    var W=64, H=110, done=false, url=URL.createObjectURL(file);
+    function end(v){ if(done) return; done=true; try{ URL.revokeObjectURL(url); }catch(e){} resolve(v||{t:'',b:''}); }
+    function draw(src,sw,sh){
+      try{
+        if(!sw||!sh) return null;
+        var c=document.createElement('canvas'); c.width=W; c.height=H;
+        var x=c.getContext('2d'), sc=Math.max(W/sw,H/sh), dw=sw*sc, dh=sh*sc;
+        x.drawImage(src,(W-dw)/2,(H-dh)/2,dw,dh);
+        var q=.55, d;
+        do{ d=c.toDataURL('image/jpeg',q); q-=.1; }while(d.length>4600 && q>.2);
+        return {t:d.split(',')[1]||'', b:ddBlurEncode(c,3,5), c:ddBlurEncode(c,2,3)};
+      }catch(e){ return null; }
+    }
+    if(!isVideo){
+      var im=new Image();
+      im.onload=function(){ end(draw(im,im.naturalWidth,im.naturalHeight)); };
+      im.onerror=function(){ end(null); };
+      im.src=url;
+    } else {
+      var v=document.createElement('video'); v.muted=true; v.playsInline=true; v.preload='auto';
+      v.onloadedmetadata=function(){ try{ v.currentTime=Math.min(1,(v.duration||2)/3); }catch(e){ end(null); } };
+      v.onseeked=function(){ end(draw(v,v.videoWidth,v.videoHeight)); };
+      v.onerror=function(){ end(null); };
+      v.src=url;
+    }
+    setTimeout(function(){ end(null); }, 8000);
+  });
+}
+function ddTxtSize(len, scale, big){
+  var base = len<=40 ? 1.8 : len<=100 ? 1.45 : len<=220 ? 1.2 : 1.02;
+  if(big) base*=1.25;
+  return (base*(scale||1)).toFixed(2);
+}
+function ddLimitWords(s,max){
+  var re=/\S+/g, m, c=0;
+  while((m=re.exec(s))){ c++; if(c>max) return s.slice(0,m.index).replace(/\s+$/,''); }
+  return s;
+}
+function ddCountWords(s){ var m=(s||'').match(/\S+/g); return m?m.length:0; }
+
+function ddBuildTextTools(){
+  document.getElementById('ddBgRow').innerHTML = DD_BGS.map(function(g,i){
+    return '<button type="button" class="dd-bg-sw'+(i===ddBg?' on':'')+'" style="background:'+g+'" title="'+DD_BG_NAMES[i]+'" onclick="ddPickBg('+i+')"></button>';
+  }).join('');
+  document.getElementById('ddFontRow').innerHTML = DD_FONTS.map(function(f,i){
+    return '<button type="button" class="dd-font-chip'+(i===ddFont?' on':'')+'" style="font-family:'+f.f+'" onclick="ddPickFont('+i+')">'+f.n+'</button>';
+  }).join('');
+}
+function ddPickBg(i){ ddBg=i; ddBuildTextTools(); ddApplyTextStyle(); }
+function ddPickFont(i){ ddFont=i; ddBuildTextTools(); ddApplyTextStyle(); }
+function ddUpdateWordCount(){
+  var n=ddCountWords(document.getElementById('ddContent').value), el=document.getElementById('ddWordCount');
+  el.textContent = n+' / '+DD_MAX_WORDS+' words';
+  el.classList.toggle('max', n>=DD_MAX_WORDS);
+}
+function ddApplyTextStyle(){
+  var card=document.getElementById('ddTxtCard'), ta=document.getElementById('ddContent');
+  if(ddWizType==='text'){
+    var f=DD_FONTS[ddFont];
+    card.classList.remove('plain'); card.style.background=DD_BGS[ddBg];
+    ta.style.fontFamily=f.f; ta.style.fontSize=ddTxtSize(ta.value.length, f.s, false)+'rem';
+    ta.style.height='auto'; ta.style.height=Math.max(60, ta.scrollHeight)+'px';
+  } else {
+    card.classList.add('plain'); card.style.background='';
+    ta.style.fontFamily=''; ta.style.fontSize=''; ta.style.height='';
+  }
+}
+function ddOnTextInput(){
+  var ta=document.getElementById('ddContent');
+  if(ddWizType==='text'){
+    var lim=ddLimitWords(ta.value, DD_MAX_WORDS);
+    if(lim!==ta.value){ ta.value=lim; showToast('Text-only drops are limited to '+DD_MAX_WORDS+' words','info'); }
+    ddUpdateWordCount();
+  }
+  ddApplyTextStyle();
+}
+
+function ddResetWizard(){
+  ddWizType=null; ddWizFlow=[0]; ddWizPos=0; ddUploading=false; ddUploadCtl=null;
+  ddBg=0; ddFont=0;
+  ddShowUploadUI(false);
+  document.getElementById('ddContent').value='';
+  ddRemoveMedia();
+  ddMode='users'; ddSetMode('users');
+  ddPicked=[]; ddRenderPicked();
+  ddInitRangeSteps();
+  ddBuildTextTools(); ddUpdateWordCount(); ddApplyTextStyle();
+  document.querySelectorAll('.dd-wiz-step').forEach(function(s){ s.classList.toggle('on', s.dataset.step==='0'); });
+  document.getElementById('ddWizBackBtn').style.visibility='hidden';
+  var nb=document.getElementById('ddWizNextBtn');
+  nb.innerHTML='Next <i class="fas fa-arrow-right"></i>'; nb.onclick=ddWizNext;
+  document.getElementById('ddWizFoot').style.display='none';     // step 1 is just two big choices — tapping one moves on
+  document.getElementById('ddWizDots').innerHTML='<span class="on"></span>';
+}
+function ddWizChooseType(t){
+  ddWizType=t;
+  if(t==='text') ddRemoveMedia();
+  ddWizFlow = t==='media' ? [0,1,2,3,4] : [0,2,3,4];
+  var isText = t==='text';
+  document.getElementById('ddWizTextLabel').textContent = isText ? 'Pick a background, then write' : 'Add a caption (optional)';
+  document.getElementById('ddTextTools').style.display = isText ? 'block' : 'none';
+  document.getElementById('ddTextTools2').style.display = isText ? 'block' : 'none';
+  document.getElementById('ddContent').maxLength = isText ? 900 : 2000;
+  ddWizPos=1;
+  ddWizRender();
+  /* one tap on "Photo / video" goes straight to the phone's media picker */
+  if(t==='media'){
+    var inp=document.getElementById('ddMediaFile');
+    if(inp){
+      if(!inp._cancelBound){
+        inp._cancelBound=true;
+        inp.addEventListener('cancel', function(){ if(ddWizType==='media' && ddWizPos===1 && !ddMedia){ ddWizPos=0; ddWizRender(); } });
+      }
+      try{ inp.click(); }catch(e){}
     }
   }
-  if(!toProcess.length) return;
-  toProcess.forEach(function(item){
-    var tempId='u'+Date.now()+Math.random().toString(36).substr(2,6);
-    var q={tempId:tempId, kind:item.kind, file:item.file, progress:0, status:'uploading', previewUrl:URL.createObjectURL(item.file)};
-    whUploadQueue.push(q);
-    renderWhMediaGrid();
-    uploadMedia(item.file, function(pct){ q.progress=pct; renderWhMediaGrid(); })
-      .then(function(url){
-        if(item.kind==='image') whImages.push(url); else whVideos.push(url);
-        whUploadQueue = whUploadQueue.filter(function(x){return x.tempId!==tempId;});
-        URL.revokeObjectURL(q.previewUrl);
-        renderWhMediaGrid();
-      })
-      .catch(function(e){ q.status='error'; q.error=e.message||'Upload failed'; renderWhMediaGrid(); });
+}
+function ddWizShowStep(stepNum){
+  document.querySelectorAll('.dd-wiz-step').forEach(function(s){ s.classList.toggle('on', +s.dataset.step===stepNum); });
+}
+function ddWizRender(){
+  var stepNum=ddWizFlow[ddWizPos];
+  ddWizShowStep(stepNum);
+  document.getElementById('ddWizBackBtn').style.visibility = ddWizPos>0 ? 'visible' : 'hidden';
+  document.getElementById('ddWizFoot').style.display = stepNum===0 ? 'none' : 'flex';
+  var isLast = ddWizPos===ddWizFlow.length-1;
+  var nb=document.getElementById('ddWizNextBtn');
+  nb.innerHTML = isLast ? '<i class="fas fa-radiation"></i> Drop it' : 'Next <i class="fas fa-arrow-right"></i>';
+  nb.onclick = isLast ? createDeadDrop : ddWizNext;
+  document.getElementById('ddWizDots').innerHTML = ddWizFlow.map(function(_,i){ return '<span class="'+(i<=ddWizPos?'on':'')+'"></span>'; }).join('');
+  if(stepNum===2){ ddUpdateWordCount(); ddApplyTextStyle(); }
+  if(stepNum===4) ddWizBuildReview();
+}
+function ddWizNext(){
+  var stepNum=ddWizFlow[ddWizPos];
+  if(stepNum===1){
+    if(!ddMedia){ showToast('Choose a photo or video first','error'); return; }
+    if(ddMedia.busy){ showToast('Still uploading — this only takes a moment on a normal connection','error'); return; }
+    if(ddMedia.uploadFailed){ showToast('That upload failed — tap Retry before continuing','error'); return; }
+    if(!ddMedia.url){ showToast('Waiting for the upload to finish','error'); return; }
+  }
+  if(stepNum===2 && ddWizType==='text' && !document.getElementById('ddContent').value.trim()){ showToast('Write a message first','error'); return; }
+  if(stepNum===3 && ddMode==='users' && !ddPicked.length){ showToast('Pick at least one user, or switch to link mode','error'); return; }
+  ddWizPos++;
+  ddWizRender();
+}
+function ddWizBack(){
+  if(ddWizPos<=0) return;
+  ddWizPos--;
+  ddWizRender();
+}
+function ddWizBuildReview(){
+  var content=document.getElementById('ddContent').value.trim();
+  var html='';
+  if(ddMedia){
+    html += '<div class="dd-card-media">'+ddMediaBox(ddMedia.url||ddMedia.previewUrl, ddMedia.isVideo)+'</div>';
+    html += '<div class="dd-media-info"><b>'+fmtMB(ddMedia.file.size)+'</b>'+(ddMedia.compressed?' <span class="dd-badge">Compressed · was '+fmtMB(ddMedia.origSize)+'</span>':'')+' <span class="dd-badge" style="background:rgba(0,255,136,.12);border-color:rgba(0,255,136,.3);color:#5ef2a6"><i class="fas fa-check"></i> Already uploaded</span></div>';
+    if(content) html += '<div class="dd-viewer-content" style="margin-top:.6rem">'+esc(content)+'</div>';
+  } else if(content){
+    var f=DD_FONTS[ddFont];
+    html += '<div class="dd-txt-preview" style="background:'+DD_BGS[ddBg]+';font-family:'+f.f+';font-size:'+ddTxtSize(content.length,f.s,false)+'rem">'+esc(content)+'</div>';
+  }
+  html += '<p style="font-size:.62rem;color:var(--mute);margin-top:.6rem">Visible to: '+(ddMode==='link'?'anyone with the link':(ddPicked.length+' picked user(s)'))+' · self-destructs at '+fmtN(ddCurrentViewTarget())+' views or 24h, whichever comes first.</p>';
+  document.getElementById('ddWizReview').innerHTML = html;
+}
+
+var anonFilter='all';
+function anonSetFilter(el, f){
+  anonFilter=f;
+  document.querySelectorAll('.anon-chip').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');
+  anonLoadFeed();
+}
+
+/* percentage-only progress ring, used everywhere except the owner's "My drops" list */
+function ddPercentRing(pct, size){
+  size = size || 34;
+  pct = Math.max(0, Math.min(100, pct||0));
+  var r = (size/2)-3, c = size/2, circ = 2*Math.PI*r, off = circ*(1-pct/100);
+  return '<div class="dd-percent-ring" style="width:'+size+'px;height:'+size+'px"><svg viewBox="0 0 '+size+' '+size+'">'+
+    '<circle class="bg" cx="'+c+'" cy="'+c+'" r="'+r+'"></circle>'+
+    '<circle class="fg" cx="'+c+'" cy="'+c+'" r="'+r+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'"></circle>'+
+    '</svg><span>'+pct+'%</span></div>';
+}
+
+var ddFeedCache = {};   // filter -> {list, sig} — kept until something actually changes
+function ddInvalidate(f){ if(f) delete ddFeedCache[f]; else ddFeedCache={}; }
+function ddSigFor(f, list){
+  if(f==='mine') return JSON.stringify(list.map(function(d){return [d.id,d.viewCount,d.status,d.mediaUrl?1:0];}));
+  if(f==='shared') return JSON.stringify(list.map(function(d){return [d.id,d.mediaUrl?1:0,(d.content||'').length];}));
+  return JSON.stringify(list.map(function(d){return [d.id,d.viewCount,d.viewTarget,d.mediaUrl?1:0];}));   // 'all'
+}
+async function ddFetchFilter(f){
+  if(f==='mine'){
+    if(!isSignedIn) throw new Error('signed-out');
+    var r=await fetch(POSTS_API+'?action=getMyDeadDrops&ddsNumber='+encodeURIComponent(currentUser.ddsNumber));
+    var d=await r.json(); return (d.data&&d.data.drops)||d.data||[];
+  }
+  if(f==='shared'){
+    if(!isSignedIn) throw new Error('signed-out');
+    var r2=await fetch(POSTS_API+'?action=getSharedDeadDrops&viewerDDS='+encodeURIComponent(currentUser.ddsNumber));
+    var d2=await r2.json(); return (d2.data&&d2.data.drops)||d2.data||[];
+  }
+  var r3=await fetch(POSTS_API+'?action=getPublicDeadDrops'); var d3=await r3.json();
+  return (d3.data&&d3.data.drops)||d3.data||[];
+}
+/* Instant paint from whatever we already have (no spinner, no flicker), then
+   a silent background check that only touches the DOM if the data actually
+   changed (a real edit, a new/removed/expired drop) — switching tabs or the
+   25s background poll otherwise leaves everything exactly as it was. */
+var ddSeen={};          // id -> {dr}: drops this person already opened (no second load, no second count)
+var ddLocalMedia={};    // id -> {url,isVideo}: the file this person just posted, shown instantly from the phone
+var ddWrapCache={}, ddWrapOrder=[], ddWarming={}, ddLoadedUrls={}, ddWarmFail={};
+function ddWrapPut(url,w){
+  ddWrapCache[url]=w; ddWrapOrder=ddWrapOrder.filter(function(u){return u!==url;}); ddWrapOrder.push(url);
+  while(ddWrapOrder.length>30){ delete ddWrapCache[ddWrapOrder.shift()]; }
+}
+/* Every card loads its content silently in the background. A card only shows
+   its picture/video once that content is fully loaded (until then it shimmers),
+   and a loaded card opens instantly on tap — no loader. */
+function ddWarmHold(){
+  var h=document.getElementById('ddWarmHold');
+  if(!h){ h=document.createElement('div'); h.id='ddWarmHold'; h.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;visibility:hidden;pointer-events:none'; document.body.appendChild(h); }
+  return h;
+}
+function ddRefreshFace(url){
+  document.querySelectorAll('.sc-face[data-did]').forEach(function(el){
+    var dr=ddCache[el.getAttribute('data-did')]; if(!dr) return;
+    if(ddMediaInfo(dr).url===url) el.innerHTML=ddCardFaceHTML(dr);
   });
 }
-function whRetryUpload(tempId){
-  var q = whUploadQueue.find(function(x){return x.tempId===tempId;});
-  if(!q || !q.file) return;
-  q.status='uploading'; q.progress=0; renderWhMediaGrid();
-  uploadMedia(q.file, function(pct){ q.progress=pct; renderWhMediaGrid(); })
-    .then(function(url){
-      if(q.kind==='image') whImages.push(url); else whVideos.push(url);
-      whUploadQueue = whUploadQueue.filter(function(x){return x.tempId!==q.tempId;});
-      URL.revokeObjectURL(q.previewUrl);
-      renderWhMediaGrid();
-    })
-    .catch(function(e){ q.status='error'; q.error=e.message||'Upload failed'; renderWhMediaGrid(); });
-}
-function renderWhMediaGrid(){
-  whUpdateMediaCounts();
-  document.getElementById('whUploadQueueList').innerHTML = whUploadQueue.map(function(q){
-    var pct = q.status==='error' ? 100 : q.progress;
-    return '<div class="up-item'+(q.status==='error'?' err':'')+'">'+
-      '<div class="up-thumb">'+(q.kind==='video'?('<video src="'+q.previewUrl+'" muted></video>'):('<img src="'+q.previewUrl+'">'))+
-      (q.status!=='error'?('<div class="up-ring">'+pct+'%</div>'):'')+'</div>'+
-      '<div class="up-info"><div class="up-name">'+(q.status==='error'?('Failed — '+esc(q.error||'')):('Uploading '+q.kind+'…'))+'</div>'+
-      '<div class="up-bar-track"><div class="up-bar-fill" style="width:'+pct+'%"></div></div></div>'+
-      (q.status==='error'
-        ? ('<button class="up-retry" onclick="whRetryUpload(\''+q.tempId+'\')"><i class="fas fa-rotate-right"></i></button>')
-        : ('<button onclick="whUploadQueue=whUploadQueue.filter(function(x){return x.tempId!==\''+q.tempId+'\'});renderWhMediaGrid()"><i class="fas fa-times"></i></button>'))+
-      '</div>';
-  }).join('');
-  var items = whImages.map(function(u){return {url:u,kind:'image'};}).concat(whVideos.map(function(u){return {url:u,kind:'video'};}));
-  document.getElementById('whMediaGrid').innerHTML = items.map(function(it){
-    var removeFn = it.kind==='image' ? ("whImages.splice("+whImages.indexOf(it.url)+",1);renderWhMediaGrid()") : ("whVideos.splice("+whVideos.indexOf(it.url)+",1);renderWhMediaGrid()");
-    return '<div class="thumb-it">'+(it.kind==='video'?('<video src="'+it.url+'" muted></video><span class="vid-badge">VIDEO</span>'):('<img src="'+it.url+'">'))+
-      '<button onclick="'+removeFn+'"><i class="fas fa-times"></i></button></div>';
-  }).join('');
-}function resetWhisperCompose(){
-  document.getElementById('whText').value=''; whUpdateCount();
-  whImages=[]; whVideos=[]; renderWhMediaGrid();
-}
-function postWhisper(btn){
-  if(!isSignedIn){ showToast('Sign in first','error'); return; }
-  if(whUploadQueue.length){ showToast('Please wait for uploads to finish','error'); return; }
-  var text=document.getElementById('whText').value.trim();
-  if(!text && !whImages.length && !whVideos.length){ showToast('Write something or attach media first','error'); return; }
-  guardTap('postWhisper', btn, function(){ return (async function(){
-    showToast('Whispering...','info');
-    try{
-      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-        body:JSON.stringify({action:'postWhisper', ddsNumber:currentUser.ddsNumber, text:text, images:whImages.join(','), videos:whVideos.join(',')})});
-      var d=await r.json();
-      if(d.success){ resetWhisperCompose(); anonCollapseCompose(); showToast('Whispered anonymously','success'); anonLoadFeed(); }
-      else showToast(d.message||'Could not post','error');
-    }catch(e){ showToast('Network error','error'); }
-  })(); });
-}
-
-function whReact(id,em){
-  var key='wh_react_'+id+'_'+em;
-  var mine=localStorage.getItem(key)==='1';
-  localStorage.setItem(key, mine?'0':'1');
-  var w=whCache[id]; if(w){ w.reactions=w.reactions||{}; w.reactions[em]=(w.reactions[em]||0)+(mine?-1:1); }
-  var card=document.getElementById('whcard_'+id);
-  if(card && w){ card.querySelector('.wh-react-row').innerHTML =
-    WH_EMOJIS.map(function(e2){ var c=(w.reactions&&w.reactions[e2])||0; var m2=localStorage.getItem('wh_react_'+id+'_'+e2)==='1';
-      return '<div class="wh-react-btn'+(m2?' active':'')+'" onclick="whReact(\''+id+'\',\''+e2+'\')">'+e2+'<span class="n">'+(c||'')+'</span></div>'; }).join('') +
-    '<span class="wh-reply-toggle" onclick="whToggleReplies(\''+id+'\')"><i class="fas fa-comment"></i> '+(w.replyCount||0)+'</span>'; }
-  fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({action:mine?'unreactWhisper':'reactWhisper', id:id, emoji:em, userId:getDeviceUid()})}).catch(function(){});
-}
-function whToggleReplies(id){
-  var wrap=document.getElementById('whreplies_'+id);
-  var open=wrap.classList.toggle('open');
-  if(open) loadWhisperReplies(id);
-}
-function whMyReplyIds(){ try{ return JSON.parse(localStorage.getItem('wh_myreplies')||'[]'); }catch(e){ return []; } }
-function whRememberReply(id){ var list=whMyReplyIds(); list.push(id); localStorage.setItem('wh_myreplies', JSON.stringify(list.slice(-200))); }
-
-async function loadWhisperReplies(id){
-  var el=document.getElementById('whreplylist_'+id);
-  el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem"><div class="spin"></div></div>';
-  try{
-    var r=await fetch(POSTS_API+'?action=getWhisperReplies&id='+encodeURIComponent(id));
-    var d=await r.json();
-    var list=(d.data&&d.data.replies)||d.data||[];
-    if(!d.success||!list.length){ el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem">No replies yet</div>'; return; }
-    var mine = whMyReplyIds();
-    el.innerHTML=list.map(function(rp){
-      var isMine = mine.indexOf(rp.id)>-1;
-      var withinWindow = (Date.now()-new Date(rp.timestamp).getTime()) < 30*60*1000;
-      var actionsHTML = '';
-      if(isMine){
-        actionsHTML = '<div style="display:flex;gap:.5rem;margin-top:.25rem;align-items:center">'+
-          (withinWindow ? ('<button style="background:none;border:none;color:var(--blue);font-size:.55rem;cursor:pointer" onclick="whStartEditReply(\''+rp.id+'\',\''+id+'\')">Edit</button>')
-                        : ('<span style="font-size:.5rem;color:var(--mute)"><i class="fas fa-lock"></i> Edit locked</span>')) +
-          '<button style="background:none;border:none;color:var(--red);font-size:.55rem;cursor:pointer" onclick="whDeleteReply(\''+rp.id+'\',\''+id+'\',this)">Delete</button></div>';
-      }
-      return '<div class="wh-reply-item" id="whreply_'+rp.id+'"><div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
-        '<div style="flex:1"><div class="wh-reply-text">'+esc(rp.text)+(rp.editedAt?' <span style="color:var(--mute);font-size:.52rem">(edited)</span>':'')+'</div>'+actionsHTML+'</div></div>';
-    }).join('');
-  }catch(e){ el.innerHTML='<div class="an-empty" style="padding:.4rem;font-size:.6rem">Could not load replies</div>'; }
-}
-function whStartEditReply(replyId, whisperId){
-  var el = document.getElementById('whreply_'+replyId);
-  var textEl = el.querySelector('.wh-reply-text');
-  var current = textEl.firstChild ? textEl.firstChild.textContent : textEl.textContent;
-  el.innerHTML = '<div class="wh-ghost-av"><i class="fas fa-user-secret"></i></div>'+
-    '<div style="flex:1"><input type="text" id="whedit_'+replyId+'" value="'+esc(current).replace(/"/g,'&quot;')+'" maxlength="240" style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;color:#fff;font-size:.66rem;outline:none">'+
-    '<div style="display:flex;gap:.5rem;margin-top:.3rem"><button style="background:var(--blue);border:none;color:#03060a;border-radius:6px;padding:.25rem .6rem;font-size:.55rem;font-weight:700;cursor:pointer" onclick="whSaveEditReply(\''+replyId+'\',\''+whisperId+'\',this)">Save</button>'+
-    '<button style="background:none;border:none;color:var(--mute);font-size:.55rem;cursor:pointer" onclick="loadWhisperReplies(\''+whisperId+'\')">Cancel</button></div></div>';
-}
-function whSaveEditReply(replyId, whisperId, btn){
-  var inp = document.getElementById('whedit_'+replyId);
-  var text = inp.value.trim(); if(!text) return;
-  guardTap('editreply_'+replyId, btn, function(){ return (async function(){
-    try{
-      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-        body:JSON.stringify({action:'editWhisperReply', id:replyId, ddsNumber:currentUser.ddsNumber, text:text})});
-      var d=await r.json();
-      if(d.success){ showToast('Reply updated','success'); loadWhisperReplies(whisperId); }
-      else showToast(d.message||'Could not update','error');
-    }catch(e){ showToast('Network error','error'); }
-  })(); });
-}
-function whDeleteReply(replyId, whisperId, btn){
-  if(!confirm('Delete this reply?')) return;
-  guardTap('delreply_'+replyId, btn, function(){ return (async function(){
-    try{
-      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-        body:JSON.stringify({action:'deleteWhisperReply', id:replyId, ddsNumber:currentUser.ddsNumber})});
-      var d=await r.json();
-      if(d.success){ showToast('Reply deleted','success'); loadWhisperReplies(whisperId); var w=whCache[whisperId]; if(w) w.replyCount=Math.max(0,(w.replyCount||0)-1); }
-      else showToast(d.message||'Could not delete','error');
-    }catch(e){ showToast('Network error','error'); }
-  })(); });
-}
-
-function postWhisperReply(id, btn){
-  if(!isSignedIn){ showToast('Sign in first','error'); return; }
-  var inp=document.getElementById('whreplyinput_'+id);
-  var text=inp.value.trim(); if(!text) return;
-  guardTap('reply_'+id, btn, function(){ return (async function(){
-    inp.disabled=true;
-    try{
-      var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-        body:JSON.stringify({action:'replyWhisper', id:id, ddsNumber:currentUser.ddsNumber, text:text})});
-      var d=await r.json();
-      inp.disabled=false;
-      if(d.success){ inp.value=''; loadWhisperReplies(id); var w=whCache[id]; if(w) w.replyCount=(w.replyCount||0)+1; if(d.data && d.data.id) whRememberReply(d.data.id); }
-      else showToast(d.message||'Could not reply','error');
-    }catch(e){ inp.disabled=false; showToast('Network error','error'); }
-  })(); });
-}
-
-/* ============================================================
-   WHATSAPP-STYLE STORY VIEWER for Whisper media
-   Tap right = next, left = previous. Images auto-advance after
-   STORY_IMG_MS. Videos advance on 'ended'. Progress bar segments
-   fill in real time, matching WhatsApp Status behavior.
-   ============================================================ */
-var STORY_IMG_MS = 5000;
-var storyItems=[], storyIdx=0, storyWhisperId=null, storyTimer=null, storyRAF=null, storyStart=0;
-function openWhisperStory(id){
-  var w=whCache[id]; if(!w) return;
-  storyItems = whMediaArray(w);
-  if(!storyItems.length) return;
-  storyWhisperId=id; storyIdx=0;
-  document.getElementById('storyAnonLbl').textContent = whAnonTag(id);
-  document.getElementById('storyTimeLbl').textContent = timeAgo(w.timestamp);
-  var caption = document.getElementById('storyCaption');
-  if(w.text){ caption.style.display='block'; caption.textContent=w.text; } else { caption.style.display='none'; }
-  document.getElementById('storyBars').innerHTML = storyItems.map(function(){ return '<div class="story-bar"><div class="story-bar-fill"></div></div>'; }).join('');
-  document.getElementById('storyOv').classList.add('open');
-  storyShow(0);
-}
-function closeStory(){
-  document.getElementById('storyOv').classList.remove('open');
-  clearTimeout(storyTimer); cancelAnimationFrame(storyRAF);
-  document.getElementById('storyStage').querySelectorAll('img,video').forEach(function(el){ el.remove(); });
-  storyItems=[]; storyWhisperId=null;
-}
-function storyMarkBarsDone(uptoIdx){
-  document.querySelectorAll('#storyBars .story-bar-fill').forEach(function(el,i){
-    if(i<uptoIdx) el.classList.add('done');
-    else if(i>uptoIdx){ el.classList.remove('done'); el.style.width='0%'; }
-  });
-}
-function storyShow(idx){
-  clearTimeout(storyTimer); cancelAnimationFrame(storyRAF);
-  if(idx<0) idx=0;
-  if(idx>=storyItems.length){ closeStory(); return; }
-  storyIdx=idx;
-  storyMarkBarsDone(idx);
-  var stage=document.getElementById('storyStage');
-  stage.querySelectorAll('img,video').forEach(function(el){ el.remove(); });
-  var item=storyItems[idx];
-  var el;
-  if(item.type==='video'){
-    el=document.createElement('video');
-    el.src=item.url; el.autoplay=true; el.playsInline=true; el.controls=false;
-    el.addEventListener('ended', function(){ storyNext(); });
-    stage.insertBefore(el, stage.firstChild);
-    storyRunProgress(idx, function(){ return el.duration ? (el.currentTime/el.duration) : 0; }, function(){});
+function ddWarmMedia(url,isVid){
+  if(!url || ddWrapCache[url] || ddWarming[url]) return;
+  ddWarming[url]=1; delete ddWarmFail[url];
+  var w=document.createElement('div'); w.className='ddv-mediahold'; w.innerHTML=ddMediaBox(url,!!isVid);
+  ddWarmHold().appendChild(w);
+  var m=w.querySelector('img,video'), fin=false, t;
+  function ok(){ if(fin) return; fin=true; clearTimeout(t); delete ddWarming[url]; ddWrapPut(url,w); ddLoadedUrls[url]=1; ddRefreshFace(url); }
+  function bad(){ if(fin) return; fin=true; clearTimeout(t); delete ddWarming[url]; ddWarmFail[url]=1; if(w.parentNode) w.parentNode.removeChild(w); ddRefreshFace(url); }
+  t=setTimeout(bad,45000);
+  if(!m){ return bad(); }
+  if(m.tagName==='IMG'){
+    if(m.complete && m.naturalWidth) return ok();
+    m.addEventListener('load',ok); m.addEventListener('error',bad);
   } else {
-    el=document.createElement('img');
-    el.src=item.url;
-    stage.insertBefore(el, stage.firstChild);
-    storyRunProgress(idx, null, function(){ storyNext(); }, STORY_IMG_MS);
+    m.addEventListener('loadedmetadata',function(){ try{ m.currentTime=0.05; }catch(e){} setTimeout(ok,1500); });
+    m.addEventListener('loadeddata',ok); m.addEventListener('error',bad);
+    if(m.readyState>=2) ok();
   }
 }
-function storyRunProgress(idx, getFractionFn, onDone, durationMs){
-  var fill = document.querySelectorAll('#storyBars .story-bar-fill')[idx];
-  if(!fill) return;
-  storyStart = Date.now();
-  function tick(){
-    if(storyIdx!==idx) return;
-    var frac;
-    if(getFractionFn){ frac = Math.min(1, getFractionFn()||0); }
-    else { frac = Math.min(1, (Date.now()-storyStart)/durationMs); }
-    fill.style.width=(frac*100)+'%';
-    if(frac>=1){ onDone(); return; }
-    storyRAF = requestAnimationFrame(tick);
-  }
-  tick();
+function ddMediaInfo(dr){
+  var lm=ddLocalMedia[dr.id]; if(lm) return {url:lm.url,isVideo:lm.isVideo};
+  var u=dr.mediaUrl; if(!u && ddSeen[dr.id]) u=ddSeen[dr.id].dr.mediaUrl;
+  return {url:u||'', isVideo:u?isVideoUrl(u):false};
 }
-function storyNext(){ storyShow(storyIdx+1); }
-function storyPrev(){ storyShow(storyIdx-1); }
+function ddMineList(){ var c=ddFeedCache.mine; return (c&&c.list)||[]; }
+function ddMineActive(){ return ddMineList().filter(function(d){ return (d.status||'active')==='active'; }); }
+function ddLocalDrop(id){
+  var l=ddMineActive(); for(var i=0;i<l.length;i++) if(l[i].id===id) return {dr:l[i],mine:true};
+  if(ddSeen[id]) return {dr:ddSeen[id].dr,mine:false};
+  return null;
+}
+function ddStale(){ ['mine','all','shared'].forEach(function(k){ if(ddFeedCache[k]) ddFeedCache[k].sig=''; }); }
+function ddRemoveLocal(id){
+  ['mine','all'].forEach(function(k){ if(ddFeedCache[k]) ddFeedCache[k].list=ddFeedCache[k].list.filter(function(x){return x.id!==id;}); });
+  delete ddSeen[id];
+  var c=ddFeedCache[anonFilter]; if(c && anonFilter!=='queue') ddPaintFeed(anonFilter,c.list);
+}
+/* the moment a drop is posted it appears in the row, content and all */
+function ddAddOptimistic(job,d,localUrl){
+  var nd=d&&d.data; if(!nd||!nd.id){ ddStale(); return; }
+  if(localUrl){ ddLocalMedia[nd.id]={url:localUrl,isVideo:!!job.isVideo}; ddWarmMedia(localUrl,!!job.isVideo); }
+  var item={id:nd.id,token:nd.token||'',ownerDDS:job.ownerDDS,content:job.content,mediaUrl:job.mediaUrl||'',hasMedia:!!job.mediaUrl,
+            mode:job.mode,viewCount:0,viewTarget:job.viewTarget,status:'active',createdAt:Date.now(),expiresAt:Date.now()+864e5};
+  var mc=ddFeedCache.mine||(ddFeedCache.mine={list:[],sig:''});
+  mc.list=[item].concat(mc.list.filter(function(x){return x.id!==item.id;})); mc.sig='';
+  if(ddFeedCache.all) ddFeedCache.all.sig='';
+}
+
+async function anonLoadFeed(){
+  var f=anonFilter;
+  if(f==='queue'){ await ddRenderQueue(); return; }
+  var cached = ddFeedCache[f];
+  if(cached) ddPaintFeed(f, cached.list);
+  else document.getElementById('anonFeed').innerHTML='<div class="dd-status-row">'+[1,2,3,4].map(function(){ return '<div class="dd-scard skel"><div class="sc-face">'+ddSkeletonHTML()+'</div></div>'; }).join('')+'</div>';
+  try{
+    var list = await ddFetchFilter(f), changed=false;
+    var sig = ddSigFor(f, list);
+    if(!cached || cached.sig!==sig){ ddFeedCache[f]={list:list, sig:sig}; changed=true; }
+    if(f!=='mine' && isSignedIn){
+      try{
+        var ml=await ddFetchFilter('mine'), ms=ddSigFor('mine',ml), mc=ddFeedCache.mine;
+        if(!mc || mc.sig!==ms){ ddFeedCache.mine={list:ml,sig:ms}; changed=true; }
+      }catch(e2){}
+    }
+    if(changed && anonFilter===f) ddPaintFeed(f, ddFeedCache[f].list);
+    if(f!=='shared') ddRefreshShared();
+  }catch(e){
+    if(!cached){
+      var msg = (e && e.message==='signed-out')
+        ? (f==='mine' ? 'Sign in to see your drops' : 'Sign in to see drops shared with you')
+        : 'Could not load';
+      var icon = (e && e.message==='signed-out') ? 'fa-lock' : 'fa-triangle-exclamation';
+      document.getElementById('anonFeed').innerHTML='<div class="empty"><i class="fas '+icon+'"></i>'+msg+'</div>';
+    }
+  }
+}
+function ddRowOnly(){
+  return '<div class="dd-status-row">'+ddAddTileHTML()+ddMineActive().map(function(d){ return ddStatusCardHTML(d,true); }).join('')+'</div>';
+}
+function ddPaintFeed(f, list){
+  var feed=document.getElementById('anonFeed');
+  var oldRow=feed.querySelector('.dd-status-row'), keep=oldRow?oldRow.scrollLeft:0;
+  var mine=ddMineActive(), mineIds={}, html='';
+  ddCache={}; ddOrder=[];
+  mine.forEach(function(d){ ddCache[d.id]=d; mineIds[d.id]=1; });
+  if(f==='mine'){
+    list.forEach(function(dr){ ddCache[dr.id]=dr; });
+    html = ddRowOnly() + (list.length
+      ? '<div class="dd-sec-lbl">Manage your drops</div>'+list.map(function(dr){ return ddCardHTML(dr,true); }).join('')
+      : '<div class="empty"><i class="fas fa-ghost"></i>No active drops yet — tap New drop</div>');
+  } else if(f==='shared'){
+    list.forEach(function(dr){ ddCache[dr.id]=dr; ddOrder.push(dr.id); });
+    if(!ddOrder.length) html='<div class="empty"><i class="fas fa-inbox"></i>Nothing shared with you yet</div>';
+    else if(ddViewMode==='row') html='<div class="dd-status-row">'+ddOrder.map(function(id){ return ddStatusCardHTML(ddCache[id]); }).join('')+'</div>';
+    else html='<div class="dd-grid-view">'+ddOrder.map(function(id){ return ddGridCardHTML(ddCache[id]); }).join('')+'</div>';
+  } else {
+    var ids={};
+    list.forEach(function(dr){ ids[dr.id]=1; if(mineIds[dr.id]) return; ddCache[dr.id]=dr; ddOrder.push(dr.id); });
+    Object.keys(ddSeen).forEach(function(k){ if(!ids[k]) delete ddSeen[k]; });   // gone / self-destructed -> forget it
+    var emptyNote = (ddOrder.length||mine.length) ? '' : '<p style="font-size:.62rem;color:var(--mute);text-align:center;margin-top:.3rem">No other active drops yet — be the first</p>';
+    if(ddViewMode==='row'){
+      html = '<div class="dd-status-row">'+ddAddTileHTML()+mine.map(function(d){ return ddStatusCardHTML(d,true); }).join('')+ddOrder.map(function(id){ return ddStatusCardHTML(ddCache[id]); }).join('')+'</div>'+emptyNote;
+    } else {
+      html = '<div class="dd-grid-view">'+ddAddGridTileHTML()+mine.map(ddGridCardHTML).join('')+ddOrder.map(function(id){ return ddGridCardHTML(ddCache[id]); }).join('')+'</div>'+emptyNote;
+    }
+  }
+  feed.innerHTML=html;
+  var row=feed.querySelector('.dd-status-row'); if(row && keep) row.scrollLeft=keep;
+  var warm=[]; mine.concat(ddOrder.map(function(id){return ddCache[id];})).forEach(function(d){ var m=ddMediaInfo(d); if(m.url) warm.push(m); });
+  warm.slice(0,20).forEach(function(m){ ddWarmMedia(m.url,m.isVideo); });
+}
+/* ---- Shared with me: loaded silently in the background, with an unread count on the tab ---- */
+function ddOpenedKey(){ return 'dd_opened_'+((typeof currentUser!=='undefined'&&currentUser&&currentUser.ddsNumber)||''); }
+function ddOpenedSet(){ try{ return JSON.parse(localStorage.getItem(ddOpenedKey())||'[]'); }catch(e){ return []; } }
+function ddMarkOpened(id){
+  if(!isSignedIn) return;
+  try{
+    var a=ddOpenedSet();
+    if(a.indexOf(id)<0){ a.push(id); if(a.length>300) a=a.slice(-300); localStorage.setItem(ddOpenedKey(),JSON.stringify(a)); }
+  }catch(e){}
+  ddUpdateSharedBadge();
+}
+function ddSharedUnread(){
+  var c=ddFeedCache.shared; if(!c) return 0;
+  var o=ddOpenedSet();
+  return c.list.filter(function(d){ return o.indexOf(d.id)<0 && !/expired|cancel|delet|destroy|gone/i.test(d.status||''); }).length;
+}
+function ddUpdateSharedBadge(){
+  var chip=document.querySelector('.anon-chip[data-f="shared"]'); if(!chip) return 0;
+  var n=isSignedIn ? ddSharedUnread() : 0;
+  chip.innerHTML='Shared with me'+(n?'<span class="dd-chip-n">'+(n>99?'99+':n)+'</span>':'');
+  return n;
+}
+var _ddSharedAnn=0;
+var _ddSharedBusy=false;
+async function ddRefreshShared(){
+  if(_ddSharedBusy) return;
+  if(!isSignedIn){ ddUpdateSharedBadge(); return; }
+  _ddSharedBusy=true;
+  try{
+    var list=await ddFetchFilter('shared'); if(!Array.isArray(list)) list=[];
+    var sig=ddSigFor('shared',list), c=ddFeedCache.shared;
+    if(!c || c.sig!==sig){ ddFeedCache.shared={list:list,sig:sig}; if(anonFilter==='shared'){ try{ ddPaintFeed('shared',list); }catch(e){} } }
+    var n=ddUpdateSharedBadge();            // the number comes first — nothing below can block it
+    if(n>_ddSharedAnn && anonFilter!=='shared') showToast('You have '+(n>99?'99+':n)+' drop'+(n>1?'s':'')+' to watch in Shared with me','info');
+    _ddSharedAnn=n;
+    try{ list.slice(0,20).forEach(function(d){ if(d.mediaUrl) ddWarmMedia(d.mediaUrl, isVideoUrl(d.mediaUrl)); }); }catch(e){}
+  }catch(e){}
+  finally{ _ddSharedBusy=false; }
+}
+/* tap the "Active drops" title 5 times: shows what the server sends for media drops (for troubleshooting previews) */
+async function ddDebugList(){
+  try{
+    var list=await ddFetchFilter('all'), m=list.filter(function(d){ return d.hasMedia||d.mediaUrl; }).slice(0,3);
+    var t='Public list: '+list.length+' drops, '+m.length+' with media.';
+    if(list[0]) t+='\nFields: '+Object.keys(list[0]).join(', ');
+    m.forEach(function(d,i){
+      var c=d.content, pv=d.preview;
+      t+='\n#'+(i+1)+' content: '+(c==null?'none':c.length+' chars')+' | preview: '+(pv==null?'none':pv.length+' chars')+' | starts: "'+String(c||pv||'').slice(0,5)+'"';
+    });
+    alert(t);
+  }catch(e){ alert('Could not read the list: '+e.message); }
+}
+(function(){
+  var n=0, t=null, el=document.getElementById('ddTitleTap'); if(!el) return;
+  el.addEventListener('click',function(){ n++; clearTimeout(t); t=setTimeout(function(){ n=0; },2500); if(n>=5){ n=0; ddDebugList(); } });
+})();
+setTimeout(ddRefreshShared,1200);
+setInterval(ddRefreshShared,15000);
+document.addEventListener('visibilitychange',function(){ if(!document.hidden) ddRefreshShared(); });
+window.addEventListener('focus',function(){ ddRefreshShared(); });
+window.addEventListener('online',function(){ ddRefreshShared(); });
+
+/* quiet background check every 25s so percentages/status stay live without
+   ever showing a spinner or wiping the screen when nothing changed */
+setInterval(function(){
+  var ov=document.getElementById('ddWizardOv');
+  if(anonFilter && anonFilter!=='queue' && document.getElementById('anonFeed') && !(ov && ov.classList.contains('open'))) anonLoadFeed();
+}, 25000);
+
+/* WhatsApp-style vertical "status" cards (tall rectangles, not circles) */
+function ddAddTileHTML(){
+  return '<div class="dd-scard add" onclick="anonPickCompose()"><div class="plus"><i class="fas fa-plus"></i></div><span>New drop</span></div>';
+}
+function ddAddGridTileHTML(){
+  return '<div class="card" onclick="anonPickCompose()" style="display:flex;align-items:center;justify-content:center;min-height:120px;border-style:dashed">'+
+    '<div style="text-align:center;color:var(--blue)"><i class="fas fa-plus" style="font-size:1.3rem;display:block;margin-bottom:.4rem"></i><span style="font-size:.65rem;color:#93a2b0">New drop</span></div></div>';
+}
+/* face of a drop for cards: photo / video frame / coloured text. Text-only drops ALWAYS get a background. */
+function ddSkeletonHTML(){ return '<div class="sc-bg sc-skel"><i class="sk-bar" style="width:75%"></i><i class="sk-bar" style="width:50%"></i></div>'; }
+function ddCardFaceHTML(dr){
+  var mi=ddMediaInfo(dr);
+  var raw = dr.content||dr.preview||(ddSeen[dr.id]?ddSeen[dr.id].dr.content:'')||'';
+  var p=ddParseText(raw);
+  var isVid = mi.url ? mi.isVideo : p.thumbVideo;
+  if(mi.url && ddLoadedUrls[mi.url]){          // full content loaded
+    if(!mi.isVideo) return '<div class="sc-bg" style="background-image:url(\''+esc(mi.url)+'\')"></div>';
+    return '<video class="sc-vid" src="'+esc(mi.url)+'#t=0.1" muted playsinline preload="metadata"'+noDlAttrs()+'></video><span class="sc-play"><i class="fas fa-play"></i></span>';
+  }
+  if(p.thumb){                                  // preview straight away; shimmer while the full file loads
+    var loading = mi.url && !ddWarmFail[mi.url];
+    return '<div class="sc-bg sc-thumb'+(loading?' sc-loading':'')+'" style="background-image:url(\'data:image/jpeg;base64,'+p.thumb+'\')"></div>'+(isVid?'<span class="sc-play"><i class="fas fa-play"></i></span>':'');
+  }
+  var bcode = p.blur || p.tiny;
+  if(bcode){                                     // list only carries the short code -> blurred preview
+    var ld = mi.url && !ddWarmFail[mi.url];
+    return ddBlurHTML(bcode, ld, p.blur?3:2, p.blur?5:3)+(isVid?'<span class="sc-play"><i class="fas fa-play"></i></span>':'');
+  }
+  if(mi.url){
+    if(ddWarmFail[mi.url]) return '<div class="sc-bg col"><i class="fas fa-rotate-right" style="font-size:1.2rem"></i><span class="lbl">Tap to retry</span></div>';
+    return ddSkeletonHTML();
+  }
+  if(dr.hasMedia) return '<div class="sc-bg col"><i class="fas fa-photo-film" style="font-size:1.4rem"></i><span class="lbl">Media drop</span></div>';
+  return '<div class="sc-bg" style="background:'+DD_BGS[p.bg]+'"></div><div class="sc-txt" style="font-family:'+DD_FONTS[p.font].f+'">'+esc(p.text.slice(0,90))+'</div>';
+}
+function ddStatusCardHTML(dr, mine){
+  var pct=Math.min(100, Math.round(((dr.viewCount||0)/(dr.viewTarget||2))*100));
+  var mi=ddMediaInfo(dr);
+  var icon = dr.mode==='link' ? 'fa-link' : (mi.url ? (mi.isVideo ? 'fa-video' : 'fa-image') : (dr.hasMedia ? 'fa-image' : 'fa-font'));
+  return '<div class="dd-scard" onclick="ddOpenViewer(\''+dr.id+'\',\''+(dr.token||'')+'\',this)" oncontextmenu="return false">'+
+    '<div class="sc-face" data-did="'+dr.id+'">'+ddCardFaceHTML(dr)+'</div>'+
+    '<div class="sc-shade"></div><span class="sc-type"><i class="fas '+icon+'"></i></span>'+(mine?'<span class="sc-you">You</span>':'')+
+    '<div class="sc-pct">'+pct+'%</div><div class="sc-bar"><i style="width:'+pct+'%"></i></div></div>';
+}
+/* Explore-style grid card for wide/landscape screens — percentage only */
+function ddGridCardHTML(dr){
+  var pct=Math.min(100, Math.round(((dr.viewCount||0)/(dr.viewTarget||2))*100));
+  var title = ddParseText(dr.content||dr.preview||'').text;
+  var face = ddCardFaceHTML(dr);
+  return '<div class="card" onclick="ddOpenViewer(\''+dr.id+'\',\''+(dr.token||'')+'\',this)">'+
+    '<div class="poster" style="background:#000"><div class="sc-face" data-did="'+dr.id+'">'+face+'</div><span class="tag-pill">DROP</span></div>'+
+    '<div class="card-body"><div class="card-title">'+esc((title||'Anonymous drop').slice(0,40))+'</div>'+
+    '<div class="card-row" style="align-items:center"><span>Self-destruct progress</span><b style="color:var(--ice)">'+pct+'%</b></div></div></div>';
+}
+function ddTextMiniHTML(dr){
+  var p=ddParseText(dr.content||'');
+  return '<div class="dd-txt-mini" style="background:'+DD_BGS[p.bg]+';font-family:'+DD_FONTS[p.font].f+'">'+esc(p.text)+'</div>';
+}
+/* Owner's own drop — real numbers, full management controls */
+function ddCardHTML(dr, isOwner){
+  var pct=Math.min(100, Math.round((dr.viewCount||0)/(dr.viewTarget||2)*100));
+  var isLink = dr.mode==='link';
+  var isText = ddIsTextDrop(dr);
+  var link = isLink ? ddShareLink(dr.id, dr.token) : '';
+  var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+ddMediaBox(dr.mediaUrl)+'</div>') : (isText ? ddTextMiniHTML(dr) : '');
+  var head = ddParseText(dr.content||'').text;
+  return '<div class="dd-card">'+
+    '<div class="dd-card-head"><div class="dd-icon"><i class="fas '+(isLink?'fa-link':'fa-users')+'"></i></div>'+
+    '<div style="flex:1;min-width:0"><div style="font-size:.68rem;color:#cdd6de;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(head.slice(0,50))+'</div></div>'+
+    '<span class="dd-status-pill '+(dr.status==='active'?'active':'expired')+'">'+(dr.status||'active')+'</span></div>'+
+    mediaHTML +
+    '<div class="dd-progress-track"><div class="dd-progress-fill" style="width:'+pct+'%"></div></div>'+
+    '<div class="dd-meta-row"><span>'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views (only you see this)</span><span>'+ddExpiryLabel(dr.expiresAt)+'</span></div>'+
+    (isLink?('<div class="dd-link-box"><input readonly value="'+esc(link)+'"><button onclick="ddCopyLink(this)">Copy</button></div>'):'')+
+    (dr.status==='active' ?('<div class="dd-card-actions"><button class="cancel" onclick="ddCancel(\''+dr.id+'\')"><i class="fas fa-ban"></i> Cancel drop</button></div>'):'')+
+    '</div>';
+}
+
+/* Shared-with-me — WhatsApp bubble, no stats at all (not the owner) */
+function ddSharedBubbleHTML(dr){
+  var hasMedia = !!dr.mediaUrl;
+  var body = hasMedia
+    ? ('<div class="dd-bubble-media">'+ddMediaBox(dr.mediaUrl)+'</div>'+(dr.content?('<div class="dd-bubble">'+esc(dr.content)+'</div>'):''))
+    : ddTextMiniHTML(dr);
+  return '<div class="dd-bubble-row">'+
+    '<div class="dd-bubble-avatar"><i class="fas fa-user-secret"></i></div>'+
+    '<div class="dd-bubble-col">'+ body +
+    '<div class="dd-bubble-time">'+timeAgo(dr.createdAt)+'</div>'+
+    '</div></div>';
+}
+
+function ddExpiryLabel(exp){
+  if(!exp) return '';
+  var diff=new Date(exp).getTime()-Date.now();
+  if(diff<=0) return 'expired';
+  var h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000);
+  return h+'h '+m+'m left';
+}
+function ddCopyLink(btn){
+  var inp=btn.previousElementSibling;
+  inp.select(); document.execCommand('copy');
+  showToast('Link copied','success');
+}
+function ddCancel(id){
+  showConfirm('Cancel this drop? It will be permanently deleted right away — there is no undo.', function(){ ddCancelConfirmed(id); }, {okLabel:'Cancel drop'});
+}
+async function ddCancelConfirmed(id){
+  try{
+    var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({action:'cancelDeadDrop', id:id, ownerDDS:currentUser.ddsNumber})});
+    var d=await r.json();
+    if(d.success){ showToast('Drop cancelled and deleted','success'); ddRemoveLocal(id); ddStale(); anonLoadFeed(); }
+    else showToast(d.message||'Could not cancel','error');
+  }catch(e){ showToast('Network error','error'); }
+}
 
 /* ============================================================
-   DEAD DROP — permissioned or link-based, self-destructing content
-   Backend actions: createDeadDrop, getMyDeadDrops, viewDeadDrop,
-   cancelDeadDrop, searchProfiles. Deletion enforced server-side.
+   FULL-SCREEN VIEWER (WhatsApp-status style)
+   Order matters: open full screen -> load the media completely ->
+   ONLY THEN tell the server to count the view -> show content.
+   If the media can't load, nothing is counted and Retry reuses what
+   we already have (no second count). Closing before it loads never
+   counts either.
    ============================================================ */
-var ddMode='users', ddPicked=[], ddSearchTimer=null, ddMediaUrl='';
-function openDeadDrop(){ openAnonymous('drops'); }
-function closeDeadDrop(){ closeAnonymous(); }
+var DD_PUBLIC_ORIGIN='https://darkdigitalspace.com.ng', DD_LINK_SEGMENT='anon';
+/* real, shareable link:  https://darkdigitalspace.com.ng/anon/postID/<id>/<token>
+   (kept anonymous on purpose — change DD_LINK_SEGMENT if you ever want something else in that slot) */
+function ddShareLink(id,token){ return DD_PUBLIC_ORIGIN+'/'+DD_LINK_SEGMENT+'/postID/'+encodeURIComponent(id)+(token?('/'+encodeURIComponent(token)):''); }
+function ddGoPost(){ location.href=DD_PUBLIC_ORIGIN+'/?new=1'; }
+function ddGoHome(){ location.href=DD_PUBLIC_ORIGIN+'/'; }
+var _ddLinkId=null, _ddLinkTok='';
+function ddEnterLinkMode(id,tok){
+  document.body.classList.add('dd-link-mode'); _ddLinkId=id; _ddLinkTok=tok||'';
+  setTimeout(function(){ ddOpenViewer(id,tok); },150);
+}
+function ddLinkReopen(){ document.getElementById('ddLinkLanding').classList.remove('open'); document.getElementById('ddLinkBar').style.display=''; if(_ddLinkId) ddOpenViewer(_ddLinkId,_ddLinkTok); }
+var _ddvSeq=0, _ddv=null;
+function ddvEl(id){ return document.getElementById(id); }
+function ddvSetStatus(html){
+  var l=ddvEl('ddvLoad'); l.innerHTML=html; l.style.display='flex';
+  l.style.background = (_ddv && _ddv.thumb) ? "linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('data:image/jpeg;base64,"+_ddv.thumb+"') center/cover" : '';
+}
+function ddvHideLoad(){ var l=ddvEl('ddvLoad'); l.style.display='none'; l.style.background=''; }
+
+function ddOpenViewer(id,token,btn){
+  guardTap('ddview_'+id, null, function(){ return ddvStart(id,token); });
+}
+function ddvStart(id,token){
+  ddMarkOpened(id);
+  var ov=ddvEl('ddViewOv');
+  ov.style.background='#000';
+  ddvEl('ddvStage').className='ddv-stage';
+  ddvEl('ddvContent').innerHTML='';
+  ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent=''; ddvEl('ddvSub').textContent='';
+  ov.classList.add('open'); document.body.style.overflow='hidden';
+  var loc=ddLocalDrop(id);   // own drop, or one already opened: shown from what we already hold — no reload, no extra count
+  _ddv={seq:++_ddvSeq, id:id, token:token, dr:loc?loc.dr:null, media:null, known:ddCache[id]||null, thumb:ddParseText((ddCache[id]||{}).content||'').thumb, mine:!!(loc&&loc.mine), local:!!loc, fresh:false};
+  return ddvStep();
+}
+function ddvRetry(){ if(_ddv) ddvStep(); }
+
+function ddvLoadMedia(url, isVid){
+  return new Promise(function(resolve,reject){
+    var box=ddvEl('ddvContent'); box.innerHTML='';
+    var hit=ddWrapCache[url];
+    if(hit){ hit.classList.remove('show'); box.appendChild(hit); return resolve(hit); }   // already loaded — instant
+    var wrap=document.createElement('div'); wrap.className='ddv-mediahold'; wrap.innerHTML=ddMediaBox(url, isVid);
+    box.appendChild(wrap);
+    var m=wrap.querySelector('img,video'), fin=false, t;
+    function ok(){ if(fin) return; fin=true; clearTimeout(t); ddWrapPut(url,wrap); ddLoadedUrls[url]=1; resolve(wrap); }
+    function bad(){ if(fin) return; fin=true; clearTimeout(t); box.innerHTML=''; var e=new Error('media'); e.kind='media'; reject(e); }
+    t=setTimeout(bad, 40000);
+    if(m.tagName==='IMG'){
+      if(m.complete && m.naturalWidth) return ok();
+      m.addEventListener('load',ok); m.addEventListener('error',bad);
+    } else {
+      m.preload='auto';
+      m.addEventListener('loadedmetadata', function(){ try{ m.currentTime=0.05; }catch(e){} setTimeout(ok,1500); });
+      m.addEventListener('loadeddata',ok); m.addEventListener('canplay',ok);
+      m.addEventListener('error',bad);
+      if(m.readyState>=2) ok();
+    }
+  });
+}
+function ddvFetch(id,token){
+  var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+(isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'');
+  return fetch(POSTS_API+'?'+qs).then(function(r){ return r.text(); })
+    .then(function(t){ try{ return JSON.parse(t); }catch(e){ throw netErr('Bad response'); } })
+    .catch(function(e){ if(e && e.net) throw e; throw netErr('Network error'); });
+}
+async function ddvCountBg(s){
+  try{
+    var d = await ddvFetch(s.id, s.token);
+    if(s.seq!==_ddvSeq) return;
+    if(!d.success){ ddvShowGone(d.message); return; }
+    s.dr = d.data; s.fresh = true; ddSeen[s.id] = {dr:s.dr};
+    ddvShow(s.dr, s.media, s);     // refresh caption / text / progress with the full server copy
+  }catch(e){ /* content is already on screen — stay quiet */ }
+}
+async function ddvStep(){
+  var s=_ddv; if(!s) return; var seq=s.seq;
+  try{
+    /* already loaded by the card? then there is nothing to wait for: show it now and count in the background */
+    if(!s.dr && s.known){
+      var kmi=ddMediaInfo(s.known);
+      var instantMedia = kmi.url && ddLoadedUrls[kmi.url] && ddWrapCache[kmi.url];
+      var instantText  = !kmi.url && ddIsTextDrop(s.known) && s.known.content;
+      if(instantMedia || instantText){
+        if(instantMedia) s.media = await ddvLoadMedia(kmi.url, kmi.isVideo);
+        if(seq!==_ddvSeq) return;
+        s.fresh=true; ddvShow(s.known, s.media, s);
+        ddvCountBg(s);
+        return;
+      }
+    }
+    var mi = ddMediaInfo(s.dr || s.known || {id:s.id});
+    if(mi.url && !s.media){
+      if(!ddWrapCache[mi.url]) ddvSetStatus('<span class="spin"></span>Loading…');
+      s.media = await ddvLoadMedia(mi.url, mi.isVideo);
+      if(seq!==_ddvSeq) return;
+    }
+    if(!s.dr){
+      ddvSetStatus('<span class="spin"></span>Opening…');
+      var d = await ddvFetch(s.id, s.token);
+      if(seq!==_ddvSeq) return;
+      if(!d.success){ ddvShowGone(d.message); return; }
+      s.dr = d.data; s.fresh = true; ddSeen[s.id] = {dr:s.dr};
+      var mi2 = ddMediaInfo(s.dr);
+      if(mi2.url && (!s.media || mi2.url!==mi.url)){
+        s.media=null;
+        if(!ddWrapCache[mi2.url]) ddvSetStatus('<span class="spin"></span>Loading…');
+        s.media = await ddvLoadMedia(mi2.url, mi2.isVideo);
+        if(seq!==_ddvSeq) return;
+      }
+    }
+    ddvShow(s.dr, s.media, s);
+  }catch(e){
+    if(seq!==_ddvSeq) return;
+    ddvShowError(e);
+  }
+}
+function ddvShowGone(msg){
+  ddvEl('ddViewOv').style.background='#000'; ddvEl('ddvStage').classList.remove('txt');
+  ddvEl('ddvContent').innerHTML=''; ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent='';
+  ddvSetStatus('<i class="fas fa-ghost big"></i><b style="color:#fff;font-size:.9rem">This drop is gone</b><span>'+esc(msg||'It reached its view limit, expired, or was cancelled.')+'</span>');
+}
+function ddvShowError(e){
+  var media = e && e.kind==='media';
+  ddvSetStatus('<i class="fas fa-triangle-exclamation big"></i><span>'+(media?"Couldn't load the media.":"Couldn't reach DDS servers.")+'</span><button onclick="ddvRetry()"><i class="fas fa-rotate-right"></i> Retry</button>');
+}
+function ddvShow(dr, wrap, s){
+  var ov=ddvEl('ddViewOv'), stage=ddvEl('ddvStage'), cont=ddvEl('ddvContent'), cap=ddvEl('ddvCap');
+  ddvHideLoad();
+  var pct = Math.min(100, Math.round((dr.viewCount||0)/(dr.viewTarget||2)*100));
+  var isOwner = s && s.mine;
+  ddvEl('ddvFoot').textContent = isOwner
+    ? ('Your drop · '+fmtN(dr.viewCount||0)+' of '+fmtN(dr.viewTarget||0)+' views')
+    : (s && s.fresh ? (pct+'% of the way to self-destruct. It may already be gone if you check again.')
+                    : 'Opened earlier — it disappears once it reaches its view limit or after 24h.');
+  if(dr.createdAt) ddvEl('ddvSub').textContent = timeAgo(dr.createdAt);
+  if(wrap){
+    wrap.classList.add('show');
+    var cpt=ddParseText(dr.content||'').text; if(cpt){ cap.textContent=cpt; cap.style.display='block'; }
+    var v=wrap.querySelector('video');
+    if(v && !(s && s.played)){                 // starts once, because the person opened it — never restarts on its own
+      if(s) s.played=true;
+      var pr=v.play();
+      if(pr && pr.catch) pr.catch(function(){ v.muted=true; v.play().catch(function(){}); });
+    }
+  } else {
+    var p=ddParseText(dr.content||''), f=DD_FONTS[p.font];
+    ov.style.background=DD_BGS[p.bg];
+    stage.classList.add('txt');
+    cont.innerHTML='<div class="ddv-text" style="font-family:'+f.f+';font-size:'+ddTxtSize(p.text.length,f.s,true)+'rem">'+esc(p.text)+'</div>';
+  }
+}
+function ddCloseViewer(){
+  _ddvSeq++; _ddv=null;               // anything still loading is abandoned — and never counted
+  var ov=ddvEl('ddViewOv'); ov.classList.remove('open'); ov.style.background='';
+  var st=ddvEl('ddvContent'), v=st.querySelector('video');
+  if(v){ try{ v.pause(); v.currentTime=0; }catch(e){} }
+  while(st.firstChild) st.removeChild(st.firstChild);   // detach, don't destroy: loaded media is reused next time
+  ddvHideLoad();
+  ddvEl('ddvCap').style.display='none';
+  document.body.style.overflow='';
+  if(document.body.classList.contains('dd-link-mode')){ document.getElementById('ddLinkLanding').classList.add('open'); document.getElementById('ddLinkBar').style.display='none'; return; }
+  /* repaint instantly from what we have, then check quietly in the background */
+  var c=ddFeedCache[anonFilter]; if(c && anonFilter!=='queue') ddPaintFeed(anonFilter,c.list);
+  anonLoadFeed();
+}
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape' && ddvEl('ddViewOv') && ddvEl('ddViewOv').classList.contains('open')) ddCloseViewer();
+});
+
+/* ---- compose a drop ---- */
+var ddMode='users', ddPicked=[], ddSearchTimer=null;
 
 function ddSetMode(m){
   ddMode=m;
@@ -2558,27 +3447,33 @@ function ddCurrentViewTarget(){
 function ddUpdateRangeLabel(){
   document.getElementById('ddViewTargetVal').textContent = fmtN(ddCurrentViewTarget()) + ' views';
 }
+var _ddSearchSeq=0;
 async function ddSearchUsers(q){
   clearTimeout(ddSearchTimer);
-  var box=document.getElementById('ddUserResults');
-  if(!q||q.trim().length<2){ box.style.display='none'; box.innerHTML=''; return; }
+  var box=document.getElementById('ddUserResults'), spin=document.getElementById('ddSearchSpin');
+  var mySeq=++_ddSearchSeq;
+  if(!q||q.trim().length<2){ box.style.display='none'; box.innerHTML=''; if(spin) spin.style.display='none'; return; }
+  if(spin) spin.style.display='inline-block';          // small loader inside the search box while we look
   ddSearchTimer=setTimeout(async function(){
     try{
       var r=await fetch(POSTS_API+'?action=searchProfilesForDrop&q='+encodeURIComponent(q.trim())+'&limit=8');
       var d=await r.json();
+      if(mySeq!==_ddSearchSeq) return;                 // a newer search replaced this one
       var list=(d.data&&d.data.profiles)||d.data||[];
       if(!d.success||!list.length){ box.innerHTML='<div class="dd-user-result">No matches</div>'; box.style.display='block'; return; }
       box.innerHTML=list.map(function(u){
         return '<div class="dd-user-result" onclick=\'ddPickUser('+JSON.stringify(u.ddsNumber)+','+JSON.stringify(u.alias||u.ddsNumber)+')\'>'+esc(u.alias||'')+' <span style="color:var(--mute)">'+esc(u.ddsNumber||'')+'</span></div>';
       }).join('');
       box.style.display='block';
-    }catch(e){ box.style.display='none'; }
+    }catch(e){ if(mySeq===_ddSearchSeq) box.style.display='none'; }
+    finally{ if(mySeq===_ddSearchSeq && spin) spin.style.display='none'; }
   },280);
 }
 function ddPickUser(dds,alias){
   if(ddPicked.find(function(u){return u.ddsNumber===dds;})){ return; }
   ddPicked.push({ddsNumber:dds, alias:alias});
   document.getElementById('ddUserSearch').value='';
+  _ddSearchSeq++; var _sp=document.getElementById('ddSearchSpin'); if(_sp) _sp.style.display='none';
   document.getElementById('ddUserResults').style.display='none';
   ddRenderPicked();
 }
@@ -2588,130 +3483,332 @@ function ddRenderPicked(){
     return '<div class="dd-picked-chip">'+esc(u.alias)+'<button onclick="ddRemovePicked('+i+')"><i class="fas fa-times"></i></button></div>';
   }).join('');
 }
-function handleDdMedia(inp){
-  var f = inp.files[0]; if(!f) return;
-  var isVideo = f.type.startsWith('video/');
-  if(!f.type.startsWith('image/') && !isVideo){ showToast('Only images or videos can be attached','error'); inp.value=''; return; }
-  var previewUrl = URL.createObjectURL(f);
-  ddMediaUrl = ''; // not ready until upload finishes
-  document.getElementById('ddMediaPreviewWrap').innerHTML =
-    '<div class="dd-media-preview" id="ddUpPreview">'+
-    (isVideo?('<video src="'+previewUrl+'" muted></video>'):('<img src="'+previewUrl+'">'))+
-    '<div class="dd-up-ring" id="ddUpRing">0%</div></div>';
-  uploadMedia(f, function(pct){ var ring=document.getElementById('ddUpRing'); if(ring) ring.textContent=pct+'%'; })
-    .then(function(url){
-      ddMediaUrl = url;
-      URL.revokeObjectURL(previewUrl);
-      document.getElementById('ddMediaPreviewWrap').innerHTML = '<div class="dd-media-preview">'+
-        (isVideo ? ('<video src="'+esc(url)+'" controls></video>') : ('<img src="'+esc(url)+'">')) +
-        '<button onclick="ddRemoveMedia()"><i class="fas fa-times"></i></button></div>';
-      showToast('Attachment ready','success');
-    })
-    .catch(function(e){
-      showToast('Upload failed: '+e.message,'error');
-      document.getElementById('ddMediaPreviewWrap').innerHTML='';
+/* ============================================================
+   MEDIA: choose -> (photos) compress -> preview with size -> upload
+   only when "Drop it" is pressed. Failed-by-network posts are parked
+   in "Awaiting upload" and retried automatically.
+   ============================================================ */
+var ddMedia=null, ddUploading=false, ddUploadCtl=null, ddUploadCancelled=false;
+
+/* Select -> (photos) compress -> upload to GitHub RIGHT AWAY, same order
+   the original working version used. By the time "Drop it" is reached the
+   media already has a real URL, so the final publish is just small JSON —
+   the one request that almost never fails, instead of carrying the whole
+   file through every remaining wizard step. */
+async function ddPickMedia(inp){
+  var f = inp.files && inp.files[0]; inp.value=''; if(!f) return;
+  var isVideo = f.type.indexOf('video/')===0, isImage = f.type.indexOf('image/')===0;
+  if(!isVideo && !isImage){ showToast('Only images or videos can be attached','error'); return; }
+  if(isVideo && f.size > DD_MAX_BYTES){ showToast('That video is '+fmtMB(f.size)+' — the limit is '+fmtMB(DD_MAX_BYTES)+'. Pick a shorter one.','error'); return; }
+  ddRemoveMedia();
+  ddMedia = {file:f, previewUrl:URL.createObjectURL(f), origSize:f.size, isVideo:isVideo, busy:true, phase:(isImage?'compressing':'uploading'), compressed:false, url:'', uploadFailed:false, pct:0, ctl:null};
+  ddRenderMediaPreview();
+  if(isImage){
+    var out = await ddCompressImage(f);
+    if(!ddMedia || ddMedia.file!==f) return;   // removed/replaced while compressing
+    if(out!==f){ URL.revokeObjectURL(ddMedia.previewUrl); ddMedia.previewUrl=URL.createObjectURL(out); ddMedia.file=out; ddMedia.compressed=true; }
+    if(out.size > DD_MAX_BYTES){ showToast('That photo is still '+fmtMB(out.size)+' after compressing — the limit is '+fmtMB(DD_MAX_BYTES),'error'); ddRemoveMedia(); return; }
+  }
+  ddUploadAttachment();
+}
+async function ddUploadAttachment(){
+  if(!ddMedia) return;
+  var m=ddMedia, file=m.file;
+  m.busy=true; m.phase='uploading'; m.uploadFailed=false; m.pct=0; m.ctl={};
+  ddRenderMediaPreview();
+  try{
+    var url = await uploadMedia(file, function(pct,l,t){ if(ddMedia && ddMedia.file===file){ ddMedia.pct=pct; ddRenderMediaPreview(); } }, m.ctl);
+    if(!ddMedia || ddMedia.file!==file) return;   // wizard closed or attachment changed mid-upload
+    ddMedia.url=url; ddMedia.busy=false;
+    ddRenderMediaPreview();
+  }catch(err){
+    if(!ddMedia || ddMedia.file!==file) return;
+    if(err && err.cancelled) return;               // user cancelled — ddRemoveMedia already ran
+    ddMedia.busy=false; ddMedia.uploadFailed=true; ddMedia.failReason=(err&&err.message)||'Upload failed';
+    ddRenderMediaPreview();
+  }
+}
+function ddCancelAttachmentUpload(){
+  if(ddMedia && ddMedia.ctl && ddMedia.ctl.abort) ddMedia.ctl.abort();
+  ddRemoveMedia();
+}
+function ddRenderMediaPreview(){
+  var w=document.getElementById('ddMediaPreviewWrap');
+  if(!ddMedia){ w.innerHTML=''; w._key=''; return; }
+  var m=ddMedia, info;
+  if(m.uploadFailed){
+    info = '<span style="color:#ff8fa3"><i class="fas fa-triangle-exclamation"></i> '+esc(m.failReason||'Upload failed')+'</span> '+
+      '<button class="dd-badge" style="border:none;cursor:pointer;background:var(--blue);color:#03060a" onclick="ddUploadAttachment()">Retry</button>';
+  } else if(m.busy && m.phase==='compressing'){
+    info = '<span class="spin"></span> <span style="color:var(--mute)">Optimizing…</span>';
+  } else if(m.busy){
+    info = '<span class="spin"></span> <span style="color:var(--mute)">Uploading… '+(m.pct||0)+'%</span>'+
+      '<button class="dd-badge" style="border:none;cursor:pointer;background:rgba(255,255,255,.08);color:#cdd6de;margin-left:.35rem" onclick="ddCancelAttachmentUpload()">Cancel</button>';
+  } else {
+    info = '<b>'+fmtMB(m.file.size)+'</b>'+(m.compressed ? ' <span class="dd-badge">Compressed · was '+fmtMB(m.origSize)+'</span>' : '')+
+      (m.url ? ' <span class="dd-badge" style="background:rgba(0,255,136,.12);border-color:rgba(0,255,136,.3);color:#5ef2a6"><i class="fas fa-check"></i> Uploaded</span>' : '');
+  }
+  var key=m.previewUrl+'|'+(m.isVideo?1:0);
+  /* the picture/video is built ONCE; progress ticks only touch the text line below it,
+     so nothing flickers or jumps while uploading */
+  if(w._key!==key || !w.querySelector('.dd-media-preview') || !w.querySelector('.dd-media-info')){
+    w.innerHTML='<div class="dd-media-preview">'+ddMediaBox(m.previewUrl, m.isVideo)+'<button onclick="ddRemoveMedia()"><i class="fas fa-times"></i></button></div><div class="dd-media-info">'+info+'</div>';
+    w._key=key;
+  } else {
+    w.querySelector('.dd-media-info').innerHTML=info;
+  }
+}
+function ddRemoveMedia(){
+  if(ddMedia && ddMedia.ctl && ddMedia.ctl.abort && ddMedia.busy){ try{ ddMedia.ctl.abort(); }catch(e){} }
+  if(ddMedia && ddMedia.previewUrl){ try{ URL.revokeObjectURL(ddMedia.previewUrl); }catch(e){} }
+  ddMedia=null;
+  var w=document.getElementById('ddMediaPreviewWrap'); if(w) w.innerHTML='';
+}
+
+/* ---- upload UI (the WhatsApp-style circle + "x MB of y MB") ---- */
+function ddShowUploadUI(on){
+  var box=document.getElementById('ddUploadBox'); if(!box) return;
+  box.style.display = on ? 'block' : 'none';
+  document.getElementById('ddWizReview').style.display = on ? 'none' : 'block';
+  document.getElementById('ddWizNote').style.display = on ? 'none' : 'block';
+  document.getElementById('ddWizFoot').style.display = on ? 'none' : 'flex';
+  if(!on) return;
+  var circle=box.querySelector('.dd-up-circle'), thumb=document.getElementById('ddUpThumb');
+  circle.classList.toggle('indet', !ddMedia);
+  document.getElementById('ddUpFg').style.strokeDashoffset = ddMedia ? '276.46' : '200';
+  document.getElementById('ddUpPct').textContent = ddMedia ? '0%' : '';
+  thumb.style.backgroundImage = 'none'; thumb.innerHTML='';
+  if(ddMedia && !ddMedia.isVideo) thumb.style.backgroundImage='url("'+ddMedia.previewUrl+'")';
+  else thumb.innerHTML='<i class="fas '+(ddMedia?'fa-video':'fa-font')+'"></i>';
+  // the attachment (if any) already uploaded back at step 1 — this loader
+  // only covers the small "create the post" request, so go straight to 100%
+  document.getElementById('ddUpFg').style.strokeDashoffset='0';
+  document.getElementById('ddUpPct').textContent = ddMedia ? '100%' : '';
+  ddUpPhase('post');
+}
+function ddUpPhase(p){
+  var title=document.getElementById('ddUpTitle'), mb=document.getElementById('ddUpMb'), cancel=document.getElementById('ddUpCancelBtn');
+  title.textContent='Posting…'; mb.textContent = ddMedia ? 'Attachment already uploaded' : ''; cancel.style.display='none';
+}
+function ddUpProgress(pct, loaded, total){
+  document.getElementById('ddUpFg').style.strokeDashoffset = String(276.46*(1-pct/100));
+  document.getElementById('ddUpPct').textContent = pct+'%';
+  document.getElementById('ddUpMb').textContent = fmtMB(loaded)+' of '+fmtMB(total);
+}
+function ddUploadCancel(){
+  if(!ddUploading) return;
+  showConfirm('Cancel this upload? Your drop will not be posted.', function(){
+    ddUploadCancelled=true;
+    if(ddUploadCtl && ddUploadCtl.xhr) ddUploadCtl.xhr.abort();
+  }, {okLabel:'Stop upload'});
+}
+
+/* ---- server calls (network-class failures are flagged err.net) ---- */
+function ddPostCreateRaw(job){
+  return ddRetry(function(){
+    return fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({action:'createDeadDrop', clientId:job.id, ownerDDS:job.ownerDDS, content:job.content, mediaUrl:job.mediaUrl||'', mode:job.mode,
+        allowedUsers:job.allowedUsers, viewTarget:job.viewTarget})})
+    .then(function(r){ return r.text(); })
+    .then(function(txt){
+      var d; try{ d=JSON.parse(txt); }catch(e){ throw ddErr('server'); }
+      if(!d.success){ var er=new Error(d.message||'Could not post — please try again.'); er.server=true; throw er; }
+      return d;
     });
-  inp.value='';
+  }, 2);
 }
-function ddRemoveMedia(){ ddMediaUrl=''; document.getElementById('ddMediaPreviewWrap').innerHTML=''; }
-async function createDeadDrop(){
-  if(document.getElementById('ddUpRing')){ showToast('Please wait for the attachment to finish uploading','error'); return; }
-
-    var content=document.getElementById('ddContent').value.trim();
-  if(!content && !ddMediaUrl){ showToast('Add a message, link, or attachment first','error'); return; }
-  if(ddMode==='users' && !ddPicked.length){ showToast('Pick at least one user, or switch to link mode','error'); return; }
-  var viewTarget=ddCurrentViewTarget();
-  var btn=document.getElementById('ddSubmitBtn'); btn.disabled=true; btn.innerHTML='<div class="spin"></div> Dropping...';
-  try{
-    var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'createDeadDrop', ownerDDS:currentUser.ddsNumber, content:content, mediaUrl:ddMediaUrl, mode:ddMode,
-        allowedUsers:ddPicked.map(function(u){return u.ddsNumber;}), viewTarget:viewTarget})});
-    var d=await r.json();
-    btn.disabled=false; btn.innerHTML='<i class="fas fa-radiation"></i> Drop it';
-    if(!d.success){ showToast(d.message||'Failed to create drop','error'); return; }
-    showToast('Dropped anonymously — self-destructs at '+fmtN(viewTarget)+' views or 24h','success');
-    document.getElementById('ddContent').value='';
-    ddRemoveMedia();
-    ddPicked=[]; ddRenderPicked();
-    if(ddMode==='link' && d.data && d.data.id){
-      showToast('Link ready — check My drops to copy it','info');
-    }
-    anonCollapseCompose();
-    var mineChip = document.querySelector('.anon-chip[data-f="mine"]');
-    if(mineChip) anonSetFilter(mineChip,'mine'); else anonLoadFeed();
-  }catch(e){ btn.disabled=false; btn.innerHTML='<i class="fas fa-radiation"></i> Drop it'; showToast('Network error','error'); }
-}
-
-function ddCardHTML(dr, isOwner){
-  var pct=Math.min(100, Math.round((dr.viewCount||0)/(dr.viewTarget||2)*100));
-  var isLink = dr.mode==='link';
-  var link = isLink ? (location.origin+location.pathname+'?drop='+encodeURIComponent(dr.id)+(dr.token?('&t='+encodeURIComponent(dr.token)):'')) : '';
-  var isVid = isVideoUrl(dr.mediaUrl);
-  var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+(isVid?('<video src="'+esc(dr.mediaUrl)+'" controls></video>'):('<img src="'+esc(dr.mediaUrl)+'">'))+'</div>') : '';
-  return '<div class="dd-card">'+
-    '<div class="dd-card-head"><div class="dd-icon"><i class="fas '+(isLink?'fa-link':'fa-users')+'"></i></div>'+
-    '<div style="flex:1;min-width:0"><div style="font-size:.68rem;color:#cdd6de;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc((dr.content||'').slice(0,50))+'</div></div>'+
-    '<span class="dd-status-pill '+(dr.status==='active'?'active':'expired')+'">'+(dr.status||'active')+'</span></div>'+
-    mediaHTML +
-    '<div class="dd-progress-track"><div class="dd-progress-fill" style="width:'+pct+'%"></div></div>'+
-    '<div class="dd-meta-row"><span>'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views</span><span>'+ddExpiryLabel(dr.expiresAt)+'</span></div>'+
-    (isLink?('<div class="dd-link-box"><input readonly value="'+esc(link)+'"><button onclick="ddCopyLink(this)">Copy</button></div>'):'')+
-    (dr.status==='active' && isOwner ?('<div class="dd-card-actions"><button class="cancel" onclick="ddCancel(\''+dr.id+'\')"><i class="fas fa-ban"></i> Cancel drop</button></div>'):'')+
-    '</div>';
-}
-
-function ddExpiryLabel(exp){
-  if(!exp) return '';
-  var diff=new Date(exp).getTime()-Date.now();
-  if(diff<=0) return 'expired';
-  var h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000);
-  return h+'h '+m+'m left';
-}
-function ddCopyLink(btn){
-  var inp=btn.previousElementSibling;
-  inp.select(); document.execCommand('copy');
-  showToast('Link copied','success');
-}
-async function ddCancel(id){
-  if(!confirm('Cancel this drop? It will be permanently deleted right away.')) return;
-  try{
-    var r=await fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'cancelDeadDrop', id:id, ownerDDS:currentUser.ddsNumber})});
-    var d=await r.json();
-    if(d.success){ showToast('Drop cancelled and deleted','success'); anonLoadFeed(); }
-    else showToast(d.message||'Could not cancel','error');
-  }catch(e){ showToast('Network error','error'); }
-}
-
-
-    
-function ddOpenViewer(id,token,btn){
-  guardTap('ddview_'+id, btn, function(){ return (async function(){
-    document.getElementById('anonOv').classList.add('open');
-    document.getElementById('anonFeed').style.display='none';
-    document.querySelector('.anon-chip-row').style.display='none';
-    document.getElementById('ddViewerWrap').style.display='block';
-    var body=document.getElementById('ddViewerBody');
-    body.innerHTML='<div class="spin"></div>';
-    try{
-      var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+(isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'');
-      var r=await fetch(POSTS_API+'?'+qs);
-      var d=await r.json();
-      if(!d.success){
-        body.innerHTML='<div class="dd-vicon"><i class="fas fa-ghost"></i></div><h3 style="color:#fff;font-size:.9rem">This drop is gone</h3><p style="font-size:.68rem;color:var(--mute);margin-top:.4rem">'+esc(d.message||'It reached its view limit, expired, or was cancelled.')+'</p>';
-        return;
+async function ddPostCreate(job){
+  try{ return await ddPostCreateRaw(job); }
+  catch(e){
+    if(e && e.server && /long|length|limit|large|big|max|char/i.test(e.message||'') && ddHasThumb(job.content)){
+      job.content=ddStripThumb(job.content,true);          // drop the sharper preview, keep the tiny blur
+      try{ return await ddPostCreateRaw(job); }
+      catch(e2){
+        if(e2 && e2.server && ddHasThumb(job.content)){ job.content=ddStripThumb(job.content,false); return ddPostCreateRaw(job); }
+        throw e2;
       }
-      var dr=d.data;
-      var isVid = isVideoUrl(dr.mediaUrl);
-      var mediaHTML = dr.mediaUrl ? ('<div class="dd-card-media">'+(isVid?('<video src="'+esc(dr.mediaUrl)+'" controls></video>'):('<img src="'+esc(dr.mediaUrl)+'">'))+'</div>') : '';
-      body.innerHTML='<div class="dd-vicon"><i class="fas fa-skull-crossbones"></i></div>'+
-        '<h3 style="color:#fff;font-size:.9rem">Anonymous drop</h3>'+
-        mediaHTML +
-        '<div class="dd-viewer-content">'+esc(dr.content||'')+'</div>'+
-        '<p style="font-size:.6rem;color:var(--mute);margin-top:.6rem">This counted as view '+fmtN(dr.viewCount||0)+' of '+fmtN(dr.viewTarget||0)+'. It may already be gone if you check again.</p>';
-    }catch(e){ body.innerHTML='<div class="dd-vicon"><i class="fas fa-triangle-exclamation"></i></div><p style="font-size:.7rem;color:var(--mute)">Could not reach DDS servers</p>'; }
-  })(); });
+    }
+    throw e;
+  }
 }
+async function ddRunJob(job, onProgress, ctl, onPhase){
+  if(job.file && !job.mediaUrl){
+    if(onPhase) onPhase('upload');
+    job.mediaUrl = await uploadMedia(job.file, onProgress, ctl);
+    job.file = null;               // uploaded — no need to keep the bytes
+    job.fileSize = job.fileSize || 0;
+  }
+  if(onPhase) onPhase('post');
+  return ddPostCreate(job);
+}
+
+async function createDeadDrop(){
+  if(ddUploading) return;
+  var content=document.getElementById('ddContent').value.trim();
+  if(!ddMedia){ content = ddLimitWords(content, DD_MAX_WORDS); if(content) content = ddEncodeText(content, ddBg, ddFont); }   // text-only always carries its background + font
+  if(!content && !ddMedia){ showToast('Add a message or attachment first','error'); return; }
+  if(ddMedia && (ddMedia.busy || ddMedia.uploadFailed || !ddMedia.url)){ showToast('The attachment isn\'t uploaded yet — go back to that step','error'); return; }
+  if(ddMode==='users' && !ddPicked.length){ showToast('Pick at least one user, or switch to link mode','error'); return; }
+  if(ddMedia){
+    ddUploading=true;                       // blocks a second tap while the preview is made
+    var th=await ddMakeThumb(ddMedia.file, ddMedia.isVideo);
+    if(th && (th.t||th.b||th.c)) content = (th.c?ddEncodeTiny(th.c, ddMedia.isVideo):'') + (th.b?ddEncodeBlur(th.b, ddMedia.isVideo):'') + (th.t?ddEncodeThumb(th.t, ddMedia.isVideo):'') + content;
+  }
+  var job = {
+    id:'q_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),
+    ownerDDS:currentUser.ddsNumber, content:content, mode:ddMode,
+    allowedUsers:ddPicked.map(function(u){return u.ddsNumber;}), viewTarget:ddCurrentViewTarget(),
+    file: null, fileSize: ddMedia ? ddMedia.file.size : 0, isVideo: ddMedia ? ddMedia.isVideo : false,
+    mediaUrl: ddMedia ? ddMedia.url : '', createdAt:Date.now(), attempts:0, status:'waiting', reason:''
+  };
+  if(!navigator.onLine){ await ddQueueJob(job,'No connection'); return; }
+  ddUploading=true; ddUploadCancelled=false; ddUploadCtl={};
+  ddShowUploadUI(true);
+  try{
+    var d = await ddRunJob(job, ddUpProgress, ddUploadCtl, ddUpPhase);
+    ddUploading=false;
+    showToast('Dropped anonymously — only you will ever see the real view count','success');
+    var wasLink = job.mode==='link' && d.data && d.data.id;
+    var localUrl=''; try{ if(ddMedia && ddMedia.file) localUrl=URL.createObjectURL(ddMedia.file); }catch(_e){}
+    closeDdWizard();
+    if(wasLink){
+      var _lk=ddShareLink(d.data.id, d.data.token||'');
+      try{ navigator.clipboard.writeText(_lk).then(function(){ showToast('Link copied — paste it anywhere','success'); },function(){ showToast('Link ready — check My drops to copy it','info'); }); }
+      catch(_e){ showToast('Link ready — check My drops to copy it','info'); }
+    }
+    ddAddOptimistic(job, d, localUrl);
+    var allChip = document.querySelector('.anon-chip[data-f="all"]');
+    if(allChip) anonSetFilter(allChip,'all'); else anonLoadFeed();
+  }catch(err){
+    ddUploading=false;
+    if(err && err.cancelled){ ddShowUploadUI(false); showToast('Upload cancelled','info'); return; }
+    if(err && err.net){ await ddQueueJob(job, err.message); return; }
+    ddShowUploadUI(false);
+    showToast((err && err.message) || 'Could not post — try again','error');
+  }
+}
+
+/* ---- Awaiting upload ---- */
+var _qBusy=false, _qThumbs={};
+async function ddQueueJob(job, reason){
+  job.status='waiting'; job.reason=reason||'';
+  await qPut(job);
+  ddUploading=false;
+  closeDdWizard();
+  showToast('No connection — saved to Awaiting upload. It will post automatically when you\'re back online.','info');
+  await ddRefreshQueueChip();
+  var chip=document.getElementById('ddQueueChip'); if(chip) anonSetFilter(chip,'queue');
+}
+async function ddMyQueue(){
+  if(!isSignedIn) return [];
+  var all = await qAll();
+  return all.filter(function(j){ return j.ownerDDS===currentUser.ddsNumber; }).sort(function(a,b){ return a.createdAt-b.createdAt; });
+}
+async function ddRefreshQueueChip(){
+  var chip=document.getElementById('ddQueueChip'); if(!chip) return;
+  var list = await ddMyQueue();
+  chip.style.display = list.length ? '' : 'none';
+  chip.textContent = 'Awaiting upload ('+list.length+')';
+  if(!list.length && anonFilter==='queue'){ var all=document.querySelector('.anon-chip[data-f="all"]'); if(all) anonSetFilter(all,'all'); }
+}
+function ddQueueThumb(job){
+  var url = job.file ? (_qThumbs[job.id] || (_qThumbs[job.id]=URL.createObjectURL(job.file))) : job.mediaUrl;
+  if(!url) return '<i class="fas fa-font"></i>';
+  return job.isVideo
+    ? ('<video src="'+url+'" muted playsinline'+noDlAttrs()+'></video><span class="dd-thumb-play"><i class="fas fa-play"></i></span>')
+    : ('<img src="'+url+'"'+noDlAttrs()+'>');
+}
+function ddQueueStatusText(job){
+  var size = job.fileSize ? ' · '+fmtMB(job.fileSize) : '';
+  if(job.status==='uploading') return 'Uploading…'+size;
+  if(job.status==='failed') return 'Failed — '+(job.reason||'tap Retry')+size;
+  return 'Waiting for connection'+size;
+}
+async function ddRenderQueue(){
+  var feed=document.getElementById('anonFeed');
+  if(!isSignedIn){ feed.innerHTML='<div class="empty"><i class="fas fa-lock"></i>Sign in to see your queued drops</div>'; return; }
+  var list = await ddMyQueue();
+  if(!list.length){ feed.innerHTML='<div class="empty"><i class="fas fa-check"></i>Nothing waiting — everything is posted</div>'; return; }
+  if(navigator.onLine) setTimeout(function(){ ddQueueProcess(); }, 300);   // try immediately, don't wait for the background timer
+  feed.innerHTML = '<p style="font-size:.62rem;color:var(--mute);margin-bottom:.7rem;line-height:1.5">These drops couldn\'t upload (no connection or bad network). They\'re saved on this device and post automatically when you\'re back online — opening this tab also retries right away.</p>' +
+    list.map(function(job){
+      var label = job.content ? ddParseText(job.content).text.slice(0,60) || (job.isVideo ? 'Video drop' : 'Photo drop') : (job.isVideo ? 'Video drop' : 'Photo drop');
+      return '<div class="dd-card" id="qc_'+job.id+'"><div class="dd-q-row"><div class="dd-q-thumb">'+ddQueueThumb(job)+'</div>'+
+        '<div style="flex:1;min-width:0"><div class="dd-q-title">'+esc(label)+'</div>'+
+        '<div class="dd-q-sub'+(job.status==='failed'?' err':'')+'" id="qs_'+job.id+'">'+esc(ddQueueStatusText(job))+'</div>'+
+        '<div class="dd-progress-track" id="qp_'+job.id+'" style="display:'+(job.status==='uploading'?'block':'none')+'"><div class="dd-progress-fill" style="width:0%"></div></div></div></div>'+
+        '<div class="dd-card-actions"><button onclick="ddQueueRetry(\''+job.id+'\')"><i class="fas fa-rotate-right"></i> Retry now</button>'+
+        '<button class="cancel" onclick="ddQueueDelete(\''+job.id+'\')"><i class="fas fa-trash"></i> Delete</button></div></div>';
+    }).join('');
+}
+function ddQueueCardProgress(id,pct,loaded,total){
+  var p=document.getElementById('qp_'+id), s=document.getElementById('qs_'+id);
+  if(p){ p.style.display='block'; p.firstChild.style.width=pct+'%'; }
+  if(s){ s.className='dd-q-sub'; s.textContent='Uploading… '+fmtMB(loaded)+' of '+fmtMB(total); }
+}
+async function ddQueueProcess(onlyId){
+  if(_qBusy){ if(onlyId) showToast('Already retrying — one moment…','info'); return; }
+  if(!isSignedIn) return;
+  if(!navigator.onLine){ if(onlyId) showToast('Still offline — check your connection','error'); return; }
+  _qBusy=true; var posted=0, thisOneFailed=null;
+  try{
+    var list = await ddMyQueue();
+    if(onlyId && !list.some(function(j){return j.id===onlyId;})){ if(onlyId) showToast('That drop is gone — it may have already posted','info'); return; }
+    for(var i=0;i<list.length;i++){
+      var job=list[i];
+      if(onlyId && job.id!==onlyId) continue;
+      if(!onlyId && job.status==='failed') continue;      // background sweeps skip failed ones — needs a manual Retry
+      job.status='uploading'; await qPut(job);
+      if(anonFilter==='queue') ddRenderQueue();
+      try{
+        await ddRunJob(job, function(pct,l,t){ ddQueueCardProgress(job.id,pct,l,t); });
+        await qDel(job.id); posted++;
+        if(_qThumbs[job.id]){ URL.revokeObjectURL(_qThumbs[job.id]); delete _qThumbs[job.id]; }
+      }catch(e){
+        job.attempts=(job.attempts||0)+1;
+        job.reason=(e && e.message) || 'Upload failed';
+        job.status = (e && e.net && job.attempts<5) ? 'waiting' : 'failed';
+        await qPut(job);
+        thisOneFailed = job.reason;
+        if(e && e.net && !onlyId) break;                   // background sweep: connection is bad, stop and try later
+      }
+    }
+  } finally {
+    _qBusy=false;
+    await ddRefreshQueueChip();
+    if(posted){ showToast(posted+' queued drop'+(posted>1?'s':'')+' posted','success'); ddStale(); }
+    else if(onlyId && thisOneFailed){ showToast('Still couldn\'t post it — '+thisOneFailed,'error'); }
+    if(anonFilter==='queue') ddRenderQueue(); else if(posted) anonLoadFeed();
+  }
+}
+function ddQueueRetry(id){
+  if(!navigator.onLine){ showToast('Still offline — check your connection','error'); return; }
+  showToast('Retrying…','info');
+  ddQueueProcess(id);
+}
+function ddQueueDelete(id){
+  showConfirm('Delete this queued drop? It hasn\'t been posted yet and will be lost.', async function(){
+    await qDel(id);
+    if(_qThumbs[id]){ URL.revokeObjectURL(_qThumbs[id]); delete _qThumbs[id]; }
+    await ddRefreshQueueChip();
+    if(anonFilter==='queue') ddRenderQueue();
+    showToast('Removed from queue','success');
+  }, {okLabel:'Delete'});
+}
+window.addEventListener('online', function(){ showToast('Back online','info'); ddQueueProcess(); });
+setInterval(function(){ ddQueueProcess(); }, 45000);
+
+/* keep row/grid choice in sync if the window is resized/rotated and the person hasn't manually overridden it this session */
+var _ddUserPickedView = false;
+document.getElementById('ddViewRowBtn') && document.getElementById('ddViewRowBtn').addEventListener('click', function(){ _ddUserPickedView = true; });
+document.getElementById('ddViewGridBtn') && document.getElementById('ddViewGridBtn').addEventListener('click', function(){ _ddUserPickedView = true; });
+window.addEventListener('resize', function(){
+  if(_ddUserPickedView) return;
+  var wide = window.matchMedia('(min-width:820px)').matches || (window.innerWidth > window.innerHeight && window.innerWidth > 700);
+  var wantMode = wide ? 'grid' : 'row';
+  if(wantMode !== ddViewMode){ ddViewMode = wantMode; document.getElementById('ddViewRowBtn').classList.toggle('on', wantMode==='row'); document.getElementById('ddViewGridBtn').classList.toggle('on', wantMode==='grid'); var c=ddFeedCache[anonFilter]; if(anonFilter!=='mine'){ if(c) ddPaintFeed(anonFilter,c.list); else anonLoadFeed(); } }
+});
+
 /* ---- boot ---- */
 document.addEventListener('DOMContentLoaded', function(){
   loadSession();
@@ -2721,12 +3818,21 @@ document.addEventListener('DOMContentLoaded', function(){
   buildCatDrop();
   updateLaunchTimer();
   setInterval(updateLaunchTimer, 1000);
+  document.getElementById('ddViewRowBtn').classList.toggle('on', ddViewMode==='row');
+  document.getElementById('ddViewGridBtn').classList.toggle('on', ddViewMode==='grid');
+  anonLoadFeed();
   document.addEventListener('click', function(e){
     var m=document.getElementById('menu');
     if(m.classList.contains('open') && !m.contains(e.target) && !e.target.closest('#signinBtn') && !e.target.closest('#heroSignBtn')){ closeMenu(); }
   });
   var params=new URLSearchParams(location.search);
-  if(params.get('drop')){ setTimeout(function(){ ddOpenViewer(params.get('drop'), params.get('t')); },300); }
+  var pm=location.pathname.match(/^\/([^\/]+)\/postID\/([^\/]+)(?:\/([^\/]+))?\/?$/i);
+  if(pm){ ddEnterLinkMode(decodeURIComponent(pm[2]), pm[3]?decodeURIComponent(pm[3]):(params.get('t')||'')); }
+  else if(params.get('drop')){ ddEnterLinkMode(params.get('drop'), params.get('t')||''); }
+  else if(params.get('new')==='1'){
+    history.replaceState(null,'','/');
+    setTimeout(function(){ var a=document.getElementById('anonSection'); if(a) a.scrollIntoView(); anonPickCompose(); },700);
+  }
 });
 </script>
 </body>
