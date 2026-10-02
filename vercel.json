@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/:who/postID/:id/:token", "destination": "/api/share.js?who=:who&id=:id&token=:token" },
-    { "source": "/:who/postID/:id",        "destination": "/api/share.js?who=:who&id=:id" }
+    { "source": "/:who/postID/:id/:token", "destination": "/api/share?who=:who&id=:id&token=:token" },
+    { "source": "/:who/postID/:id",        "destination": "/api/share?who=:who&id=:id" }
   ]
 }
