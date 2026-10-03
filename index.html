@@ -601,6 +601,55 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
 .ddl-land p{color:var(--mute);font-size:.74rem;line-height:1.6;max-width:320px;}
 .ddl-main{width:100%;max-width:320px;background:var(--blue);color:#03060a;border:none;border-radius:12px;padding:.9rem;font-weight:700;font-size:.8rem;cursor:pointer;}
 .ddl-alt{width:100%;max-width:320px;background:transparent;color:#cdd6de;border:1px solid var(--line);border-radius:12px;padding:.75rem;font-size:.74rem;cursor:pointer;}
+.ddv-react{display:none;background:rgba(0,0,0,.62);padding:.5rem .8rem .35rem;}
+.ddv-react.on{display:block;}
+.ddv-emojis{display:none;justify-content:space-between;gap:.15rem;padding:.15rem 0 .5rem;}
+.ddv-react.open .ddv-emojis{display:flex;}
+.ddv-emoji{background:none;border:none;font-size:1.6rem;line-height:1;padding:.3rem .32rem;border-radius:14px;cursor:pointer;transition:transform .15s;}
+.ddv-emoji:active{transform:scale(1.35);}
+.ddv-emoji.sel{background:rgba(255,255,255,.2);}
+.ddv-replybar{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:26px;padding:.15rem .25rem .15rem .3rem;}
+.ddv-replybar input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-size:.8rem;padding:.55rem .3rem;font-family:inherit;}
+.ddv-replybar input::placeholder{color:rgba(255,255,255,.65);}
+.ddv-smile,.ddv-send{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.ddv-smile{background:transparent;color:#fff;}
+.ddv-send{background:var(--blue);color:#03060a;display:none;}
+.ddv-react.typing .ddv-send{display:flex;}
+.ddv-float{position:absolute;bottom:8%;z-index:8;font-size:2.1rem;pointer-events:none;animation:ddvFloat 1.7s ease-out forwards;}
+@keyframes ddvFloat{0%{transform:translateY(0) scale(.5);opacity:0;}15%{opacity:1;transform:translateY(-30px) scale(1.25);}100%{transform:translateY(-300px) scale(1);opacity:0;}}
+.ddv-activity{display:none;background:rgba(0,0,0,.62);padding:.7rem 1rem;color:#fff;font-size:.74rem;}
+.ddv-activity.on{display:flex;align-items:center;justify-content:space-between;gap:.6rem;}
+.ddv-act-em span{margin-right:.8rem;font-size:.95rem;}
+.ddv-act-btn{background:var(--blue);color:#03060a;border:none;border-radius:16px;padding:.45rem .85rem;font-weight:700;font-size:.66rem;cursor:pointer;white-space:nowrap;}
+.sc-unread{position:absolute;right:.4rem;bottom:.5rem;z-index:3;min-width:18px;height:18px;padding:0 .3rem;border-radius:9px;background:#ff3b5c;color:#fff;font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.dd-inbox-bar{display:flex;align-items:center;gap:.6rem;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.8rem .9rem;margin:.2rem 0 .9rem;cursor:pointer;color:#cdd6de;font-size:.74rem;}
+.dd-inbox-bar>i:first-child{color:var(--blue);font-size:1rem;}
+.dd-inbox-bar .dd-chip-n{margin-left:auto;}
+.dd-act-line{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.55rem;font-size:.78rem;color:#e6edf3;}
+.dd-act-line button{background:rgba(47,143,255,.14);border:1px solid rgba(47,143,255,.4);color:#7db8ff;border-radius:14px;padding:.35rem .7rem;font-size:.62rem;cursor:pointer;white-space:nowrap;}
+.ddi{position:fixed;inset:0;z-index:955;background:var(--bg);display:none;flex-direction:column;}
+.ddi.open{display:flex;}
+.ddi-head{display:flex;align-items:center;gap:.6rem;padding:calc(env(safe-area-inset-top,0px) + .8rem) 1rem .8rem;border-bottom:1px solid var(--line);}
+.ddi-head b{color:#fff;font-size:.9rem;font-family:'Space Grotesk',sans-serif;}
+.ddi-x{margin-left:auto;background:rgba(255,255,255,.08);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;}
+.ddi-body{flex:1;overflow-y:auto;padding:1rem;}
+.ddi-drop{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.8rem;margin-bottom:.9rem;}
+.ddi-drop-head{display:flex;gap:.65rem;align-items:center;margin-bottom:.6rem;}
+.ddi-thumb{width:36px;height:62px;border-radius:8px;position:relative;overflow:hidden;flex-shrink:0;background:#0a0f18;}
+.ddi-thumb .sc-txt{font-size:.34rem;padding:.2rem;}
+.ddi-title{color:#fff;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ddi-sub{color:var(--mute);font-size:.58rem;margin-top:.2rem;}
+.ddi-clear{background:transparent;border:none;color:var(--mute);cursor:pointer;padding:.4rem;}
+.ddi-reacts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.4rem;}
+.ddi-rc{background:rgba(255,255,255,.07);border-radius:14px;padding:.25rem .6rem;font-size:.95rem;}
+.ddi-rc b{font-size:.68rem;color:#cdd6de;}
+.ddi-whos{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.5rem;}
+.ddi-pill{font-size:.56rem;color:#93a2b0;border:1px solid var(--line);border-radius:10px;padding:.15rem .5rem;}
+.ddi-pill.new{border-color:var(--blue);color:#7db8ff;}
+.ddi-reply{background:rgba(255,255,255,.05);border-radius:12px 12px 12px 4px;padding:.5rem .7rem;margin:.35rem 0;font-size:.76rem;color:#e6edf3;line-height:1.45;white-space:pre-wrap;word-break:break-word;}
+.ddi-reply.unread{border-left:3px solid var(--blue);}
+.ddi-who{font-size:.54rem;color:var(--ice);margin-bottom:.2rem;}
+.ddi-time{font-size:.5rem;color:var(--mute);text-align:right;margin-top:.2rem;}
 .no-select{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 @media (min-width:700px){
   /* real centered dialogs on tablet/desktop instead of bottom-anchored sheets */
@@ -632,6 +681,10 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
 <script>if(/^\/[^\/]+\/postID\//i.test(location.pathname)||/[?&]drop=/.test(location.search))document.body.classList.add('dd-link-mode');</script>
 
 <div class="toast-cont" id="toastCont"></div>
+<div class="ddi" id="ddInboxOv">
+  <div class="ddi-head"><i class="fas fa-comments" style="color:var(--blue)"></i><b>Anonymous replies</b><button class="ddi-x" onclick="ddCloseInbox()" aria-label="Close"><i class="fas fa-times"></i></button></div>
+  <div class="ddi-body" id="ddInboxBody"></div>
+</div>
 <div class="ddl-bar" id="ddLinkBar"><span>Want to drop something too?</span><button onclick="ddGoPost()">Post your own <i class="fas fa-arrow-right"></i></button></div>
 <div class="ddl-land" id="ddLinkLanding">
   <div class="ddl-ic"><i class="fas fa-skull-crossbones"></i></div>
@@ -658,6 +711,15 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
     <div class="ddv-load" id="ddvLoad"></div>
   </div>
   <div class="ddv-cap" id="ddvCap"></div>
+  <div class="ddv-react" id="ddvReact">
+    <div class="ddv-emojis" id="ddvEmojis"></div>
+    <div class="ddv-replybar">
+      <button class="ddv-smile" onclick="ddvToggleEmojis()" aria-label="Reactions"><i class="fas fa-face-smile"></i></button>
+      <input id="ddvReplyInput" type="text" maxlength="240" placeholder="Reply anonymously…" autocomplete="off" enterkeyhint="send">
+      <button class="ddv-send" id="ddvSend" onclick="ddvSendReply()" aria-label="Send"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <div class="ddv-activity" id="ddvActivity"></div>
   <div class="ddv-foot" id="ddvFoot"></div>
 </div>
 
@@ -1228,9 +1290,9 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
 <script>
 /* ============ backend endpoints ============ */
 var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
-var POSTS_API = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
-var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbwZ-WgqX5m32L1l-z3XzpZn2uzYqZISqfdpmaZOroMndaTu0ZY5lWGDilBVUXqkBmOB8Q/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
+var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
 var SUPPORT_EMAIL = 'darkdigitalspaceteam@gmail.com';
 
 var currentUser = {}, isSignedIn = false;
@@ -3011,7 +3073,7 @@ async function anonLoadFeed(){
       }catch(e2){}
     }
     if(changed && anonFilter===f) ddPaintFeed(f, ddFeedCache[f].list);
-    if(f!=='shared') ddRefreshShared();
+    if(f!=='shared'){ ddRefreshShared(); ddRefreshInbox(); }
   }catch(e){
     if(!cached){
       var msg = (e && e.message==='signed-out')
@@ -3033,7 +3095,7 @@ function ddPaintFeed(f, list){
   mine.forEach(function(d){ ddCache[d.id]=d; mineIds[d.id]=1; });
   if(f==='mine'){
     list.forEach(function(dr){ ddCache[dr.id]=dr; });
-    html = ddRowOnly() + (list.length
+    html = ddRowOnly() + ddInboxBarHTML() + (list.length
       ? '<div class="dd-sec-lbl">Manage your drops</div>'+list.map(function(dr){ return ddCardHTML(dr,true); }).join('')
       : '<div class="empty"><i class="fas fa-ghost"></i>No active drops yet — tap New drop</div>');
   } else if(f==='shared'){
@@ -3066,12 +3128,16 @@ function ddMarkOpened(id){
     var a=ddOpenedSet();
     if(a.indexOf(id)<0){ a.push(id); if(a.length>300) a=a.slice(-300); localStorage.setItem(ddOpenedKey(),JSON.stringify(a)); }
   }catch(e){}
+  try{ var sc=ddFeedCache.shared; if(sc) sc.list.forEach(function(d){ if(d.id===id) d.seen=true; }); }catch(e2){}
   ddUpdateSharedBadge();
 }
 function ddSharedUnread(){
   var c=ddFeedCache.shared; if(!c) return 0;
   var o=ddOpenedSet();
-  return c.list.filter(function(d){ return o.indexOf(d.id)<0 && !/expired|cancel|delet|destroy|gone/i.test(d.status||''); }).length;
+  return c.list.filter(function(d){
+    if(/expired|cancel|delet|destroy|gone/i.test(d.status||'')) return false;
+    return (d.seen===undefined) ? (o.indexOf(d.id)<0) : !d.seen;      // server knows what you've opened; old backend falls back to this phone's memory
+  }).length;
 }
 function ddUpdateSharedBadge(){
   var chip=document.querySelector('.anon-chip[data-f="shared"]'); if(!chip) return 0;
@@ -3082,6 +3148,7 @@ function ddUpdateSharedBadge(){
 var _ddSharedAnn=0;
 var _ddSharedBusy=false;
 async function ddRefreshShared(){
+  if(!ddCaps.social) return;       // old backend counts every list fetch as a view — never poll it
   if(_ddSharedBusy) return;
   if(!isSignedIn){ ddUpdateSharedBadge(); return; }
   _ddSharedBusy=true;
@@ -3113,11 +3180,236 @@ async function ddDebugList(){
   var n=0, t=null, el=document.getElementById('ddTitleTap'); if(!el) return;
   el.addEventListener('click',function(){ n++; clearTimeout(t); t=setTimeout(function(){ n=0; },2500); if(n>=5){ n=0; ddDebugList(); } });
 })();
-setTimeout(ddRefreshShared,1200);
-setInterval(ddRefreshShared,15000);
-document.addEventListener('visibilitychange',function(){ if(!document.hidden) ddRefreshShared(); });
-window.addEventListener('focus',function(){ ddRefreshShared(); });
-window.addEventListener('online',function(){ ddRefreshShared(); });
+/* =====================================================================
+   ANONYMOUS REACTIONS & REPLIES (WhatsApp-status style)
+   Viewers react / reply without being identified; only the owner reads them
+   ("Anonymous 1", "Anonymous 2"...). Needs backend_patched_full-8 — on an
+   older backend all of this switches itself off (and background polling too).
+   ===================================================================== */
+var DD_REACTS=['\u2764\uFE0F','\uD83D\uDE02','\uD83D\uDE2E','\uD83D\uDE22','\uD83D\uDE4F','\uD83D\uDC4D','\uD83D\uDD25','\uD83D\uDC80'];
+var ddCaps={social:false}, _ddCapsP=null;
+function ddEnsureCaps(){
+  if(_ddCapsP) return _ddCapsP;
+  _ddCapsP=fetch(POSTS_API+'?action=getDropInboxCount&ownerDDS=probe').then(function(r){ return r.text(); })
+    .then(function(t){ var d; try{ d=JSON.parse(t); }catch(e){ return; } ddCaps.social=!/invalid action/i.test(d.message||''); ddUpdateMineBadge(); })
+    .catch(function(){ ddCaps.social=false; _ddCapsP=null; });
+  return _ddCapsP;
+}
+function ddGuestKey(){
+  try{
+    var k=localStorage.getItem('dd_vk');
+    if(!k){ k=Math.random().toString(36).slice(2,10)+Math.random().toString(36).slice(2,10)+Date.now().toString(36); localStorage.setItem('dd_vk',k); }
+    return k;
+  }catch(e){ return window._ddvkMem||(window._ddvkMem='m'+Math.random().toString(36).slice(2,14)+Date.now().toString(36)); }
+}
+function ddViewerQS(){ return (isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'')+'&vk='+encodeURIComponent(ddGuestKey()); }
+function ddWho(){ return {viewerDDS:(isSignedIn?currentUser.ddsNumber:''), vk:ddGuestKey()}; }
+function ddPostJSON(obj){
+  return ddRetry(function(){
+    return fetch(POSTS_API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(obj)})
+      .then(function(r){ return r.text(); })
+      .then(function(t){
+        var d; try{ d=JSON.parse(t); }catch(e){ throw ddErr('server'); }
+        if(!d.success){ var er=new Error(d.message||'Something went wrong — please try again.'); er.server=true; throw er; }
+        return d;
+      });
+  },2);
+}
+function ddGetJSON(qs){
+  return ddRetry(function(){
+    return fetch(POSTS_API+'?'+qs).then(function(r){ return r.text(); })
+      .then(function(t){
+        var d; try{ d=JSON.parse(t); }catch(e){ throw ddErr('server'); }
+        if(!d.success){ var er=new Error(d.message||'Something went wrong'); er.server=true; throw er; }
+        return d;
+      });
+  },2);
+}
+
+/* ---- viewer: reply bar + emoji reactions ---- */
+function ddvHideSocial(){
+  var rx=ddvEl('ddvReact'), ac=ddvEl('ddvActivity'), i=ddvEl('ddvReplyInput');
+  if(rx) rx.className='ddv-react'; if(ac){ ac.className='ddv-activity'; ac.innerHTML=''; }
+  if(i){ i.value=''; i.blur(); }
+}
+function ddvRenderEmojis(sel){
+  ddvEl('ddvEmojis').innerHTML=DD_REACTS.map(function(e){ return '<button class="ddv-emoji'+(e===sel?' sel':'')+'" onclick="ddvReact(\''+e+'\')">'+e+'</button>'; }).join('');
+}
+async function ddvSetupSocial(dr,s){
+  await ddEnsureCaps();
+  if(!s || _ddv!==s) return;
+  if(!ddCaps.social){ ddvHideSocial(); return; }
+  if(s.mine || (dr && dr.isOwner)){ s.mine=true; ddvHideSocial(); ddvLoadActivity(s); return; }
+  if(!s.counted){ ddvHideSocial(); return; }
+  ddvEl('ddvActivity').className='ddv-activity';
+  ddvEl('ddvReact').classList.add('on');
+  ddvRenderEmojis(s.myReaction||'');
+}
+function ddvToggleEmojis(){ ddvEl('ddvReact').classList.toggle('open'); }
+function ddvFloat(emoji){
+  var st=ddvEl('ddvStage');
+  for(var i=0;i<7;i++){
+    (function(i){
+      var el=document.createElement('span'); el.className='ddv-float'; el.textContent=emoji;
+      el.style.left=(15+Math.random()*70)+'%'; el.style.animationDelay=(i*0.09)+'s';
+      st.appendChild(el); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },2000);
+    })(i);
+  }
+}
+async function ddvReact(emoji){
+  var s=_ddv; if(!s || !s.counted) return;
+  var prev=s.myReaction||'', next=(prev===emoji)?'':emoji;
+  s.myReaction=next; ddvRenderEmojis(next);
+  if(ddSeen[s.id]) ddSeen[s.id].dr.myReaction=next;
+  if(next) ddvFloat(next);
+  try{
+    var w=ddWho();
+    await ddPostJSON({action:'reactDeadDrop', id:s.id, t:s.token||'', viewerDDS:w.viewerDDS, vk:w.vk, emoji:next});
+    showToast(next?'Reaction sent anonymously':'Reaction removed','success');
+  }catch(e){
+    s.myReaction=prev; ddvRenderEmojis(prev);
+    if(ddSeen[s.id]) ddSeen[s.id].dr.myReaction=prev;
+    showToast(e.message||'Could not send','error');
+  }
+}
+async function ddvSendReply(){
+  var s=_ddv; if(!s || !s.counted) return;
+  var inp=ddvEl('ddvReplyInput'), text=inp.value.trim(); if(!text) return;
+  var btn=ddvEl('ddvSend'); btn.disabled=true;
+  try{
+    var w=ddWho();
+    await ddPostJSON({action:'replyDeadDrop', id:s.id, t:s.token||'', viewerDDS:w.viewerDDS, vk:w.vk, text:text});
+    inp.value=''; ddvEl('ddvReact').classList.remove('typing'); inp.blur();
+    showToast('Reply sent anonymously','success');
+  }catch(e){ showToast(e.message||'Could not send','error'); }
+  finally{ btn.disabled=false; }
+}
+/* owner opening their own drop sees who reacted (anonymously) and a button to the replies */
+async function ddvLoadActivity(s){
+  if(!isSignedIn) return;
+  var items; try{ items=await ddFetchInbox(true); }catch(e){ return; }
+  if(_ddv!==s) return;
+  var it=ddInboxFor(s.id), ac=ddvEl('ddvActivity');
+  var em=it?Object.keys(it.reactions).map(function(k){ return '<span>'+k+' '+it.reactions[k]+'</span>'; }).join(''):'';
+  var n=it?it.replies.length:0;
+  ac.innerHTML='<div class="ddv-act-em">'+(em||'<span style="color:rgba(255,255,255,.6);font-size:.7rem">No reactions yet</span>')+'</div>'+
+    '<button class="ddv-act-btn" onclick="ddOpenInbox(\''+s.id+'\')">'+(n?(n+' repl'+(n>1?'ies':'y')):'Replies')+'</button>';
+  ac.classList.add('on');
+}
+(function(){
+  var inp=document.getElementById('ddvReplyInput'); if(!inp) return;
+  inp.addEventListener('input',function(){ ddvEl('ddvReact').classList.toggle('typing', !!inp.value.trim()); });
+  inp.addEventListener('focus',function(){                       // like WhatsApp: typing a reply pauses the video
+    var v=ddvEl('ddvContent').querySelector('video'); if(v && !v.paused){ try{ v.pause(); }catch(e){} }
+  });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); ddvSendReply(); } });
+  if(window.visualViewport){                                      // keep the reply bar above the keyboard
+    var fit=function(){ var ov=ddvEl('ddViewOv'); if(!ov.classList.contains('open')){ ov.style.height=''; return; } ov.style.height=window.visualViewport.height+'px'; ov.style.bottom='auto'; };
+    window.visualViewport.addEventListener('resize',fit); window.visualViewport.addEventListener('scroll',fit);
+  }
+})();
+
+/* ---- owner: inbox of anonymous replies & reactions ---- */
+var ddInbox={items:[],unread:0,at:0};
+async function ddFetchInbox(force){
+  if(!isSignedIn || !ddCaps.social) return [];
+  if(!force && Date.now()-ddInbox.at<8000) return ddInbox.items;
+  var d=await ddGetJSON('action=getDropInbox&ownerDDS='+encodeURIComponent(currentUser.ddsNumber));
+  ddInbox={items:(d.data&&d.data.items)||[], unread:(d.data&&d.data.unread)||0, at:Date.now()};
+  ddUpdateMineBadge();
+  return ddInbox.items;
+}
+function ddInboxFor(id){ for(var i=0;i<ddInbox.items.length;i++) if(ddInbox.items[i].dropId===id) return ddInbox.items[i]; return null; }
+function ddUnreadBadge(id){ var it=ddInboxFor(id); return (it&&it.unread)?'<span class="sc-unread">'+it.unread+'</span>':''; }
+function ddUpdateMineBadge(){
+  var chip=document.querySelector('.anon-chip[data-f="mine"]'); if(!chip) return;
+  var n=(isSignedIn&&ddCaps.social)?ddInbox.unread:0;
+  chip.innerHTML='My drops'+(n?'<span class="dd-chip-n">'+(n>99?'99+':n)+'</span>':'');
+}
+function ddInboxBarHTML(){
+  if(!ddCaps.social || !isSignedIn) return '';
+  var n=ddInbox.unread;
+  return '<div class="dd-inbox-bar" onclick="ddOpenInbox()"><i class="fas fa-comments"></i><span>Anonymous replies &amp; reactions</span>'+(n?'<span class="dd-chip-n">'+(n>99?'99+':n)+'</span>':'<i class="fas fa-chevron-right" style="margin-left:auto;color:var(--mute)"></i>')+'</div>';
+}
+function ddActLineHTML(id){
+  if(!ddCaps.social) return '';
+  var it=ddInboxFor(id);
+  var em=it?Object.keys(it.reactions).map(function(k){ return k+' '+it.reactions[k]; }).join('&nbsp;&nbsp;'):'';
+  var n=it?it.replies.length:0;
+  return '<div class="dd-act-line"><span>'+(em||'<span style="color:var(--mute)">No reactions yet</span>')+'</span>'+
+    '<button onclick="ddOpenInbox(\''+id+'\')"><i class="fas fa-comment"></i> '+(n?(n+' repl'+(n>1?'ies':'y')+(it.unread?' · '+it.unread+' new':'')):'Replies')+'</button></div>';
+}
+function ddRepaintCurrent(){ var c=ddFeedCache[anonFilter]; if(c && anonFilter!=='queue') ddPaintFeed(anonFilter,c.list); }
+var _ddInboxAnn=0, _ddInboxBusy=false;
+async function ddRefreshInbox(){
+  if(!isSignedIn || !ddCaps.social || _ddInboxBusy) return;
+  _ddInboxBusy=true;
+  try{
+    var d=await ddGetJSON('action=getDropInboxCount&ownerDDS='+encodeURIComponent(currentUser.ddsNumber));
+    var n=(d.data&&d.data.unread)||0;
+    if(n!==ddInbox.unread || (n>0 && !ddInbox.items.length) || !ddInbox.at){ await ddFetchInbox(true); ddRepaintCurrent(); }
+    if(n>_ddInboxAnn && !document.getElementById('ddInboxOv').classList.contains('open')) showToast('New anonymous reply or reaction on your drop \uD83D\uDCAC','info');
+    _ddInboxAnn=n;
+  }catch(e){}
+  finally{ _ddInboxBusy=false; }
+}
+function ddOpenInbox(focusId){
+  if(!isSignedIn){ showToast('Sign in to see your replies','error'); return; }
+  if(!ddCaps.social) return;
+  var ov=document.getElementById('ddInboxOv'), body=document.getElementById('ddInboxBody');
+  ov.classList.add('open'); document.body.style.overflow='hidden';
+  body.innerHTML='<div class="empty"><div class="spin"></div>Loading…</div>';
+  ddFetchInbox(true).then(function(items){
+    ddRenderInbox(items, focusId);
+    ddPostJSON({action:'markDropInboxRead', ownerDDS:currentUser.ddsNumber, id:focusId||''}).then(function(){
+      ddInbox.items.forEach(function(it){ if(!focusId || it.dropId===focusId) it.unread=0; });
+      ddInbox.unread=ddInbox.items.reduce(function(a,it){ return a+(it.unread||0); },0);
+      _ddInboxAnn=ddInbox.unread; ddUpdateMineBadge();
+    }).catch(function(){});
+  }).catch(function(e){ body.innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>'+esc(e.message||'Could not load')+'</div>'; });
+}
+function ddCloseInbox(){
+  document.getElementById('ddInboxOv').classList.remove('open');
+  if(!document.getElementById('ddViewOv').classList.contains('open')) document.body.style.overflow='';
+  ddRepaintCurrent();
+}
+function ddRenderInbox(items, focusId){
+  var body=document.getElementById('ddInboxBody');
+  if(!items.length){ body.innerHTML='<div class="empty"><i class="fas fa-comments"></i>No replies or reactions yet.<br>When someone reacts to or replies to one of your drops, it shows up here — anonymously.</div>'; return; }
+  body.innerHTML=items.map(function(it){
+    var p=ddParseText(it.preview||'');
+    var title=p.text || ((p.blur||p.tiny||p.thumb)?(p.thumbVideo?'Video drop':'Photo drop'):'Drop');
+    var react=Object.keys(it.reactions).map(function(k){ return '<span class="ddi-rc">'+k+' <b>'+it.reactions[k]+'</b></span>'; }).join('');
+    var who=it.reactionList.map(function(r){ return '<span class="ddi-pill'+(r.unread?' new':'')+'">'+esc(r.who)+' '+r.emoji+'</span>'; }).join('');
+    var reps=it.replies.map(function(r){
+      return '<div class="ddi-reply'+(r.unread?' unread':'')+'"><div class="ddi-who">'+esc(r.who)+'</div>'+esc(r.text)+'<div class="ddi-time">'+timeAgo(r.at)+'</div></div>';
+    }).join('');
+    return '<div class="ddi-drop" id="ddi-'+it.dropId+'">'+
+      '<div class="ddi-drop-head"><div class="ddi-thumb"><div class="sc-face">'+ddCardFaceHTML({id:'ddi_'+it.dropId,content:it.preview,hasMedia:false})+'</div></div>'+
+      '<div style="flex:1;min-width:0"><div class="ddi-title">'+esc(title.slice(0,60))+'</div><div class="ddi-sub">'+(it.live?'Live now':'Self-destructed')+' · '+it.replies.length+' repl'+(it.replies.length===1?'y':'ies')+' · '+it.reactionList.length+' reaction'+(it.reactionList.length===1?'':'s')+'</div></div>'+
+      '<button class="ddi-clear" onclick="ddClearDropInbox(\''+it.dropId+'\')" title="Clear"><i class="fas fa-trash"></i></button></div>'+
+      (react?'<div class="ddi-reacts">'+react+'</div>':'')+(who?'<div class="ddi-whos">'+who+'</div>':'')+reps+'</div>';
+  }).join('');
+  if(focusId){ var el=document.getElementById('ddi-'+focusId); if(el) el.scrollIntoView(); }
+}
+function ddClearDropInbox(id){
+  showConfirm('Clear all replies and reactions on this drop?', function(){
+    ddPostJSON({action:'clearDropInbox', ownerDDS:currentUser.ddsNumber, id:id}).then(function(){
+      ddInbox.items=ddInbox.items.filter(function(it){ return it.dropId!==id; });
+      ddInbox.unread=ddInbox.items.reduce(function(a,it){ return a+(it.unread||0); },0);
+      ddUpdateMineBadge(); ddRenderInbox(ddInbox.items);
+    }).catch(function(e){ showToast(e.message||'Could not clear','error'); });
+  });
+}
+
+/* ---- background checks: only when the backend supports it (older backend = no polling, it would burn views) ---- */
+function ddBackgroundTick(){ if(document.hidden || !ddCaps.social) return; ddRefreshShared(); ddRefreshInbox(); }
+ddEnsureCaps().then(function(){ if(ddCaps.social) setTimeout(ddBackgroundTick,600); });
+setInterval(ddBackgroundTick,30000);
+document.addEventListener('visibilitychange',function(){ if(!document.hidden) ddBackgroundTick(); });
+window.addEventListener('focus',ddBackgroundTick);
+window.addEventListener('online',ddBackgroundTick);
+
 
 /* quiet background check every 25s so percentages/status stay live without
    ever showing a spinner or wiping the screen when nothing changed */
@@ -3167,7 +3459,7 @@ function ddStatusCardHTML(dr, mine){
   var icon = dr.mode==='link' ? 'fa-link' : (mi.url ? (mi.isVideo ? 'fa-video' : 'fa-image') : (dr.hasMedia ? 'fa-image' : 'fa-font'));
   return '<div class="dd-scard" onclick="ddOpenViewer(\''+dr.id+'\',\''+(dr.token||'')+'\',this)" oncontextmenu="return false">'+
     '<div class="sc-face" data-did="'+dr.id+'">'+ddCardFaceHTML(dr)+'</div>'+
-    '<div class="sc-shade"></div><span class="sc-type"><i class="fas '+icon+'"></i></span>'+(mine?'<span class="sc-you">You</span>':'')+
+    '<div class="sc-shade"></div><span class="sc-type"><i class="fas '+icon+'"></i></span>'+(mine?'<span class="sc-you">You</span>'+ddUnreadBadge(dr.id):'')+
     '<div class="sc-pct">'+pct+'%</div><div class="sc-bar"><i style="width:'+pct+'%"></i></div></div>';
 }
 /* Explore-style grid card for wide/landscape screens — percentage only */
@@ -3199,6 +3491,7 @@ function ddCardHTML(dr, isOwner){
     mediaHTML +
     '<div class="dd-progress-track"><div class="dd-progress-fill" style="width:'+pct+'%"></div></div>'+
     '<div class="dd-meta-row"><span>'+fmtN(dr.viewCount||0)+' / '+fmtN(dr.viewTarget||0)+' views (only you see this)</span><span>'+ddExpiryLabel(dr.expiresAt)+'</span></div>'+
+    ddActLineHTML(dr.id)+
     (isLink?('<div class="dd-link-box"><input readonly value="'+esc(link)+'"><button onclick="ddCopyLink(this)">Copy</button></div>'):'')+
     (dr.status==='active' ?('<div class="dd-card-actions"><button class="cancel" onclick="ddCancel(\''+dr.id+'\')"><i class="fas fa-ban"></i> Cancel drop</button></div>'):'')+
     '</div>';
@@ -3274,7 +3567,7 @@ function ddOpenViewer(id,token,btn){
   guardTap('ddview_'+id, null, function(){ return ddvStart(id,token); });
 }
 function ddvStart(id,token){
-  ddMarkOpened(id);
+  ddMarkOpened(id); ddvHideSocial();
   var ov=ddvEl('ddViewOv');
   ov.style.background='#000';
   ddvEl('ddvStage').className='ddv-stage';
@@ -3282,7 +3575,7 @@ function ddvStart(id,token){
   ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent=''; ddvEl('ddvSub').textContent='';
   ov.classList.add('open'); document.body.style.overflow='hidden';
   var loc=ddLocalDrop(id);   // own drop, or one already opened: shown from what we already hold — no reload, no extra count
-  _ddv={seq:++_ddvSeq, id:id, token:token, dr:loc?loc.dr:null, media:null, known:ddCache[id]||null, thumb:ddParseText((ddCache[id]||{}).content||'').thumb, mine:!!(loc&&loc.mine), local:!!loc, fresh:false};
+  _ddv={seq:++_ddvSeq, id:id, token:token, dr:loc?loc.dr:null, media:null, known:ddCache[id]||null, thumb:ddParseText((ddCache[id]||{}).content||'').thumb, mine:!!(loc&&loc.mine), local:!!loc, fresh:false, counted:!!(loc&&!loc.mine), myReaction:(loc&&loc.dr&&loc.dr.myReaction)||''};
   return ddvStep();
 }
 function ddvRetry(){ if(_ddv) ddvStep(); }
@@ -3311,7 +3604,7 @@ function ddvLoadMedia(url, isVid){
   });
 }
 function ddvFetch(id,token){
-  var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+(isSignedIn?('&viewerDDS='+encodeURIComponent(currentUser.ddsNumber)):'');
+  var qs='action=viewDeadDrop&id='+encodeURIComponent(id)+(token?('&t='+encodeURIComponent(token)):'')+ddViewerQS();
   return fetch(POSTS_API+'?'+qs).then(function(r){ return r.text(); })
     .then(function(t){ try{ return JSON.parse(t); }catch(e){ throw netErr('Bad response'); } })
     .catch(function(e){ if(e && e.net) throw e; throw netErr('Network error'); });
@@ -3321,7 +3614,7 @@ async function ddvCountBg(s){
     var d = await ddvFetch(s.id, s.token);
     if(s.seq!==_ddvSeq) return;
     if(!d.success){ ddvShowGone(d.message); return; }
-    s.dr = d.data; s.fresh = true; ddSeen[s.id] = {dr:s.dr};
+    s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; ddSeen[s.id] = {dr:s.dr};
     ddvShow(s.dr, s.media, s);     // refresh caption / text / progress with the full server copy
   }catch(e){ /* content is already on screen — stay quiet */ }
 }
@@ -3352,7 +3645,7 @@ async function ddvStep(){
       var d = await ddvFetch(s.id, s.token);
       if(seq!==_ddvSeq) return;
       if(!d.success){ ddvShowGone(d.message); return; }
-      s.dr = d.data; s.fresh = true; ddSeen[s.id] = {dr:s.dr};
+      s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; ddSeen[s.id] = {dr:s.dr};
       var mi2 = ddMediaInfo(s.dr);
       if(mi2.url && (!s.media || mi2.url!==mi.url)){
         s.media=null;
@@ -3369,7 +3662,7 @@ async function ddvStep(){
 }
 function ddvShowGone(msg){
   ddvEl('ddViewOv').style.background='#000'; ddvEl('ddvStage').classList.remove('txt');
-  ddvEl('ddvContent').innerHTML=''; ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent='';
+  ddvEl('ddvContent').innerHTML=''; ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent=''; ddvHideSocial();
   ddvSetStatus('<i class="fas fa-ghost big"></i><b style="color:#fff;font-size:.9rem">This drop is gone</b><span>'+esc(msg||'It reached its view limit, expired, or was cancelled.')+'</span>');
 }
 function ddvShowError(e){
@@ -3401,9 +3694,10 @@ function ddvShow(dr, wrap, s){
     stage.classList.add('txt');
     cont.innerHTML='<div class="ddv-text" style="font-family:'+f.f+';font-size:'+ddTxtSize(p.text.length,f.s,true)+'rem">'+esc(p.text)+'</div>';
   }
+  ddvSetupSocial(dr, s);
 }
 function ddCloseViewer(){
-  _ddvSeq++; _ddv=null;               // anything still loading is abandoned — and never counted
+  _ddvSeq++; _ddv=null; ddvHideSocial(); ddvEl('ddViewOv').style.height='';               // anything still loading is abandoned — and never counted
   var ov=ddvEl('ddViewOv'); ov.classList.remove('open'); ov.style.background='';
   var st=ddvEl('ddvContent'), v=st.querySelector('video');
   if(v){ try{ v.pause(); v.currentTime=0; }catch(e){} }
