@@ -605,18 +605,40 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
 .ddv-react.on{display:block;}
 .ddv-emojis{display:none;justify-content:space-between;gap:.15rem;padding:.15rem 0 .5rem;}
 .ddv-react.open .ddv-emojis{display:flex;}
-.ddv-emoji{background:none;border:none;font-size:1.6rem;line-height:1;padding:.3rem .32rem;border-radius:14px;cursor:pointer;transition:transform .15s;}
-.ddv-emoji:active{transform:scale(1.35);}
+.ddv-emoji{background:none;border:none;font-size:1.2rem;line-height:1;min-width:38px;height:38px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:12px;cursor:pointer;transition:transform .15s;}
+.ddv-emoji:active{transform:scale(1.2);}
 .ddv-emoji.sel{background:rgba(255,255,255,.2);}
 .ddv-replybar{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:26px;padding:.15rem .25rem .15rem .3rem;}
 .ddv-replybar input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-size:.8rem;padding:.55rem .3rem;font-family:inherit;}
 .ddv-replybar input::placeholder{color:rgba(255,255,255,.65);}
 .ddv-smile,.ddv-send{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
-.ddv-smile{background:transparent;color:#fff;}
+.ddv-smile{background:transparent;color:#fff;font-size:1.4rem;line-height:1;}
 .ddv-send{background:var(--blue);color:#03060a;display:none;}
 .ddv-react.typing .ddv-send{display:flex;}
-.ddv-float{position:absolute;bottom:8%;z-index:8;font-size:2.1rem;pointer-events:none;animation:ddvFloat 1.7s ease-out forwards;}
-@keyframes ddvFloat{0%{transform:translateY(0) scale(.5);opacity:0;}15%{opacity:1;transform:translateY(-30px) scale(1.25);}100%{transform:translateY(-300px) scale(1);opacity:0;}}
+.ddv-float{position:absolute;bottom:4px;z-index:8;font-size:1.1rem;line-height:1;pointer-events:none;opacity:0;animation:ddvFloat 2s ease-out forwards;will-change:transform,opacity;}
+@keyframes ddvFloat{
+ 0%{transform:translate(0,0) scale(.5) rotate(0deg);opacity:0;}
+ 15%{opacity:.95;transform:translate(var(--d1),-24px) scale(1.1) rotate(var(--rot));}
+ 50%{transform:translate(var(--d2),-100px) scale(1) rotate(calc(var(--rot) * -1));}
+ 100%{transform:translate(var(--d3),-190px) scale(.75) rotate(0deg);opacity:0;}
+}
+.ddv-tag{position:absolute;bottom:170px;z-index:9;transform:translateX(-50%);background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;font-size:.5rem;letter-spacing:.03em;padding:.15rem .5rem;border-radius:10px;border:1px solid rgba(255,255,255,.18);pointer-events:none;white-space:nowrap;animation:ddvTag 2.4s ease-out forwards;}
+@keyframes ddvTag{0%{opacity:0;transform:translate(-50%,8px);}15%{opacity:.9;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-40px);}}
+.ddv-feed{position:absolute;left:.8rem;bottom:.8rem;max-width:74%;z-index:7;display:flex;flex-direction:column;gap:.35rem;pointer-events:none;}
+.ddv-cmt{align-self:flex-start;background:rgba(0,0,0,.34);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);color:#fff;font-size:.72rem;line-height:1.35;padding:.35rem .7rem;border-radius:14px;border:1px solid rgba(255,255,255,.12);word-break:break-word;animation:ddvCmtIn .4s ease-out;transition:opacity .7s,transform .7s;}
+.ddv-cmt b{display:block;font-size:.54rem;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.03em;margin-bottom:.1rem;}
+.ddv-cmt.mine{border-color:rgba(47,143,255,.55);}
+.ddv-cmt.mine b{color:#7db8ff;}
+.ddv-cmt.out{opacity:0;transform:translateY(-16px);}
+@keyframes ddvCmtIn{from{opacity:0;transform:translateY(16px) scale(.96);}to{opacity:1;transform:none;}}
+.ddv-send .spin{display:none;width:16px;height:16px;border-width:2px;border-color:rgba(3,6,10,.3);border-top-color:#03060a;}
+.ddv-send.loading i{display:none;}
+.ddv-send.loading .spin{display:inline-block;}
+.ddv-send:disabled{opacity:.9;cursor:default;}
+.ddv-sealed{display:none;flex:1;align-items:center;gap:.5rem;color:rgba(255,255,255,.78);font-size:.72rem;padding:.55rem .6rem;}
+.ddv-react.sealed .ddv-replybar input,.ddv-react.sealed .ddv-send{display:none !important;}
+.ddv-react.sealed .ddv-sealed{display:flex;}
+.ddv-emojis{transition:opacity .15s;}
 .ddv-activity{display:none;background:rgba(0,0,0,.62);padding:.7rem 1rem;color:#fff;font-size:.74rem;}
 .ddv-activity.on{display:flex;align-items:center;justify-content:space-between;gap:.6rem;}
 .ddv-act-em span{margin-right:.8rem;font-size:.95rem;}
@@ -708,15 +730,17 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
   </div>
   <div class="ddv-stage" id="ddvStage">
     <div class="ddv-content" id="ddvContent"></div>
+    <div class="ddv-feed" id="ddvFeed"></div>
     <div class="ddv-load" id="ddvLoad"></div>
   </div>
   <div class="ddv-cap" id="ddvCap"></div>
   <div class="ddv-react" id="ddvReact">
     <div class="ddv-emojis" id="ddvEmojis"></div>
     <div class="ddv-replybar">
-      <button class="ddv-smile" onclick="ddvToggleEmojis()" aria-label="Reactions"><i class="fas fa-face-smile"></i></button>
+      <button class="ddv-smile" onclick="ddvToggleEmojis()" aria-label="Reactions">🥸</button>
       <input id="ddvReplyInput" type="text" maxlength="240" placeholder="Reply anonymously…" autocomplete="off" enterkeyhint="send">
-      <button class="ddv-send" id="ddvSend" onclick="ddvSendReply()" aria-label="Send"><i class="fas fa-paper-plane"></i></button>
+      <div class="ddv-sealed" id="ddvSealed"></div>
+      <button class="ddv-send" id="ddvSend" onclick="ddvSendReply()" aria-label="Send"><i class="fas fa-paper-plane"></i><span class="spin"></span></button>
     </div>
   </div>
   <div class="ddv-activity" id="ddvActivity"></div>
@@ -1290,9 +1314,9 @@ body.dd-link-mode .ddl-land.open ~ .ddl-bar,body.dd-link-mode:has(.ddl-land.open
 <script>
 /* ============ backend endpoints ============ */
 var API = 'https://script.google.com/macros/s/AKfycbw4kR_kvg3vt3tc5WCG0kWX0bV4NApIiw2uhzog9CDetQ9nVYUSkQ8vRwKG8ZTvE31Ajw/exec';
-var POSTS_API = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
-var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbz11n3SYJJlbilg8bEi54jyhnXsqdoB2RZSCMqmDCRkLZW54X9XrLU-FusvPoLCPMKbPw/exec';
+var POSTS_API = 'https://script.google.com/macros/s/AKfycbwrwOHUAtu3gIY-6kXC10Mvy1dufsxiVdrG3dAKLq_VLD_dG8HJiNmBTUuZlGv-Qa-G6Q/exec';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwOHUAtu3gIY-6kXC10Mvy1dufsxiVdrG3dAKLq_VLD_dG8HJiNmBTUuZlGv-Qa-G6Q/exec';
+var REFERRAL_BACKEND = 'https://script.google.com/macros/s/AKfycbwrwOHUAtu3gIY-6kXC10Mvy1dufsxiVdrG3dAKLq_VLD_dG8HJiNmBTUuZlGv-Qa-G6Q/exec';
 var SUPPORT_EMAIL = 'darkdigitalspaceteam@gmail.com';
 
 var currentUser = {}, isSignedIn = false;
@@ -3210,7 +3234,7 @@ function ddPostJSON(obj){
       .then(function(r){ return r.text(); })
       .then(function(t){
         var d; try{ d=JSON.parse(t); }catch(e){ throw ddErr('server'); }
-        if(!d.success){ var er=new Error(d.message||'Something went wrong — please try again.'); er.server=true; throw er; }
+        if(!d.success){ var er=new Error(d.message||'Something went wrong — please try again.'); er.server=true; er.data=d.data; throw er; }
         return d;
       });
   },2);
@@ -3227,13 +3251,25 @@ function ddGetJSON(qs){
 }
 
 /* ---- viewer: reply bar + emoji reactions ---- */
+var DD_LIVE_MAX=18, _ddvLive=0, _ddvLastBurst=0, ddvOwnerTimer=null;
 function ddvHideSocial(){
-  var rx=ddvEl('ddvReact'), ac=ddvEl('ddvActivity'), i=ddvEl('ddvReplyInput');
-  if(rx) rx.className='ddv-react'; if(ac){ ac.className='ddv-activity'; ac.innerHTML=''; }
-  if(i){ i.value=''; i.blur(); }
+  clearInterval(ddvOwnerTimer); ddvOwnerTimer=null;
+  var rx=ddvEl('ddvReact'), ac=ddvEl('ddvActivity'), i=ddvEl('ddvReplyInput'), fd=ddvEl('ddvFeed');
+  if(rx) rx.className='ddv-react';
+  if(ac){ ac.className='ddv-activity'; ac.innerHTML=''; }
+  if(fd) fd.innerHTML='';
+  if(i){ i.value=''; i.readOnly=false; i.placeholder='Reply anonymously\u2026'; i.blur(); }
+  var sb=ddvEl('ddvSend'); if(sb){ sb.classList.remove('loading'); sb.disabled=false; }
 }
 function ddvRenderEmojis(sel){
-  ddvEl('ddvEmojis').innerHTML=DD_REACTS.map(function(e){ return '<button class="ddv-emoji'+(e===sel?' sel':'')+'" onclick="ddvReact(\''+e+'\')">'+e+'</button>'; }).join('');
+  ddvEl('ddvEmojis').innerHTML=DD_REACTS.map(function(e){ return '<button class="ddv-emoji'+(e===sel?' sel':'')+'" onclick="ddvReact(\''+e+'\',this)">'+e+'</button>'; }).join('');
+}
+/* reply allowance: placeholder shows what's left; once used up the box is sealed */
+function ddvApplyReplyState(s){
+  var rx=ddvEl('ddvReact'), inp=ddvEl('ddvReplyInput'), lim=s.replyLimit||3, used=(s.myReplies||[]).length, left=Math.max(0,lim-used);
+  rx.classList.toggle('sealed', left<=0);
+  ddvEl('ddvSealed').innerHTML='<i class="fas fa-lock"></i> You\'ve used all '+lim+' replies on this drop';
+  inp.placeholder = used ? ('Reply anonymously\u2026 ('+left+' left)') : 'Reply anonymously\u2026';
 }
 async function ddvSetupSocial(dr,s){
   await ddEnsureCaps();
@@ -3244,57 +3280,132 @@ async function ddvSetupSocial(dr,s){
   ddvEl('ddvActivity').className='ddv-activity';
   ddvEl('ddvReact').classList.add('on');
   ddvRenderEmojis(s.myReaction||'');
-}
-function ddvToggleEmojis(){ ddvEl('ddvReact').classList.toggle('open'); }
-function ddvFloat(emoji){
-  var st=ddvEl('ddvStage');
-  for(var i=0;i<7;i++){
-    (function(i){
-      var el=document.createElement('span'); el.className='ddv-float'; el.textContent=emoji;
-      el.style.left=(15+Math.random()*70)+'%'; el.style.animationDelay=(i*0.09)+'s';
-      st.appendChild(el); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },2000);
-    })(i);
+  ddvApplyReplyState(s);
+  if(!s.replayed){                       // what you said earlier drifts by again, gently
+    s.replayed=true;
+    (s.myReplies||[]).filter(Boolean).slice(-3).forEach(function(t,i){ setTimeout(function(){ if(_ddv===s) ddvComment(t,'You',true); },700+i*1100); });
   }
 }
-async function ddvReact(emoji){
-  var s=_ddv; if(!s || !s.counted) return;
+function ddvToggleEmojis(){ ddvEl('ddvReact').classList.toggle('open'); }
+
+/* TikTok-Live style: translucent comment bubbles that rise and fade */
+function ddvComment(text,label,mine){
+  var fd=ddvEl('ddvFeed'); if(!fd) return;
+  while(fd.children.length>=4) fd.removeChild(fd.firstChild);
+  var el=document.createElement('div'); el.className='ddv-cmt'+(mine?' mine':'');
+  el.innerHTML='<b>'+esc(label)+'</b>'+esc(text);
+  fd.appendChild(el);
+  setTimeout(function(){ el.classList.add('out'); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },700); },4800);
+}
+/* emoji burst: wobbling emojis scatter upward from where you tapped, with an "Anonymous reaction" tag.
+   Capped so a mashed button can't flood the screen. */
+function ddvBurst(emoji,fromEl,label){
+  var st=ddvEl('ddvStage'), now=Date.now();
+  if(now-_ddvLastBurst<140) return; _ddvLastBurst=now;
+  var sr=st.getBoundingClientRect(), x=sr.width/2;
+  if(fromEl){ var r=fromEl.getBoundingClientRect(); x=r.left+r.width/2-sr.left; }
+  x=Math.max(50,Math.min(sr.width-50,x));
+  var rnd=function(a){ return (Math.random()*2-1)*a; };
+  for(var i=0;i<5 && _ddvLive<DD_LIVE_MAX;i++){
+    (function(i){
+      _ddvLive++;
+      var el=document.createElement('span'); el.className='ddv-float'; el.textContent=emoji;
+      el.style.left=(x-8)+'px';
+      el.style.setProperty('--d1',rnd(12)+'px'); el.style.setProperty('--d2',rnd(24)+'px'); el.style.setProperty('--d3',rnd(36)+'px'); el.style.setProperty('--rot',rnd(14)+'deg');
+      el.style.animationDuration=(1.5+Math.random()*0.6)+'s'; el.style.animationDelay=(i*0.07)+'s';
+      st.appendChild(el); setTimeout(function(){ _ddvLive--; if(el.parentNode) el.parentNode.removeChild(el); },2500);
+    })(i);
+  }
+  if(label && _ddvLive<DD_LIVE_MAX){
+    var tg=document.createElement('span'); tg.className='ddv-tag'; tg.textContent=label; tg.style.left=Math.max(70,Math.min(sr.width-70,x))+'px';
+    st.appendChild(tg); setTimeout(function(){ if(tg.parentNode) tg.parentNode.removeChild(tg); },2500);
+  }
+}
+async function ddvReact(emoji,btn){
+  var s=_ddv; if(!s || !s.counted || s.reactBusy) return;
   var prev=s.myReaction||'', next=(prev===emoji)?'':emoji;
-  s.myReaction=next; ddvRenderEmojis(next);
+  s.reactBusy=true; s.myReaction=next; ddvRenderEmojis(next);
   if(ddSeen[s.id]) ddSeen[s.id].dr.myReaction=next;
-  if(next) ddvFloat(next);
+  if(next) ddvBurst(next,btn,'Anonymous reaction');
   try{
     var w=ddWho();
     await ddPostJSON({action:'reactDeadDrop', id:s.id, t:s.token||'', viewerDDS:w.viewerDDS, vk:w.vk, emoji:next});
-    showToast(next?'Reaction sent anonymously':'Reaction removed','success');
   }catch(e){
     s.myReaction=prev; ddvRenderEmojis(prev);
     if(ddSeen[s.id]) ddSeen[s.id].dr.myReaction=prev;
     showToast(e.message||'Could not send','error');
-  }
+  }finally{ s.reactBusy=false; }
 }
+/* send: the button spins and everything locks until the server answers, so a tap can't send twice.
+   If it fails the text stays in the box so nothing is lost. A one-time id also makes a retried send safe. */
 async function ddvSendReply(){
-  var s=_ddv; if(!s || !s.counted) return;
+  var s=_ddv; if(!s || !s.counted || s.sending) return;
+  var lim=s.replyLimit||3;
+  if((s.myReplies||[]).length>=lim){ ddvApplyReplyState(s); showToast('You\'ve used all '+lim+' replies on this drop','info'); return; }
   var inp=ddvEl('ddvReplyInput'), text=inp.value.trim(); if(!text) return;
-  var btn=ddvEl('ddvSend'); btn.disabled=true;
+  var btn=ddvEl('ddvSend');
+  s.sending=true; btn.disabled=true; btn.classList.add('loading'); inp.readOnly=true;
+  var cid='c'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   try{
     var w=ddWho();
-    await ddPostJSON({action:'replyDeadDrop', id:s.id, t:s.token||'', viewerDDS:w.viewerDDS, vk:w.vk, text:text});
-    inp.value=''; ddvEl('ddvReact').classList.remove('typing'); inp.blur();
-    showToast('Reply sent anonymously','success');
-  }catch(e){ showToast(e.message||'Could not send','error'); }
-  finally{ btn.disabled=false; }
+    var d=await ddPostJSON({action:'replyDeadDrop', id:s.id, t:s.token||'', viewerDDS:w.viewerDDS, vk:w.vk, text:text, cid:cid});
+    s.myReplies=(s.myReplies||[]).concat([text]);
+    if(ddSeen[s.id]) ddSeen[s.id].dr.myReplies=s.myReplies;
+    if(_ddv===s){
+      inp.value=''; ddvEl('ddvReact').classList.remove('typing');
+      ddvComment(text,'You',true);                                   // you see what you sent, drifting up
+      ddvApplyReplyState(s);
+      var left=((d.data&&d.data.limit)||lim)-s.myReplies.length;
+      if(left<=0){ inp.blur(); showToast('That was your last reply \u2014 replies on this drop are now closed','info'); }
+      else showToast('Sent anonymously \u00B7 '+left+' left','success');
+    }
+  }catch(e){
+    if(e && e.data && e.data.sealed){                                // used up on another device/tab
+      s.myReplies=(s.myReplies||[]).slice(); while(s.myReplies.length<lim) s.myReplies.push('');
+      if(_ddv===s){ ddvApplyReplyState(s); showToast(e.message||'Replies closed','info'); }
+    } else if(_ddv===s){ showToast((e&&e.message)||'Could not send \u2014 your reply is still here, tap send to try again','error'); }
+  }finally{
+    s.sending=false; btn.disabled=false; btn.classList.remove('loading'); inp.readOnly=false;
+  }
 }
-/* owner opening their own drop sees who reacted (anonymously) and a button to the replies */
-async function ddvLoadActivity(s){
-  if(!isSignedIn) return;
-  var items; try{ items=await ddFetchInbox(true); }catch(e){ return; }
-  if(_ddv!==s) return;
+/* owner opening their own drop: reactions + replies drift by like live comments, and new ones keep arriving */
+function ddvRenderActivity(s){
   var it=ddInboxFor(s.id), ac=ddvEl('ddvActivity');
   var em=it?Object.keys(it.reactions).map(function(k){ return '<span>'+k+' '+it.reactions[k]+'</span>'; }).join(''):'';
   var n=it?it.replies.length:0;
   ac.innerHTML='<div class="ddv-act-em">'+(em||'<span style="color:rgba(255,255,255,.6);font-size:.7rem">No reactions yet</span>')+'</div>'+
     '<button class="ddv-act-btn" onclick="ddOpenInbox(\''+s.id+'\')">'+(n?(n+' repl'+(n>1?'ies':'y')):'Replies')+'</button>';
   ac.classList.add('on');
+}
+async function ddvLoadActivity(s){
+  if(!isSignedIn) return;
+  try{ await ddFetchInbox(true); }catch(e){ return; }
+  if(_ddv!==s) return;
+  ddvRenderActivity(s);
+  var it=ddInboxFor(s.id); s.seenKeys={};
+  if(it){
+    it.replies.forEach(function(r){ s.seenKeys['r'+r.id]=1; });
+    it.reactionList.forEach(function(x){ s.seenKeys['x'+x.who+x.emoji+x.at]=1; });
+    it.replies.slice(-3).forEach(function(r,i){ setTimeout(function(){ if(_ddv===s) ddvComment(r.text,r.who,false); },600+i*1100); });
+    var seenE={}, k=0;
+    it.reactionList.slice().reverse().forEach(function(x){ if(!seenE[x.emoji] && k<2){ seenE[x.emoji]=1; setTimeout(function(){ if(_ddv===s) ddvBurst(x.emoji,null,'Anonymous reaction'); },500+k*1300); k++; } });
+    if(it.unread) ddPostJSON({action:'markDropInboxRead', ownerDDS:currentUser.ddsNumber, id:s.id}).then(function(){ it.unread=0; ddInbox.unread=ddInbox.items.reduce(function(a,z){ return a+(z.unread||0); },0); ddUpdateMineBadge(); }).catch(function(){});
+  }
+  clearInterval(ddvOwnerTimer);
+  ddvOwnerTimer=setInterval(function(){ ddvOwnerPoll(s); },7000);
+}
+async function ddvOwnerPoll(s){
+  if(_ddv!==s || document.hidden){ if(_ddv!==s){ clearInterval(ddvOwnerTimer); } return; }
+  try{ await ddFetchInbox(true); }catch(e){ return; }
+  if(_ddv!==s) return;
+  var it=ddInboxFor(s.id); if(!it) return;
+  var fresh=false;
+  it.replies.forEach(function(r){ if(!s.seenKeys['r'+r.id]){ s.seenKeys['r'+r.id]=1; fresh=true; ddvComment(r.text,r.who,false); } });
+  it.reactionList.forEach(function(x){ var key='x'+x.who+x.emoji+x.at; if(!s.seenKeys[key]){ s.seenKeys[key]=1; fresh=true; ddvBurst(x.emoji,null,'Anonymous reaction'); } });
+  if(fresh){
+    ddvRenderActivity(s);
+    ddPostJSON({action:'markDropInboxRead', ownerDDS:currentUser.ddsNumber, id:s.id}).then(function(){ it.unread=0; ddInbox.unread=ddInbox.items.reduce(function(a,z){ return a+(z.unread||0); },0); ddUpdateMineBadge(); }).catch(function(){});
+  }
 }
 (function(){
   var inp=document.getElementById('ddvReplyInput'); if(!inp) return;
@@ -3303,11 +3414,22 @@ async function ddvLoadActivity(s){
     var v=ddvEl('ddvContent').querySelector('video'); if(v && !v.paused){ try{ v.pause(); }catch(e){} }
   });
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); ddvSendReply(); } });
-  if(window.visualViewport){                                      // keep the reply bar above the keyboard
-    var fit=function(){ var ov=ddvEl('ddViewOv'); if(!ov.classList.contains('open')){ ov.style.height=''; return; } ov.style.height=window.visualViewport.height+'px'; ov.style.bottom='auto'; };
-    window.visualViewport.addEventListener('resize',fit); window.visualViewport.addEventListener('scroll',fit);
+  inp.addEventListener('blur',function(){ setTimeout(ddvFit,350); });   // keyboard closing doesn't always fire a resize
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',ddvFit); window.visualViewport.addEventListener('scroll',ddvFit);
   }
 })();
+/* The viewer is normally pinned to all four edges of the screen. Only while the keyboard is up do we
+   shorten it so the reply bar stays visible — and every time it opens or closes the box is reset to
+   full screen, so it can never get stuck as a small bar at the top of the page. */
+function ddvResetBox(){ var ov=ddvEl('ddViewOv'); if(!ov) return; ov.style.height=''; ov.style.top=''; ov.style.bottom=''; }
+function ddvFit(){
+  var ov=ddvEl('ddViewOv'); if(!ov) return;
+  if(!ov.classList.contains('open')){ ddvResetBox(); return; }
+  var vv=window.visualViewport; if(!vv) return;
+  if(vv.height >= window.innerHeight-90 || vv.height < 220){ ddvResetBox(); return; }   // no keyboard (or a tiny preview window)
+  ov.style.height=vv.height+'px'; ov.style.top=vv.offsetTop+'px';
+}
 
 /* ---- owner: inbox of anonymous replies & reactions ---- */
 var ddInbox={items:[],unread:0,at:0};
@@ -3567,7 +3689,7 @@ function ddOpenViewer(id,token,btn){
   guardTap('ddview_'+id, null, function(){ return ddvStart(id,token); });
 }
 function ddvStart(id,token){
-  ddMarkOpened(id); ddvHideSocial();
+  ddMarkOpened(id); ddvHideSocial(); ddvResetBox();
   var ov=ddvEl('ddViewOv');
   ov.style.background='#000';
   ddvEl('ddvStage').className='ddv-stage';
@@ -3575,7 +3697,7 @@ function ddvStart(id,token){
   ddvEl('ddvCap').style.display='none'; ddvEl('ddvFoot').textContent=''; ddvEl('ddvSub').textContent='';
   ov.classList.add('open'); document.body.style.overflow='hidden';
   var loc=ddLocalDrop(id);   // own drop, or one already opened: shown from what we already hold — no reload, no extra count
-  _ddv={seq:++_ddvSeq, id:id, token:token, dr:loc?loc.dr:null, media:null, known:ddCache[id]||null, thumb:ddParseText((ddCache[id]||{}).content||'').thumb, mine:!!(loc&&loc.mine), local:!!loc, fresh:false, counted:!!(loc&&!loc.mine), myReaction:(loc&&loc.dr&&loc.dr.myReaction)||''};
+  _ddv={seq:++_ddvSeq, id:id, token:token, dr:loc?loc.dr:null, media:null, known:ddCache[id]||null, thumb:ddParseText((ddCache[id]||{}).content||'').thumb, mine:!!(loc&&loc.mine), local:!!loc, fresh:false, counted:!!(loc&&!loc.mine), myReaction:(loc&&loc.dr&&loc.dr.myReaction)||'', myReplies:(loc&&loc.dr&&loc.dr.myReplies)||[], replyLimit:(loc&&loc.dr&&loc.dr.replyLimit)||3, sending:false, reactBusy:false};
   return ddvStep();
 }
 function ddvRetry(){ if(_ddv) ddvStep(); }
@@ -3614,7 +3736,7 @@ async function ddvCountBg(s){
     var d = await ddvFetch(s.id, s.token);
     if(s.seq!==_ddvSeq) return;
     if(!d.success){ ddvShowGone(d.message); return; }
-    s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; ddSeen[s.id] = {dr:s.dr};
+    s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; s.myReplies = d.data.myReplies||[]; s.replyLimit = d.data.replyLimit||3; ddSeen[s.id] = {dr:s.dr};
     ddvShow(s.dr, s.media, s);     // refresh caption / text / progress with the full server copy
   }catch(e){ /* content is already on screen — stay quiet */ }
 }
@@ -3645,7 +3767,7 @@ async function ddvStep(){
       var d = await ddvFetch(s.id, s.token);
       if(seq!==_ddvSeq) return;
       if(!d.success){ ddvShowGone(d.message); return; }
-      s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; ddSeen[s.id] = {dr:s.dr};
+      s.dr = d.data; s.fresh = true; s.counted = true; s.myReaction = d.data.myReaction||''; s.myReplies = d.data.myReplies||[]; s.replyLimit = d.data.replyLimit||3; ddSeen[s.id] = {dr:s.dr};
       var mi2 = ddMediaInfo(s.dr);
       if(mi2.url && (!s.media || mi2.url!==mi.url)){
         s.media=null;
@@ -3697,7 +3819,7 @@ function ddvShow(dr, wrap, s){
   ddvSetupSocial(dr, s);
 }
 function ddCloseViewer(){
-  _ddvSeq++; _ddv=null; ddvHideSocial(); ddvEl('ddViewOv').style.height='';               // anything still loading is abandoned — and never counted
+  _ddvSeq++; _ddv=null; ddvHideSocial(); ddvResetBox();               // anything still loading is abandoned — and never counted
   var ov=ddvEl('ddViewOv'); ov.classList.remove('open'); ov.style.background='';
   var st=ddvEl('ddvContent'), v=st.querySelector('video');
   if(v){ try{ v.pause(); v.currentTime=0; }catch(e){} }
