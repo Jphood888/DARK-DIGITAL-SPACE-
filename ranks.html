@@ -181,7 +181,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#05070a;color:#dbe6f7}
 .rx-stage{position:relative;height:calc(var(--w)*1.4 + 56px);perspective:1500px;perspective-origin:50% 45%;touch-action:pan-y;cursor:grab}
 .rx-stage.drag{cursor:grabbing}
 .rx-floor{position:absolute;left:50%;bottom:6px;width:calc(var(--w)*1.5);height:calc(var(--w)*.34);margin-left:calc(var(--w)*-.75);border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 55%,transparent),transparent);filter:blur(2px);transition:background .5s}
-.rx-ring{position:absolute;left:50%;top:6px;width:var(--w);height:calc(var(--w)*1.4);margin-left:calc(var(--w)/-2);transform-style:preserve-3d;transition:transform .8s cubic-bezier(.22,.8,.2,1)}
+.rx-ring{position:absolute;left:50%;top:6px;width:var(--w);height:calc(var(--w)*1.4);margin-left:calc(var(--w)/-2);transform-style:preserve-3d;transition:transform .95s cubic-bezier(.2,.9,.25,1.035)}
 .rx-stage.drag .rx-ring{transition:none}
 .rx-c{position:absolute;inset:0;transform:rotateY(calc(var(--i)*var(--st))) translateZ(calc(var(--w)*var(--k)));transform-style:preserve-3d;transition:opacity .5s,filter .5s}
 .rx-c:not(.front){pointer-events:none}
@@ -263,6 +263,41 @@ body{font-family:'Inter',system-ui,sans-serif;background:#05070a;color:#dbe6f7}
 .rk-conf .no{background:#121c2c;color:#cfe3ff;border:1px solid var(--line)!important}
 .rk-conf .yes{background:var(--blue);color:#03060a}
 @media(prefers-reduced-motion:reduce){.rx-ring,.rx-flip{transition-duration:.01s}}
+
+/* ---- logo style faces, glitch + impact ---- */
+.rx-c{--gl:drop-shadow(0 0 16px color-mix(in srgb,var(--k2) 55%,transparent))}
+.rx-f{background:none;border:0;box-shadow:none;overflow:visible}
+.rx-art{margin:0;border-radius:0;background:none;overflow:visible}
+.rx-art::before{content:"";position:absolute;inset:8% 0 12%;background:radial-gradient(closest-side,color-mix(in srgb,var(--k2) 26%,transparent),transparent);filter:blur(10px);pointer-events:none}
+.rx-art.raw{background:#050a12;border-radius:18px;overflow:hidden}
+.rx-art img,.rx-art canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none;filter:var(--gl)}
+.rx-art.raw img{object-fit:cover}
+.rx-ph{background:none}
+.rx-fi h3{text-shadow:0 0 14px color-mix(in srgb,var(--k2) 60%,transparent)}
+.rx-wave{position:absolute;left:50%;bottom:calc(var(--w)*.08);width:calc(var(--w)*1.2);height:calc(var(--w)*.34);margin-left:calc(var(--w)*-.6);border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}
+.rx-stage.hit .rx-wave{animation:rxWave .8s ease-out}
+.rx.shk{animation:rxShake .4s linear}
+.rx-stage.hit .rx-c.front .rx-art img,.rx-stage.hit .rx-c.front .rx-art canvas{animation:rxSlice .55s steps(1,end) both}
+.rx-stage.hit .rx-c.front .rx-fi h3{animation:rxTx .55s steps(1,end)}
+.rx-stage.hit .rx-c.front .rx-art{animation:rxPop .5s cubic-bezier(.2,1.4,.4,1)}
+.rx-stage.rxspin .rx-c .rx-art img,.rx-stage.rxspin .rx-c .rx-art canvas{filter:drop-shadow(-4px 0 0 rgba(255,40,90,.75)) drop-shadow(4px 0 0 rgba(25,230,255,.75)) var(--gl)}
+
+.rx-body.gl>*{animation:rxIn .5s steps(1,end) both}
+.rx-body.gl>*:nth-child(2){animation-delay:.07s}.rx-body.gl>*:nth-child(3){animation-delay:.14s}.rx-body.gl>*:nth-child(4){animation-delay:.21s}.rx-body.gl>*:nth-child(n+5){animation-delay:.28s}
+@keyframes rxShake{0%{transform:none}12%{transform:translate(-4px,1px)}26%{transform:translate(4px,-2px)}40%{transform:translate(-3px,-1px)}55%{transform:translate(2px,1px)}72%{transform:translate(-1px,0)}100%{transform:none}}
+@keyframes rxJolt{0%{translate:0 0}30%{translate:-3px 1px}60%{translate:3px -1px}100%{translate:0 0}}
+@keyframes rxPop{0%{transform:scale(.94)}60%{transform:scale(1.07)}100%{transform:scale(1)}}
+@keyframes rxWave{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.9)}}
+@keyframes rxSlice{0%{clip-path:inset(10% 0 72% 0);transform:translateX(-10px);filter:drop-shadow(-6px 0 0 #ff2a5f) drop-shadow(6px 0 0 #19e6ff) var(--gl)}
+ 14%{clip-path:inset(58% 0 18% 0);transform:translateX(10px);filter:drop-shadow(-6px 0 0 #ff2a5f) drop-shadow(6px 0 0 #19e6ff) var(--gl)}
+ 28%{clip-path:inset(78% 0 2% 0);transform:translateX(-6px)}
+ 42%{clip-path:inset(28% 0 50% 0);transform:translateX(7px);filter:drop-shadow(-4px 0 0 #ff2a5f) drop-shadow(4px 0 0 #19e6ff) var(--gl)}
+ 58%{clip-path:inset(0);transform:translateX(-3px);filter:var(--gl)}
+ 74%{clip-path:inset(40% 0 38% 0);transform:translateX(3px)}
+ 100%{clip-path:inset(0);transform:none;filter:var(--gl)}}
+@keyframes rxTx{0%{text-shadow:-3px 0 #ff2a5f,3px 0 #19e6ff;transform:translateX(-3px)}25%{text-shadow:3px 0 #ff2a5f,-3px 0 #19e6ff;transform:translateX(3px) skewX(-8deg)}50%{text-shadow:-2px 0 #ff2a5f,2px 0 #19e6ff;transform:none}75%{text-shadow:2px 0 #ff2a5f,-2px 0 #19e6ff;transform:translateX(-2px)}100%{text-shadow:0 0 14px color-mix(in srgb,var(--k2) 60%,transparent);transform:none}}
+@keyframes rxIn{0%{opacity:0;clip-path:inset(0 0 100% 0)}18%{opacity:1;clip-path:inset(40% 0 30% 0);transform:translateX(-8px);text-shadow:-3px 0 #ff2a5f,3px 0 #19e6ff}36%{clip-path:inset(0 0 55% 0);transform:translateX(6px)}54%{clip-path:inset(60% 0 0 0);transform:translateX(-4px);text-shadow:2px 0 #ff2a5f,-2px 0 #19e6ff}75%{clip-path:inset(0);transform:translateX(2px)}100%{opacity:1;clip-path:inset(0);transform:none;text-shadow:none}}
+@media(prefers-reduced-motion:reduce){.rx.shk,.rx-stage.hit,.rx-body.gl>*,.rx-stage.hit *{animation:none!important}}
 </style>
 </head>
 <body>
@@ -290,7 +325,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#05070a;color:#dbe6f7}
   <!-- COLLAPSIBLE INFO (rules + how-to) -->
   <div class="info-collapse" style="--ic:#ff0040" id="rulesCollapse">
     <div class="info-collapse-head" onclick="toggleCollapse('rulesCollapse')">
-      <h3>⚔️ RANK CHALLENGE RULES</h3>
+      <h3>RANK CHALLENGE RULES</h3>
       <i class="fas fa-chevron-down"></i>
     </div>
     <div class="info-collapse-body">
@@ -306,7 +341,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#05070a;color:#dbe6f7}
 
   <div class="info-collapse" style="--ic:#ffaa00" id="howtoCollapse">
     <div class="info-collapse-head" onclick="toggleCollapse('howtoCollapse')">
-      <h3>🎯 HOW THIS PAGE WORKS</h3>
+      <h3>HOW THIS PAGE WORKS</h3>
       <i class="fas fa-chevron-down"></i>
     </div>
     <div class="info-collapse-body">
@@ -317,7 +352,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#05070a;color:#dbe6f7}
   </div>
 
   <div class="final-message">
-    <h3>🎯 REMEMBER THE SACRED RULES</h3>
+    <h3>REMEMBER THE SACRED RULES</h3>
     <p>Each rank is a battlefield. Each challenge is a war. Only the strongest survive in this digital hierarchy.<br><br>Rise through skill, fall through defeat, and always respect the code of the DDS.</p>
   </div>
 </div>
@@ -372,32 +407,32 @@ const BASIC_RANKS = [
   {key:'H',label:'H-RANK',icon:'fa-user-ninja',img:'/ranks/H.webp?v=1',color:'#0096ff',range:'H100 → H0',
     desc:'The foundation tier for aspiring hackers. Start your journey at H100 and prove your worth by climbing to H0. This is where digital warriors are forged through determination and skill.',
     role:'Aspiring Hacker',focus:'Learning • Growth • Adaptation',strength:'Potential • Curiosity • Persistence',weapon:'Knowledge • Code • Mind',
-    tagline:'★ Every legend was once a beginner.',
+    tagline:' Every legend was once a beginner.',
     abilities:[{icon:'fa-crosshairs',name:'RECON SCAN',desc:'Scan systems and networks'},{icon:'fa-code',name:'CODE BREAK',desc:'Break basic encryption'},{icon:'fa-user-ninja',name:'SHADOW WALK',desc:'Move unseen in the network'},{icon:'fa-bolt',name:'DATA GRAB',desc:'Extract data quickly'},{icon:'fa-shield-halved',name:'DEFENSE MODE',desc:'Protect against basic threats'}]},
   {key:'A',label:'A-RANK',icon:'fa-bolt',img:'/ranks/A.webp?v=1',color:'#0096ff',range:'A100 → A0',
     desc:'Advanced hackers who have mastered the basics. The A-series represents elevated skills and deeper understanding of digital warfare. Only the worthy ascend from H-ranks.',
     role:'Advanced Operator',focus:'Precision • Strategy • Speed',strength:'Discipline • Sharp Instincts',weapon:'Exploits • Scripts • Tactics',
-    tagline:'★ Mastery begins where the basics end.',
+    tagline:' Mastery begins where the basics end.',
     abilities:[{icon:'fa-satellite-dish',name:'DEEP SCAN',desc:'Map hidden network layers'},{icon:'fa-fire',name:'FIREWALL CRACK',desc:'Break intermediate defenses'},{icon:'fa-user-secret',name:'GHOST TRACE',desc:'Erase your digital footsteps'},{icon:'fa-bolt',name:'PAYLOAD DROP',desc:'Deploy advanced scripts fast'},{icon:'fa-shield-halved',name:'COUNTER GUARD',desc:'Block retaliation attempts'}]},
   {key:'C',label:'C-RANK',icon:'fa-terminal',img:'/ranks/C.webp?v=1',color:'#0096ff',range:'C100 → C0',
     desc:'Code masters and system infiltrators. C-ranks are the backbone of cyber operations, possessing advanced technical skills and strategic thinking capabilities.',
     role:'System Infiltrator',focus:'Access • Control • Precision',strength:'Technical Mastery • Strategy',weapon:'Root Access • Custom Tools',
-    tagline:'★ Code is the key to every door.',
+    tagline:' Code is the key to every door.',
     abilities:[{icon:'fa-key',name:'ROOT BREACH',desc:'Force root-level access'},{icon:'fa-terminal',name:'TERMINAL CMD',desc:'Execute complex operations'},{icon:'fa-user-ninja',name:'SILENT BYPASS',desc:'Slip past monitoring systems'},{icon:'fa-database',name:'SYSTEM DRAIN',desc:'Pull entire databases'},{icon:'fa-shield-halved',name:'LOCKDOWN SHIELD',desc:'Seal your tracks instantly'}]},
   {key:'K',label:'K-RANK',icon:'fa-chess-king',img:'/ranks/K.webp?v=1',color:'#0096ff',range:'K100 → K0',
     desc:'Kings of their domain, K-ranks command respect and fear. These elite operators have proven themselves through countless digital battles and strategic victories.',
     role:'Domain Commander',focus:'Authority • Command • Respect',strength:'Leadership • Tactical Power',weapon:'Command Chains • Networks',
-    tagline:'★ A king is measured by what he commands.',
+    tagline:' A king is measured by what he commands.',
     abilities:[{icon:'fa-chess-king',name:'TERRITORY CLAIM',desc:'Take control of a network'},{icon:'fa-network-wired',name:'CHAIN COMMAND',desc:'Direct multiple systems at once'},{icon:'fa-skull',name:'FEAR PROTOCOL',desc:'Intimidate lesser ranks'},{icon:'fa-bolt',name:'RESOURCE SEIZE',desc:'Redirect system resources'},{icon:'fa-shield-halved',name:'ROYAL GUARD',desc:'Defend your claimed domain'}]},
   {key:'E',label:'E-RANK',icon:'fa-fire',img:'/ranks/E.webp?v=1',color:'#0096ff',range:'E100 → E0',
     desc:'Elite warriors of the digital realm. E-ranks are feared across networks, capable of executing complex operations that others can only dream of.',
     role:'Feared Operative',focus:'Execution • Fear • Impact',strength:'Ruthlessness • Precision',weapon:'Zero-Day Exploits • Fire',
-    tagline:'★ Fear is earned, not given.',
+    tagline:' Fear is earned, not given.',
     abilities:[{icon:'fa-fire',name:'BLAZE STRIKE',desc:'Overwhelm a target instantly'},{icon:'fa-bug',name:'ZERO DAY',desc:'Exploit unknown vulnerabilities'},{icon:'fa-crosshairs',name:'ELITE RECON',desc:'Identify high-value targets'},{icon:'fa-bolt',name:'RAPID EXTRACT',desc:'Pull data before detection'},{icon:'fa-shield-halved',name:'IRON WALL',desc:'Withstand elite countermeasures'}]},
   {key:'R',label:'R-RANK',icon:'fa-star',img:'/ranks/R.webp?v=1',color:'#0096ff',range:'R100 → R0',
     desc:'The pinnacle of basic ranks. R-series hackers are legends in training, standing at the threshold of true digital enlightenment and elder status.',
     role:'Legend In Training',focus:'Enlightenment • Threshold • Legacy',strength:'Near-Elder Skill • Vision',weapon:'Refined Mastery • Insight',
-    tagline:'★ The threshold to legend stands before you.',
+    tagline:' The threshold to legend stands before you.',
     abilities:[{icon:'fa-eye',name:'HORIZON SCAN',desc:'See threats before they form'},{icon:'fa-code',name:'MASTER BREAK',desc:'Crack elite-tier encryption'},{icon:'fa-user-ninja',name:'PHANTOM STEP',desc:'Become untraceable'},{icon:'fa-database',name:'LEGACY PULL',desc:'Extract legendary-tier intel'},{icon:'fa-shield-halved',name:'ASCENSION GUARD',desc:'Shield your path to Elder'}]}
 ];
 
@@ -405,54 +440,54 @@ const BASIC_RANKS = [
 const CYBER_HACKER = {rankName:'Cyber-Hacker',label:'CYBER-HACKER',icon:'fa-globe',color:'#ff6b35',range:'Cyber-Hacker100 → Cyber-Hacker0',
   desc:'Masters of the digital realm, these elite hackers transcend normal limitations. They command networks like kingdoms and strike fear into the hearts of system administrators worldwide.',
   role:'Network Overlord',focus:'Domination • Reach • Fear',strength:'Global Access • Command',weapon:'Kingdom Networks',
-  tagline:'★ Masters of the digital realm.',
+  tagline:' Masters of the digital realm.',
   abilities:[{icon:'fa-network-wired',name:'GRID CONTROL',desc:'Command entire networks'},{icon:'fa-globe',name:'GLOBAL REACH',desc:'Strike anywhere, anytime'},{icon:'fa-skull-crossbones',name:'ADMIN TERROR',desc:'Break the strongest admins'},{icon:'fa-server',name:'KINGDOM BUILD',desc:'Expand your digital territory'},{icon:'fa-shield-halved',name:'OVERLORD SHIELD',desc:'Untouchable defense grid'}]};
 
 const ELDER_TITLES = [
   {rankName:'Wolf',label:'WOLF',icon:'fa-paw',color:'#ff6b35',
     desc:'The lone hunter of cyberspace. Wolves operate in shadows, striking with precision and disappearing without a trace. Only one can claim this legendary title.',
     role:'Lone Hunter',focus:'Stealth • Precision • Solitude',strength:'Instinct • Patience',weapon:'Silent Strikes',
-    tagline:'★ Only one wolf leads the pack.',
+    tagline:' Only one wolf leads the pack.',
     abilities:[{icon:'fa-paw',name:'SILENT HUNT',desc:'Track targets undetected'},{icon:'fa-user-ninja',name:'PACK INSTINCT',desc:'Strike without warning'},{icon:'fa-wind',name:'VANISH TRAIL',desc:'Disappear without a trace'},{icon:'fa-bolt',name:'PRECISION BITE',desc:'One strike, total damage'},{icon:'fa-shield-halved',name:'LONE GUARD',desc:'Immune to group tracking'}]},
   {rankName:'Spy Master',label:'SPY MASTER',icon:'fa-user-secret',color:'#ff6b35',
     desc:'Information is power, and the Spy Master controls it all. This elite operative has access to secrets that could topple governments and corporations alike.',
     role:'Information Broker',focus:'Secrets • Leverage • Control',strength:'Intelligence Network',weapon:'Stolen Secrets',
-    tagline:'★ Information is power.',
+    tagline:' Information is power.',
     abilities:[{icon:'fa-eye',name:'DEEP SURVEILLANCE',desc:'Monitor any target'},{icon:'fa-user-secret',name:'SECRET EXTRACT',desc:'Steal classified intel'},{icon:'fa-chess',name:'LEVERAGE PLAY',desc:'Turn secrets into power'},{icon:'fa-network-wired',name:'INFILTRATE',desc:'Embed inside any org'},{icon:'fa-shield-halved',name:'COVER IDENTITY',desc:'Never be exposed'}]},
   {rankName:'Digital Killer',label:'DIGITAL KILLER',icon:'fa-skull-crossbones',color:'#ff6b35',
     desc:'Where systems go to die. The Digital Killer specializes in complete annihilation of digital infrastructure, leaving no trace of their devastating presence.',
     role:'System Terminator',focus:'Annihilation • Destruction',strength:'Total Erasure',weapon:'Infrastructure Kill Codes',
-    tagline:'★ Where systems go to die.',
+    tagline:' Where systems go to die.',
     abilities:[{icon:'fa-skull-crossbones',name:'SYSTEM WIPE',desc:'Erase entire infrastructures'},{icon:'fa-bolt',name:'KILL SWITCH',desc:'Instantly disable any system'},{icon:'fa-eraser',name:'TRACE ERASE',desc:'Leave zero evidence'},{icon:'fa-power-off',name:'BLACKOUT',desc:'Cut all power to a network'},{icon:'fa-shield-halved',name:'DEATH SHIELD',desc:'Survive any counterattack'}]},
   {rankName:'Legend Bits',label:'LEGEND BITS',icon:'fa-atom',color:'#ff6b35',
     desc:'Composed of pure digital essence, Legend Bits exists in the quantum realm between code and consciousness, manipulating reality through binary will.',
     role:'Quantum Entity',focus:'Essence • Consciousness',strength:'Binary Will',weapon:'Pure Code',
-    tagline:'★ Pure digital essence.',
+    tagline:' Pure digital essence.',
     abilities:[{icon:'fa-atom',name:'QUANTUM SHIFT',desc:'Exist beyond normal detection'},{icon:'fa-code',name:'BIT MANIPULATION',desc:'Rewrite reality in code'},{icon:'fa-brain',name:'MIND MERGE',desc:'Fuse mind with machine'},{icon:'fa-bolt',name:'ESSENCE STRIKE',desc:'Attack from pure data'},{icon:'fa-shield-halved',name:'BINARY SHIELD',desc:'Become unkillable code'}]},
   {rankName:'Legend Roller',label:'LEGEND ROLLER',icon:'fa-dice',color:'#ff6b35',
     desc:'Fate bends to their will. The Legend Roller controls probability itself, ensuring victory through manipulation of digital chaos and random number generation.',
     role:'Fate Controller',focus:'Chance • Probability',strength:'Chaos Manipulation',weapon:'Random Number Control',
-    tagline:'★ Fate bends to their will.',
+    tagline:' Fate bends to their will.',
     abilities:[{icon:'fa-dice',name:'DICE CONTROL',desc:'Rig any outcome'},{icon:'fa-bolt',name:'CHAOS WAVE',desc:'Destabilize enemy systems'},{icon:'fa-chart-line',name:'PROB SHIFT',desc:'Bend odds in your favor'},{icon:'fa-lock',name:'FATE LOCK',desc:"Seal a guaranteed win"},{icon:'fa-shield-halved',name:'FORTUNE SHIELD',desc:'Deflect bad luck attacks'}]},
   {rankName:'Skull',label:'SKULL',icon:'fa-skull',color:'#ff6b35',
     desc:'Death incarnate in digital form. The Skull represents the end of all systems, the final termination command that brings silence to the loudest networks.',
     role:'Death Incarnate',focus:'Termination • Silence',strength:'Absolute End',weapon:'Final Commands',
-    tagline:'★ The end of all systems.',
+    tagline:' The end of all systems.',
     abilities:[{icon:'fa-skull',name:'FINAL COMMAND',desc:'Execute total termination'},{icon:'fa-volume-xmark',name:'SILENCE PROTOCOL',desc:'Mute any network'},{icon:'fa-biohazard',name:'DEATH MARCH',desc:'Spread system failure'},{icon:'fa-bolt',name:'END SEQUENCE',desc:'Trigger irreversible shutdown'},{icon:'fa-shield-halved',name:'GRAVE SHIELD',desc:'No system survives contact'}]},
   {rankName:'Wolf Karma',label:'WOLF KARMA',icon:'fa-yin-yang',color:'#ff6b35',
     desc:'The cosmic enforcer of digital justice. Wolf Karma ensures that every action in cyberspace has its consequence, balancing the scales with supernatural precision.',
     role:'Cosmic Enforcer',focus:'Balance • Justice',strength:'Supernatural Precision',weapon:'Karmic Retribution',
-    tagline:'★ Every action has its consequence.',
+    tagline:' Every action has its consequence.',
     abilities:[{icon:'fa-yin-yang',name:'BALANCE STRIKE',desc:'Punish every violation'},{icon:'fa-eye',name:'KARMIC TRACE',desc:'See all past actions'},{icon:'fa-bolt',name:'JUSTICE WAVE',desc:'Deliver consequence instantly'},{icon:'fa-scale-balanced',name:'FATE REBALANCE',desc:'Reset the scales'},{icon:'fa-shield-halved',name:'COSMIC SHIELD',desc:'Immune to karmic backlash'}]},
   {rankName:'Skull Unit',label:'SKULL UNIT',icon:'fa-radiation',color:'#ff6b35',
     desc:'The final execution protocol. Skull Unit represents the ultimate termination force, capable of ending entire digital civilizations with a single command.',
     role:'Termination Force',focus:'Mass Execution',strength:'Ultimate Force',weapon:'Civilization Killers',
-    tagline:'★ The ultimate termination force.',
+    tagline:' The ultimate termination force.',
     abilities:[{icon:'fa-radiation',name:'MASS TERMINATE',desc:'Wipe entire civilizations'},{icon:'fa-user-group',name:'UNIT COMMAND',desc:'Deploy termination squads'},{icon:'fa-skull-crossbones',name:'FINAL PROTOCOL',desc:'Irreversible execution'},{icon:'fa-bolt',name:'OVERWHELM FORCE',desc:'Crush all resistance'},{icon:'fa-shield-halved',name:'UNIT SHIELD',desc:'Withstand any counter-force'}]},
   {rankName:'Lord Haka',label:'LORD HAKA',icon:'fa-fist-raised',color:'#ff6b35',
     desc:'The war chief of cyberspace. Lord Haka commands digital armies and leads them into battle against the forces of order and security. A true warrior-king of the modern age.',
     role:'War Chief',focus:'Command • Battle',strength:'Warrior Leadership',weapon:'Digital Armies',
-    tagline:"★ A true warrior-king of the modern age.",
+    tagline:" A true warrior-king of the modern age.",
     abilities:[{icon:'fa-fist-raised',name:'ARMY COMMAND',desc:'Lead digital armies to war'},{icon:'fa-bullhorn',name:'BATTLE CRY',desc:'Rally forces instantly'},{icon:'fa-khanda',name:'WAR STRIKE',desc:'Break enemy formations'},{icon:'fa-flag',name:'CONQUEST WAVE',desc:'Claim territory in battle'},{icon:'fa-shield-halved',name:"CHIEF'S SHIELD",desc:'Unbreakable in combat'}]}
 ];
 
@@ -460,34 +495,34 @@ const SUPREME_TITLES = [
   {rankName:'Rank 5',label:'RANK 5',icon:'fa-shield-halved',color:'#ff0000',range:'Fifth from the Throne',
     desc:'The Guardian of Ancient Protocols. Rank 5 holds the keys to forgotten systems and lost digital realms, wielding power that predates modern cyber warfare.',
     role:'Guardian of Ancient Protocols',focus:'History • Preservation',strength:'Forgotten Power',weapon:'Lost Systems',
-    tagline:'★ Power that predates modern cyber warfare.',
+    tagline:' Power that predates modern cyber warfare.',
     abilities:[{icon:'fa-shield-halved',name:'ANCIENT WARD',desc:'Guard forgotten systems'},{icon:'fa-scroll',name:'PROTOCOL RECALL',desc:'Summon lost knowledge'},{icon:'fa-lock',name:'REALM LOCK',desc:'Seal off lost digital realms'},{icon:'fa-bolt',name:'OLD POWER',desc:'Wield pre-modern cyber force'},{icon:'fa-shield',name:'GUARDIAN STAND',desc:'Immovable defense'}]},
   {rankName:'Rank 4',label:'RANK 4',icon:'fa-compass-drafting',color:'#ff0000',range:'Fourth from the Throne',
     desc:'The Architect of Digital Dimensions. Rank 4 designs and constructs virtual realities, bending space and time within cyberspace to their absolute will.',
     role:'Architect of Digital Dimensions',focus:'Creation • Design',strength:'Reality Bending',weapon:'Virtual Constructs',
-    tagline:'★ Bending space and time within cyberspace.',
+    tagline:' Bending space and time within cyberspace.',
     abilities:[{icon:'fa-compass-drafting',name:'DIMENSION BUILD',desc:'Construct virtual realities'},{icon:'fa-atom',name:'SPACE BEND',desc:'Warp digital space'},{icon:'fa-clock',name:'TIME SHIFT',desc:'Alter system timing'},{icon:'fa-bolt',name:'CONSTRUCT WAVE',desc:'Reshape systems at will'},{icon:'fa-shield-halved',name:'ARCHITECT SHIELD',desc:'Reality-proof defense'}]},
   {rankName:'Rank 3',label:'RANK 3',icon:'fa-scroll',color:'#ff0000',range:'Third from the Throne',
     desc:'The Weaver of Digital Fate. Rank 3 controls the very threads of cyber destiny, determining the rise and fall of digital empires with calculated precision.',
     role:'Weaver of Digital Fate',focus:'Destiny • Control',strength:'Calculated Precision',weapon:'Threads of Fate',
-    tagline:'★ Controls the threads of cyber destiny.',
+    tagline:' Controls the threads of cyber destiny.',
     abilities:[{icon:'fa-scroll',name:'FATE THREAD',desc:'Control digital destinies'},{icon:'fa-chess',name:'EMPIRE RISE',desc:'Determine rise and fall'},{icon:'fa-bolt',name:'PRECISION WEAVE',desc:'Calculate every outcome'},{icon:'fa-lock',name:'DESTINY LOCK',desc:"Seal an empire's fate"},{icon:'fa-shield-halved',name:'WEAVER SHIELD',desc:'Untouchable by fate itself'}]},
   {rankName:'Rank 2',label:'RANK 2',icon:'fa-bullhorn',color:'#ff0000',range:'Second from the Throne',
     desc:'The Herald of Digital Apocalypse. Rank 2 stands as the harbinger of system-ending events, capable of triggering cascade failures across global networks.',
     role:'Herald of Digital Apocalypse',focus:'Cascade • Collapse',strength:'System-Ending Power',weapon:'Cascade Failures',
-    tagline:'★ The harbinger of system-ending events.',
+    tagline:' The harbinger of system-ending events.',
     abilities:[{icon:'fa-bullhorn',name:'CASCADE TRIGGER',desc:'Trigger global cascade failures'},{icon:'fa-bolt',name:'APOCALYPSE WAVE',desc:'System-ending event'},{icon:'fa-network-wired',name:'NETWORK COLLAPSE',desc:'Bring down global grids'},{icon:'fa-volume-high',name:"HERALD'S CALL",desc:'Announce total collapse'},{icon:'fa-shield-halved',name:'APOCALYPSE SHIELD',desc:'Survive your own storm'}]},
   {rankName:'Rank 1',label:'RANK 1',icon:'fa-chess-queen',color:'#ff0000',range:'Heir to the Digital Throne',
     desc:'The Crown Prince of Cyberspace. Rank 1 is the chosen successor, wielding power second only to the ultimate authority. They stand at the gates of digital godhood.',
     role:'Crown Prince of Cyberspace',focus:'Succession • Power',strength:'Second Only to the Throne',weapon:'Godhood Access',
-    tagline:'★ They stand at the gates of digital godhood.',
+    tagline:' They stand at the gates of digital godhood.',
     abilities:[{icon:'fa-chess-queen',name:'THRONE APPROACH',desc:"Stand at godhood's gates"},{icon:'fa-bolt',name:'SUCCESSOR STRIKE',desc:'Wield near-ultimate power'},{icon:'fa-crown',name:'ROYAL COMMAND',desc:'Command with royal authority'},{icon:'fa-hand-sparkles',name:'DIVINE REACH',desc:'Touch power beyond mortals'},{icon:'fa-shield-halved',name:'HEIR SHIELD',desc:'Nearly unchallengeable'}]}
 ];
 
 const EMPEROR_DATA = {label:'RANK 0 — EMPEROR',icon:'fa-crown',color:'#ffd700',range:'The Highest Seat in Dark Digital Space',
   desc:'The absolute sovereign of all digital realms. Rank 0 is the mythical pinnacle of hacking mastery — the King of Kings in cyberspace. Only one being in existence can claim this ultimate title, ruling over all lesser ranks with divine authority.',
   role:'Supreme Digital Emperor',focus:'Absolute Sovereignty',strength:'Unlimited Power',weapon:'All Networks & Systems',
-  tagline:'★ In the beginning was the Code, and the Code was with 0.',
+  tagline:' In the beginning was the Code, and the Code was with 0.',
   abilities:[{icon:'fa-crown',name:'TOTAL DOMINION',desc:'Rule all networks and systems'},{icon:'fa-hand-sparkles',name:'DIVINE AUTHORITY',desc:'Command with absolute power'},{icon:'fa-infinity',name:'REALITY OVERRIDE',desc:'Control all virtual realities'},{icon:'fa-hourglass',name:'ETERNAL REIGN',desc:'Power that never fades'},{icon:'fa-shield-halved',name:"EMPEROR'S SHIELD",desc:'Beyond all challenge'}]};
 
 /* ================= INIT ================= */
@@ -573,7 +608,25 @@ function rxSfx(n,arg){ const c=rxAC(); if(!c) return; const t=c.currentTime+.005
   if(n==='whoosh'){ const len=Math.floor(c.sampleRate*.4), b=c.createBuffer(1,len,c.sampleRate), d=b.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1; const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type='bandpass'; f.Q.value=1.6; f.frequency.setValueAtTime(400,t); f.frequency.exponentialRampToValueAtTime(1800,t+.32); const g=c.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.25,t+.12); g.gain.exponentialRampToValueAtTime(.001,t+.4); s.connect(f); f.connect(g); g.connect(m); s.start(t); }
   else if(n==='pick'){ const b=200*Math.pow(1.122,arg||0); osc('triangle',b,b*2,.16,.14); osc('sine',b*3,b*3,.3,.07,.07); }
   else if(n==='tab'){ osc('triangle',900,600,.07,.09); }
+  else if(n==='hit'){ osc('sine',140,42,.3,.55); const len=Math.floor(c.sampleRate*.14), b=c.createBuffer(1,len,c.sampleRate), d=b.getChannelData(0); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*(Math.random()<.35?1:.2); const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type='highpass'; f.frequency.value=2200; const g=c.createGain(); g.gain.setValueAtTime(.22,t); g.gain.exponentialRampToValueAtTime(.001,t+.14); s.connect(f); f.connect(g); g.connect(m); s.start(t); }
   else if(n==='flip'){ osc('sine',320,640,.18,.1); osc('triangle',640,960,.16,.07,.09); } }
+/* ---- impact effects ---- */
+function rxKick(cls,ms){ const st=document.getElementById('rxStage'); if(!st) return; st.classList.remove(cls); void st.offsetWidth; st.classList.add(cls); clearTimeout(st['_'+cls]); st['_'+cls]=setTimeout(()=>st.classList.remove(cls),ms); }
+function rxShakeAll(){ const e=document.getElementById('rx'); if(!e) return; e.classList.remove('shk'); void e.offsetWidth; e.classList.add('shk'); clearTimeout(e._s); e._s=setTimeout(()=>e.classList.remove('shk'),450); }
+function rxGl(){ const b=document.querySelector('#rxRing .rx-c.flipped .rx-body'); if(!b) return; b.classList.remove('gl'); void b.offsetWidth; b.classList.add('gl'); }
+/* ---- picture: logo style, transparent, not savable ---- */
+function rkImgOk(img){
+  const art=img.parentNode; if(!art||img.dataset.done) return; img.dataset.done=1;
+  try{
+    const w=img.naturalWidth,h=img.naturalHeight; if(!w||!h) return; const m=Math.min(1,640/Math.max(w,h)), cw=Math.round(w*m), ch=Math.round(h*m);
+    const c=document.createElement('canvas'); c.width=cw; c.height=ch; const x=c.getContext('2d'); x.drawImage(img,0,0,cw,ch);
+    const d=x.getImageData(0,0,cw,ch), p=d.data;
+    for(let i=0;i<p.length;i+=4){ const mx=Math.max(p[i],p[i+1],p[i+2]); if(mx<3){ p[i+3]=0; continue; } const k=255/mx; p[i]=Math.min(255,p[i]*k); p[i+1]=Math.min(255,p[i+1]*k); p[i+2]=Math.min(255,p[i+2]*k); p[i+3]=Math.min(255,(mx*1.12))*(p[i+3]/255); }
+    x.putImageData(d,0,0);
+    c.className='rx-pic'; c.setAttribute('role','img'); c.setAttribute('aria-label',img.alt||'');
+    img.replaceWith(c); const ph=art.querySelector('.rx-ph'); if(ph) ph.remove();
+  }catch(e){ art.classList.add('raw'); const ph=art.querySelector('.rx-ph'); if(ph) ph.remove(); }
+}
 /* ---- geometry ---- */
 function rxN(){ return RX.list.length; }
 function rxStep(){ return 360/rxN(); }
@@ -582,19 +635,19 @@ function rxK(n){ return n<3?0:0.64/Math.tan(Math.PI/n); }
 function rxApply(){
   const ring=document.getElementById('rxRing'); if(!ring) return; const n=rxN(), st=rxStep();
   ring.style.transform='translateZ(calc(var(--w)*'+(-rxK(n))+')) rotateY('+RX.rot+'deg)';
-  document.querySelectorAll('#rxRing .rx-c').forEach((el,i)=>{ if(n<2){ el.style.opacity=1; el.classList.add('front'); return; } const a=((i*st+RX.rot)%360+540)%360-180, k=Math.min(Math.abs(a),110)/110; el.style.opacity=(1-k*.72).toFixed(2); el.style.filter='brightness('+(1-k*.5).toFixed(2)+')'; el.classList.toggle('front',Math.abs(a)<st/2); });
+  document.querySelectorAll('#rxRing .rx-c').forEach((el,i)=>{ if(n<2){ el.style.opacity=1; el.classList.add('front'); return; } const a=((i*st+RX.rot)%360+540)%360-180, k=Math.min(Math.abs(a),110)/110; el.style.opacity=Math.abs(a)>105?0:(1-k*.6).toFixed(2); el.style.visibility=Math.abs(a)>105?'hidden':'visible'; el.classList.toggle('front',Math.abs(a)<st/2); });
 }
 function rxUnflip(){ document.querySelectorAll('#rxRing .rx-c.flipped').forEach(e=>e.classList.remove('flipped')); }
-function rxGo(d){ if(rxN()<2) return; rxUnflip(); RX.rot-=rxStep()*d; rxApply(); rxSfx('whoosh'); rxSettle(); }
-function rxTo(i){ const n=rxN(), cur=rxIdx(); let d=i-cur; if(d>n/2) d-=n; if(d<-n/2) d+=n; if(!d) return; rxUnflip(); RX.rot-=rxStep()*d; rxApply(); rxSfx('whoosh'); rxSettle(); }
-function rxSettle(){ clearTimeout(RX.st); RX.st=setTimeout(rxSelect,420); }
-function rxSelect(){ const i=rxIdx(); if(i===RX.idx) return; RX.idx=i; RX.tab='ov'; rxSfx('pick',i); try{ if(navigator.vibrate) navigator.vibrate(8); }catch(e){} rxMeta(); }
+function rxGo(d){ if(rxN()<2) return; rxUnflip(); RX.rot-=rxStep()*d; rxApply(); rxSfx('whoosh'); rxKick('rxspin',650); rxSettle(); }
+function rxTo(i){ const n=rxN(), cur=rxIdx(); let d=i-cur; if(d>n/2) d-=n; if(d<-n/2) d+=n; if(!d) return; rxUnflip(); RX.rot-=rxStep()*d; rxApply(); rxSfx('whoosh'); rxKick('rxspin',650); rxSettle(); }
+function rxSettle(){ clearTimeout(RX.st); RX.st=setTimeout(rxSelect,520); }
+function rxSelect(){ const i=rxIdx(); if(i===RX.idx) return; RX.idx=i; RX.tab='ov'; rxSfx('hit'); rxSfx('pick',i); rxKick('hit',900); rxShakeAll(); try{ if(navigator.vibrate) navigator.vibrate(8); }catch(e){} rxMeta(); }
 /* ---- card faces ---- */
 function rxCrest(r){ return `<div class="rx-ph"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="none" stroke="currentColor" stroke-width="2.4"/><polygon points="50,14 81,32 81,68 50,86 19,68 19,32" fill="none" stroke="currentColor" stroke-width="1" opacity=".5"/></svg><i class="fas ${r.icon||'fa-star'}"></i></div>`; }
 function rxCard(r,i){
   const u=JSON.stringify(rkUrls(rkSlug(r)));
   return `<div class="rx-c" style="--i:${i};--k2:${r.col}"><div class="rx-flip">
-   <div class="rx-f" onclick="rxTap(${i})"><div class="rx-art">${rxCrest(r)}<img src="${rkUrls(rkSlug(r))[0]}" data-u='${u}' data-n="0" alt="${esc(r.label)}" draggable="false" onerror="rkImgErr(this)" style="position:absolute;inset:0">${rxMine(r)?'<span class="rx-you">YOUR RANK</span>':''}<span class="rx-flipic"><i class="fas fa-rotate"></i></span></div>
+   <div class="rx-f" onclick="rxTap(${i})" oncontextmenu="return false" ondragstart="return false"><div class="rx-art">${rxCrest(r)}<img src="${rkUrls(rkSlug(r))[0]}" data-u='${u}' data-n="0" alt="${esc(r.label)}" draggable="false" onload="rkImgOk(this)" onerror="rkImgErr(this)">${rxMine(r)?'<span class="rx-you">YOUR RANK</span>':''}<span class="rx-flipic"><i class="fas fa-rotate"></i></span></div>
     <div class="rx-fi"><h3>${esc(r.label)}</h3><div class="ro">${esc(r.role)}</div><span class="rg">${esc(r.range||'Single title holder')}</span></div></div>
    <div class="rx-b"><div class="rx-bh" onclick="rxFlip()"><div><h3>${esc(r.label)}</h3><div class="ro">${esc(r.role)}</div></div><span class="bk"><i class="fas fa-rotate-left"></i></span></div><div class="rx-tabs"></div><div class="rx-body"></div></div></div></div>`;
 }
@@ -610,14 +663,14 @@ function rxFill(i){
   const el=document.querySelectorAll('#rxRing .rx-c')[i], r=RX.list[i]; if(!el||!r) return;
   el.querySelector('.rx-tabs').innerHTML=rxTabsFor(r).map(t=>`<button class="${t[0]===RX.tab?'on':''}" onclick="rxTab('${t[0]}')">${t[1]}</button>`).join('');
   let h='';
-  if(RX.tab==='ov') h=`<p class="rx-q">${esc(String(r.tagline||'').replace(/^★\s*/,''))}</p><p class="rx-d">${esc(r.desc)}</p><div class="rx-g"><div><small>FOCUS</small><b>${esc(r.focus)}</b></div><div><small>STRENGTH</small><b>${esc(r.strength)}</b></div><div><small>WEAPON</small><b>${esc(r.weapon)}</b></div><div><small>RANGE</small><b>${esc(r.range||'Single title holder')}</b></div></div>`;
+  if(RX.tab==='ov') h=`<p class="rx-q">${esc(String(r.tagline||'').replace(/^\s*/,''))}</p><p class="rx-d">${esc(r.desc)}</p><div class="rx-g"><div><small>FOCUS</small><b>${esc(r.focus)}</b></div><div><small>STRENGTH</small><b>${esc(r.strength)}</b></div><div><small>WEAPON</small><b>${esc(r.weapon)}</b></div><div><small>RANGE</small><b>${esc(r.range||'Single title holder')}</b></div></div>`;
   else if(RX.tab==='ab') h=r.abilities.map((a,n)=>`<div class="rx-ab"><em>${a.icon?'<i class="fas '+a.icon+'"></i>':n+1}</em><div><b>${esc(a.name)}</b><span>${esc(a.desc)}</span></div></div>`).join('');
   else if(RX.tab==='seat') h=rxSeat(r);
   else h=`<div class="rx-tg">${(RS_TAGS[r.key]||[]).map(t=>'<span>'+t+'</span>').join('')}</div><p class="rx-d">${esc(r.role)}. Basic ranks are earned through standing in the community: play, build, help others and climb from ${esc(String(r.range).split(' ')[0])} toward ${esc(String(r.range).split(' ').pop())}.</p>`;
-  const b=el.querySelector('.rx-body'); b.innerHTML=h; b.scrollTop=0;
+  const b=el.querySelector('.rx-body'); b.innerHTML=h; b.scrollTop=0; b.classList.remove('gl'); void b.offsetWidth; b.classList.add('gl');
 }
-function rxTab(t){ RX.tab=t; rxSfx('tab'); rxFill(RX.idx); }
-function rxFlip(){ const el=document.querySelectorAll('#rxRing .rx-c')[RX.idx]; if(!el) return; const on=!el.classList.contains('flipped'); if(on){ RX.tab='ov'; rxFill(RX.idx); } el.classList.toggle('flipped',on); rxSfx('flip'); try{ if(navigator.vibrate) navigator.vibrate(6); }catch(e){} }
+function rxTab(t){ RX.tab=t; rxSfx('tab'); rxFill(RX.idx); rxKick('jolt',500); }
+function rxFlip(){ const el=document.querySelectorAll('#rxRing .rx-c')[RX.idx]; if(!el) return; const on=!el.classList.contains('flipped'); if(on){ RX.tab='ov'; rxFill(RX.idx); } el.classList.toggle('flipped',on); rxSfx('flip'); rxKick('jolt',500); try{ if(navigator.vibrate) navigator.vibrate(6); }catch(e){} }
 function rxTap(i){ if(RX.lock>Date.now()) return; if(i!==RX.idx||!document.querySelectorAll('#rxRing .rx-c')[i].classList.contains('front')){ rxTo(i); return; } rxFlip(); }
 function rxMeta(){
   document.querySelectorAll('#rxDots i').forEach((d,i)=>d.classList.toggle('on',i===RX.idx));
@@ -646,7 +699,7 @@ function renderBasicGrid(){
   try{ const q=new URLSearchParams(location.search).get('tier'); if(['basic','elder','supreme','throne'].includes(q)) t0=q; }catch(e){}
   box.innerHTML=`<div class="rx" id="rx"><div class="rx-head"><div class="rx-tiers" id="rxTiers">${RX_TIERS.map(t=>`<button data-t="${t[0]}" onclick="rxTier('${t[0]}')">${t[1]}</button>`).join('')}</div></div>
    <div class="rx-me">Your rank <b id="rxMeTxt">${esc(rxMeText())}</b></div>
-   <div class="rx-stage" id="rxStage"><div class="rx-floor"></div><div class="rx-ring" id="rxRing"></div><button class="rx-ar l" onclick="rxGo(-1)" aria-label="Previous">&#10094;</button><button class="rx-ar r" onclick="rxGo(1)" aria-label="Next">&#10095;</button></div>
+   <div class="rx-stage" id="rxStage"><div class="rx-floor"></div><i class="rx-wave"></i><div class="rx-ring" id="rxRing"></div><button class="rx-ar l" onclick="rxGo(-1)" aria-label="Previous">&#10094;</button><button class="rx-ar r" onclick="rxGo(1)" aria-label="Next">&#10095;</button></div>
    <div class="rx-dots" id="rxDots"></div><div class="rx-hint">Swipe to rotate &middot; tap the card to flip it</div></div>`;
   rxSetTier(t0,true); rxBind();
 }
@@ -658,7 +711,7 @@ function rxBind(){
     const dt=Math.max(1,e.timeStamp-lt); vx=.8*vx+.2*((e.clientX-lx)/dt); lx=e.clientX; lt=e.timeStamp;
     RX.rot=sr+dx*(0.42*Math.min(1,6/rxN()+.35)); rxApply(); });
   const end=e=>{ if(id!==e.pointerId) return; id=null; if(!go) return; go=false; RX.lock=Date.now()+250; st.classList.remove('drag');
-    const proj=RX.rot+vx*0.42*140, n=Math.round(-proj/rxStep()), cur=Math.round(-RX.rot/rxStep()); const t=Math.max(cur-2,Math.min(cur+2,n)); RX.rot=-t*rxStep(); rxApply(); rxSfx('whoosh'); rxSettle(); };
+    const proj=RX.rot+vx*0.42*140, n=Math.round(-proj/rxStep()), cur=Math.round(-RX.rot/rxStep()); const t=Math.max(cur-2,Math.min(cur+2,n)); RX.rot=-t*rxStep(); rxApply(); rxSfx('whoosh'); rxKick('rxspin',650); rxSettle(); };
   st.addEventListener('pointerup',end); st.addEventListener('pointercancel',end);
   if(!window._rxKey){ window._rxKey=1; document.addEventListener('keydown',e=>{ if(!document.getElementById('rxStage')) return; if(e.key==='ArrowRight') rxGo(1); else if(e.key==='ArrowLeft') rxGo(-1); else if(e.key===' '||e.key==='Enter'){ if(document.activeElement&&document.activeElement.tagName==='BUTTON') return; e.preventDefault(); rxFlip(); } }); }
 }
@@ -820,7 +873,7 @@ function buildEliteFooter(rankName, number, item, fee){
     return `
       <div class="rmodal-status-row"><span>Held by</span><span>${esc(item.holder)}</span></div>
       <div class="rmodal-status-row"><span>Challenge fee</span><span style="color:#ff0040">${fee.toLocaleString()} bits</span></div>
-      <button class="rmodal-btn challenge" onclick="attemptChallengeElite(this,'${esc(rankName)}',${number},'${item.holderDDS}','${esc(item.holder)}',${fee})">⚔️ CHALLENGE</button>
+      <button class="rmodal-btn challenge" onclick="attemptChallengeElite(this,'${esc(rankName)}',${number},'${item.holderDDS}','${esc(item.holder)}',${fee})"> CHALLENGE</button>
       <div class="rmodal-note">Resolves instantly. Win and it's yours — lose and the fee is forfeited.</div>`;
   }
   return `
@@ -856,9 +909,9 @@ function renderElitePosRow(rankName, p, fee){
   const isMine = currentUser && p.holderDDS === currentUser.ddsNumber;
   let btnHTML = isZero ? '<span class="pos-btn locked">Earn only</span>'
     : isMine ? '<span class="pos-btn locked">You hold this</span>'
-    : p.occupied ? `<button class="pos-btn challenge" onclick="attemptChallengeElite(this,'${esc(rankName)}',${p.number},'${p.holderDDS}','${esc(p.holder)}',${fee})">⚔️ Challenge</button>`
+    : p.occupied ? `<button class="pos-btn challenge" onclick="attemptChallengeElite(this,'${esc(rankName)}',${p.number},'${p.holderDDS}','${esc(p.holder)}',${fee})"> Challenge</button>`
     : `<button class="pos-btn buy" onclick="attemptBuyElite(this,'${esc(rankName)}',${p.number},${p.price})">Buy ${p.price.toLocaleString()}</button>`;
-  return `<div class="pos-row"><div class="pos-num ${isZero?'zero':''}">${p.number}${isZero?' 👑':''}</div>
+  return `<div class="pos-row"><div class="pos-num ${isZero?'zero':''}">${p.number}${isZero?' ':''}</div>
     <div class="pos-info">${p.occupied ? '<span class="holder">'+esc(p.holder)+'</span>' : (isZero?'Highest in this rank':'Vacant')}</div>
     ${!isZero ? `<div class="pos-price">${p.occupied?'Fee: '+fee.toLocaleString():p.price.toLocaleString()}</div>` : ''}
     ${btnHTML}</div>`;
@@ -881,7 +934,7 @@ function openEmperorModal(){
     inner = `
       <div class="rmodal-status-row"><span>Status</span><span style="color:#00ff88">Vacant</span></div>
       <div class="rmodal-status-row"><span>Price</span><span style="color:#ffd700">${e.price.toLocaleString()} bits</span></div>
-      <button class="rmodal-btn buy" onclick="attemptBuyEmperor(this)">👑 ASCEND TO EMPEROR</button>
+      <button class="rmodal-btn buy" onclick="attemptBuyEmperor(this)"> ASCEND TO EMPEROR</button>
       <div class="rmodal-note">Irreversible and immediate. Make sure you're certain.</div>`;
   } else {
     inner = `<div class="rmodal-status-row"><span>Held by</span><span>${esc(e.holder)}</span></div>
