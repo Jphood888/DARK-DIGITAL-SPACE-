@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/b/:id",
+      "destination": "/api/b?id=:id"
+    },
+    {
+      "source": "/b/:id/:path*",
+      "destination": "/api/b?id=:id&path=:path*"
+    },
+    {
       "source": "/:who/postID/:id/:token",
       "destination": "/api/share?who=:who&id=:id&token=:token"
     },
@@ -10,6 +18,36 @@
     }
   ],
   "headers": [
+    {
+      "source": "/engine/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/octet-stream"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/engine/v1/manifest.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
+      ]
+    },
     {
       "source": "/(.*)\\.apk",
       "headers": [
@@ -48,5 +86,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/b.js": {
+      "maxDuration": 30
+    }
+  }
 }
