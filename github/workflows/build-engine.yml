@@ -1,0 +1,25 @@
+name: Build Codelab engine
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build engine pack
+        working-directory: engine-build
+        run: |
+          npm install --no-audit --no-fund
+          node build.mjs
+      - name: Commit engine files
+        run: |
+          git config user.name "dds-engine-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add engine
+          git commit -m "Update Codelab engine pack" || echo "No changes"
+          git push
