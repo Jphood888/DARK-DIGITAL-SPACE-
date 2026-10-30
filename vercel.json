@@ -86,10 +86,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/b.js": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
