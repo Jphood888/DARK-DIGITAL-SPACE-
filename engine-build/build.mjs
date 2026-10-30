@@ -3,12 +3,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { createRequire } from 'node:module';
 
 const STUB = process.argv.includes('--stub');
 const OUT = path.resolve(process.argv.find(a => a.startsWith('--out='))?.slice(6) || '../engine/v1');
 const CHUNK = 256 * 1024;
-const require = createRequire(import.meta.url);
 
 async function build() {
   const parts = [];
@@ -22,9 +20,14 @@ async function build() {
     const esbuild = await import('esbuild');
     const r = await esbuild.build({ entryPoints: ['entry.js'], bundle: true, format: 'iife', minify: true, write: false, target: 'es2019' });
     cm = Buffer.from(r.outputFiles[0].contents);
-    react = fs.readFileSync(require.resolve('react/umd/react.production.min.js'));
-    reactDom = fs.readFileSync(require.resolve('react-dom/umd/react-dom.production.min.js'));
-    babel = fs.readFileSync(require.resolve('@babel/standalone/babel.min.js'));
+    const nm = (p) => {
+      const f = path.resolve('node_modules', p);
+      if (!fs.existsSync(f)) throw new Error('Missing file: ' + f);
+      return fs.readFileSync(f);
+    };
+    react = nm('react/umd/react.production.min.js');
+    reactDom = nm('react-dom/umd/react-dom.production.min.js');
+    babel = nm('@babel/standalone/babel.min.js');
   }
   // step 1 = editor core, step 2 = preview tools (each is one logical item, loaded in this order)
   parts.push({ id: 'core', step: 1, items: [{ id: 'cm', data: cm }] });
