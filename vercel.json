@@ -88,3 +88,12 @@
     }
   ]
 }
+
+
+
+{
+  "rewrites": [
+    { "source": "/codelab/preview/:project/:id", "destination": "/api/codelab?k=preview&id=:id" },
+    { "source": "/codelab/p/:project/:id",       "destination": "/api/codelab?k=p&id=:id" }
+  ]
+}
