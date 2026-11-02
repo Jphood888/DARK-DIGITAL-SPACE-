@@ -7,7 +7,7 @@
 // For the lock to be real, the APK file itself must not be guessable (see the notes):
 // give it a secret name and list that name in the APK_FILES setting (comma separated).
 
-const LAUNCH = Date.parse(process.env.LAUNCH_ISO || '2026-11-05T00:00:00+01:00');
+const LAUNCH = Date.parse(process.env.LAUNCH_ISO || '2026-12-15T00:00:00+01:00');
 const FILES = (process.env.APK_FILES || 'dds-codelab-v6.apk,dds-codelab-v6_112641.apk')
   .split(',').map((s) => s.trim().replace(/^\/+/, '')).filter(Boolean);
 
