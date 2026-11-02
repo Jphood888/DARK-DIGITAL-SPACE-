@@ -1,12 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/b/:id",
-      "destination": "/api/b?id=:id"
+      "source": "/codelab/preview/:alias/:project/:id",
+      "destination": "/api/codelab?k=preview&id=:id"
     },
     {
-      "source": "/b/:id/:path*",
-      "destination": "/api/b?id=:id&path=:path*"
+      "source": "/codelab/p/:alias/:project/:id",
+      "destination": "/api/codelab?k=p&id=:id"
     },
     {
       "source": "/:who/postID/:id/:token",
@@ -18,36 +18,6 @@
     }
   ],
   "headers": [
-    {
-      "source": "/engine/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Content-Type",
-          "value": "application/octet-stream"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/engine/v1/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=60"
-        }
-      ]
-    },
     {
       "source": "/(.*)\\.apk",
       "headers": [
@@ -86,14 +56,5 @@
         }
       ]
     }
-  ]
-}
-
-
-
-{
-  "rewrites": [
-    { "source": "/codelab/preview/:project/:id", "destination": "/api/codelab?k=preview&id=:id" },
-    { "source": "/codelab/p/:project/:id",       "destination": "/api/codelab?k=p&id=:id" }
   ]
 }
