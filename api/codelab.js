@@ -6,6 +6,17 @@ const CODELAB = process.env.CODELAB_URL || 'https://script.google.com/macros/s/A
 const page = (title, msg) => '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + title +
   '</title><body style="margin:0;font-family:system-ui,sans-serif;background:#05070a;color:#cfd8e6;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px"><div><h2 style="color:#2f8fff;margin:0 0 8px">' + title + '</h2><p style="margin:0">' + msg + '</p><p style="margin-top:18px"><a style="color:#6db1ff" href="https://darkdigitalspace.com.ng/">darkdigitalspace.com.ng</a></p></div>';
 
+const PROTECT = 'This project\'s code is protected by the terms and conditions of the DDS community. Published projects can be run, but their code cannot be shown.';
+
+// Tools that only download a page (curl, scripts, scrapers, "view source" fetchers) never get the code.
+// Real browsers and the DDS app always say they are opening a page (document) or a frame (iframe).
+const isTool = (req) => {
+  const dest = String(req.headers['sec-fetch-dest'] || '').toLowerCase();
+  const ua = String(req.headers['user-agent'] || '');
+  if (dest) return !(dest === 'document' || dest === 'iframe');
+  return !/Mozilla\//i.test(ua) || /curl|wget|python|node-fetch|axios|go-http|java|okhttp|httpie|scrapy|bot|spider|crawler|headless|google-apps-script|urlfetch/i.test(ua);
+};
+
 module.exports = async (req, res) => {
   const kind = String(req.query.k || '');
   const id = String(req.query.id || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 80);
@@ -15,6 +26,8 @@ module.exports = async (req, res) => {
   res.setHeader('Content-Security-Policy', 'sandbox allow-scripts allow-forms allow-popups allow-modals allow-pointer-lock');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('Vary', 'Sec-Fetch-Dest, User-Agent');
+  if (isTool(req)) { res.statusCode = 200; res.setHeader('Cache-Control', 'no-store'); return res.end(page('Protected project', PROTECT)); }
   if (!action || !id) { res.statusCode = 404; return res.end(page('Not found', 'This link is not valid.')); }
   try {
     const q = action === 'previewRaw' ? 't=' : 'id=';
