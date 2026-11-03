@@ -74,7 +74,7 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!codelab/).*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
