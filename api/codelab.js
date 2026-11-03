@@ -1,7 +1,7 @@
 // DDS CodeLab links on the real DDS domain:
 //   https://darkdigitalspace.com.ng/codelab/preview/<project>/<deploymentId>   (48-hour view-only test link)
 //   https://darkdigitalspace.com.ng/codelab/p/<project>/<projectId>            (a published project)
-const CODELAB = process.env.CODELAB_URL || 'https://script.google.com/macros/s/AKfycbyJZ3cCERIGqPjy8OjD110lLPp8rIjCTJNHSoOwqkzaSTj_abxx6PsiN9ygjq5GbMRp/exec';
+const CODELAB = process.env.CODELAB_URL || 'https://script.google.com/macros/s/AKfycbxZimQ346-UlaHp6DHVB_cGtFvT5Cm44VujBTk3t5HPAV-zMMHRuOL-7WaN_hrb53Vd/exec';
 
 const page = (title, msg) => '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + title +
   '</title><body style="margin:0;font-family:system-ui,sans-serif;background:#05070a;color:#cfd8e6;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px"><div><h2 style="color:#2f8fff;margin:0 0 8px">' + title + '</h2><p style="margin:0">' + msg + '</p><p style="margin-top:18px"><a style="color:#6db1ff" href="https://darkdigitalspace.com.ng/">darkdigitalspace.com.ng</a></p></div>';
