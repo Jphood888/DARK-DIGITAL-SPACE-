@@ -250,7 +250,12 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 .shp svg{position:absolute;inset:0;width:100%;height:100%}
 .gico.ph,.hi .mk.ph{background:none;border:0;width:auto;height:auto;box-shadow:none;border-radius:0}
 .gico.ph{margin-bottom:12px}
-#gate.first .sw{display:none}
+#strobe{position:fixed;inset:0;z-index:40;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,40,70,.0) 30%,rgba(255,30,60,.75) 100%),rgba(255,20,50,.34);opacity:0;animation:strobe .5s ease-in-out infinite}
+@keyframes strobe{0%,100%{opacity:0}50%{opacity:1}}
+body.calm #strobe{display:none}
+#gate .sw{display:none}
+.sndn{display:flex;flex-direction:column;gap:10px;margin-top:16px;padding:14px 16px;border:1px solid var(--bd);border-radius:14px;background:var(--s2);font-size:13.5px;line-height:1.5;color:var(--tx)}.sndn .btn{align-self:flex-start}.sndn.hide{display:none}
+#gLinks{display:grid;grid-template-columns:1fr 1fr;gap:10px}#gLinks .btn{text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}#gLinks.one{grid-template-columns:1fr}
 /* chat */
 .chat{display:flex;flex-direction:column;max-height:88dvh}
 .cmsgs{flex:1;min-height:220px;max-height:52dvh;overflow:auto;margin:14px 0 10px;padding:10px;border:1px solid var(--bd);border-radius:14px;background:linear-gradient(180deg,#07101f,#0a1426);display:flex;flex-direction:column;gap:6px}
@@ -277,6 +282,7 @@ body.calm #scene.cut{animation:cutcalm .5s forwards}
 
 <div id="ctl" class="hide">
   <button class="cbtn" id="cVibe" aria-pressed="true" title="Phone vibration during the demo"><span id="cVibeIc"></span><span class="lbl">Vibration</span><span class="dot"></span></button>
+  <button class="cbtn" id="cAlarm" aria-pressed="true" title="Alarm sound during the demo"><span id="cAlarmIc"></span><span class="lbl">Alarm</span><span class="dot"></span></button>
   <button class="cbtn off" id="cCalm" aria-pressed="false" title="Reduce flashing and shaking"><span id="cCalmIc"></span><span class="lbl">Calm</span></button>
   <button class="cbtn hide" id="cChat" title="Message Julian"><span id="cChatIc"></span><span class="lbl">Chat</span><span class="dot hide" id="cChatDot" style="background:var(--rd);box-shadow:0 0 8px var(--rd)"></span></button>
   <button class="cbtn hide" id="cSkip" title="Skip to the letter"><span id="cSkipIc"></span><span class="lbl">Skip</span></button>
@@ -289,13 +295,15 @@ body.calm #scene.cut{animation:cutcalm .5s forwards}
     <h1 id="gTitle">A 30-second <b>security demo</b></h1>
     <p id="gText">Julian Prosper Pearse sent you this. It acts out what an inbox takeover feels like, then shows who built it and why. No password is asked for, nothing is installed, and nothing about you is stored except that you opened it.</p>
     <button class="sw on" id="gVibe" aria-pressed="true"><span class="l"><span id="gVibeIc"></span><span>Phone vibration<small>On by default. Android Chrome only.</small></span></span><span class="tg"></span></button>
+    <button class="sw on" id="gAlarm" aria-pressed="true"><span class="l"><span id="gAlarmIc"></span><span>Alarm sound<small>On by default. Loud, for the first 20 seconds only.</small></span></span><span class="tg"></span></button>
     <button class="sw" id="gCalm" aria-pressed="false"><span class="l"><span id="gCalmIc"></span><span>Reduce flashing and shaking<small>Calmer visuals for sensitive eyes.</small></span></span><span class="tg"></span></button>
     <div class="gbtns">
       <button class="btn p w" id="gStart"></button>
       <button class="btn g w" id="gSkip"></button>
+      <div id="gLinks" class="hide"><a class="btn g" id="gPort" target="_blank" rel="noopener"></a><a class="btn g" id="gCv" target="_blank" rel="noopener"></a></div>
       <button class="btn g w hide" id="gVt"></button>
     </div>
-    <p class="fine" id="gFine">Contains flashing light and vibration for 30 seconds. You can switch vibration off at any moment. iPhones do not allow web pages to vibrate, so they get the visual effect only.</p>
+    <p class="fine" id="gFine">Contains flashing light, a loud alarm and vibration. Switch the alarm and vibration off at the top right at any moment.</p>
   </div>
 </section>
 
@@ -310,6 +318,7 @@ body.calm #scene.cut{animation:cutcalm .5s forwards}
     <p class="lead">Nothing was touched, sent or stored. But the next three numbers are real, and they are why people like me exist.</p>
     <div class="stg" id="stg"></div>
     <div class="note" id="stNote"></div>
+    <div class="sndn hide" id="sndN"><span id="sndIc"></span><div id="sndT"></div><button class="btn p" id="sndRe"></button></div>
   </div>
 
   <div class="h3"><span id="devIc"></span>What this page could already see</div>
@@ -336,6 +345,19 @@ body.calm #scene.cut{animation:cutcalm .5s forwards}
 <div id="bar" class="hide"><button class="btn gn" id="bHire2"></button><button class="btn rd" id="bDecl2"></button></div>
 
 <!-- ============ DECLINE ============ -->
+<div class="modal hide" id="mChk" role="dialog" aria-modal="true" aria-labelledby="mChkT">
+  <div class="sheet">
+    <div class="gico" id="chkIc" style="margin-bottom:14px"></div>
+    <h3 id="mChkT">Quick device check</h3>
+    <p class="s" id="chkTxt"></p>
+    <div class="gbtns" style="margin-top:14px">
+      <button class="btn p w" id="chkPlay"></button>
+      <button class="btn g w hide" id="chkYes"></button>
+      <button class="btn g w" id="chkSkip"></button>
+    </div>
+  </div>
+</div>
+
 <div class="modal hide" id="mDecl" role="dialog" aria-modal="true" aria-labelledby="mDeclT">
   <div class="sheet">
     <button class="x" data-close aria-label="Close" id="xD"></button>
@@ -428,6 +450,8 @@ var ICONS = {
   wifi: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/>',
   zap: '<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
   vibrate: '<path d="m2 8 2 4-2 4"/><path d="m22 8-2 4 2 4"/><rect x="8" y="5" width="8" height="14" rx="1"/>',
+  volume: '<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>',
+  volumeoff: '<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/>',
   vibrateoff: '<path d="m2 8 2 4-2 4"/><path d="m22 8-2 4 2 4"/><rect x="8" y="5" width="8" height="14" rx="1"/><path d="m3 3 18 18"/>',
   heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
   message: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
@@ -641,6 +665,7 @@ function hookTags(root) {
 /* ---------------- preferences ---------------- */
 var prefs = {
   vibe: store.get('jpp_vibe') !== '0',
+  alarm: store.get('jpp_alarm') !== '0',
   calm: store.get('jpp_calm') === '1' || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && store.get('jpp_calm') !== '0')
 };
 function paintPrefs() {
@@ -648,30 +673,103 @@ function paintPrefs() {
   [['#cVibe', 'cbtn'], ['#gVibe', 'sw']].forEach(function (p) {
     var b = $(p[0]); b.classList.toggle('on', prefs.vibe); b.classList.toggle('off', !prefs.vibe); b.setAttribute('aria-pressed', prefs.vibe);
   });
+  [['#cAlarm', 'cbtn'], ['#gAlarm', 'sw']].forEach(function (p) {
+    var b = $(p[0]); b.classList.toggle('on', prefs.alarm); b.classList.toggle('off', !prefs.alarm); b.setAttribute('aria-pressed', prefs.alarm);
+  });
+  icon('#cAlarmIc', prefs.alarm ? 'volume' : 'volumeoff', 16); icon('#gAlarmIc', prefs.alarm ? 'volume' : 'volumeoff', 20);
   icon('#cVibeIc', prefs.vibe ? 'vibrate' : 'vibrateoff', 16);
   icon('#gVibeIc', prefs.vibe ? 'vibrate' : 'vibrateoff', 20);
   $('#gCalm').classList.toggle('on', prefs.calm); $('#gCalm').setAttribute('aria-pressed', prefs.calm);
   $('#cCalm').classList.toggle('off', !prefs.calm); $('#cCalm').setAttribute('aria-pressed', prefs.calm);
 }
+function setAlarm(v) {
+  prefs.alarm = v; store.set('jpp_alarm', v ? '1' : '0'); paintPrefs();
+  if (!v) alarmStop(); else if (Run.running && Run.t < ATK) alarmStart();
+}
 function setVibe(v) {
   prefs.vibe = v; store.set('jpp_vibe', v ? '1' : '0'); paintPrefs();
-  if (!v) vibeStop(); else if (Run.running && Run.t < 15000) vibeStart(15000 - Run.t);
+  if (!v) vibeStop(); else if (Run.running && Run.t < ATK) vibeStart(ATK - Run.t);
 }
 
-/* ---------------- vibration: on for 15 s, silent for the next 15 s ---------------- */
+/* ---------------- vibration: on for 20 s, silent for the last 10 s ---------------- */
 var VIBE_MSG = 'The browser blocked vibration. Open this page directly in Chrome on an Android phone (not inside a preview or another app).';
 function vibeSupported() { return typeof navigator.vibrate === 'function'; }
+var vibeTimer = 0, vibeEnd = 0;
 function vibeStart(ms) {
   if (!prefs.vibe) return;
   if (!vibeSupported()) { if (PREVIEW) toast('This device or browser cannot vibrate (iPhone, computer, or an in-app browser). Try Chrome on Android.', 1); return; }
-  var left = ms || 15000, pat = [];
-  // heavy: one long buzz after another with only a 40 ms breath between them
-  while (left > 0) { pat.push(Math.min(1000, left), 40); left -= 1040; }
-  var ok = true; try { ok = navigator.vibrate(pat); } catch (e) { ok = false; }
+  var left = ms || ATK; vibeEnd = performance.now() + left;
+  var ok = true; try { ok = vibeBurst(); } catch (e) { ok = false; }
   if (ok === false && PREVIEW) toast(VIBE_MSG, 1);
+  // some phones cut a long pattern short, so the buzz is renewed every 2 seconds until the attack is over
+  clearInterval(vibeTimer);
+  vibeTimer = setInterval(function () {
+    if (!prefs.vibe || performance.now() >= vibeEnd) { clearInterval(vibeTimer); return; }
+    try { vibeBurst(); } catch (e) {}
+  }, 2000);
 }
-function vibeStop() { try { vibeSupported() && navigator.vibrate(0); } catch (e) {} }
+function vibeBurst() {
+  var left = Math.max(0, vibeEnd - performance.now()), pat = [];
+  while (left > 0) { pat.push(Math.min(1000, left), 30); left -= 1030; }
+  return navigator.vibrate(pat);
+}
+function vibeStop() { clearInterval(vibeTimer); try { vibeSupported() && navigator.vibrate(0); } catch (e) {} }
+
+/* ---------------- alarm: a loud siren, generated here, no file needed ---------------- */
+var Alarm = { el: null, ctx: null, osc: null, url: '' };
+function sirenWav() {
+  var sr = 22050, n = sr * 3, buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf), i;
+  function w(o, t) { for (var k = 0; k < t.length; k++) v.setUint8(o + k, t.charCodeAt(k)); }
+  w(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); w(8, 'WAVE'); w(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, sr, true); v.setUint32(28, sr * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, 'data'); v.setUint32(40, n * 2, true);
+  var ph = 0, ph2 = 0;
+  for (i = 0; i < n; i++) {
+    var t = i / sr, sweep = (t % 1) < .5 ? (t % .5) / .5 : 1 - (t % .5) / .5;        // up and down every second
+    var f = 650 + 900 * sweep; ph += 2 * Math.PI * f / sr; ph2 += 2 * Math.PI * (f * 1.5) / sr;
+    var x = Math.sin(ph) + .6 * Math.sin(ph * 3) + .5 * Math.sin(ph2);                // harmonics make it harsh and piercing
+    x = Math.max(-1, Math.min(1, x * 2.2));                                            // push into the limit: as loud as a file can be
+    v.setInt16(44 + i * 2, x * 32000, true);
+  }
+  return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+}
+// called straight from the tap, so the browser allows sound. Two layers play together: a siren file and a live synth.
+function alarmPrime(test) {
+  if (!test && !prefs.alarm) return;
+  Alarm.err = '';
+  try {
+    if (navigator.audioSession) navigator.audioSession.type = 'playback';           // iPhone: play even with the silent switch on
+    if (!Alarm.el) { Alarm.url = sirenWav(); Alarm.el = new Audio(Alarm.url); Alarm.el.loop = true; Alarm.el.preload = 'auto'; }
+    Alarm.el.muted = false; Alarm.el.volume = 1;
+    var p = Alarm.el.play();
+    if (p && p.then) p.then(function () { if (!test && !(Run.running && prefs.alarm && Run.t < ATK)) alarmStop(); }).catch(function (e) { Alarm.err = String((e && e.name) || e); if (test) toast('The file siren was blocked: ' + Alarm.err, 1); });
+  } catch (e) { Alarm.err = String(e && e.message || e); }
+  try {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) {
+      if (!Alarm.ctx) Alarm.ctx = new AC();
+      if (Alarm.ctx.state === 'suspended') Alarm.ctx.resume();
+      synthOn();
+    }
+  } catch (e) { Alarm.err += ' synth:' + (e && e.message || e); }
+}
+function synthOn() {
+  var c = Alarm.ctx; if (!c || Alarm.osc) return;
+  var o = c.createOscillator(), o2 = c.createOscillator(), lfo = c.createOscillator(), lg = c.createGain(), g = c.createGain(), k = c.createDynamicsCompressor();
+  o.type = 'square'; o2.type = 'sawtooth'; o.frequency.value = 1100; o2.frequency.value = 1650;
+  lfo.type = 'triangle'; lfo.frequency.value = 1; lg.gain.value = 450; lfo.connect(lg); lg.connect(o.frequency);
+  var lg2 = c.createGain(); lg2.gain.value = 675; lfo.connect(lg2); lg2.connect(o2.frequency);
+  g.gain.value = 0.9; o.connect(g); o2.connect(g); g.connect(k); k.connect(c.destination);
+  o.start(); o2.start(); lfo.start(); Alarm.osc = [o, o2, lfo, g];
+}
+function synthOff() { try { if (Alarm.osc) { Alarm.osc[3].gain.value = 0; Alarm.osc.slice(0, 3).forEach(function (n) { try { n.stop(); } catch (e) {} }); Alarm.osc = null; } } catch (e) {} }
+function alarmStart() {
+  if (!prefs.alarm) return;
+  try { if (!Alarm.el) { alarmPrime(); return; } Alarm.el.muted = false; Alarm.el.volume = 1; var p = Alarm.el.play(); if (p && p.catch) p.catch(function (e) { Alarm.err = String((e && e.name) || e); }); } catch (e) {}
+  try { if (Alarm.ctx) { if (Alarm.ctx.state === 'suspended') Alarm.ctx.resume(); synthOn(); } } catch (e) {}
+}
+function alarmStop() { try { if (Alarm.el) { Alarm.el.pause(); Alarm.el.currentTime = 0; } } catch (e) {} synthOff(); }
 function vibeTest() {
+  try { alarmPrime(true); setTimeout(function () { toast(Alarm.err ? 'Alarm blocked: ' + Alarm.err : 'Alarm is playing. Hear nothing? Turn the MEDIA volume up with the phone volume keys (it is separate from the ringer).'); }, 400); setTimeout(alarmStop, 2500); } catch (e) {}
   if (!vibeSupported()) { toast('This browser has no vibration support (iPhone, desktop, or an in-app browser). Use Chrome on Android.', 1); return; }
   var ok = true; try { ok = navigator.vibrate(1200); } catch (e) { ok = false; }
   if (ok === false) toast(VIBE_MSG, 1);
@@ -679,6 +777,7 @@ function vibeTest() {
 }
 
 /* ---------------- scenes ---------------- */
+var ATK = 20000;   // 20 s of attack, then 10 s of silence
 var Run = { running: false, t: 0, t0: 0, raf: 0, hush: false };
 var S = null;
 var TOASTS_ICON = { key: 'key', mail: 'mail', shield: 'shield', send: 'send', eye: 'eye', lock: 'lock', bell: 'bell', down: 'trenddown', user: 'user' };
@@ -687,7 +786,7 @@ function pushToast(root, ico, title, sub) {
   box.appendChild(t); while (box.children.length > 2) box.firstChild.remove(); setTimeout(function () { t.remove(); }, 3500);
 }
 function hushHTML(inner) {
-  return '<div class="hush"><div class="hsi">' + ic('vibrateoff', 34) + '</div><h2>Silence.</h2><p>' + inner + '</p><div class="big"><small>LOCKOUT IN</small><span id="hcd">15</span></div></div>';
+  return '<div class="hush"><div class="hsi">' + ic('vibrateoff', 34) + '</div><h2>Silence.</h2><p>' + inner + '</p><div class="big"><small>LOCKOUT IN</small><span id="hcd">10</span></div></div>';
 }
 function clockStr(t) { return '00:' + String(Math.max(0, Math.ceil((30000 - t) / 1000))).padStart(2, '0'); }
 
@@ -711,12 +810,13 @@ function cyberScene() {
     ['i', 'drafting messages as you', '412 queued'], ['er', 'sending messages as you', '0 / 412'], ['w', 'attachments with "payment" in name', '19'],
     ['o', 'finance threads indexed', 'OK'], ['er', 'cloud drive access', 'GRANTED'], ['i', 'covering tracks', '...'], ['o', 'audit log trimmed', 'OK'], ['er', 'owner has not noticed', 'TRUE']
   ];
-  var LOG = L.map(function (r, n) { return { t: 300 + n * 720, c: r[0], a: r[1], b: r[2] }; });
+  var LOG = L.map(function (r, n) { return { t: 300 + n * 950, c: r[0], a: r[1], b: r[2] }; });
   [['qt', 'no alert was sent to you', ''], ['qt', 'nobody called you', ''], ['qt', 'the inbox looks normal from the outside', ''], ['qt', 'still running', '...'], ['qt', 'it is quiet in here', '']].forEach(function (r, n) {
-    LOG.push({ t: 15800 + n * 2900, c: r[0], a: r[1], b: r[2] });
+    LOG.push({ t: 20800 + n * 1800, c: r[0], a: r[1], b: r[2] });
   });
   var TS = [[2600, 'key', 'Password changed', 'Just now'], [5200, 'mail', 'Recovery email replaced', 'Just now'], [7800, 'shield', '2-step verification turned off', 'Just now'],
     [10400, 'send', '412 messages sent as you', 'Just now'], [12400, 'eye', 'New sign-in from an unknown device', '2 minutes ago'], [14000, 'lock', 'You were signed out everywhere', 'Just now']];
+  TS.forEach(function (x) { x[0] = Math.round(x[0] * 1.35); });
   var li = 0, ti = 0, term = $('#term');
   // matrix rain
   var cv = $('#rain'), cx = cv.getContext('2d'), cols, drops, last = 0;
@@ -765,12 +865,13 @@ function socialScene() {
     '<div id="toasts"></div>' +
     hushHTML('Account takeovers rarely look dramatic. Followers leave, strange posts appear under your name, and customers are already clicking before anyone on your team notices.') + '</div>';
   var HJ = [
-    [6000, 'p1', 'POSTED BY UNKNOWN DEVICE', 'FREE GIVEAWAY. Verify your account to claim: claim-prize.example/verify'],
-    [11000, 'p2', 'POSTED BY UNKNOWN DEVICE', 'We moved. Log in again at secure-login.example to keep your account.'],
-    [16500, 'p3', 'POSTED BY UNKNOWN DEVICE', 'Urgent: send us a payment to restore your page.']
+    [7000, 'p1', 'POSTED BY UNKNOWN DEVICE', 'FREE GIVEAWAY. Verify your account to claim: claim-prize.example/verify'],
+    [13000, 'p2', 'POSTED BY UNKNOWN DEVICE', 'We moved. Log in again at secure-login.example to keep your account.'],
+    [18500, 'p3', 'POSTED BY UNKNOWN DEVICE', 'Urgent: send us a payment to restore your page.']
   ];
   var TS = [[2000, 'bell', 'New login from an unknown device', 'Just now'], [4400, 'key', 'Password changed', 'Just now'], [7000, 'mail', 'Recovery email changed', 'Just now'],
     [9800, 'send', 'Message sent to 3,412 followers', 'Just now'], [12000, 'down', 'Followers are dropping fast', 'Just now'], [13900, 'lock', 'You were signed out', 'Just now']];
+  TS.forEach(function (x) { x[0] = Math.round(x[0] * 1.35); });
   var hi = 0, ti = 0;
   return {
     update: function (t) {
@@ -785,7 +886,70 @@ function socialScene() {
   };
 }
 
+/* ---------------- device check: the sound is really measured through the microphone, vibration through the motion sensor ---------------- */
+var Checked = false, Chk = { busy: false, tries: 0, vibFails: 0, motion: [] };
+function wantAttack() {
+  if (Checked || (!prefs.alarm && !prefs.vibe)) { startDemo(); return; }
+  $('#chkIc').innerHTML = ic('volume', 34);
+  chkSay('Before this opens: switch your phone off silent and turn the volume up to at least half. Tap the button and the page checks it for you. The microphone is used only to hear the test sound. Nothing is recorded or sent.');
+  $('#chkPlay').innerHTML = ic('volume', 18) + 'Run the check'; $('#chkPlay').disabled = false; $('#chkYes').classList.add('hide');
+  $('#mChk').classList.remove('hide'); document.body.style.overflow = 'hidden';
+}
+function chkSay(t, bad) { var n = $('#chkTxt'); n.textContent = t; n.style.color = bad ? 'var(--rd)' : ''; }
+function chkClose() { $('#mChk').classList.add('hide'); document.body.style.overflow = ''; }
+// pure maths, kept separate so it can be tested: did the tone band rise clearly above the quiet before it?
+function toneHeard(baseDb, peakDb) { return peakDb > -75 && (peakDb - baseDb) >= 12; }
+function wobble(a) { if (a.length < 6) return 0; var m = a.reduce(function (x, y) { return x + y; }, 0) / a.length; return Math.sqrt(a.reduce(function (x, y) { return x + (y - m) * (y - m); }, 0) / a.length); }
+function chkRun() {
+  if (Chk.busy) return; Chk.busy = true; Chk.tries++; $('#chkPlay').disabled = true;
+  try { alarmPrime(true); alarmStop(); } catch (e) {}                       // unlock audio inside the tap
+  var md = navigator.mediaDevices;
+  if (!md || !md.getUserMedia || !window.isSecureContext) {                 // cannot measure here: fall back to asking
+    Chk.busy = false; $('#chkPlay').disabled = false;
+    chkSay('This browser cannot run the automatic check. Tap Play test sound, then confirm what you heard.');
+    $('#chkPlay').onclick = function () { try { alarmPrime(true); setTimeout(alarmStop, 1500); if (vibeSupported()) navigator.vibrate([500]); } catch (e) {} $('#chkYes').innerHTML = ic('check', 18) + 'Yes, I heard it'; $('#chkYes').classList.remove('hide'); };
+    $('#chkPlay').innerHTML = ic('volume', 18) + 'Play test sound'; return;
+  }
+  chkSay('Checking... allow the microphone if your browser asks.');
+  md.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } }).then(function (stream) {
+    var AC = window.AudioContext || window.webkitAudioContext; if (!Alarm.ctx) Alarm.ctx = new AC(); if (Alarm.ctx.state === 'suspended') Alarm.ctx.resume();
+    var ctx = Alarm.ctx, src = ctx.createMediaStreamSource(stream), an = ctx.createAnalyser(); an.fftSize = 2048; an.smoothingTimeConstant = 0; src.connect(an);
+    var buf = new Float32Array(an.frequencyBinCount), lo = Math.floor(500 / (ctx.sampleRate / 2048)), hi = Math.ceil(2600 / (ctx.sampleRate / 2048));
+    function band() { an.getFloatFrequencyData(buf); var m = -200; for (var i = lo; i <= hi; i++) if (buf[i] > m) m = buf[i]; return m; }
+    var base = [], peak = -200, mot = [], mt0 = performance.now(), buzzAt = 0, onMo = function (e) {
+      var a = e.acceleration && e.acceleration.x != null ? e.acceleration : e.accelerationIncludingGravity; if (!a || a.x == null) return;
+      mot.push({ t: performance.now(), v: Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z) });
+    };
+    window.addEventListener('devicemotion', onMo);
+    chkSay('Listening...');
+    var n = 0, iv = setInterval(function () {
+      n++; var d = band();
+      if (n <= 10) base.push(d);                                             // first 0.5 s: the quiet room
+      if (n === 11) { buzzAt = performance.now(); try { alarmPrime(true); if (vibeSupported() && prefs.vibe) navigator.vibrate([700]); } catch (e) {} }
+      if (n > 11) peak = Math.max(peak, d);
+      if (n >= 36) {                                                         // 1.25 s of tone
+        clearInterval(iv); alarmStop(); window.removeEventListener('devicemotion', onMo);
+        stream.getTracks().forEach(function (t) { t.stop(); }); try { src.disconnect(); } catch (e) {}
+        base.sort(function (x, y) { return x - y; }); var baseDb = base[Math.floor(base.length / 2)];
+        var heard = toneHeard(baseDb, peak);
+        var quiet = mot.filter(function (m) { return m.t < buzzAt - 50; }).map(function (m) { return m.v; }), buzz = mot.filter(function (m) { return m.t > buzzAt + 80 && m.t < buzzAt + 700; }).map(function (m) { return m.v; });
+        var vibOk = true;
+        if (vibeSupported() && prefs.vibe && quiet.length > 5 && buzz.length > 5) vibOk = wobble(buzz) >= Math.max(.25, wobble(quiet) * 3);
+        Chk.busy = false; $('#chkPlay').disabled = false; $('#chkPlay').innerHTML = ic('refresh', 18) + 'Try again';
+        if (!heard && prefs.alarm) { chkSay('The page could not hear the test sound. Switch your phone off silent, turn the volume up to at least half, and try again.', 1); return; }
+        if (!vibOk) { Chk.vibFails++; if (Chk.vibFails < 2) { chkSay('Sound is fine, but vibration did not register. Switch off silent mode and make sure touch vibration is on, then try again.', 1); return; } }
+        chkSay('Sound confirmed. Starting.'); Checked = true; setTimeout(function () { chkClose(); startDemo(); }, 700);
+      }
+    }, 50);
+  }).catch(function () {
+    Chk.busy = false; $('#chkPlay').disabled = false; $('#chkPlay').innerHTML = ic('refresh', 18) + 'Try again';
+    chkSay('The check needs the microphone, only to hear the test sound. Nothing is recorded or sent. Allow it in your browser, then try again.', 1);
+  });
+}
+function chkYes() { Checked = true; chkClose(); startDemo(); }
+
 function startDemo() {
+  alarmPrime();
   $('#gate').classList.add('hide'); $('#after').classList.add('hide'); $('#bar').classList.add('hide');
   var sc = $('#scene'); sc.classList.remove('hide', 'cut');
   $('#ctl').classList.remove('hide'); $('#cSkip').classList.remove('hide');
@@ -793,17 +957,20 @@ function startDemo() {
   S = D.category === 'social' ? socialScene() : cyberScene();
   if (prefs.calm) sc.classList.remove('buzz');
   window.scrollTo(0, 0); track('demo_start', navigator.userAgent.slice(0, 120));
-  vibeStart(); tick();
+  var sb = document.createElement('div'); sb.id = 'strobe'; document.body.appendChild(sb);
+  try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(function (l) { Run.wl = l; }).catch(function () {}); } catch (e) {}
+  vibeStart(); alarmStart(); tick();
 }
+function strobeOff() { var n = $('#strobe'); if (n) n.remove(); }
 function tick() {
   if (!Run.running) return;
   var t = (performance.now() - Run.t0) * SPEED; Run.t = t; S.update(t);
-  if (!Run.hush && t >= 15000) { Run.hush = true; vibeStop(); var sc = $('#scene'); sc.classList.remove('buzz'); sc.classList.add('hush-on'); }
+  if (!Run.hush && t >= ATK) { Run.hush = true; vibeStop(); alarmStop(); strobeOff(); var sc = $('#scene'); sc.classList.remove('buzz'); sc.classList.add('hush-on'); }
   if (t >= 30000) { finishDemo(true); return; }
   Run.raf = requestAnimationFrame(tick);
 }
 function finishDemo(completed) {
-  Run.running = false; cancelAnimationFrame(Run.raf); vibeStop();
+  Run.running = false; cancelAnimationFrame(Run.raf); vibeStop(); alarmStop(); strobeOff(); try { if (Run.wl) { Run.wl.release(); Run.wl = null; } } catch (e) {}
   store.set('jpp_seen_' + (TOKEN || 'p'), '1');
   track(completed ? 'demo_complete' : 'demo_skip');
   var sc = $('#scene'); sc.classList.remove('buzz'); sc.classList.add('cut');
@@ -857,8 +1024,16 @@ function paintStatus() {
   var s = $('#status'); s.innerHTML = '';
   if (D.decision) { s.appendChild(el('div', 'status', ic('checkcircle', 16) + ' You already responded: ' + (D.decision === 'hire' ? 'Hire' : 'Turn down') + '. You can still change your answer below.')); }
 }
+function sndNotice(fromScene) {
+  var n = $('#sndN'); if (!n) return;
+  if (!fromScene) { n.classList.add('hide'); return; }
+  $('#sndIc').innerHTML = ic('volume', 20);
+  $('#sndT').innerHTML = '<b>Heard nothing, or felt nothing?</b> ' + (Alarm.err ? 'Your browser blocked the sound. ' : '') + 'Turn your phone volume up and take it off silent, then replay the attack. It will run with the sound and vibration this time.';
+  $('#sndRe').innerHTML = ic('refresh', 17) + 'Replay the attack';
+  n.classList.remove('hide');
+}
 function showAfter(fromScene) {
-  buildAfter(); $('#gate').classList.add('hide'); $('#scene').classList.add('hide');
+  buildAfter(); sndNotice(fromScene); $('#gate').classList.add('hide'); $('#scene').classList.add('hide');
   $('#after').classList.remove('hide'); $('#bar').classList.remove('hide'); $('#ctl').classList.remove('hide'); $('#cSkip').classList.add('hide'); $('#cChat').classList.remove('hide');
   window.scrollTo(0, 0); track('letter_view'); if (!Chat.timer) { chatPoll(true); Chat.timer = setInterval(function () { chatPoll(true); }, 30000); }
   // a visitor who skipped the demo starts at the letter; the facts stay above it
@@ -868,7 +1043,7 @@ function showAfter(fromScene) {
 /* ---------------- decision flows ---------------- */
 var declReason = '', hireStep = '';
 function openModal(id) { $(id).classList.remove('hide'); document.body.style.overflow = 'hidden'; $('#bar').classList.add('hide'); }
-function closeModals() { if (Chat.open) chatClose(); document.querySelectorAll('.modal').forEach(function (m) { m.classList.add('hide'); }); document.body.style.overflow = ''; if (!$('#after').classList.contains('hide')) $('#bar').classList.remove('hide'); }
+function closeModals() { if (Chat.open) chatClose(); document.querySelectorAll('.modal').forEach(function (m) { if (m.id !== 'mChk') m.classList.add('hide'); }); document.body.style.overflow = ''; if (!$('#after').classList.contains('hide')) $('#bar').classList.remove('hide'); }
 function openDecline() {
   $('#declForm').classList.remove('hide'); $('#declDone').classList.add('hide'); openModal('#mDecl'); track('decline_open');
 }
@@ -956,7 +1131,7 @@ function init() {
   if (Q.get('samplephoto') === '1') D.photo = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="250"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4c6fff"/><stop offset="1" stop-color="#1c2b47"/></linearGradient></defs><rect width="200" height="250" fill="url(#g)"/><circle cx="100" cy="95" r="42" fill="#e9f0ff"/><path d="M20 250c0-60 36-90 80-90s80 30 80 90z" fill="#e9f0ff"/></svg>');
   $('#gIco').innerHTML = shield(66); $('#gIco').classList.toggle('ph', !!D.photo); icon('#gCalmIc', 'eye', 20);
   icon('#cCalmIc', 'eye', 16); icon('#cChatIc', 'message', 16); icon('#xC', 'x', 18); $('#chatGo').innerHTML = ic('send', 17);
-  $('#gVt').innerHTML = ic('vibrate', 18) + 'Test vibration on this phone';
+  $('#gVt').innerHTML = ic('vibrate', 18) + 'Test vibration and alarm';
   $('#gStart').innerHTML = ic('play', 18) + 'Start the demo'; $('#gSkip').innerHTML = ic('mail', 18) + 'Skip to the letter';
   icon('#cSkipIc', 'chevron', 16); icon('#xD', 'x', 18); icon('#xH', 'x', 18); icon('#tagIc', 'lock', 13);
   icon('#declIc', 'check', 42); icon('#hireIc', 'briefcase', 42);
@@ -967,8 +1142,12 @@ function init() {
 
   $('#gVibe').addEventListener('click', function () { setVibe(!prefs.vibe); });
   $('#cVibe').addEventListener('click', function () { setVibe(!prefs.vibe); });
+  $('#gAlarm').addEventListener('click', function () { setAlarm(!prefs.alarm); });
+  $('#cAlarm').addEventListener('click', function () { setAlarm(!prefs.alarm); });
   $('#gCalm').addEventListener('click', function () { prefs.calm = !prefs.calm; store.set('jpp_calm', prefs.calm ? '1' : '0'); paintPrefs(); });
-  $('#gStart').addEventListener('click', startDemo);
+  $('#gStart').addEventListener('click', wantAttack); $('#sndRe').addEventListener('click', wantAttack);
+  $('#chkPlay').addEventListener('click', chkRun); $('#chkYes').addEventListener('click', chkYes);
+  $('#chkSkip').innerHTML = ic('mail', 18) + 'Skip to the letter'; $('#chkSkip').addEventListener('click', function () { chkClose(); track('demo_skip_gate'); showAfter(false); });
   $('#gSkip').addEventListener('click', function () { track('demo_skip_gate'); showAfter(false); });
   $('#cSkip').addEventListener('click', function () { finishDemo(false); });
   $('#bHire').addEventListener('click', openHire); $('#bHire2').addEventListener('click', openHire);
@@ -978,8 +1157,8 @@ function init() {
   $('#declGo').addEventListener('click', submitDecline); $('#hGo').addEventListener('click', submitHire);
   document.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', closeModals); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModals(); });
-  document.addEventListener('visibilitychange', function () { if (document.hidden) vibeStop(); });
-  window.addEventListener('pagehide', function () { vibeStop(); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) { vibeStop(); alarmStop(); strobeOff(); } });
+  window.addEventListener('pagehide', function () { vibeStop(); alarmStop(); });
 
   var seenKey = 'jpp_seen_' + (TOKEN || 'p'), first = store.get(seenKey) !== '1';
   if (first) {
@@ -988,15 +1167,19 @@ function init() {
     $('#gTitle').innerHTML = 'Application for <b>' + esc(D.role || 'a role') + '</b>';
     $('#gText').textContent = 'From ' + (D.display || D.myName) + (D.company ? ' to ' + D.company : '') + '. Tap below to open it.';
     $('#gStart').innerHTML = ic('chevron', 18) + 'Open application'; $('#gSkip').innerHTML = 'Just show me the letter';
-    $('#gFine').textContent = 'May include flashing light and vibration. The controls at the top right switch them off at any time.';
+    $('#gFine').textContent = 'May include flashing light, a loud alarm and vibration. The controls at the top right switch them off at any time.';
   } else {
-    $('#gTitle').innerHTML = 'A 30-second <b>security demo</b>' + (D.company ? ' for ' + esc(D.company) : '');
-    $('#gText').textContent = 'Welcome back. No pressure this time: read the letter first, or replay the demo whenever you like. Vibration is ' + (prefs.vibe ? 'on' : 'off') + ' and you control it below.';
-    $('#gStart').innerHTML = ic('refresh', 18) + 'Replay the demo'; $('#gStart').className = 'btn g w'; $('#gSkip').className = 'btn p w';
+    $('#gTitle').innerHTML = 'The 30-second <b>attack</b>' + (D.company ? ' for ' + esc(D.company) : '');
+    $('#gText').textContent = 'Welcome back. For the full effect, turn your volume up and take your phone off silent, then run the attack again. Or read the letter, or look at my work. The sound and vibration switches are at the top right.';
+    $('#gStart').innerHTML = ic('refresh', 18) + 'Replay the attack'; $('#gStart').className = 'btn p w'; $('#gSkip').className = 'btn g w';
     $('#gSkip').innerHTML = ic('mail', 18) + 'Read the letter';
-    $('#gStart').parentNode.insertBefore($('#gSkip'), $('#gStart'));
+    var gl = $('#gLinks'), cvA = D.attachments && D.attachments[0], n = 0;
+    if (D.portfolio) { var gp = $('#gPort'); gp.href = D.portfolio; gp.innerHTML = ic('globe', 17) + 'My portfolio'; gp.addEventListener('click', function () { track('portfolio_click', ''); }); n++; } else $('#gPort').remove();
+    if (cvA && cvA.url) { var gc = $('#gCv'); gc.href = cvA.url; gc.innerHTML = ic('file', 17) + 'Check my CV'; gc.addEventListener('click', function () { track('cv_click', cvA.name || 'cv'); }); n++; } else $('#gCv').remove();
+    if (n) { gl.classList.remove('hide'); if (n === 1) gl.classList.add('one'); }
   }
-  if (PREVIEW || Q.get('vibetest') === '1') { $('#gVt').classList.remove('hide'); $('#gVt').addEventListener('click', vibeTest); }
+  if (Q.get('vibetest') === '1') { $('#gVt').classList.remove('hide'); $('#gVt').addEventListener('click', vibeTest); }
+  if (PREVIEW) $('#gFine').textContent += ' [preview, build 11]';
   $('#ctl').classList.remove('hide');
 
   if (GO === 'hire' || GO === 'decline' || GO === 'letter') {
