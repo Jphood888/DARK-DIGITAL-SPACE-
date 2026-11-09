@@ -27,6 +27,10 @@ label{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.8p
 .btn.w{width:100%;padding:12px}.btn.s{padding:6px 10px;font-size:12px}
 #app{display:none;position:relative}
 .top{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(7,9,13,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.skw{display:grid;gap:12px;padding:4px 0}.sk{border-radius:14px;background:linear-gradient(100deg,#0f1b30 30%,#16264a 50%,#0f1b30 70%);background-size:300% 100%;animation:shim 1.3s linear infinite;border:1px solid #14223c}
+@keyframes shim{from{background-position:100% 0}to{background-position:-100% 0}}
+.skr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sk.t{height:70px}.sk.b{height:96px}.sk.h{height:22px;width:45%}
+.errc{border:1px solid rgba(255,77,109,.4);background:rgba(255,77,109,.08);border-radius:14px;padding:16px;color:#ffc3cf;font-size:14px;line-height:1.5}.errc b{display:block;color:#fff;margin-bottom:6px}.errc .btn{margin-top:12px}
 .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 10px var(--ac);margin-right:8px;animation:b 2s infinite}@keyframes b{50%{opacity:.3}}
 main{max-width:1000px;margin:0 auto;padding:16px}
 nav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;overflow-x:auto;gap:4px;background:rgba(13,17,23,.95);backdrop-filter:blur(14px);border-top:1px solid var(--bd);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
@@ -193,13 +197,13 @@ function call(a,p){
     return j;
   }).catch(function(){return{ok:false,message:'Network error. Check the web app URL.'}});
 }
-function logout(bad){localStorage.removeItem('jm_s');S=null;clearInterval(timer);$('#app').style.display='none';$('#login').style.display='flex';if(bad)$('#lErr').textContent='Wrong admin key or session ended.'}
+function logout(bad){try{localStorage.removeItem('jm_s')}catch(e){}S=null;clearInterval(timer);$('#app').style.display='none';$('#login').style.display='flex';if(bad)$('#lErr').textContent='Wrong admin key or session ended.'}
 if(S&&S.url){$('#lUrl').value=S.url}
 $('#lGo').onclick=function(){
   var url=$('#lUrl').value.trim(),key=$('#lKey').value.trim();if(!key){$('#lErr').textContent='Enter your admin key.';return}
   S={url:url,key:key};$('#lGo').disabled=true;$('#lErr').textContent='';
   call('a_login').then(function(j){$('#lGo').disabled=false;if(!j||!j.ok){S=null;$('#lErr').textContent=(j&&(j.message||j.error))||'The server answered but did not accept the key. The web app is probably an old version: redeploy it as a new version.';return}
-    localStorage.setItem('jm_s',JSON.stringify(S));boot()})
+    try{localStorage.setItem('jm_s',JSON.stringify(S))}catch(e){}boot()})
 };
 $('#lo').onclick=function(){logout()};
 $('#rf').onclick=function(){load(true)};
@@ -208,10 +212,15 @@ function buildNav(){$('#nav').innerHTML=NAV.map(function(n,i){return '<button da
   $('#nav').onclick=function(e){var b=e.target.closest('button');if(b)go(b.dataset.v)}}
 function go(v){CUR=v;document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)});
   ['home','apps','letters','chat','files','set'].forEach(function(x){$('#v-'+x).classList.toggle('hide',x!==v)});
+  if(v!=='home'&&v!=='apps'&&!$('#v-'+v).children.length)$('#v-'+v).innerHTML=skel();
   if(v==='chat')loadChat();if(v==='files')loadFiles();if(v==='set')loadSettings();if(v==='letters')loadLetters();window.scrollTo(0,0)}
-function boot(){$('#login').style.display='none';$('#app').style.display='block';buildNav();load();clearInterval(timer);timer=setInterval(tick,10000)}
+function skel(){return '<div class="skw"><div class="sk h"></div><div class="skr"><div class="sk t"></div><div class="sk t"></div><div class="sk t"></div></div><div class="sk b"></div><div class="sk b"></div><div class="sk b"></div></div>'}
+function failV(v,j){var m=(j&&(j.message||j.error))||'The server did not answer with data. Check that the web app is deployed as a new version, then retry.';
+  var n=$('#v-'+v);if(!n||!n.querySelector('.skw'))return;n.innerHTML='<div class="errc"><b>Could not load</b>'+h(m)+'<br><button class="btn p" id="rt_'+v+'">Retry</button></div>';
+  $('#rt_'+v).onclick=function(){if(v==='home'||v==='apps'){$('#v-home').innerHTML=skel();$('#v-apps').innerHTML=skel();load(true)}else{n.innerHTML=skel();go(v)}}}
+function boot(){$('#v-home').innerHTML=skel();$('#v-apps').innerHTML=skel();$('#login').style.display='none';$('#app').style.display='block';buildNav();load();clearInterval(timer);timer=setInterval(tick,10000)}
 function tick(){if(!S)return;if(CUR==='chat'){loadChat(true)}else load(false,true)}
-function load(manual,quiet){return call('a_overview').then(function(j){if(!j||!j.ok){if(manual)toast((j&&j.message)||'Failed',1);return}O=j;$('#who').textContent=j.name+' | updated '+j.now;paintBadges();drawHome();drawApps()})}
+function load(manual,quiet){return call('a_overview').then(function(j){if(!j||!j.ok){if(manual||!O)toast((j&&(j.message||j.error))||'The server answered without data. Redeploy the web app as a new version.',1);if(!O){failV('home',j);failV('apps',j)}return}O=j;$('#who').textContent=j.name+' | updated '+j.now;paintBadges();drawHome();drawApps()})}
 function paintBadges(){var b=document.querySelector('#nav [data-v=chat]'),e=b.querySelector('.nb');if(e)e.remove();if(O.unread){e=document.createElement('span');e.className='nb';e.textContent=O.unread>99?'99+':O.unread;b.appendChild(e)}
   var hb=document.querySelector('#nav [data-v=home]'),he=hb.querySelector('.nb');if(he)he.remove();var n=O.offers.filter(function(o){return o.status!=='Handled'}).length;if(n){he=document.createElement('span');he.className='nb';he.textContent=n;hb.appendChild(he)}}
 function modal(html,wide){$('#sheet').className='sheet'+(wide?' wide':'');$('#sheet').innerHTML='<button class="btn s x" id="mx">'+ic('x',14)+'</button>'+html;$('#mod').classList.add('on');$('#mx').onclick=closeM}
@@ -281,7 +290,7 @@ function editApp(row){
 }
 
 /* ---------- letters ---------- */
-function loadLetters(){call('a_letters').then(function(j){if(!j.ok)return;LETTERS=j.letters;call('a_files').then(function(f){if(f.ok)FILES=f.files;drawLetters()})})}
+function loadLetters(){call('a_letters').then(function(j){if(!j.ok){failV('letters',j);return}LETTERS=j.letters;call('a_files').then(function(f){if(f.ok)FILES=f.files;drawLetters()})})}
 function drawLetters(){$('#v-letters').innerHTML='<div class="bar"><button class="btn p" id="ln">'+ic('mail',14)+'New letter</button></div>'+(LETTERS.length?LETTERS.map(function(l){return '<div class="card"><div class="nm">'+h(l.key)+' <span class="pill '+(l.category==='social'?'b':'')+'">'+h(l.category)+'</span></div><div class="meta">'+h(l.subject)+'</div><p class="sub" style="margin-top:8px;white-space:pre-wrap;max-height:90px;overflow:hidden">'+h(String(l.body).slice(0,260))+'</p><div class="acts"><button class="btn s" data-le="'+l.row+'">'+ic('settings',13)+'Edit</button></div></div>'}).join(''):'<div class="card empty">No letters.</div>');
   $('#ln').onclick=function(){editLetter(null)};$('#v-letters').querySelectorAll('[data-le]').forEach(function(b){b.onclick=function(){editLetter(+b.dataset.le)}})}
 var TAGBTNS=[['b','b'],['i','i'],['glow','glow'],['glitch','glitch'],['shake','shake'],['flicker','flicker'],['blink','blink'],['pulse','pulse'],['wave','wave'],['rainbow','rainbow'],['scan','scan'],['matrix','matrix'],['decode','decode'],['type','type'],['count','count'],['redact','redact'],['badge','badge'],['h2','h2'],['quote','quote'],['box','box'],['ok','ok'],['warn','warn'],['color','color=#ff4d6d']];
@@ -311,7 +320,7 @@ function editLetter(row){var l=row?LETTERS.filter(function(x){return x.row===row
 
 /* ---------- chat ---------- */
 function initials(n){return String(n||'?').trim().slice(0,2).toUpperCase()}
-function loadChat(quiet){return call('a_chats').then(function(j){if(!j.ok)return;CH.threads=j.threads;
+function loadChat(quiet){return call('a_chats').then(function(j){if(!j.ok){failV('chat',j);return}CH.threads=j.threads;
   var p=CH.cur?call('a_chat_get',{token:CH.cur}).then(function(m){if(m.ok){CH.msgs=m.msgs}}):Promise.resolve();
   return p.then(function(){drawChat(quiet);load(false,true)})})}
 function drawChat(quiet){var el=$('#v-chat');var keepTxt=$('#cIn')?$('#cIn').value:'';var open=CH.cur?' open':'';
@@ -333,7 +342,7 @@ function send(){var t=$('#cIn').value.trim();if(!t&&!CH.file)return;call('a_chat
 function chatWith(tok){if(!tok)return toast('This row has no token yet. Send or save it first.',1);go('chat');call('a_files').then(function(f){if(f.ok)FILES=f.files;call('a_chats').then(function(j){if(j.ok)CH.threads=j.threads;openThread(tok)})})}
 
 /* ---------- files ---------- */
-function loadFiles(){Promise.all([call('a_files'),call('a_overview')]).then(function(r){if(r[0].ok)FILES=r[0].files;if(r[1].ok)O=r[1];drawFiles()})}
+function loadFiles(){Promise.all([call('a_files'),call('a_overview')]).then(function(r){if(!r[0].ok){failV('files',r[0]);return}FILES=r[0].files;if(r[1].ok)O=r[1];drawFiles()})}
 function shieldHtml(p){return '<span class="shp"><img alt="" src="'+h(p)+'"><svg viewBox="4 2 16 20" preserveAspectRatio="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="#2f8fff" stroke-width=".6" stroke-linejoin="round"/></svg></span>'}
 function drawFiles(){var ph=O&&O.photo;
   $('#v-files').innerHTML='<div class="card"><h2>'+ic('fingerprint',16)+' Passport photo (shown inside the shield)</h2><div class="photo">'+(ph?shieldHtml(ph):'<div class="noph">'+ic('shield',60)+'</div>')+
@@ -355,7 +364,7 @@ function setPhoto(file){var im=new Image(),u=URL.createObjectURL(file);im.onload
 /* ---------- settings ---------- */
 var GROUPS=[['Who you are',['MyName','DisplayName','MyEmail','Phone','Portfolio']],['Sending',['TestEmail','DemoPageUrl','WebAppUrl','HireLabel','DeclineLabel','DailyCap']]];
 var SWITCHES=['TrackOpens','NotifyOnDecline','NotifyOnHire','NotifyOnChat','NotifyOnFirstVisit'];
-function loadSettings(){Promise.all([call('a_config'),call('a_files')]).then(function(r){if(!r[0].ok)return;if(r[1].ok)FILES=r[1].files;drawSettings(r[0].config)})}
+function loadSettings(){Promise.all([call('a_config'),call('a_files')]).then(function(r){if(!r[0].ok){failV('set',r[0]);return}if(r[1].ok)FILES=r[1].files;drawSettings(r[0].config)})}
 function drawSettings(cfg){var by={};cfg.forEach(function(c){by[c.key]=c});
   var html=GROUPS.map(function(g){return '<div class="card"><h2>'+g[0]+'</h2>'+g[1].map(function(k){var c=by[k];if(!c)return '';return '<div class="kv"><div><label>'+h(k)+'</label><div class="nt">'+h(c.note)+'</div></div><div style="display:flex;gap:6px"><input data-k="'+h(k)+'" value="'+h(c.value)+'"><button class="btn s" data-sv="'+h(k)+'">Save</button></div></div>'}).join('')+'</div>'}).join('');
   html+='<div class="card"><h2>Default CV</h2><p class="sub" style="margin-bottom:6px">Used when a letter has no attachments of its own.</p><div class="chips" id="dA"></div><button class="btn s" id="dAs">Save default</button></div>';
