@@ -26,6 +26,8 @@ label{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.8p
 .btn.g{color:var(--ac);border-color:rgba(47,143,255,.35)}.btn.r{color:var(--rd);border-color:rgba(255,77,109,.35)}.btn.y{color:var(--yl);border-color:rgba(255,194,75,.35)}.btn.n{color:var(--gn);border-color:rgba(47,210,138,.4)}
 .btn.w{width:100%;padding:12px}.btn.s{padding:6px 10px;font-size:12px}
 #app{display:none;position:relative}
+.top .tl{min-width:0}.top h1{font-size:19px;white-space:nowrap}.top .sub{font-size:11px;margin-top:1px}.top .tb{display:flex;gap:8px;flex:none}.btn.ic{width:38px;height:38px;padding:0;border-radius:50%}
+.nt2{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;border-color:rgba(255,194,75,.4)!important;background:rgba(255,194,75,.06)!important}.nt2 .ti{color:var(--yl);flex:none;margin-top:2px}.nt2 b{display:block;margin-bottom:3px}.nt2 p{font-size:13px;color:#cbd5e8;line-height:1.5}.nt2 .btn{margin-top:10px}
 .top{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(7,9,13,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
 .skw{display:grid;gap:12px;padding:4px 0}.sk{border-radius:14px;background:linear-gradient(100deg,#0f1b30 30%,#16264a 50%,#0f1b30 70%);background-size:300% 100%;animation:shim 1.3s linear infinite;border:1px solid #14223c}
 @keyframes shim{from{background-position:100% 0}to{background-position:-100% 0}}
@@ -33,8 +35,8 @@ label{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.8p
 .errc{border:1px solid rgba(255,77,109,.4);background:rgba(255,77,109,.08);border-radius:14px;padding:16px;color:#ffc3cf;font-size:14px;line-height:1.5}.errc b{display:block;color:#fff;margin-bottom:6px}.errc .btn{margin-top:12px}
 .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 10px var(--ac);margin-right:8px;animation:b 2s infinite}@keyframes b{50%{opacity:.3}}
 main{max-width:1000px;margin:0 auto;padding:16px}
-nav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;overflow-x:auto;gap:4px;background:rgba(13,17,23,.95);backdrop-filter:blur(14px);border-top:1px solid var(--bd);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
-nav button{flex:1 0 64px;background:none;border:0;color:var(--mu);font:500 10px 'Space Grotesk';padding:6px 2px;border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;gap:2px;background:rgba(13,17,23,.95);backdrop-filter:blur(14px);border-top:1px solid var(--bd);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+nav button{flex:1 1 0;min-width:0;background:none;border:0;color:var(--mu);font:500 10px 'Space Grotesk';padding:6px 2px;border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
 nav button.on{color:var(--ac2);background:rgba(47,143,255,.12)}
 .nb{position:absolute;top:0;left:calc(50% + 6px);background:var(--rd);color:#fff;border-radius:99px;font-size:10px;padding:0 6px;line-height:15px}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-bottom:14px}
@@ -53,7 +55,7 @@ nav button.on{color:var(--ac2);background:rgba(47,143,255,.12)}
 .st.d i{background:rgba(47,210,138,.15);border-color:var(--gn);color:var(--gn)}.st.x i{background:rgba(255,77,109,.15);border-color:var(--rd);color:var(--rd)}.st.h i{background:rgba(47,143,255,.18);border-color:var(--ac);color:var(--ac2)}
 .st:not(:last-child):after{content:"";position:absolute;top:13px;left:50%;width:100%;height:2px;background:var(--bd)}.st.d:not(:last-child):after{background:var(--gn)}
 .st span{display:block;font-size:9.5px;color:var(--mu);letter-spacing:.6px;text-transform:uppercase}
-.st em{display:block;font:400 10px 'JetBrains Mono',monospace;color:#9fb2d4;font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st em{display:block;font:400 10px/1.35 'JetBrains Mono',monospace;color:#9fb2d4;font-style:normal;white-space:pre-line;word-break:break-word}
 .pill{display:inline-flex;gap:5px;align-items:center;font:600 11px 'JetBrains Mono',monospace;padding:2px 9px;border-radius:99px;border:1px solid var(--bd);color:var(--mu);margin:0 6px 4px 0}
 .pill.g{color:var(--gn);border-color:rgba(47,210,138,.4)}.pill.r{color:#ff9fb0;border-color:rgba(255,77,109,.4)}.pill.b{color:var(--ac2);border-color:rgba(47,143,255,.4)}.pill.y{color:var(--yl);border-color:rgba(255,194,75,.4)}
 .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
@@ -113,7 +115,7 @@ iframe.pv{width:100%;height:70vh;border:1px solid var(--bd);border-radius:12px;b
 </div></div>
 
 <div id="app">
-  <div class="top"><div><h1><span class="live"></span>Julian <b>Mailer</b></h1><div class="sub" id="who"></div></div><div style="display:flex;gap:8px"><button class="btn s" id="rf"></button><button class="btn s r" id="lo"></button></div></div>
+  <div class="top"><div class="tl"><h1><span class="live"></span>Julian <b>Mailer</b></h1><div class="sub" id="who"></div></div><div class="tb"><button class="btn s ic" id="rf" aria-label="Refresh" title="Refresh"></button><button class="btn s r ic" id="lo" aria-label="Sign out" title="Sign out"></button></div></div>
   <main>
     <section id="v-home"></section>
     <section id="v-apps" class="hide"></section>
@@ -189,7 +191,7 @@ var $=function(s){return document.querySelector(s)};
 function h(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 var S=null; try{S=JSON.parse(localStorage.getItem('jm_s')||'null')}catch(e){}
 var O=null, FILES=[], LETTERS=[], CUR='home', CH={threads:[],cur:'',msgs:[],file:''}, FILTER='all', Q='', timer=0;
-$('#lgIc').innerHTML=ic('shield',34);$('#rf').innerHTML=ic('refresh',14)+'Refresh';$('#lo').innerHTML=ic('x',14)+'Sign out';
+$('#lgIc').innerHTML=ic('shield',34);$('#rf').innerHTML=ic('refresh',16);$('#lo').innerHTML=ic('x',16);
 function toast(m,e){var t=document.createElement('div');t.className='toast'+(e?' e':'');t.textContent=m;document.body.append(t);setTimeout(function(){t.remove()},3600)}
 function call(a,p){
   return fetch(S.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(Object.assign({action:a,key:S.key},p||{}))}).then(function(r){return r.json()}).then(function(j){
@@ -220,7 +222,7 @@ function failV(v,j){var m=(j&&(j.message||j.error))||'The server did not answer 
   $('#rt_'+v).onclick=function(){if(v==='home'||v==='apps'){$('#v-home').innerHTML=skel();$('#v-apps').innerHTML=skel();load(true)}else{n.innerHTML=skel();go(v)}}}
 function boot(){$('#v-home').innerHTML=skel();$('#v-apps').innerHTML=skel();$('#login').style.display='none';$('#app').style.display='block';buildNav();load();clearInterval(timer);timer=setInterval(tick,10000)}
 function tick(){if(!S)return;if(CUR==='chat'){loadChat(true)}else load(false,true)}
-function load(manual,quiet){return call('a_overview').then(function(j){if(!j||!j.ok){if(manual||!O)toast((j&&(j.message||j.error))||'The server answered without data. Redeploy the web app as a new version.',1);if(!O){failV('home',j);failV('apps',j)}return}O=j;$('#who').textContent=j.name+' | updated '+j.now;paintBadges();drawHome();drawApps()})}
+function load(manual,quiet){return call('a_overview').then(function(j){if(!j||!j.ok){if(manual||!O)toast((j&&(j.message||j.error))||'The server answered without data. Redeploy the web app as a new version.',1);if(!O){failV('home',j);failV('apps',j)}return}O=j;$('#who').textContent=j.name+' | updated '+String(j.now).slice(11);paintBadges();drawHome();drawApps();var ud=$('#useDemo');if(ud)ud.onclick=function(){var g=location.href.split('?')[0].replace(/[^\/]*$/,'')+'julian-demo.html';call('a_config_set',{k:'DemoPageUrl',v:g}).then(function(r){toast(r.ok?'Demo page address saved':(r.message||'Failed'),!r.ok);load()})}})}
 function paintBadges(){var b=document.querySelector('#nav [data-v=chat]'),e=b.querySelector('.nb');if(e)e.remove();if(O.unread){e=document.createElement('span');e.className='nb';e.textContent=O.unread>99?'99+':O.unread;b.appendChild(e)}
   var hb=document.querySelector('#nav [data-v=home]'),he=hb.querySelector('.nb');if(he)he.remove();var n=O.offers.filter(function(o){return o.status!=='Handled'}).length;if(n){he=document.createElement('span');he.className='nb';he.textContent=n;hb.appendChild(he)}}
 function modal(html,wide){$('#sheet').className='sheet'+(wide?' wide':'');$('#sheet').innerHTML='<button class="btn s x" id="mx">'+ic('x',14)+'</button>'+html;$('#mod').classList.add('on');$('#mx').onclick=closeM}
@@ -230,18 +232,25 @@ function confirmM(t,x,y){return new Promise(function(res){modal('<h3>'+h(t)+'</h
 
 /* ---------- pipeline ---------- */
 function step(done,bad,icn,label,sub,hl){return '<div class="st '+(bad?'x':hl?'h':done?'d':'')+'"><i>'+ic(bad?'x':done?'check':icn,13)+'</i><span>'+label+'</span><em>'+h(sub||'')+'</em></div>'}
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function when(t){t=String(t||'');var m=t.match(/^\d{4}-(\d\d)-(\d\d)[ T](\d\d:\d\d)/);return m?(MON[+m[1]-1]+' '+(+m[2])+'\n'+m[3]):t}
 function pipe(r){var bounced=r.status==='Bounced',resp=r.decision||r.replied;
-  return '<div class="pipe">'+step(!!r.sentAt,r.status&&r.status.indexOf('Error')===0,'send','Sent',r.sentAt&&String(r.sentAt).slice(5))+
+  return '<div class="pipe">'+step(!!r.sentAt,r.status&&r.status.indexOf('Error')===0,'send','Sent',r.sentAt&&when(r.sentAt))+
    step(r.delivered==='Yes',bounced,'inbox','Delivered',bounced?'bounced':r.delivered==='Pending'?'pending':'')+
-   step(!!r.opened,false,'eye','Opened',r.opened&&String(r.opened).slice(5))+
+   step(!!r.opened,false,'eye','Opened',r.opened&&when(r.opened))+
    step(r.demo==='Demo completed'||r.demo==='Read the letter',false,'play','Demo',r.demo)+
    step(!!resp,false,'message','Response',r.decision==='Hire'?'HIRE':r.decision==='Declined'?'turned down':r.replied?'replied':'',r.decision==='Hire')+'</div>'}
 
 /* ---------- home ---------- */
+function notices(){var o='';
+  if(!O.demoUrl){var g=location.protocol.indexOf('http')===0?location.href.split('?')[0].replace(/[^\/]*$/,'')+'julian-demo.html':'';
+    o+='<div class="card nt2"><span class="ti">'+ic('alert',18)+'</span><div><b>Demo page address is not set</b><p>Without it your emails go out with no demo buttons and no pictures.'+(g?' Your demo page is probably here:<br><span style="font-family:JetBrains Mono,monospace;font-size:11.5px;word-break:break-all">'+h(g)+'</span>':'')+'</p>'+(g?'<button class="btn s p" id="useDemo">Use this address</button>':'<button class="btn s" onclick="JM.go(\'set\')">Open Settings</button>')+'</div></div>'}
+  if(!O.defCv){o+='<div class="card nt2"><span class="ti">'+ic('file',18)+'</span><div><b>No CV is attached to your emails</b><p>Upload your CV in Files, then tick it under Settings > Default CV. Until then emails go out without it.</p><button class="btn s" onclick="JM.go(\'files\')">Open Files</button></div></div>'}
+  return o}
 function drawHome(){var c=O.companies,n=function(f){return c.filter(f).length};
   var t=[['briefcase','Applications',c.length],['mail','Sent',n(function(r){return r.sentAt})],['inbox','Delivered',n(function(r){return r.delivered==='Yes'})],['eye','Opened',n(function(r){return r.opened})],['play','Demo seen',n(function(r){return r.demo})],['message','Replied',n(function(r){return r.replied})],['checkcircle','Hired',n(function(r){return r.decision==='Hire'})],['xcircle','Declined',n(function(r){return r.decision==='Declined'})]];
   var offers=O.offers.filter(function(o){return o.status!=='Handled'});
-  $('#v-home').innerHTML='<div class="tiles">'+t.map(function(x){return '<div class="tile"><span>'+ic(x[0],13)+x[1]+'</span><b>'+x[2]+'</b></div>'}).join('')+'</div>'+
+  $('#v-home').innerHTML=notices()+'<div class="tiles">'+t.map(function(x){return '<div class="tile"><span>'+ic(x[0],13)+x[1]+'</span><b>'+x[2]+'</b></div>'}).join('')+'</div>'+
    (O.unread?'<div class="card" style="border-color:rgba(255,77,109,.4)"><b>'+ic('message',16)+' '+O.unread+' unread chat message'+(O.unread>1?'s':'')+'</b> <button class="btn s g" style="margin-left:8px" onclick="JM.go(\'chat\')">Open chat</button></div>':'')+
    '<h2>'+ic('heart',16)+' Personal Space: companies that want to hire you</h2>'+
    (O.offers.length?O.offers.map(function(o){return '<div class="card offer"><div class="nm">'+ic('star',16)+' '+h(o.name||'Someone')+(o.title?' <span class="sub">'+h(o.title)+'</span>':'')+'</div><div class="meta">'+h(o.company)+' | '+h(o.role)+' | '+h(o.at)+'</div><div style="margin-top:8px">'+(o.step?'<span class="pill g">'+h(o.step)+'</span>':'')+(o.when?'<span class="pill b">'+ic('calendar',11)+' '+h(o.when)+'</span>':'')+(o.status==='Handled'?'<span class="pill">handled</span>':'<span class="pill r">new</span>')+'</div><p>'+(h(o.note)||'<span class="sub">No message.</span>')+'</p><div class="acts"><button class="btn s g" onclick="JM.chatWith(\''+h(o.token)+'\')">'+ic('message',13)+'Reply in chat</button><button class="btn s" onclick="JM.offer('+o.row+',\''+(o.status==='Handled'?'New':'Handled')+'\')">'+(o.status==='Handled'?'Mark as new':'Mark as handled')+'</button></div></div>'}).join(''):'<div class="card empty">'+ic('heart',26)+'<br>Nothing yet. When someone taps "Hire this dude", their message lands here.</div>')+
@@ -273,7 +282,8 @@ function drawApps(){var c=O.companies.filter(function(r){var b=bucket(r);return(
 function copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast('Link copied')}).catch(function(){prompt('Copy this link',t)})}
 function sendApp(row,test){var r=O.companies.filter(function(x){return x.row===row})[0];
   var go=function(){toast(test?'Sending test...':'Sending...');call('a_company_send',{row:row,test:test}).then(function(j){toast(j.message||(j.ok?'Done':'Failed'),!j.ok);load()})};
-  if(test)go();else confirmM('Send for real?','This emails '+r.company+' at '+r.email+'.','Send').then(function(ok){if(ok)go()})}
+  var lt=O.letters.filter(function(l){return l.key===r.letter})[0],noCv=!O.defCv&&!(lt&&lt.att);
+  if(test)go();else confirmM(noCv?'Send WITHOUT a CV?':'Send for real?',(noCv?'No CV is attached to this email. Upload your CV in Files and tick it in Settings > Default CV first. ':'')+'This emails '+r.company+' at '+r.email+'.',noCv?'Send without CV':'Send').then(function(ok){if(ok)go()})}
 function editApp(row){
   var r=row?O.companies.filter(function(x){return x.row===row})[0]:{company:'',contact:'',email:'',role:'',category:'cyber',letter:'',notes:'',decision:''};
   var lopts=O.letters.map(function(l){return '<option value="'+h(l.key)+'"'+(l.key===r.letter?' selected':'')+'>'+h(l.key)+' ('+h(l.category)+')</option>'}).join('');
