@@ -102,7 +102,7 @@ iframe.pv{width:100%;height:70vh;border:1px solid var(--bd);border-radius:12px;b
 <div id="login"><div class="card lg">
   <div style="margin-bottom:16px;color:var(--ac)" id="lgIc"></div>
   <h1>Julian <b>Mailer</b></h1><p class="sub" style="margin:6px 0 18px">Your private application tracker. Sign in once, this device remembers you.</p>
-  <label>Web app URL</label><input id="lUrl" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+  <input id="lUrl" type="hidden" value="https://script.google.com/macros/s/AKfycbznryIKIVeEa1ro3tEEdOHUzKGXcmUymDf4ce5w118rXh4z6is3CUpcqTZCuitiy882/exec">
   <label>Admin key</label><input id="lKey" type="password" placeholder="From Julian Mailer > Show links" autocomplete="off">
   <button class="btn p w" id="lGo">Sign in</button>
   <p class="sub" id="lErr" style="color:var(--rd);margin-top:10px"></p>
@@ -194,11 +194,11 @@ function call(a,p){
   }).catch(function(){return{ok:false,message:'Network error. Check the web app URL.'}});
 }
 function logout(bad){localStorage.removeItem('jm_s');S=null;clearInterval(timer);$('#app').style.display='none';$('#login').style.display='flex';if(bad)$('#lErr').textContent='Wrong admin key or session ended.'}
-if(S){$('#lUrl').value=S.url}
+if(S&&S.url){$('#lUrl').value=S.url}
 $('#lGo').onclick=function(){
-  var url=$('#lUrl').value.trim(),key=$('#lKey').value.trim();if(!url||!key){$('#lErr').textContent='Fill both fields.';return}
+  var url=$('#lUrl').value.trim(),key=$('#lKey').value.trim();if(!key){$('#lErr').textContent='Enter your admin key.';return}
   S={url:url,key:key};$('#lGo').disabled=true;$('#lErr').textContent='';
-  call('a_login').then(function(j){$('#lGo').disabled=false;if(!j||!j.ok){S=null;$('#lErr').textContent=(j&&(j.message||j.error))||'Could not sign in.';return}
+  call('a_login').then(function(j){$('#lGo').disabled=false;if(!j||!j.ok){S=null;$('#lErr').textContent=(j&&(j.message||j.error))||'The server answered but did not accept the key. The web app is probably an old version: redeploy it as a new version.';return}
     localStorage.setItem('jm_s',JSON.stringify(S));boot()})
 };
 $('#lo').onclick=function(){logout()};
