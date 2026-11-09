@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vibration test</title>
+<style>
+:root{color-scheme:dark}
+body{margin:0;background:#050a14;color:#e9f0ff;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 4px}p{color:#9fb2d4;margin:6px 0 14px;font-size:14px}
+button{display:block;width:100%;border:0;border-radius:12px;padding:15px;margin:10px 0;font:700 16px system-ui;background:#2f8fff;color:#fff}
+button.g{background:#111d33;border:1px solid #1c2b47;color:#cfe4ff}
+pre{background:#0b1424;border:1px solid #1c2b47;border-radius:12px;padding:12px;font:13px/1.55 ui-monospace,Consolas,monospace;white-space:pre-wrap;word-break:break-word;color:#cfe4ff}
+.ok{color:#37ff8b}.bad{color:#ff6b86}
+</style></head><body>
+<h1>Vibration test</h1>
+<p>Open this page directly in Chrome. Tap the buttons and then take a screenshot of the result box and send it to me.</p>
+<button id="b1">Test 1: one buzz (1.5 s)</button>
+<button id="b2" class="g">Test 2: three short buzzes</button>
+<button id="b3" class="g">Test 3: buzz 5 s and measure movement</button>
+<pre id="out">Waiting for a tap...</pre>
+<script>
+var out=document.getElementById('out'),log=[];
+function say(t,c){log.push((c?'<span class="'+c+'">':'')+t+(c?'</span>':''));out.innerHTML=log.join('\n')}
+function head(){
+  log=[];
+  say('Address: '+location.protocol+'//'+(location.host||'(local file)'));
+  say('Secure page: '+(window.isSecureContext?'yes':'no'),window.isSecureContext?'ok':'bad');
+  say('Top-level page (not in a frame): '+(window.top===window?'yes':'no'),window.top===window?'ok':'bad');
+  say('navigator.vibrate exists: '+(typeof navigator.vibrate==='function'?'yes':'NO'),typeof navigator.vibrate==='function'?'ok':'bad');
+  say('User activation (tapped): '+(navigator.userActivation?(navigator.userActivation.hasBeenActive?'yes':'no'):'unknown'));
+  say('Page visible: '+(document.visibilityState==='visible'?'yes':'NO ('+document.visibilityState+')'));
+  say('Browser: '+navigator.userAgent.replace(/\s+/g,' ').slice(0,150));
+}
+function call(p,label){
+  if(typeof navigator.vibrate!=='function'){say(label+': not supported by this browser','bad');return false}
+  var r;try{r=navigator.vibrate(p)}catch(e){say(label+': error '+e.message,'bad');return false}
+  say(label+': the browser answered '+r+(r?' (accepted)':' (REFUSED)'),r?'ok':'bad');return r;
+}
+document.getElementById('b1').onclick=function(){head();call(1500,'Buzz 1.5 s')};
+document.getElementById('b2').onclick=function(){head();call([300,150,300,150,300],'Three buzzes')};
+document.getElementById('b3').onclick=function(){
+  head();var mot=[],t0=0;
+  function on(e){var a=e.acceleration&&e.acceleration.x!=null?e.acceleration:e.accelerationIncludingGravity;if(a&&a.x!=null)mot.push({t:performance.now(),v:Math.sqrt(a.x*a.x+a.y*a.y+a.z*a.z)})}
+  function sd(a){if(a.length<5)return 0;var m=a.reduce(function(x,y){return x+y},0)/a.length;return Math.sqrt(a.reduce(function(x,y){return x+(y-m)*(y-m)},0)/a.length)}
+  function run(){
+    window.addEventListener('devicemotion',on);setTimeout(function(){
+      t0=performance.now();call(5000,'Buzz 5 s');
+      setTimeout(function(){window.removeEventListener('devicemotion',on);
+        var q=mot.filter(function(m){return m.t<t0}).map(function(m){return m.v}),b=mot.filter(function(m){return m.t>t0+300}).map(function(m){return m.v});
+        if(!mot.length){say('Motion sensor: no readings, cannot measure','bad');return}
+        var a=sd(q),c=sd(b);say('Movement before: '+a.toFixed(3)+'   during buzz: '+c.toFixed(3));
+        say(c>Math.max(.2,a*3)?'RESULT: the phone really vibrated.':'RESULT: the browser accepted it but the phone did NOT vibrate. The phone itself is blocking it.',c>Math.max(.2,a*3)?'ok':'bad');
+      },5600)},600);
+  }
+  if(typeof DeviceMotionEvent!=='undefined'&&DeviceMotionEvent.requestPermission){DeviceMotionEvent.requestPermission().then(function(s){if(s==='granted')run();else say('Motion permission refused','bad')})}else run();
+};
+head();say('\nTap a button above.');
+</script></body></html>
