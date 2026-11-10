@@ -1,0 +1,27 @@
+=====================================================================
+PASTE THIS BLOCK as the FIRST lines inside <head> of every site page
+(index.html and the other HTML files in your GitHub repo), as an HTML comment:
+=====================================================================
+<!--
+  DARK DIGITAL SPACE (DDS) - PROPRIETARY SOFTWARE
+  Copyright (c) 2024-2026 Dark Digital Space. All rights reserved.
+  The DDS platform, its source code, design and data are licensed
+  facilities of DDS. Copying, scraping, reverse engineering, analysing,
+  decompiling or redistributing any part of it, by any tool or method,
+  without written permission from DDS is a violation of the DDS Terms
+  and may lead to account termination and legal action.
+-->
+<meta name="copyright" content="Dark Digital Space. All rights reserved.">
+
+=====================================================================
+ADD THIS CLAUSE to your Terms page (under "Intellectual property")
+=====================================================================
+Ownership and licence. The DDS platform, the DDS CodeLab, their source
+code, designs, text and data are owned by Dark Digital Space and are
+provided to you under a limited, revocable licence to use them as
+intended. You may not copy, scrape, reverse engineer, decompile,
+analyse, resell or redistribute any part of the platform or its code,
+or use automated tools to do so, without written permission. Breaking
+this clause is a serious violation: we may suspend your account and
+take legal action. Code that users publish in Space stays owned by its
+author and is governed by the licence the author chose.
