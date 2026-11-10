@@ -234,12 +234,12 @@ function confirmM(t,x,y){return new Promise(function(res){modal('<h3>'+h(t)+'</h
 function step(done,bad,icn,label,sub,hl){return '<div class="st '+(bad?'x':hl?'h':done?'d':'')+'"><i>'+ic(bad?'x':done?'check':icn,13)+'</i><span>'+label+'</span><em>'+h(sub||'')+'</em></div>'}
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function when(t){t=String(t||'');var m=t.match(/^\d{4}-(\d\d)-(\d\d)[ T](\d\d:\d\d)/);return m?(MON[+m[1]-1]+' '+(+m[2])+'\n'+m[3]):t}
-function pipe(r){var bounced=r.status==='Bounced',resp=r.decision||r.replied;
+function pipe(r){var bounced=r.status==='Bounced',resp=r.decision||r.replied||r.unconfirmed;
   return '<div class="pipe">'+step(!!r.sentAt,r.status&&r.status.indexOf('Error')===0,'send','Sent',r.sentAt&&when(r.sentAt))+
    step(r.delivered==='Yes',bounced,'inbox','Delivered',bounced?'bounced':r.delivered==='Pending'?'pending':'')+
    step(!!r.opened,false,'eye','Opened',r.opened&&when(r.opened))+
    step(r.demo==='Demo completed'||r.demo==='Read the letter',false,'play','Demo',r.demo)+
-   step(!!resp,false,'message','Response',r.decision==='Hire'?'HIRE':r.decision==='Declined'?'turned down':r.replied?'replied':'',r.decision==='Hire')+'</div>'}
+   step(!!resp,false,'message','Response',r.decision==='Hire'?'HIRE':r.decision==='Declined'?'turned down':r.replied?'replied':r.unconfirmed?'unconfirmed':'',r.decision==='Hire')+'</div>'}
 
 /* ---------- home ---------- */
 function notices(){var o='';
@@ -380,7 +380,12 @@ function drawSettings(cfg){var by={};cfg.forEach(function(c){by[c.key]=c});
   html+='<div class="card"><h2>Default CV</h2><p class="sub" style="margin-bottom:6px">Used when a letter has no attachments of its own.</p><div class="chips" id="dA"></div><button class="btn s" id="dAs">Save default</button></div>';
   html+='<div class="card"><h2>Switches</h2>'+SWITCHES.map(function(k){var c=by[k];if(!c)return '';var on=/^(true|yes|1)$/i.test(c.value);return '<div class="sw"><div><b>'+h(k)+'</b><div class="nt sub">'+h(c.note)+'</div></div><button class="tg'+(on?' on':'')+'" data-sw="'+h(k)+'" aria-pressed="'+on+'"></button></div>'}).join('')+'</div>';
   html+='<div class="card"><h2>Security</h2><p class="sub" style="margin-bottom:10px">Your admin key is the password for this panel. If it ever leaks, make a new one. You will be signed out.</p><button class="btn r" id="rk">'+ic('key',14)+'Make a new admin key</button></div>';
+  html+='<div class="card"><h2>Facts shown after the attack</h2><p class="sub" style="margin-bottom:8px">The real numbers your visitor sees once the demo ends. Change them any time. Leave all empty to use the built in ones.</p><div id="stL"></div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn s" id="stAdd">'+ic('check',14)+'Add a fact</button><button class="btn s p" id="stSave">Save facts</button></div></div>';
   $('#v-set').innerHTML=html;
+  (function(){var L=$('#stL');function row(s){var d=document.createElement('div');d.className='stRow';d.style.cssText='border:1px solid var(--line,#1c2b47);border-radius:12px;padding:10px;margin-bottom:8px;display:grid;gap:6px';d.innerHTML='<input class="b" placeholder="Big number, e.g. $4.99M" maxlength="24"><input class="d" placeholder="What it means, e.g. average cost of one data breach" maxlength="140"><input class="s" placeholder="Source name, e.g. IBM report 2026" maxlength="90"><input class="u" placeholder="Source link (https://...)" maxlength="300"><button class="btn s r">Remove</button>';var i=d.querySelectorAll('input');i[0].value=s.big||'';i[1].value=s.d||'';i[2].value=s.src||'';i[3].value=s.url||'';d.querySelector('button').onclick=function(){d.remove()};L.appendChild(d)}
+   L.innerHTML='<div class="sub">Loading</div>';call('a_stats_get').then(function(j){L.innerHTML='';var list=[];try{list=JSON.parse(j.stats||'[]')}catch(e){}list.forEach(row)});
+   $('#stAdd').onclick=function(){if(L.querySelectorAll('.stRow').length<6)row({})};
+   $('#stSave').onclick=function(){var v=[].map.call(L.querySelectorAll('.stRow'),function(d){var i=d.querySelectorAll('input');return{big:i[0].value,d:i[1].value,src:i[2].value,url:i[3].value}});call('a_stats_set',{v:JSON.stringify(v)}).then(function(j){toast(j.ok?'Saved':(j.message||'Failed'),!j.ok)})}})();
   var getD=attachPicker($('#dA'),(by.DefaultAttachments||{}).value);$('#dAs').onclick=function(){call('a_config_set',{k:'DefaultAttachments',v:getD()}).then(function(j){toast(j.ok?'Saved':(j.message||'Failed'),!j.ok)})};
   $('#v-set').querySelectorAll('[data-sv]').forEach(function(b){b.onclick=function(){var k=b.dataset.sv,i=$('#v-set input[data-k="'+k+'"]');call('a_config_set',{k:k,v:i.value}).then(function(j){toast(j.ok?'Saved':(j.message||'Failed'),!j.ok)})}});
   $('#v-set').querySelectorAll('[data-sw]').forEach(function(b){b.onclick=function(){var on=!b.classList.contains('on');b.classList.toggle('on',on);call('a_config_set',{k:b.dataset.sw,v:on?'TRUE':'FALSE'}).then(function(j){if(!j.ok){b.classList.toggle('on',!on);toast(j.message||'Failed',1)}else toast('Saved')})}});
